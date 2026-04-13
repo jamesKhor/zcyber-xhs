@@ -1,13 +1,23 @@
 services:
-  pipeline:
+  scheduler:
     build: .
     env_file: .env
     volumes:
       - ./output:/app/output
-      - ./data:/app/data
       - ./config:/app/config
     restart: unless-stopped
     command: ["run"]
 
-  # Optional: run one-off generation
-  # docker compose run pipeline generate -a problem_command
+  telegram-bot:
+    build: .
+    env_file: .env
+    volumes:
+      - ./output:/app/output
+      - ./config:/app/config
+    restart: unless-stopped
+    command: ["bot"]
+
+  # One-off commands:
+  # docker compose run scheduler generate -a problem_command
+  # docker compose run scheduler queue list
+  # docker compose run scheduler status

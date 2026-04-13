@@ -224,20 +224,48 @@ def publish(post_id: int | None):
 def run():
     """Start the scheduler (runs generation + publishing on cron)."""
     config = _get_config()
-    db = _get_db(config)
 
-    from .scheduler import create_scheduler
+    from .scheduler import create_scheduler, print_schedule
 
-    click.echo("Starting zcyber-xhs scheduler...")
-    click.echo("Generation schedule: daily at configured hour")
-    click.echo("Publish schedule: twice daily at configured hours")
-    click.echo("Press Ctrl+C to stop.\n")
+    print_schedule(config)
+    click.echo()
+    click.echo("Starting scheduler... Press Ctrl+C to stop.\n")
 
-    scheduler = create_scheduler(config, db)
+    scheduler = create_scheduler(config)
     try:
         scheduler.start()
     except (KeyboardInterrupt, SystemExit):
         click.echo("\nScheduler stopped.")
+
+
+@cli.command()
+def schedule():
+    """Show the weekly content schedule."""
+    config = _get_config()
+
+    from .scheduler import print_schedule
+
+    print_schedule(config)
+
+
+@cli.command()
+def bot():
+    """Start the Telegram review bot."""
+    import asyncio
+
+    config = _get_config()
+    db = _get_db(config)
+
+    from .review_bot import run_bot
+
+    click.echo("Starting Telegram review bot...")
+    click.echo("Commands: /start, /drafts, /status")
+    click.echo("Press Ctrl+C to stop.\n")
+
+    try:
+        asyncio.run(run_bot(config, db))
+    except (KeyboardInterrupt, SystemExit):
+        click.echo("\nBot stopped.")
     finally:
         db.close()
 
