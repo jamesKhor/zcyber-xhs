@@ -50,9 +50,9 @@ class Orchestrator:
 
         click.echo(f"Topic: {topic.slug} -- {topic.problem}")
 
-        # 2. Generate content
+        # 2. Generate content (with safety retry)
         click.echo("Generating content via LLM...")
-        draft, payload_json = self.generator.generate(archetype, topic)
+        draft, payload_json = self._generate_with_retry(archetype, topic)
         click.echo(f"Title: {draft.title}")
 
         # 3. Render image(s)
@@ -70,6 +70,23 @@ class Orchestrator:
             self._queue_ctf_solution(draft, topic.slug, payload_json)
 
         return post_id
+
+    def _generate_with_retry(
+        self, archetype: str, topic: TopicEntry, max_retries: int = 2
+    ) -> tuple[PostDraft, str]:
+        """Generate content with auto-retry on safety filter blocks."""
+        from .generate.generator import ContentBlockedError
+
+        for attempt in range(1, max_retries + 2):
+            try:
+                return self.generator.generate(archetype, topic)
+            except ContentBlockedError as e:
+                if attempt <= max_retries:
+                    click.echo(f"Safety filter blocked (attempt {attempt}), retrying...")
+                else:
+                    raise RuntimeError(
+                        f"Content blocked after {max_retries + 1} attempts: {e}"
+                    ) from e
 
     def _pick_topic(
         self, archetype: str, topic_override: Optional[str]

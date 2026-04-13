@@ -47,9 +47,37 @@ class ContentGenerator:
         if ai_label and ai_label not in raw.get("body", ""):
             raw["body"] = raw["body"].rstrip() + f"\n\n{ai_label}"
 
+        # Post-process: safety filter
+        from ..safety import check_and_fix
+
+        safety_result, fixed_body = check_and_fix(
+            title=raw.get("title", ""),
+            body=raw.get("body", ""),
+            tags=raw.get("tags", []),
+            safety_disclaimer_needed=raw.get("safety_disclaimer_needed", False),
+            safety_disclaimer=self.config.content.get("safety_disclaimer", ""),
+        )
+        raw["body"] = fixed_body
+
+        if not safety_result.passed:
+            raise ContentBlockedError(
+                f"Content blocked by safety filter: {safety_result.blocks}"
+            )
+
+        if safety_result.warnings:
+            import logging
+
+            logger = logging.getLogger("zcyber.safety")
+            for warning in safety_result.warnings:
+                logger.warning(f"Safety warning: {warning}")
+
         draft = PostDraft(**raw)
         payload = json.dumps(raw, ensure_ascii=False, indent=2)
         return draft, payload
+
+
+class ContentBlockedError(Exception):
+    """Raised when generated content fails safety checks."""
 
     def _render_prompt(self, archetype: str, topic: TopicEntry) -> str:
         """Load and render the Jinja2 prompt template for the archetype."""
