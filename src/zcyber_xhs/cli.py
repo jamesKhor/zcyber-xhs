@@ -307,3 +307,95 @@ def status():
         click.echo(f"Topics [{archetype}]: {remaining}/{total} remaining")
 
     db.close()
+
+
+# ── Analytics ────────────────────────────────────────────
+
+
+@cli.group()
+def analytics():
+    """View analytics and check account health."""
+    pass
+
+
+@analytics.command("poll")
+def analytics_poll():
+    """Poll metrics for all published posts."""
+    config = _get_config()
+    db = _get_db(config)
+
+    from .analytics import Analytics
+
+    a = Analytics(config, db)
+    updated = a.poll_all_published()
+    click.echo(f"Updated metrics for {updated} posts.")
+    db.close()
+
+
+@analytics.command("check")
+def analytics_check():
+    """Check for shadowban indicators."""
+    config = _get_config()
+    db = _get_db(config)
+
+    from .analytics import Analytics
+
+    a = Analytics(config, db)
+    status = a.check_shadowban()
+
+    if status.is_shadowbanned:
+        click.echo(f"[CRITICAL] {status.message}")
+    elif status.confidence == "warning":
+        click.echo(f"[WARNING] {status.message}")
+    else:
+        click.echo(f"[OK] {status.message}")
+
+    db.close()
+
+
+@analytics.command("performance")
+def analytics_performance():
+    """Show archetype performance rankings."""
+    config = _get_config()
+    db = _get_db(config)
+
+    from .analytics import Analytics
+
+    a = Analytics(config, db)
+    perf = a.get_archetype_performance()
+
+    if not perf:
+        click.echo("No performance data yet. Metrics are polled after posts are published.")
+        db.close()
+        return
+
+    click.echo(f"{'Archetype':<20} {'Posts':>5} {'Views':>7} {'Likes':>6} "
+               f"{'Comments':>8} {'Saves':>6} {'Eng%':>6}")
+    click.echo("-" * 65)
+    for arch, data in sorted(perf.items(), key=lambda x: x[1]["avg_views"], reverse=True):
+        click.echo(
+            f"{arch:<20} {data['post_count']:>5} {data['avg_views']:>7} "
+            f"{data['avg_likes']:>6} {data['avg_comments']:>8} "
+            f"{data['avg_saves']:>6} {data['engagement_rate']:>5.1f}%"
+        )
+
+    db.close()
+
+
+@analytics.command("health")
+def analytics_health():
+    """Show recent pipeline health events."""
+    config = _get_config()
+    db = _get_db(config)
+
+    events = db.get_health_events(limit=20)
+    if not events:
+        click.echo("No health events logged.")
+        db.close()
+        return
+
+    for e in events:
+        sev = e["severity"].upper()
+        click.echo(f"[{sev}] {e['created_at']} - {e['event_type']}: {e['message']}")
+
+    db.close()

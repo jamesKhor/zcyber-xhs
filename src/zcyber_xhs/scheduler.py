@@ -84,6 +84,30 @@ def _publish_job(config_path: str) -> None:
     db.close()
 
 
+def _analytics_job(config_path: str) -> None:
+    """Scheduled job: poll metrics and check for shadowban."""
+    config = Config(config_path)
+    db = Database(config.base_dir / "zcyber_xhs.db")
+    db.init()
+
+    from .analytics import Analytics
+
+    analytics = Analytics(config, db)
+
+    # Poll metrics
+    updated = analytics.poll_all_published()
+    if updated:
+        logger.info(f"[Analytics] Updated metrics for {updated} posts")
+
+    # Check shadowban
+    paused = analytics.auto_pause_if_shadowbanned()
+    if paused:
+        logger.critical("[Analytics] SHADOWBAN DETECTED — pipeline paused")
+        click.echo("[ALERT] Shadowban detected! Pipeline paused. Check your account.")
+
+    db.close()
+
+
 def _notify_new_draft(config: Config, db: Database, post_id: int) -> None:
     """Send Telegram notification for a new draft (if configured)."""
     import os
@@ -145,6 +169,25 @@ def create_scheduler(config: Config) -> BlockingScheduler:
         args=[config_path],
         id="afternoon_publish",
         name="Afternoon publish drain",
+        replace_existing=True,
+    )
+
+    # Analytics: poll metrics twice daily
+    scheduler.add_job(
+        _analytics_job,
+        CronTrigger(hour=10, minute=0),
+        args=[config_path],
+        id="morning_analytics",
+        name="Morning metrics poll + shadowban check",
+        replace_existing=True,
+    )
+
+    scheduler.add_job(
+        _analytics_job,
+        CronTrigger(hour=20, minute=0),
+        args=[config_path],
+        id="evening_analytics",
+        name="Evening metrics poll + shadowban check",
         replace_existing=True,
     )
 

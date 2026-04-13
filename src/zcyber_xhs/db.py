@@ -39,9 +39,32 @@ CREATE TABLE IF NOT EXISTS topics_history (
     UNIQUE(archetype, topic_slug)
 );
 
+CREATE TABLE IF NOT EXISTS post_metrics (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    post_id INTEGER NOT NULL,
+    views INTEGER DEFAULT 0,
+    likes INTEGER DEFAULT 0,
+    comments INTEGER DEFAULT 0,
+    shares INTEGER DEFAULT 0,
+    saves INTEGER DEFAULT 0,
+    polled_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    hours_since_publish INTEGER DEFAULT 0,
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+CREATE TABLE IF NOT EXISTS pipeline_health (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_type TEXT NOT NULL,
+    message TEXT,
+    severity TEXT DEFAULT 'info',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE INDEX IF NOT EXISTS idx_posts_status ON posts(status);
 CREATE INDEX IF NOT EXISTS idx_posts_archetype ON posts(archetype);
 CREATE INDEX IF NOT EXISTS idx_topics_history_lookup ON topics_history(archetype, topic_slug);
+CREATE INDEX IF NOT EXISTS idx_post_metrics_post ON post_metrics(post_id);
+CREATE INDEX IF NOT EXISTS idx_pipeline_health_type ON pipeline_health(event_type);
 """
 
 
@@ -157,6 +180,70 @@ class Database:
             (archetype, topic_slug),
         )
         self.conn.commit()
+
+    # ── Metrics ───────────────────────────────────────────
+
+    def insert_metrics(
+        self,
+        post_id: int,
+        views: int = 0,
+        likes: int = 0,
+        comments: int = 0,
+        shares: int = 0,
+        saves: int = 0,
+        hours_since: int = 0,
+    ) -> None:
+        self.conn.execute(
+            """INSERT INTO post_metrics
+               (post_id, views, likes, comments, shares, saves, hours_since_publish)
+               VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (post_id, views, likes, comments, shares, saves, hours_since),
+        )
+        self.conn.commit()
+
+    def get_latest_metrics(self, post_id: int) -> Optional[dict]:
+        row = self.conn.execute(
+            "SELECT * FROM post_metrics WHERE post_id=? ORDER BY id DESC LIMIT 1",
+            (post_id,),
+        ).fetchone()
+        if not row:
+            return None
+        return dict(row)
+
+    def get_recent_published_metrics(self, limit: int = 10) -> list[dict]:
+        """Get latest metrics for recently published posts."""
+        rows = self.conn.execute(
+            """SELECT p.id, p.title, p.archetype, p.published_at,
+                      m.views, m.likes, m.comments, m.shares, m.saves,
+                      m.hours_since_publish
+               FROM posts p
+               LEFT JOIN post_metrics m ON p.id = m.post_id
+               WHERE p.status = 'published'
+               AND m.id = (
+                   SELECT MAX(m2.id) FROM post_metrics m2 WHERE m2.post_id = p.id
+               )
+               ORDER BY p.published_at DESC LIMIT ?""",
+            (limit,),
+        ).fetchall()
+        return [dict(r) for r in rows]
+
+    # ── Pipeline Health ──────────────────────────────────
+
+    def log_health_event(
+        self, event_type: str, message: str, severity: str = "info"
+    ) -> None:
+        self.conn.execute(
+            "INSERT INTO pipeline_health (event_type, message, severity) VALUES (?, ?, ?)",
+            (event_type, message, severity),
+        )
+        self.conn.commit()
+
+    def get_health_events(self, limit: int = 20) -> list[dict]:
+        rows = self.conn.execute(
+            "SELECT * FROM pipeline_health ORDER BY id DESC LIMIT ?",
+            (limit,),
+        ).fetchall()
+        return [dict(r) for r in rows]
 
     # ── Helpers ───────────────────────────────────────────
 
