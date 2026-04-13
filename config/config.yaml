@@ -31,6 +31,7 @@ publishing:
 content:
   cta: "更多威胁情报 → 主页 zcybernews"
   safety_disclaimer: "仅限自己设备/授权测试"
+  education_disclaimer: "本内容仅供网络安全学习和研究用途"
   ai_label: "AI辅助创作"
   default_tags:
     - "#网络安全"

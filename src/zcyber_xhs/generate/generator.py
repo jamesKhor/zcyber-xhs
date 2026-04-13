@@ -42,6 +42,11 @@ class ContentGenerator:
                 existing_tags.append(tag)
         raw["tags"] = existing_tags
 
+        # Post-process: education disclaimer (always appended for cyber content)
+        edu_disclaimer = self.config.content.get("education_disclaimer", "")
+        if edu_disclaimer and edu_disclaimer not in raw.get("body", ""):
+            raw["body"] = raw["body"].rstrip() + f"\n\n📚 {edu_disclaimer}"
+
         # Post-process: AI label
         ai_label = self.config.content.get("ai_label", "")
         if ai_label and ai_label not in raw.get("body", ""):
