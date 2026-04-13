@@ -1,0 +1,163 @@
+# Topic bank for before_after archetype
+# Bad practice vs good practice — visual split-screen
+
+topics:
+  - slug: password-plaintext
+    problem: 密码存储方式对比
+    bad_practice: 密码写在txt文件里
+    good_practice: 用KeePassXC加密管理
+    tool: keepassxc
+    command: "keepassxc-cli add database.kdbx 'MyAccount'"
+    category: passwords
+
+  - slug: reused-passwords
+    problem: 密码重复使用
+    bad_practice: 所有网站用同一个密码
+    good_practice: 每个网站独立强密码+密码管理器
+    tool: password-manager
+    command: "密码管理器 → 自动生成 → 每站不同"
+    category: passwords
+
+  - slug: http-vs-https
+    problem: HTTP登录页面
+    bad_practice: 在HTTP页面输入密码（明文传输）
+    good_practice: 只在HTTPS页面提交敏感信息
+    tool: wireshark
+    command: "Wireshark抓包 → HTTP密码一览无余"
+    category: web
+
+  - slug: root-ssh
+    problem: SSH直接用root登录
+    bad_practice: "ssh root@server（暴露最高权限）"
+    good_practice: 普通用户+sudo+密钥认证
+    tool: sshd_config
+    command: "PermitRootLogin no  # /etc/ssh/sshd_config"
+    category: server
+
+  - slug: no-2fa
+    problem: 不开两步验证
+    bad_practice: 只靠密码保护账号
+    good_practice: 开启TOTP或硬件密钥二次验证
+    tool: 2fa
+    command: "账号设置 → 安全 → 开启两步验证"
+    category: account
+
+  - slug: chmod-777
+    problem: 文件权限全开
+    bad_practice: "chmod 777 — 谁都能读写执行"
+    good_practice: 最小权限原则 chmod 644/755
+    tool: chmod
+    command: "chmod 644 config.yml  # 主人读写，其他只读"
+    category: server
+
+  - slug: no-firewall
+    problem: 服务器不开防火墙
+    bad_practice: 所有端口对外开放
+    good_practice: 只开放需要的端口
+    tool: ufw
+    command: "ufw default deny incoming && ufw allow 22,80,443/tcp"
+    category: server
+
+  - slug: hardcoded-secrets
+    problem: 代码里写死密钥
+    bad_practice: "API_KEY = 'sk-abc123'  # 直接写在代码里"
+    good_practice: 用环境变量或密钥管理服务
+    tool: dotenv
+    command: "os.environ.get('API_KEY')  # 从.env读取"
+    category: dev
+
+  - slug: no-backup
+    problem: 不做备份
+    bad_practice: 数据只存一个地方
+    good_practice: 3-2-1备份法则
+    tool: rsync
+    command: "rsync -av /data/ /backup/  # 每天自动增量备份"
+    category: data
+
+  - slug: click-all-links
+    problem: 随便点邮件链接
+    bad_practice: 直接点击邮件中的链接
+    good_practice: 悬停查看真实URL再决定
+    tool: email
+    command: "鼠标悬停 → 看左下角真实地址 → 域名对不上就别点"
+    category: phishing
+
+  - slug: no-updates
+    problem: 从不更新系统
+    bad_practice: 提示更新永远点"稍后"
+    good_practice: 定期更新修补安全漏洞
+    tool: apt
+    command: "apt update && apt upgrade -y  # 每周执行一次"
+    category: maintenance
+
+  - slug: same-wifi-password
+    problem: Wi-Fi用默认密码
+    bad_practice: 路由器还是admin/admin
+    good_practice: 改强密码+关闭WPS+隐藏SSID
+    tool: router
+    command: "路由器管理页 → 改密码 → 关WPS → MAC过滤"
+    category: network
+
+  - slug: unencrypted-disk
+    problem: 磁盘不加密
+    bad_practice: 笔记本丢了数据全暴露
+    good_practice: 开启全盘加密(BitLocker/FileVault)
+    tool: bitlocker
+    command: "控制面板 → BitLocker → 开启加密"
+    category: data
+
+  - slug: sharing-accounts
+    problem: 共享账号密码
+    bad_practice: 团队共用一个管理员账号
+    good_practice: 每人独立账号+角色权限
+    tool: iam
+    command: "IAM → 创建用户 → 分配最小权限角色"
+    category: account
+
+  - slug: no-log-monitoring
+    problem: 不看日志
+    bad_practice: 服务器被黑了都不知道
+    good_practice: 设置日志告警自动通知
+    tool: log
+    command: "fail2ban + 日志转发到集中监控"
+    category: monitoring
+
+  - slug: public-git-secrets
+    problem: 把.env推到GitHub
+    bad_practice: git add . 把密钥也传上去了
+    good_practice: .gitignore + 推前检查
+    tool: gitignore
+    command: "echo '.env' >> .gitignore && git rm --cached .env"
+    category: dev
+
+  - slug: weak-jwt
+    problem: JWT配置不安全
+    bad_practice: "JWT密钥是 'secret123'，不设过期"
+    good_practice: 强密钥+短过期+刷新机制
+    tool: jwt
+    command: "openssl rand -base64 64  # 生成强密钥"
+    category: dev
+
+  - slug: no-rate-limit
+    problem: API不限速
+    bad_practice: 接口随便调不限制频率
+    good_practice: 加速率限制+IP黑名单
+    tool: nginx
+    command: "limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;"
+    category: web
+
+  - slug: ignore-ssl-errors
+    problem: 忽略SSL证书错误
+    bad_practice: "curl -k / verify=False 跳过验证"
+    good_practice: 修复证书问题而不是跳过
+    tool: openssl
+    command: "openssl verify -CAfile ca.pem cert.pem  # 找到根因"
+    category: web
+
+  - slug: no-input-validation
+    problem: 不验证用户输入
+    bad_practice: 直接拼SQL/命令（注入漏洞）
+    good_practice: 参数化查询+输入过滤
+    tool: sql
+    command: "cursor.execute('SELECT * WHERE id=?', (user_input,))"
+    category: dev

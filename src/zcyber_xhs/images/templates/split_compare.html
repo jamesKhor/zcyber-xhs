@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root {
+    --base: #000000;
+    --surface0: #0d1117;
+    --surface1: #161b22;
+    --text: #f0f4f8;
+    --subtext: #8b949e;
+    --cyan: #00B8FF;
+    --red: #f85149;
+    --green: #3fb950;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1440px;
+    background: var(--base);
+    {% if background_image %}
+    background-image: url('{{ background_image }}');
+    background-size: cover;
+    background-position: center;
+    {% endif %}
+    font-family: "Geist Mono", "SF Mono", monospace;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    padding: 60px;
+  }
+
+  .card {
+    background: rgba(13, 17, 23, 0.88);
+    border-radius: 16px;
+    border: 1px solid var(--surface1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+  }
+
+  .header {
+    padding: 36px 40px;
+    border-bottom: 1px solid var(--surface1);
+  }
+
+  .headline {
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  }
+
+  .split-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .split-half {
+    flex: 1;
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .before-half {
+    background: rgba(248, 81, 73, 0.06);
+    border-bottom: 2px solid rgba(248, 81, 73, 0.3);
+  }
+
+  .after-half {
+    background: rgba(63, 185, 80, 0.06);
+  }
+
+  .split-label {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  .label-bad { color: var(--red); }
+  .label-good { color: var(--green); }
+
+  .split-icon {
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  .split-text {
+    font-size: 32px;
+    line-height: 1.5;
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  }
+
+  .split-command {
+    font-size: 24px;
+    color: var(--cyan);
+    background: var(--surface0);
+    padding: 16px 20px;
+    border-radius: 8px;
+    word-break: break-all;
+  }
+
+  .footer {
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--surface1);
+  }
+
+  .brand {
+    font-size: 24px;
+    color: var(--cyan);
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+
+  .cta {
+    font-size: 20px;
+    color: var(--subtext);
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="headline">{{ headline }}</div>
+    </div>
+
+    <div class="split-container">
+      <div class="split-half before-half">
+        <span class="split-label label-bad">{{ before_label | default('WRONG') }}</span>
+        <div class="split-text" style="color: var(--red);">{{ before_text }}</div>
+        {% if command %}
+        <div class="split-command" style="opacity: 0.6; text-decoration: line-through;">{{ command }}</div>
+        {% endif %}
+      </div>
+
+      <div class="split-half after-half">
+        <span class="split-label label-good">{{ after_label | default('RIGHT') }}</span>
+        <div class="split-text" style="color: var(--green);">{{ after_text }}</div>
+        {% if caption %}
+        <div class="split-command">{{ caption }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="brand">ZCYBERNEWS</span>
+      <span class="cta">{{ cta }}</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -269,7 +269,11 @@ def status():
     click.echo()
 
     # Topic bank stats
-    for archetype in ["problem_command"]:
+    archetypes_with_banks = [
+        "problem_command", "tool_spotlight", "everyday_panic",
+        "before_after", "mythbust",
+    ]
+    for archetype in archetypes_with_banks:
         remaining = bank.count_remaining(archetype)
         total = len(bank.list_topics(archetype))
         click.echo(f"Topics [{archetype}]: {remaining}/{total} remaining")

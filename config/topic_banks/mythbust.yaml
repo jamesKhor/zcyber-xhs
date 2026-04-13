@@ -1,0 +1,163 @@
+# Topic bank for mythbust archetype
+# Common security myths debunked
+
+topics:
+  - slug: incognito-anonymous
+    problem: 无痕模式真的匿名吗
+    myth: 开了无痕模式就没人知道我在干什么
+    truth: 无痕只是不保存本地历史，ISP、公司网络、网站都能看到你
+    tool: browser
+    command: "无痕 ≠ 匿名，只是不留本地痕迹"
+    category: privacy
+
+  - slug: apple-no-virus
+    problem: 苹果手机真的不中毒吗
+    myth: iPhone/Mac不会感染恶意软件
+    truth: 苹果也有漏洞，Pegasus间谍软件就专门针对iOS
+    tool: ios
+    command: "定期更新iOS + 不装来路不明的描述文件"
+    category: malware
+
+  - slug: vpn-total-protection
+    problem: VPN能完全保护隐私吗
+    myth: 开了VPN就百分百安全匿名了
+    truth: VPN加密传输但VPN公司能看到你的流量，还有DNS泄露风险
+    tool: vpn
+    command: "VPN保护传输层，但不防钓鱼、恶意软件、账号泄露"
+    category: privacy
+
+  - slug: complex-password-safe
+    problem: 密码越复杂越安全吗
+    myth: 用 P@$$w0rd! 这种替换就很安全
+    truth: 长度比复杂度重要，"correct horse battery staple"比 P@$$w0rd! 更难破
+    tool: password
+    command: "20位随机密码 > 8位复杂密码，用密码管理器"
+    category: passwords
+
+  - slug: antivirus-enough
+    problem: 装了杀毒软件就高枕无忧
+    myth: 杀毒软件能防住所有攻击
+    truth: 杀毒只能防已知威胁，零日漏洞、钓鱼、社工它防不了
+    tool: security
+    command: "杀毒是最后一道防线，不是唯一防线"
+    category: malware
+
+  - slug: https-means-safe
+    problem: 有HTTPS小锁就是安全网站
+    myth: 看到绿色小锁就可以放心输密码
+    truth: HTTPS只保证传输加密，钓鱼网站也能申请证书
+    tool: ssl
+    command: "HTTPS ≠ 可信，还要看域名是否正确"
+    category: web
+
+  - slug: deleted-is-gone
+    problem: 删除的文件真的消失了吗
+    myth: 清空回收站文件就彻底没了
+    truth: 数据仍在磁盘上直到被覆盖，专业工具可以恢复
+    tool: recovery
+    command: "photorec能恢复已删文件 → 真要销毁用shred"
+    category: forensics
+
+  - slug: mac-address-tracking
+    problem: 改MAC地址就追踪不到
+    myth: 改了MAC地址就完全匿名了
+    truth: 现代追踪用cookie、指纹、IP等多种方式，MAC只是一个
+    tool: tracking
+    command: "浏览器指纹比MAC地址更难隐藏"
+    category: privacy
+
+  - slug: firewall-blocks-all
+    problem: 有防火墙就万事大吉
+    myth: 开了防火墙黑客就进不来
+    truth: 防火墙管端口，但Web漏洞走80/443合法端口进来
+    tool: firewall
+    command: "防火墙防不了SQL注入、XSS、钓鱼邮件"
+    category: network
+
+  - slug: small-company-safe
+    problem: 小公司不会成为攻击目标
+    myth: 黑客只攻击大企业
+    truth: 43%的网络攻击针对中小企业，因为防护更弱
+    tool: stats
+    command: "小公司更容易中勒索软件，因为没有安全团队"
+    category: business
+
+  - slug: two-factor-unhackable
+    problem: 开了2FA就绝对安全
+    myth: 有两步验证就不可能被黑
+    truth: SIM swap、钓鱼中间人、社工客服都能绕过短信2FA
+    tool: 2fa
+    command: "TOTP/硬件密钥 > 短信验证码，但都不是100%"
+    category: account
+
+  - slug: linux-no-virus
+    problem: Linux不会中毒
+    myth: 用Linux就不用担心安全问题
+    truth: Linux服务器是勒索软件的重要目标，提权漏洞频出
+    tool: linux
+    command: "sudo apt update && sudo apt upgrade  # Linux也要打补丁"
+    category: malware
+
+  - slug: strong-wifi-password
+    problem: Wi-Fi密码强就够了
+    myth: Wi-Fi密码够复杂就安全了
+    truth: WPA2有KRACK漏洞，还有evil twin、密码喷洒等攻击
+    tool: wifi
+    command: "用WPA3 + 关WPS + 客人用访客网络"
+    category: network
+
+  - slug: email-sender-trusted
+    problem: 看发件人就能判断邮件真假
+    myth: 发件人显示是老板/银行就是真的
+    truth: 邮件发件人可以伪造，SPF/DKIM/DMARC不是所有域都配了
+    tool: email
+    command: "看完整邮件头 → 检查Return-Path和真实发送IP"
+    category: phishing
+
+  - slug: factory-reset-clean
+    problem: 恢复出厂设置数据就没了
+    myth: 手机恢复出厂设置就可以安全卖掉
+    truth: 不加密直接重置的数据可能被恢复
+    tool: phone
+    command: "先加密 → 再恢复出厂 → 才能安全转手"
+    category: data
+
+  - slug: tor-total-anonymity
+    problem: 用Tor就完全匿名
+    myth: Tor浏览器让你在网上隐身
+    truth: 出口节点可被监控，JS漏洞可暴露IP，使用习惯可关联身份
+    tool: tor
+    command: "Tor提高匿名性但不保证100%，行为模式仍可被分析"
+    category: privacy
+
+  - slug: biometrics-secure
+    problem: 指纹/面部识别最安全
+    myth: 生物识别比密码更安全
+    truth: 指纹可被复制、面部可被照片/3D模型欺骗、且无法更换
+    tool: biometrics
+    command: "生物识别做'用户名'方便，密码/PIN做真正的保护"
+    category: account
+
+  - slug: paid-vpn-no-logs
+    problem: 付费VPN说不记录日志就真的不记录
+    myth: VPN公司承诺零日志就可以信任
+    truth: 没有第三方审计的零日志承诺不可验证，多家VPN被曝泄露
+    tool: vpn
+    command: "选经过独立安全审计的VPN，而不是只看广告"
+    category: privacy
+
+  - slug: quantum-breaks-all
+    problem: 量子计算机马上要破解所有加密
+    myth: 量子计算机很快就能破解一切
+    truth: 目前量子计算机还很初级，后量子加密标准已在部署中
+    tool: crypto
+    command: "RSA/ECC未来有风险，但AES-256对量子仍安全"
+    category: crypto
+
+  - slug: dark-web-illegal
+    problem: 暗网全是违法的
+    myth: 暗网上全是犯罪活动
+    truth: 暗网也有合法用途——记者保护线人、活动人士规避审查
+    tool: tor
+    command: "暗网是工具，关键看怎么用"
+    category: general

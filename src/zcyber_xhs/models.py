@@ -28,10 +28,45 @@ class PostStatus(str, Enum):
 
 
 class ImageText(BaseModel):
-    headline: str
+    """Flexible image text data — fields used vary by archetype template."""
+
+    model_config = {"extra": "allow"}
+
+    # Common
+    headline: str = ""
     command: str = ""
     output_preview: str = ""
     caption: str = ""
+
+    # tool_spotlight carousel
+    tool_name: str = ""
+    use_number: str = ""
+    use_title: str = ""
+    items: list[dict[str, str]] = Field(default_factory=list)
+
+    # everyday_panic
+    scenario_emoji: str = ""
+
+    # before_after / split_compare
+    before_label: str = ""
+    after_label: str = ""
+    before_text: str = ""
+    after_text: str = ""
+
+    # news_hook / alert_red
+    severity: str = ""
+    source: str = ""
+    date: str = ""
+
+    # mythbust
+    myth: str = ""
+    truth: str = ""
+
+    # ctf / puzzle_frame
+    puzzle_string: str = ""
+    hint: str = ""
+    difficulty: str = ""
+    engagement_cta: str = ""
 
 
 class PostDraft(BaseModel):
@@ -46,6 +81,13 @@ class PostDraft(BaseModel):
     image_text: ImageText = Field(default_factory=ImageText)
     cta: str = ""
     safety_disclaimer_needed: bool = False
+
+    # carousel: list of per-slide image_text for multi-image posts
+    carousel_slides: list[ImageText] = Field(default_factory=list)
+
+    # ctf: solution post data
+    solution_body: str = ""
+    solution_image_text: Optional[ImageText] = None
 
 
 class PostRecord(BaseModel):
@@ -69,10 +111,34 @@ class PostRecord(BaseModel):
 
 
 class TopicEntry(BaseModel):
-    """A topic from the topic bank."""
+    """A topic from the topic bank — flexible fields per archetype."""
+
+    model_config = {"extra": "allow"}
 
     slug: str
-    problem: str
-    tool: str
-    command: str
+    problem: str = ""
+    tool: str = ""
+    command: str = ""
     category: str = ""
+
+    # everyday_panic
+    scenario: str = ""
+    solution: str = ""
+
+    # before_after
+    bad_practice: str = ""
+    good_practice: str = ""
+
+    # mythbust
+    myth: str = ""
+    truth: str = ""
+
+    # tool_spotlight
+    uses: list[dict[str, str]] = Field(default_factory=list)
+
+    # news_hook (from RSS)
+    news_title: str = ""
+    news_url: str = ""
+    news_excerpt: str = ""
+    news_date: str = ""
+    news_category: str = ""

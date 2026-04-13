@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from typing import Any
 
 from jinja2 import Template
 
@@ -19,18 +20,21 @@ class ContentGenerator:
         self.llm = llm or LLMClient.from_config(config.llm)
         self._prompts_dir = config.base_dir / "config" / "prompts"
 
-    def generate(self, archetype: str, topic: TopicEntry) -> PostDraft:
-        """Generate a post draft for the given archetype and topic."""
+    def generate(self, archetype: str, topic: TopicEntry) -> tuple[PostDraft, str]:
+        """Generate a post draft for the given archetype and topic.
+
+        Returns (PostDraft, payload_json).
+        """
         prompt = self._render_prompt(archetype, topic)
         raw = self.llm.generate_json(prompt)
 
-        # Inject safety disclaimer if needed
+        # Post-process: safety disclaimer
         if raw.get("safety_disclaimer_needed"):
             disclaimer = self.config.content.get("safety_disclaimer", "")
             if disclaimer and disclaimer not in raw.get("body", ""):
                 raw["body"] = raw["body"].rstrip() + f"\n\n⚠️ {disclaimer}"
 
-        # Ensure default tags are included
+        # Post-process: ensure default tags
         default_tags = self.config.content.get("default_tags", [])
         existing_tags = raw.get("tags", [])
         for tag in default_tags:
@@ -38,13 +42,14 @@ class ContentGenerator:
                 existing_tags.append(tag)
         raw["tags"] = existing_tags
 
-        # Append AI label
+        # Post-process: AI label
         ai_label = self.config.content.get("ai_label", "")
         if ai_label and ai_label not in raw.get("body", ""):
             raw["body"] = raw["body"].rstrip() + f"\n\n{ai_label}"
 
         draft = PostDraft(**raw)
-        return draft, json.dumps(raw, ensure_ascii=False, indent=2)
+        payload = json.dumps(raw, ensure_ascii=False, indent=2)
+        return draft, payload
 
     def _render_prompt(self, archetype: str, topic: TopicEntry) -> str:
         """Load and render the Jinja2 prompt template for the archetype."""
@@ -55,12 +60,21 @@ class ContentGenerator:
         template_text = template_path.read_text(encoding="utf-8")
         template = Template(template_text)
 
-        return template.render(
-            problem=topic.problem,
-            tool=topic.tool,
-            command=topic.command,
-            category=topic.category,
-            cta=self.config.content.get("cta", ""),
-            safety_disclaimer=self.config.content.get("safety_disclaimer", ""),
-            default_tags=self.config.content.get("default_tags", []),
-        )
+        # Build template variables from topic — pass all fields
+        variables = self._build_template_vars(topic)
+        return template.render(**variables)
+
+    def _build_template_vars(self, topic: TopicEntry) -> dict[str, Any]:
+        """Build the full set of Jinja2 template variables from a topic."""
+        # Start with all TopicEntry fields
+        variables = topic.model_dump()
+
+        # Add config-level content settings
+        variables["cta"] = self.config.content.get("cta", "")
+        variables["safety_disclaimer"] = self.config.content.get("safety_disclaimer", "")
+        variables["default_tags"] = self.config.content.get("default_tags", [])
+
+        # news_hook specific aliases
+        variables["news_source"] = topic.news_url.split("/")[2] if topic.news_url else ""
+
+        return variables

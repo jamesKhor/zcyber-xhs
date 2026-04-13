@@ -1,0 +1,163 @@
+# Topic bank for everyday_panic archetype
+# Relatable "oh no" moments → simple solution
+
+topics:
+  - slug: forgot-wifi-password
+    problem: 出差忘记Wi-Fi密码了
+    scenario: 连过的Wi-Fi密码想不起来
+    solution: 系统里查已保存的密码
+    tool: netsh/security
+    command: 'netsh wlan show profile name="WiFi名称" key=clear'
+    category: password
+
+  - slug: suspicious-excel
+    problem: 同事发来的Excel要不要打开
+    scenario: 收到不明来源的Office文件
+    solution: 先用在线沙箱扫一下
+    tool: VirusTotal
+    command: "上传到 virustotal.com 或 any.run 检查"
+    category: safety
+
+  - slug: phone-lost-wifi
+    problem: 手机丢了想看最后连了哪个Wi-Fi
+    scenario: 手机丢失想追踪位置线索
+    solution: 查路由器管理页面的连接记录
+    tool: router
+    command: "登录 192.168.1.1 → 已连接设备 → 查看历史"
+    category: incident
+
+  - slug: suspect-monitoring
+    problem: 怀疑电脑被装了监控软件
+    scenario: 公司电脑或借给别人后担心被监控
+    solution: 检查网络连接和启动项
+    tool: netstat
+    command: "netstat -ano | findstr ESTABLISHED"
+    category: incident
+
+  - slug: weird-browser-redirect
+    problem: 浏览器总是自动跳转到奇怪网站
+    scenario: 打开浏览器就被劫持到广告页
+    solution: 检查浏览器扩展和DNS设置
+    tool: browser
+    command: "chrome://extensions → 删除可疑插件 → 重置DNS"
+    category: malware
+
+  - slug: leaked-password-check
+    problem: 听说又有数据泄露，我的密码安全吗
+    scenario: 新闻报道大规模数据泄露事件
+    solution: 用HIBP查你的邮箱是否在泄露库中
+    tool: haveibeenpwned
+    command: "访问 haveibeenpwned.com 输入你的邮箱"
+    category: safety
+
+  - slug: unknown-app-permissions
+    problem: 手机app要了一堆奇怪权限
+    scenario: 一个计算器app要访问通讯录和摄像头
+    solution: 检查并关闭不必要的权限
+    tool: phone-settings
+    command: "设置 → 隐私 → 权限管理 → 逐个检查"
+    category: privacy
+
+  - slug: public-wifi-safe
+    problem: 咖啡店的免费Wi-Fi能用吗
+    scenario: 在公共场所需要用Wi-Fi办公
+    solution: 用VPN或避免登录敏感账号
+    tool: vpn
+    command: "开启VPN → 不登录银行/支付类网站 → 用完忘记网络"
+    category: safety
+
+  - slug: spam-calls-flood
+    problem: 突然收到大量骚扰电话和短信
+    scenario: 注册了某个网站后信息被卖
+    solution: 开启手机骚扰拦截+投诉
+    tool: phone
+    command: "设置 → 电话 → 静音未知来电 + 12321举报"
+    category: privacy
+
+  - slug: accidental-delete-file
+    problem: 重要文件被误删了
+    scenario: 不小心清空了回收站
+    solution: 用数据恢复工具扫描
+    tool: testdisk/photorec
+    command: "photorec /dev/sda"
+    category: recovery
+
+  - slug: usb-virus-fear
+    problem: 捡到/借到一个U盘要不要插
+    scenario: 别人的U盘可能带病毒
+    solution: 在隔离环境中检查
+    tool: sandbox
+    command: "用虚拟机或断网电脑打开 → 先杀毒扫描"
+    category: safety
+
+  - slug: two-factor-locked
+    problem: 换手机后两步验证登不上了
+    scenario: 旧手机的验证器app数据丢失
+    solution: 用备份码恢复或联系客服
+    tool: 2fa
+    command: "找当初保存的恢复码 → 输入备用验证方式"
+    category: account
+
+  - slug: qr-code-scam
+    problem: 扫了个二维码怕中招
+    scenario: 街边/邮件里的可疑二维码
+    solution: 先预览链接再决定是否打开
+    tool: qr-check
+    command: "长按二维码 → 预览链接 → 不认识的域名别点"
+    category: safety
+
+  - slug: email-attachment-safe
+    problem: 邮件附件是病毒还是正常文件
+    scenario: 收到PDF/DOC附件不确定安全性
+    solution: 用VirusTotal扫描附件
+    tool: virustotal
+    command: "下载但不打开 → 上传到 virustotal.com"
+    category: safety
+
+  - slug: forgot-linux-password
+    problem: Linux密码忘了进不去系统
+    scenario: 服务器或虚拟机密码遗忘
+    solution: 通过单用户模式重置
+    tool: grub
+    command: "重启 → GRUB菜单按e → init=/bin/bash → passwd"
+    category: password
+
+  - slug: computer-slow-suddenly
+    problem: 电脑突然变得巨慢
+    scenario: 没装什么新东西但CPU飙到100%
+    solution: 查看资源占用找出元凶
+    tool: task-manager
+    command: "任务管理器 → 按CPU排序 → 搜索可疑进程名"
+    category: incident
+
+  - slug: webcam-light-on
+    problem: 摄像头灯亮了但我没开视频
+    scenario: 笔记本摄像头指示灯异常亮起
+    solution: 检查哪个程序在用摄像头
+    tool: process-check
+    command: "设置 → 隐私 → 摄像头 → 查看最近访问的应用"
+    category: incident
+
+  - slug: child-safe-internet
+    problem: 小孩要上网怎么保护
+    scenario: 担心孩子接触不良内容
+    solution: 设置家长控制和DNS过滤
+    tool: dns
+    command: "路由器DNS设为 family.cloudflare-dns.com (1.1.1.3)"
+    category: privacy
+
+  - slug: website-not-https
+    problem: 这个网站没有小锁标志安全吗
+    scenario: 要输入信息但发现不是HTTPS
+    solution: 不要在HTTP页面输入敏感信息
+    tool: browser
+    command: "看地址栏 → 没有🔒就不要输密码/银行卡"
+    category: safety
+
+  - slug: account-hacked-what-now
+    problem: 社交账号被盗了怎么办
+    scenario: 发现账号发了自己没发的内容
+    solution: 立即改密码+开二次验证+通知好友
+    tool: account-recovery
+    command: "改密码 → 退出所有设备 → 开启2FA → 检查绑定邮箱"
+    category: incident

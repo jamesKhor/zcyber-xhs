@@ -74,11 +74,30 @@ class Publisher:
             "tags": post.tags,
         }
 
-        # Attach image if available
-        if post.image_path and Path(post.image_path).exists():
-            payload["image_paths"] = [post.image_path]
+        # Attach image(s) — supports single path or JSON array of paths
+        if post.image_path:
+            image_paths = self._resolve_image_paths(post.image_path)
+            if image_paths:
+                payload["image_paths"] = image_paths
 
         return payload
+
+    @staticmethod
+    def _resolve_image_paths(image_path_str: str) -> list[str]:
+        """Parse image path(s) — handles both single path and JSON array."""
+        import json
+
+        if image_path_str.startswith("["):
+            try:
+                paths = json.loads(image_path_str)
+                return [p for p in paths if Path(p).exists()]
+            except json.JSONDecodeError:
+                pass
+
+        if Path(image_path_str).exists():
+            return [image_path_str]
+
+        return []
 
     def _resolve_publish_url(self) -> str:
         """Resolve the xiaohongshu-mcp publish endpoint."""
