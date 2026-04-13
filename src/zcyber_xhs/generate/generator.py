@@ -1,0 +1,66 @@
+"""Content generator — loads archetype prompts, calls LLM, validates output."""
+
+from __future__ import annotations
+
+import json
+
+from jinja2 import Template
+
+from ..config import Config
+from ..models import PostDraft, TopicEntry
+from .llm import LLMClient
+
+
+class ContentGenerator:
+    """Generate XHS post content for a given archetype and topic."""
+
+    def __init__(self, config: Config, llm: LLMClient | None = None):
+        self.config = config
+        self.llm = llm or LLMClient.from_config(config.llm)
+        self._prompts_dir = config.base_dir / "config" / "prompts"
+
+    def generate(self, archetype: str, topic: TopicEntry) -> PostDraft:
+        """Generate a post draft for the given archetype and topic."""
+        prompt = self._render_prompt(archetype, topic)
+        raw = self.llm.generate_json(prompt)
+
+        # Inject safety disclaimer if needed
+        if raw.get("safety_disclaimer_needed"):
+            disclaimer = self.config.content.get("safety_disclaimer", "")
+            if disclaimer and disclaimer not in raw.get("body", ""):
+                raw["body"] = raw["body"].rstrip() + f"\n\n⚠️ {disclaimer}"
+
+        # Ensure default tags are included
+        default_tags = self.config.content.get("default_tags", [])
+        existing_tags = raw.get("tags", [])
+        for tag in default_tags:
+            if tag not in existing_tags:
+                existing_tags.append(tag)
+        raw["tags"] = existing_tags
+
+        # Append AI label
+        ai_label = self.config.content.get("ai_label", "")
+        if ai_label and ai_label not in raw.get("body", ""):
+            raw["body"] = raw["body"].rstrip() + f"\n\n{ai_label}"
+
+        draft = PostDraft(**raw)
+        return draft, json.dumps(raw, ensure_ascii=False, indent=2)
+
+    def _render_prompt(self, archetype: str, topic: TopicEntry) -> str:
+        """Load and render the Jinja2 prompt template for the archetype."""
+        template_path = self._prompts_dir / f"{archetype}.j2"
+        if not template_path.exists():
+            raise FileNotFoundError(f"Prompt template not found: {template_path}")
+
+        template_text = template_path.read_text(encoding="utf-8")
+        template = Template(template_text)
+
+        return template.render(
+            problem=topic.problem,
+            tool=topic.tool,
+            command=topic.command,
+            category=topic.category,
+            cta=self.config.content.get("cta", ""),
+            safety_disclaimer=self.config.content.get("safety_disclaimer", ""),
+            default_tags=self.config.content.get("default_tags", []),
+        )

@@ -1,0 +1,13 @@
+services:
+  pipeline:
+    build: .
+    env_file: .env
+    volumes:
+      - ./output:/app/output
+      - ./data:/app/data
+      - ./config:/app/config
+    restart: unless-stopped
+    command: ["run"]
+
+  # Optional: run one-off generation
+  # docker compose run pipeline generate -a problem_command

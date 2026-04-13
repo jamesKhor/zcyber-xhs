@@ -1,0 +1,43 @@
+# zcyber-xhs-pipeline configuration
+
+llm:
+  provider: deepseek  # deepseek | kimi | anthropic
+  model: deepseek-chat
+  temperature: 0.8
+  max_tokens: 2000
+
+schedule:
+  # Day of week (0=Mon, 6=Sun) → archetype
+  rotation:
+    0: problem_command
+    1: tool_spotlight
+    2: everyday_panic
+    3: before_after
+    4: news_hook
+    5: mythbust
+    6: ctf
+  # Generation runs at this hour (24h)
+  generate_hour: 8
+  # Publish drains approved queue at this hour
+  publish_hour: 12
+
+publishing:
+  max_per_day: 2
+  min_hours_between: 4
+  jitter_minutes: 20
+  retry_attempts: 3
+  xhs_mcp_url: ${XHS_MCP_URL:-http://localhost:18060}
+
+content:
+  cta: "更多威胁情报 → 主页 zcybernews"
+  safety_disclaimer: "仅限自己设备/授权测试"
+  ai_label: "AI辅助创作"
+  default_tags:
+    - "#网络安全"
+    - "#信息安全"
+    - "#zcybernews"
+
+images:
+  width: 1080
+  height: 1440
+  output_dir: output/images

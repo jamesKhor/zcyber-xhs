@@ -1,0 +1,124 @@
+# Topic bank for problem_command archetype
+# Each entry: a problem scenario + the tool/command that solves it
+# The LLM will expand these into full XHS posts
+
+topics:
+  - slug: unknown-hosts
+    problem: 不知道局域网里有哪些设备
+    tool: nmap
+    command: "nmap -sn 192.168.1.0/24"
+    category: network_recon
+
+  - slug: open-ports
+    problem: 想知道服务器开了哪些端口
+    tool: nmap
+    command: "nmap -p- 192.168.1.100"
+    category: network_recon
+
+  - slug: service-version
+    problem: 端口开了但不知道跑的什么服务
+    tool: nmap
+    command: "nmap -sV -p 80,443,8080 target.com"
+    category: network_recon
+
+  - slug: zip-password
+    problem: 忘记zip压缩包密码
+    tool: fcrackzip
+    command: "fcrackzip -u -m 3 -c a1 -l 4-8 file.zip"
+    category: password_recovery
+
+  - slug: pdf-password
+    problem: PDF文件被加密打不开
+    tool: pdfcrack
+    command: "pdfcrack -f document.pdf"
+    category: password_recovery
+
+  - slug: wifi-password-windows
+    problem: 忘记已连接的Wi-Fi密码
+    tool: netsh
+    command: 'netsh wlan show profile name="WiFi名称" key=clear'
+    category: password_recovery
+
+  - slug: what-is-this-file
+    problem: 下载了一个没有扩展名的文件
+    tool: file
+    command: "file mystery_file"
+    category: forensics
+
+  - slug: image-metadata
+    problem: 想知道照片是在哪里拍的
+    tool: exiftool
+    command: "exiftool photo.jpg"
+    category: forensics
+
+  - slug: hidden-strings
+    problem: 怀疑二进制文件里藏了东西
+    tool: strings
+    command: "strings suspicious_file | grep -i pass"
+    category: forensics
+
+  - slug: check-link-safe
+    problem: 收到一个可疑链接不敢点
+    tool: curl
+    command: "curl -I -L https://suspicious-link.com"
+    category: safety_check
+
+  - slug: check-hacked-logins
+    problem: 怀疑有人登录了我的服务器
+    tool: last
+    command: "last -n 20"
+    category: incident
+
+  - slug: suspicious-processes
+    problem: 电脑变慢怀疑有后门
+    tool: ps
+    command: "ps auxf | head -30"
+    category: incident
+
+  - slug: listening-ports
+    problem: 想知道哪些程序在监听端口
+    tool: ss
+    command: "ss -tulnp"
+    category: incident
+
+  - slug: dns-lookup
+    problem: 想查一个域名指向哪个IP
+    tool: dig
+    command: "dig +short example.com"
+    category: network_recon
+
+  - slug: whois-lookup
+    problem: 想知道一个域名是谁注册的
+    tool: whois
+    command: "whois example.com"
+    category: network_recon
+
+  - slug: check-ssl-cert
+    problem: 想查一个网站的证书是否过期
+    tool: openssl
+    command: "openssl s_client -connect example.com:443 2>/dev/null | openssl x509 -noout -dates"
+    category: safety_check
+
+  - slug: hash-file
+    problem: 下载文件想验证是否被篡改
+    tool: sha256sum
+    command: "sha256sum downloaded_file.iso"
+    category: safety_check
+
+  - slug: find-large-files
+    problem: 磁盘满了不知道什么文件占空间
+    tool: du
+    command: "du -ah / 2>/dev/null | sort -rh | head -20"
+    category: sysadmin
+
+  - slug: kill-process-by-port
+    problem: 端口被占用了想释放
+    tool: fuser
+    command: "fuser -k 8080/tcp"
+    category: sysadmin
+
+  - slug: base64-decode
+    problem: 看到一串Base64编码想解码
+    tool: base64
+    command: "echo 'SGVsbG8gV29ybGQ=' | base64 -d"
+    category: forensics
