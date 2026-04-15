@@ -11,12 +11,15 @@ from pydantic import BaseModel, Field
 
 class Archetype(str, Enum):
     PROBLEM_COMMAND = "problem_command"
-    TOOL_SPOTLIGHT = "tool_spotlight"
+    TOOL_SPOTLIGHT = "tool_spotlight"   # kept for DB backwards-compat
     EVERYDAY_PANIC = "everyday_panic"
-    BEFORE_AFTER = "before_after"
+    BEFORE_AFTER = "before_after"       # kept for DB backwards-compat
     NEWS_HOOK = "news_hook"
     MYTHBUST = "mythbust"
     CTF = "ctf"
+    REAL_STORY = "real_story"           # replaces tool_spotlight (Tue)
+    RANK_WAR = "rank_war"               # replaces before_after (Thu)
+    HACKER_POV = "hacker_pov"          # replaces ctf (Sun) — immersive 2nd-person scenario
 
 
 class PostStatus(str, Enum):
@@ -68,6 +71,9 @@ class ImageText(BaseModel):
     difficulty: str = ""
     engagement_cta: str = ""
 
+    # hacker_pov
+    pov_label: str = ""
+
 
 class PostDraft(BaseModel):
     """Structured output from the LLM content generator."""
@@ -76,6 +82,7 @@ class PostDraft(BaseModel):
     title: str
     body: str
     tags: list[str] = Field(default_factory=list)
+    language: str = "zh"    # "zh" = Chinese/XHS, "en" = English/Instagram
     image_mode: str = "text_card"
     image_template: str = "terminal_dark"
     image_text: ImageText = Field(default_factory=ImageText)
@@ -142,3 +149,9 @@ class TopicEntry(BaseModel):
     news_excerpt: str = ""
     news_date: str = ""
     news_category: str = ""
+
+    # hacker_pov
+    pov_type: str = ""
+    attack_type: str = ""
+    technical_detail: str = ""
+    defense_action: str = ""

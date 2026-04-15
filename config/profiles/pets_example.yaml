@@ -1,0 +1,17 @@
+# Pets & Animals profile — example/placeholder for future niche expansion
+name: "Pets & Animals"
+slug: "pets"
+icon: "🐾"
+description: "Daily pet care, health and lifestyle content"
+brand: "PETWISE"
+default_language: zh
+archetypes:
+  - tip_of_day
+  - real_story
+  - myth_bust
+  - news_hook
+  - rank_war
+color: "#00E676"
+# NOTE: This profile requires its own topic banks and prompt templates.
+# Add config/topic_banks/pets_*.yaml and config/prompts/pets_*.j2 to activate.
+status: "coming_soon"

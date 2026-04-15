@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<div class="space-y-8">
+  <!-- Page header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-brand-text">Dashboard</h1>
+      <p class="text-sm text-brand-dim mt-1">Pipeline health at a glance</p>
+    </div>
+    <a href="/generate" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-cyan text-brand-bg text-sm font-semibold rounded-lg hover:bg-brand-cyan/90 transition-colors">
+      <span>⚡</span> Generate
+    </a>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    {% for label, value, color, href in [
+      ('Drafts',    counts.draft,     'yellow', '/review'),
+      ('Approved',  counts.approved,  'green',  '/approved'),
+      ('Published', counts.published, 'cyan',   '/export'),
+      ('Topics Left', topics_remaining, 'indigo', '/generate'),
+    ] %}
+    <a href="{{ href }}" class="block p-5 bg-brand-surface border border-brand-border rounded-xl hover:border-brand-{{ color }}/40 transition-all group">
+      <div class="text-3xl font-bold text-brand-{{ color }} group-hover:scale-105 transition-transform origin-left">{{ value }}</div>
+      <div class="text-sm text-brand-dim mt-1">{{ label }}</div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <!-- Recent posts -->
+  <div>
+    <h2 class="text-lg font-semibold text-brand-text mb-4">Recent Posts</h2>
+    {% if recent_posts %}
+    <div class="bg-brand-surface border border-brand-border rounded-xl overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-brand-border text-brand-dim text-xs uppercase tracking-wider">
+            <th class="text-left px-4 py-3 w-10">#</th>
+            <th class="text-left px-4 py-3">Title</th>
+            <th class="text-left px-4 py-3">Archetype</th>
+            <th class="text-left px-4 py-3">Status</th>
+            <th class="text-left px-4 py-3">Image</th>
+            <th class="text-left px-4 py-3">Created</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-brand-border">
+          {% for post in recent_posts %}
+          <tr class="hover:bg-white/2 transition-colors">
+            <td class="px-4 py-3 text-brand-dim font-mono text-xs">{{ post.id }}</td>
+            <td class="px-4 py-3 max-w-xs truncate text-brand-text">{{ post.title or '(no title)' }}</td>
+            <td class="px-4 py-3">
+              <span class="text-xs font-mono text-brand-indigo">{{ archetype_zh.get(post.archetype, post.archetype) }}</span>
+            </td>
+            <td class="px-4 py-3">
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border {{ status_color(post.status.value) }}">
+                {{ post.status.value }}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-xs">
+              {% if post.image_path %}<span class="text-green-400">🖼️ Yes</span>{% else %}<span class="text-brand-dim">—</span>{% endif %}
+            </td>
+            <td class="px-4 py-3 text-brand-dim text-xs font-mono">
+              {{ post.created_at.strftime('%m/%d %H:%M') if post.created_at else '—' }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="p-12 text-center border border-dashed border-brand-border rounded-xl">
+      <p class="text-brand-dim text-sm">No posts yet — <a href="/generate" class="text-brand-cyan hover:underline">generate your first post</a></p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

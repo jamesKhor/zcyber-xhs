@@ -21,6 +21,8 @@ from .queue import DraftQueue
 BANK_ARCHETYPES = {
     "problem_command", "tool_spotlight", "everyday_panic",
     "before_after", "mythbust",
+    "real_story", "rank_war",     # new archetypes (Tue + Thu)
+    "hacker_pov",                 # replaces ctf (Sun) — immersive scenario
 }
 
 
@@ -40,8 +42,16 @@ class Orchestrator:
         self,
         archetype: str,
         topic_override: Optional[str] = None,
+        text_only: bool = False,
+        language: str = "zh",
     ) -> Optional[int]:
-        """Run the full pipeline for one post. Returns post ID or None."""
+        """Run the full pipeline for one post. Returns post ID or None.
+
+        Args:
+            text_only: If True, skip image rendering (fast mode).
+                       Call render_image_for_post(post_id) later to render.
+            language: Content language — "zh" (default) or "en".
+        """
         # 1. Discover topic
         topic = self._pick_topic(archetype, topic_override)
         if not topic:
@@ -52,11 +62,15 @@ class Orchestrator:
 
         # 2. Generate content (with safety retry)
         click.echo("Generating content via LLM...")
-        draft, payload_json = self._generate_with_retry(archetype, topic)
+        draft, payload_json = self._generate_with_retry(archetype, topic, language=language)
         click.echo(f"Title: {draft.title}")
 
-        # 3. Render image(s)
-        image_path = self._render_images(draft, archetype, topic.slug)
+        # 3. Render image(s) — skipped in text_only mode
+        if text_only:
+            image_path = None
+            click.echo("Text-only mode — image rendering skipped.")
+        else:
+            image_path = self._render_images(draft, archetype, topic.slug)
 
         # 4. Enqueue
         post_id = self.queue.enqueue(draft, topic.slug, image_path, payload_json)
@@ -67,19 +81,76 @@ class Orchestrator:
 
         # 5. If CTF, also queue the solution post
         if archetype == "ctf" and draft.solution_body:
-            self._queue_ctf_solution(draft, topic.slug, payload_json)
+            self._queue_ctf_solution(draft, topic.slug, payload_json, text_only=text_only)
 
         return post_id
 
+    def render_image_for_post(self, post_id: int, force: bool = False) -> Optional[str]:
+        """Render image(s) for a draft and save to DB.
+
+        Reconstructs the PostDraft from the stored payload_json so the LLM
+        does not need to be called again.  Returns the saved image path.
+
+        Args:
+            force: If True, re-render even if an image already exists
+                   (useful after template updates).
+        """
+        from .models import PostDraft, Archetype  # local import avoids circularity
+
+        post = self.db.get_post(post_id)
+        if not post:
+            click.echo(f"Post #{post_id} not found.")
+            return None
+
+        if post.image_path and not force:
+            click.echo(f"Post #{post_id} already has an image — skipping render.")
+            return post.image_path
+
+        if not post.payload_json:
+            click.echo(f"Post #{post_id} has no payload_json — cannot reconstruct draft.")
+            return None
+
+        payload = json.loads(post.payload_json)
+
+        # Reconstruct a PostDraft from stored payload — only image fields matter
+        # image_text must be an ImageText object — deserialise from dict or use empty
+        from .models import ImageText  # local import avoids circularity
+        raw_image_text = payload.get("image_text") or {}
+        if isinstance(raw_image_text, dict):
+            image_text_obj = ImageText(**raw_image_text)
+        elif isinstance(raw_image_text, ImageText):
+            image_text_obj = raw_image_text
+        else:
+            image_text_obj = ImageText(headline=post.title or "")
+
+        draft = PostDraft(
+            archetype=Archetype(post.archetype),
+            title=post.title or "",
+            body=post.body or "",
+            tags=post.tags or [],
+            image_mode=payload.get("image_mode", "text_card"),
+            image_template=payload.get("image_template", "terminal_dark"),
+            image_text=image_text_obj,
+            carousel_slides=payload.get("carousel_slides") or [],
+            safety_disclaimer_needed=payload.get("safety_disclaimer_needed", False),
+            cta=payload.get("cta", ""),
+        )
+
+        image_path = self._render_images(draft, post.archetype, post.topic_slug)
+        if image_path:
+            self.db.update_post_image(post_id, image_path)
+            click.echo(f"Image rendered and saved for post #{post_id}: {image_path}")
+        return image_path
+
     def _generate_with_retry(
-        self, archetype: str, topic: TopicEntry, max_retries: int = 2
+        self, archetype: str, topic: TopicEntry, max_retries: int = 2, language: str = "zh"
     ) -> tuple[PostDraft, str]:
         """Generate content with auto-retry on safety filter blocks."""
         from .generate.generator import ContentBlockedError
 
         for attempt in range(1, max_retries + 2):
             try:
-                return self.generator.generate(archetype, topic)
+                return self.generator.generate(archetype, topic, language=language)
             except ContentBlockedError as e:
                 if attempt <= max_retries:
                     click.echo(f"Safety filter blocked (attempt {attempt}), retrying...")
@@ -176,8 +247,75 @@ class Orchestrator:
         # Return as JSON array of paths
         return json.dumps(path_strs, ensure_ascii=False)
 
+    def render_images_for_posts(self, post_ids: list[int]) -> dict[int, str]:
+        """Render images for multiple text-only drafts. Returns {post_id: image_path}.
+
+        Text-card posts are batched into ONE browser session (fast).
+        Carousel posts are rendered individually (each needs its own slide set).
+        """
+        from .models import ImageText, Archetype  # local import
+
+        def _build_draft(post, payload):
+            raw_it = payload.get("image_text") or {}
+            image_text_obj = (
+                ImageText(**raw_it) if isinstance(raw_it, dict) else ImageText()
+            )
+            return PostDraft(
+                archetype=Archetype(post.archetype),
+                title=post.title or "",
+                body=post.body or "",
+                tags=post.tags or [],
+                image_mode=payload.get("image_mode", "text_card"),
+                image_template=payload.get("image_template", "terminal_dark"),
+                image_text=image_text_obj,
+                carousel_slides=payload.get("carousel_slides") or [],
+                safety_disclaimer_needed=payload.get("safety_disclaimer_needed", False),
+                cta=payload.get("cta", ""),
+            )
+
+        # Split into text_card (batchable) vs carousel (must render individually)
+        text_card_items: list[tuple[int, object, PostDraft, str]] = []
+        carousel_items: list[tuple[int, object, PostDraft]] = []
+
+        for post_id in post_ids:
+            post = self.db.get_post(post_id)
+            if not post or post.image_path or not post.payload_json:
+                continue
+            payload = json.loads(post.payload_json)
+            draft = _build_draft(post, payload)
+            filename = f"{post.archetype}_{post.topic_slug}"
+            if draft.image_mode == "carousel":
+                carousel_items.append((post_id, post, draft))
+            else:
+                text_card_items.append((post_id, post, draft, filename))
+
+        results: dict[int, str] = {}
+
+        # Batch render all text cards in one browser session
+        if text_card_items:
+            click.echo(f"Batch rendering {len(text_card_items)} text-card image(s)...")
+            batch_input = [(draft, fname) for _, _, draft, fname in text_card_items]
+            paths = self.renderer.render_batch_sync(batch_input)
+            for (post_id, _, _, _), path in zip(text_card_items, paths):
+                path_str = str(path)
+                self.db.update_post_image(post_id, path_str)
+                results[post_id] = path_str
+                click.echo(f"  ✓ Post #{post_id}: {path_str}")
+
+        # Render carousel posts individually
+        for post_id, post, draft in carousel_items:
+            click.echo(f"Rendering carousel for post #{post_id}...")
+            path = self._render_carousel(draft, post.archetype, post.topic_slug)
+            if path:
+                self.db.update_post_image(post_id, path)
+                results[post_id] = path
+                click.echo(f"  ✓ Post #{post_id}: {path}")
+
+        return results
+
     def _queue_ctf_solution(
-        self, draft: PostDraft, topic_slug: str, payload_json: str
+        self, draft: PostDraft, topic_slug: str, payload_json: str,
+        text_only: bool = False,
     ) -> None:
         """Queue the CTF solution as a separate draft post."""
         if not draft.solution_image_text:
@@ -194,10 +332,14 @@ class Orchestrator:
             cta=draft.cta,
         )
 
-        # Render solution image
-        image_path = self._render_single(
-            solution_draft, "ctf_solution", topic_slug
-        )
+        # Render solution image (skip in text_only mode)
+        if text_only:
+            image_path = None
+            click.echo("Text-only mode — CTF solution image rendering skipped.")
+        else:
+            image_path = self._render_single(
+                solution_draft, "ctf_solution", topic_slug
+            )
 
         solution_id = self.queue.enqueue(
             solution_draft, f"{topic_slug}_solution", image_path, payload_json

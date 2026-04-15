@@ -1,23 +1,40 @@
 services:
+  # ── Web UI (FastAPI + HTMX + Tailwind) ────────────────────────────────────
+  web:
+    build: .
+    env_file: .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./output:/app/output
+      - ./config:/app/config
+      - ./zcyber_xhs.db:/app/zcyber_xhs.db
+    restart: unless-stopped
+    command: ["uvicorn", "zcyber_xhs.web:app", "--host", "0.0.0.0", "--port", "8080"]
+
+  # ── Daily scheduler ────────────────────────────────────────────────────────
   scheduler:
     build: .
     env_file: .env
     volumes:
       - ./output:/app/output
       - ./config:/app/config
+      - ./zcyber_xhs.db:/app/zcyber_xhs.db
     restart: unless-stopped
     command: ["run"]
 
+  # ── Telegram review bot ───────────────────────────────────────────────────
   telegram-bot:
     build: .
     env_file: .env
     volumes:
       - ./output:/app/output
       - ./config:/app/config
+      - ./zcyber_xhs.db:/app/zcyber_xhs.db
     restart: unless-stopped
     command: ["bot"]
 
   # One-off commands:
-  # docker compose run scheduler generate -a problem_command
-  # docker compose run scheduler queue list
-  # docker compose run scheduler status
+  # docker compose run --rm web generate -a problem_command
+  # docker compose run --rm web queue list
+  # Open UI: http://localhost:8080

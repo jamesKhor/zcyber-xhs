@@ -1,0 +1,92 @@
+# real_story topic bank — real breach narratives for Tuesday posts
+# Fields: slug, problem, scenario, solution, tool, command
+# problem = event name
+# scenario = who got hit
+# solution = the key mistake
+# tool = impact/damage
+# command = time/context
+
+topics:
+  - slug: colonial-pipeline-ransomware
+    problem: Colonial Pipeline勒索软件攻击
+    scenario: 美国最大燃油管道运营商，5500英里管道
+    solution: 单个VPN账号没有多因素认证，凭据早已在暗网上出售
+    tool: 美国东海岸45%燃油供应中断6天，支付440万美元赎金
+    command: 2021年5月，一个普通周五下午
+
+  - slug: twitter-sim-swap-hack
+    problem: Twitter/X CEO账号SIM卡劫持
+    scenario: 高知名度Twitter账号被接管，用于比特币骗局
+    solution: 员工被社会工程攻击，攻击者假冒IT支持获取内部访问权限
+    tool: 13万美元比特币被盗，影响奥巴马、马斯克、比尔盖茨等账号
+    command: 2020年7月，17岁攻击者主导
+
+  - slug: equifax-data-breach
+    problem: Equifax信用局数据泄露
+    scenario: 美国三大信用局之一，掌管1.5亿人财务数据
+    solution: 已知的Apache Struts漏洞补丁发布后78天未打，安全扫描证书过期
+    tool: 1.47亿人社会安全号码、驾照信息泄露，史上最大个人信息泄露之一
+    command: 2017年，漏洞已存在5个月才被发现
+
+  - slug: lastpass-breach-2022
+    problem: LastPass密码管理器源代码泄露
+    scenario: 全球2500万用户依赖的密码管理器
+    solution: 开发人员家庭电脑被黑，用于访问公司生产环境，家用设备没有企业安全策略
+    tool: 加密密码库数据被盗，数月后发现有针对性的解密攻击
+    command: 2022年8月，两次独立攻击
+
+  - slug: uber-2022-social-engineering
+    problem: Uber被18岁少年完全攻陷
+    scenario: 全球打车巨头Uber全内网
+    solution: 社会工程攻击：假冒IT给员工发MFA疲劳轰炸，员工接受了"意外"推送
+    tool: 内部Slack、HackerOne漏洞赏金数据库、AWS、Google Cloud全部暴露
+    command: 2022年9月，攻击者事后在Slack频道公告"我黑了Uber"
+
+  - slug: rockstar-gta6-leak
+    problem: GTA6开发视频被16岁少年泄露
+    scenario: Rockstar Games，史上最期待的游戏开发团队
+    solution: Slack工作区被入侵，凭据从另一次攻击中获取，Slack是内部最核心的协作工具
+    tool: 90多个GTA6开发视频泄露，引发数十亿产品影响和投资人恐慌
+    command: 2022年9月，同一少年还攻击了Uber
+
+  - slug: healthcare-ransomware-change
+    problem: Change Healthcare勒索软件，美国医疗系统瘫痪
+    scenario: 处理美国1/3医疗理赔的关键基础设施
+    solution: 远程访问门户没有多因素认证
+    tool: 医院无法处理保险理赔，患者无法取药，损失超过10亿美元
+    command: 2024年2月，影响持续数月
+
+  - slug: solar-winds-supply-chain
+    problem: SolarWinds供应链攻击
+    scenario: 全球18000个政府和企业客户，包括美国财政部、国防部
+    solution: 软件更新服务器被植入后门，攻击者潜伏长达9个月未被发现
+    tool: 美国多个政府机构数据被长期访问，定性为国家级APT攻击
+    command: 2020年，渗透从2019年10月开始
+
+  - slug: zoom-credential-stuffing
+    problem: 50万Zoom账号在暗网5美分一个出售
+    scenario: 疫情期间全球远程工作者
+    solution: 用户在多个平台重复使用密码，凭据填充攻击自动化
+    tool: 50万Zoom账号含会议ID、主持人密钥、邮件密码全套出售
+    command: 2020年4月，疫情居家高峰期
+
+  - slug: mgm-social-engineering-casino
+    problem: MGM大赌场被10分钟电话打垮
+    scenario: MGM Resorts旗下拉斯维加斯所有酒店
+    solution: 攻击者在LinkedIn找到员工信息，打给帮助台冒充员工，帮助台没有核实身份
+    tool: 赌场老虎机瘫痪、酒店入住系统停摆、损失超1亿美元
+    command: 2023年9月，攻击从一个10分钟电话开始
+
+  - slug: phishing-google-facebook-billion
+    problem: 一个立陶宛男人骗走谷歌Facebook各5000万美元
+    scenario: 谷歌和Facebook的财务部门
+    solution: 伪造了与真实供应商Quanta Computer相同的公司名和发票，通过邮件发送
+    tool: 1.2亿美元通过正常转账流程支付给假冒供应商（后来大部分追回）
+    command: 2013-2015年，持续两年
+
+  - slug: twilio-employee-phishing
+    problem: Twilio员工被钓鱼短信攻击，导致Signal用户数据暴露
+    scenario: 全球最大短信API服务商，服务Signal、Authy等安全应用
+    solution: 员工收到伪装成公司IT的钓鱼短信，点击后输入了企业SSO凭据
+    tool: 125个Twilio客户数据被访问，包括Signal验证码接收记录
+    command: 2022年8月，攻击者同时攻击了130多家公司

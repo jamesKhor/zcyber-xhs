@@ -69,16 +69,22 @@ CREATE INDEX IF NOT EXISTS idx_pipeline_health_type ON pipeline_health(event_typ
 
 
 class Database:
-    def __init__(self, db_path: str | Path | None = None):
+    def __init__(
+        self, db_path: str | Path | None = None, *, cross_thread: bool = False
+    ):
         if db_path is None:
             db_path = Path.cwd() / DB_NAME
         self.db_path = Path(db_path)
+        self._cross_thread = cross_thread
         self._conn: Optional[sqlite3.Connection] = None
 
     @property
     def conn(self) -> sqlite3.Connection:
         if self._conn is None:
-            self._conn = sqlite3.connect(str(self.db_path))
+            self._conn = sqlite3.connect(
+                str(self.db_path),
+                check_same_thread=not self._cross_thread,
+            )
             self._conn.row_factory = sqlite3.Row
             self._conn.execute("PRAGMA journal_mode=WAL")
             self._conn.execute("PRAGMA foreign_keys=ON")
@@ -155,6 +161,21 @@ class Database:
                 "UPDATE posts SET status=?, updated_at=? WHERE id=?",
                 (status.value, now, post_id),
             )
+        self.conn.commit()
+
+    def delete_post(self, post_id: int) -> bool:
+        """Hard-delete a post. Returns True if a row was deleted."""
+        cur = self.conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+        self.conn.commit()
+        return cur.rowcount > 0
+
+    def update_post_image(self, post_id: int, image_path: str) -> None:
+        """Set or update the image_path for an existing post."""
+        now = datetime.now(UTC).isoformat()
+        self.conn.execute(
+            "UPDATE posts SET image_path=?, updated_at=? WHERE id=?",
+            (image_path, now, post_id),
+        )
         self.conn.commit()
 
     def count_published_today(self) -> int:

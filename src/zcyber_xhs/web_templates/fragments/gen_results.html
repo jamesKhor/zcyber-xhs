@@ -1,0 +1,88 @@
+<!-- Generated results fragment — returned when job completes -->
+<div class="space-y-4 mt-4">
+  {% if errors %}
+  <div class="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-sm text-red-400">
+    ⚠ {{ errors | length }} error(s): {{ errors | join(', ') }}
+  </div>
+  {% endif %}
+
+  {% if posts %}
+  <div class="flex items-center justify-between">
+    <h2 class="text-lg font-semibold text-brand-text">
+      {{ posts | length }} post{{ 's' if posts|length != 1 else '' }} generated
+    </h2>
+    <span class="text-xs text-green-400 font-medium">✓ Done</span>
+  </div>
+
+  <div class="space-y-4">
+    {% for post in posts %}
+    <div class="bg-brand-surface border border-brand-border rounded-xl p-5 space-y-4" id="gen-post-{{ post.id }}">
+      <div class="flex items-start gap-4">
+        <!-- Content -->
+        <div class="flex-1 min-w-0 space-y-3">
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-xs font-mono text-brand-dim">#{{ post.id }}</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-brand-indigo/20 text-brand-indigo border border-brand-indigo/20">
+              {{ archetype_zh.get(post.archetype, post.archetype) }}
+            </span>
+            <span id="status-{{ post.id }}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border {{ status_color(post.status.value) }}">
+              {{ post.status.value }}
+            </span>
+          </div>
+          <h3 class="text-base font-semibold text-brand-text">{{ post.title or '(no title)' }}</h3>
+          <p class="text-sm text-brand-dim leading-relaxed line-clamp-3">{{ post.body or '' }}</p>
+          {% if post.tags %}
+          <div class="flex flex-wrap gap-1.5">
+            {% for tag in post.tags[:6] %}
+            <span class="text-xs px-2 py-0.5 bg-brand-cyan/5 border border-brand-cyan/15 rounded text-brand-cyan font-mono">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <!-- Image preview -->
+        <div class="w-24 flex-shrink-0">
+          {% if post.image_path %}
+          {% set img = resolve_image(post.image_path) %}
+          {% if img %}
+          <img src="{{ img }}" class="w-24 rounded-lg border border-brand-border" loading="lazy">
+          {% endif %}
+          {% else %}
+          <div id="render-{{ post.id }}" class="w-24 h-32 bg-brand-bg border border-dashed border-brand-border rounded-lg flex items-center justify-center">
+            <span class="text-xs text-brand-dim text-center px-1">No image</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 pt-1 border-t border-brand-border">
+        <button hx-post="/api/posts/{{ post.id }}/approve"
+                hx-target="#status-{{ post.id }}"
+                hx-swap="outerHTML"
+                class="px-3 py-1.5 text-xs font-semibold bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg hover:bg-green-500/20 transition-colors">
+          ✓ Approve
+        </button>
+        <button hx-post="/api/posts/{{ post.id }}/reject"
+                hx-target="#status-{{ post.id }}"
+                hx-swap="outerHTML"
+                class="px-3 py-1.5 text-xs font-semibold bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors">
+          ✗ Reject
+        </button>
+        {% if not post.image_path %}
+        <button hx-post="/api/posts/{{ post.id }}/render"
+                hx-target="#render-{{ post.id }}"
+                hx-swap="outerHTML"
+                class="px-3 py-1.5 text-xs font-semibold bg-brand-indigo/10 border border-brand-indigo/20 text-brand-indigo rounded-lg hover:bg-brand-indigo/20 transition-colors">
+          🖼 Render Image
+        </button>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="p-8 text-center border border-dashed border-brand-border rounded-xl">
+    <p class="text-brand-dim text-sm">Generation produced no results. Check the terminal for errors.</p>
+  </div>
+  {% endif %}
+</div>

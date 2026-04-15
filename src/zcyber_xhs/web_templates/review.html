@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Review Queue{% endblock %}
+{% block content %}
+
+<div class="space-y-6">
+  <div class="flex items-center justify-between flex-wrap gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-brand-text">Review Queue</h1>
+      <p class="text-sm text-brand-dim mt-1">{{ posts | length }} draft{{ 's' if posts|length != 1 else '' }} waiting</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <!-- Archetype filter -->
+      <select onchange="window.location='/review?archetype='+this.value"
+              class="px-3 py-2 bg-brand-surface border border-brand-border rounded-lg text-sm text-brand-text focus:outline-none focus:border-brand-cyan/50">
+        <option value="" {% if not selected_archetype %}selected{% endif %}>All archetypes</option>
+        {% for arch in all_archetypes %}
+        <option value="{{ arch }}" {% if arch == selected_archetype %}selected{% endif %}>
+          {{ archetype_zh.get(arch, arch) }}
+        </option>
+        {% endfor %}
+      </select>
+      <a href="/generate" class="px-4 py-2 bg-brand-cyan text-brand-bg text-sm font-semibold rounded-lg hover:bg-brand-cyan/90 transition-colors">
+        + Generate
+      </a>
+    </div>
+  </div>
+
+  {% if posts %}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for post in posts %}
+    <div class="bg-brand-surface border border-brand-border rounded-xl overflow-hidden hover:border-brand-border/80 transition-all" id="review-card-{{ post.id }}">
+      <!-- Top: image + meta -->
+      <div class="flex gap-0">
+        <!-- Thumbnail -->
+        <div class="w-24 flex-shrink-0 bg-brand-bg">
+          {% set img = resolve_image(post.image_path) %}
+          {% if img %}
+          <img src="{{ img }}" class="w-24 h-32 object-cover" loading="lazy">
+          {% else %}
+          <div class="w-24 h-32 flex items-center justify-center">
+            <span class="text-2xl opacity-20">🖼</span>
+          </div>
+          {% endif %}
+        </div>
+        <!-- Content -->
+        <div class="flex-1 p-4 min-w-0 space-y-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs px-2 py-0.5 rounded bg-brand-indigo/15 text-brand-indigo border border-brand-indigo/20 font-mono">
+              {{ archetype_zh.get(post.archetype, post.archetype) }}
+            </span>
+            <span id="status-pill-{{ post.id }}" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border {{ status_color(post.status.value) }}">
+              {{ post.status.value }}
+            </span>
+          </div>
+          <p class="text-sm font-semibold text-brand-text line-clamp-2 leading-snug">{{ post.title or '(no title)' }}</p>
+          <p class="text-xs text-brand-dim line-clamp-2 leading-relaxed">{{ post.body[:120] if post.body else '' }}…</p>
+        </div>
+      </div>
+      <!-- Actions bar -->
+      <div class="flex items-center gap-2 px-4 py-3 border-t border-brand-border bg-brand-bg/30">
+        <button hx-post="/api/posts/{{ post.id }}/approve"
+                hx-target="#status-pill-{{ post.id }}"
+                hx-swap="outerHTML"
+                class="flex-1 py-1.5 text-xs font-semibold bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg hover:bg-green-500/20 transition-colors">
+          ✓ Approve
+        </button>
+        <button hx-post="/api/posts/{{ post.id }}/reject"
+                hx-target="#status-pill-{{ post.id }}"
+                hx-swap="outerHTML"
+                class="flex-1 py-1.5 text-xs font-semibold bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors">
+          ✗ Reject
+        </button>
+        {% if not post.image_path %}
+        <button hx-post="/api/posts/{{ post.id }}/render"
+                hx-target="#render-slot-{{ post.id }}"
+                hx-swap="innerHTML"
+                class="py-1.5 px-3 text-xs font-semibold bg-brand-indigo/10 border border-brand-indigo/20 text-brand-indigo rounded-lg hover:bg-brand-indigo/20 transition-colors">
+          🖼
+        </button>
+        {% endif %}
+        <button
+          hx-get="/api/posts/{{ post.id }}/modal"
+          hx-target="#modal-content"
+          hx-swap="innerHTML"
+          @click="$dispatch('open-modal', {html: document.getElementById('modal-content').innerHTML})"
+          hx-on::after-request="$dispatch('open-modal', {html: document.getElementById('modal-content').innerHTML})"
+          class="py-1.5 px-3 text-xs text-brand-dim border border-brand-border rounded-lg hover:text-brand-text hover:border-brand-dim transition-colors">
+          ···
+        </button>
+      </div>
+      <div id="render-slot-{{ post.id }}"></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="py-24 text-center border border-dashed border-brand-border rounded-xl">
+    <div class="text-4xl mb-4">📋</div>
+    <p class="text-brand-dim">No drafts in queue.</p>
+    <a href="/generate" class="mt-4 inline-block text-brand-cyan text-sm hover:underline">Generate a post →</a>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Hidden modal content container -->
+<div id="modal-content" class="hidden"></div>
+
+{% endblock %}

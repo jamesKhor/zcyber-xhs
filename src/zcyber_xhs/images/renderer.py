@@ -2,14 +2,37 @@
 
 from __future__ import annotations
 
+import asyncio
 import base64
 import random
+import sys
 from pathlib import Path
+from typing import Any, Coroutine, TypeVar
 
 from jinja2 import Template
 
 from ..config import Config
 from ..models import PostDraft
+
+T = TypeVar("T")
+
+
+def _run_async(coro: Coroutine[Any, Any, T]) -> T:
+    """Run an async coroutine safely on any platform/thread.
+
+    On Windows, SelectorEventLoop does not support subprocess (needed by
+    Playwright to launch Chromium).  We always use ProactorEventLoop on
+    Windows so Playwright can start its browser process regardless of what
+    the calling thread's current event loop policy is.
+    """
+    if sys.platform == "win32":
+        loop = asyncio.ProactorEventLoop()
+        try:
+            return loop.run_until_complete(coro)
+        finally:
+            loop.close()
+    else:
+        return asyncio.run(coro)
 
 
 class ImageRenderer:
@@ -120,30 +143,83 @@ class ImageRenderer:
 
         return paths
 
-    async def _screenshot(self, html_content: str, output_path: Path) -> None:
-        """Take a screenshot of rendered HTML."""
+    async def _screenshot(
+        self, html_content: str, output_path: Path, browser=None
+    ) -> None:
+        """Take a screenshot of rendered HTML.
+
+        If a browser instance is provided it is reused (no launch overhead).
+        Otherwise a short-lived browser is created just for this call.
+        """
         from playwright.async_api import async_playwright
 
-        async with async_playwright() as p:
-            browser = await p.chromium.launch()
-            page = await browser.new_page(
+        async def _do_screenshot(b) -> None:
+            page = await b.new_page(
                 viewport={"width": self.width, "height": self.height},
                 device_scale_factor=2,
             )
             await page.set_content(html_content, wait_until="networkidle")
+            # Extra safety margin for Google Fonts to finish rendering
+            # (networkidle fires when requests complete but paint may lag)
+            await page.wait_for_timeout(800)
             await page.screenshot(path=str(output_path), type="png")
-            await browser.close()
+            await page.close()
+
+        if browser is not None:
+            await _do_screenshot(browser)
+        else:
+            async with async_playwright() as p:
+                b = await p.chromium.launch()
+                await _do_screenshot(b)
+                await b.close()
+
+    async def render_batch(
+        self, items: list[tuple[PostDraft, str]]
+    ) -> list[Path]:
+        """Render N images in a SINGLE browser session — much faster for batches.
+
+        Args:
+            items: list of (draft, filename) pairs.
+        Returns:
+            list of output Paths in the same order.
+        """
+        from playwright.async_api import async_playwright
+
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        paths: list[Path] = []
+
+        async with async_playwright() as p:
+            browser = await p.chromium.launch()
+            try:
+                for draft, filename in items:
+                    output_path = self.output_dir / f"{filename}.png"
+                    template_file = self.templates_dir / f"{draft.image_template}.html"
+                    if not template_file.exists():
+                        raise FileNotFoundError(
+                            f"Image template not found: {template_file}"
+                        )
+                    html_content = Template(
+                        template_file.read_text(encoding="utf-8")
+                    ).render(**self._build_template_vars(draft))
+                    await self._screenshot(html_content, output_path, browser=browser)
+                    paths.append(output_path)
+            finally:
+                await browser.close()
+
+        return paths
 
     def render_sync(self, draft: PostDraft, filename: str) -> Path:
         """Synchronous wrapper for render()."""
-        import asyncio
-
-        return asyncio.run(self.render(draft, filename))
+        return _run_async(self.render(draft, filename))
 
     def render_carousel_sync(
         self, drafts: list[PostDraft], filename_prefix: str
     ) -> list[Path]:
         """Synchronous wrapper for render_carousel()."""
-        import asyncio
+        return _run_async(self.render_carousel(drafts, filename_prefix))
 
-        return asyncio.run(self.render_carousel(drafts, filename_prefix))
+    def render_batch_sync(
+        self, items: list[tuple[PostDraft, str]]
+    ) -> list[Path]:
+        """Synchronous wrapper for render_batch() — single browser session."""
+        return _run_async(self.render_batch(items))

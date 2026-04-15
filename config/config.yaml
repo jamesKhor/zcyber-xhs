@@ -4,18 +4,18 @@ llm:
   provider: deepseek  # deepseek | kimi | anthropic
   model: deepseek-chat
   temperature: 0.8
-  max_tokens: 2000
+  max_tokens: 900   # shorter prompts (200-300字 body) fit in ~700-800 tokens; lower = faster response
 
 schedule:
   # Day of week (0=Mon, 6=Sun) → archetype
   rotation:
     0: problem_command
-    1: tool_spotlight
+    1: real_story      # Tue: humanized breach narrative (replaces tool_spotlight)
     2: everyday_panic
-    3: before_after
+    3: rank_war        # Thu: opinion poll / debate (replaces before_after)
     4: news_hook
     5: mythbust
-    6: ctf
+    6: hacker_pov
   # Generation runs at this hour (24h)
   generate_hour: 8
   # Publish drains approved queue at this hour
@@ -29,13 +29,23 @@ publishing:
   xhs_mcp_url: ${XHS_MCP_URL:-http://localhost:18060}
 
 content:
+  # Chinese content (XHS / 小红书)
   cta: "更多威胁情报 → 主页 zcybernews"
   safety_disclaimer: "仅限自己设备/授权测试"
   education_disclaimer: "本内容仅供网络安全学习和研究用途"
-  ai_label: "AI辅助创作"
+  ai_label: ""
   default_tags:
     - "#网络安全"
     - "#信息安全"
+    - "#zcybernews"
+
+  # English content (Instagram — future use, content ready now)
+  en_cta: "More threat intel → zcybernews.com"
+  en_safety_disclaimer: "For authorized testing and educational purposes only"
+  en_default_tags:
+    - "#cybersecurity"
+    - "#infosec"
+    - "#hacking"
     - "#zcybernews"
 
 images:

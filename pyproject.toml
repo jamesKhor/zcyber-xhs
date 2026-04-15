@@ -19,6 +19,10 @@ dependencies = [
     "playwright>=1.40",
     "python-telegram-bot>=21.0",
     "sqlalchemy>=2.0",
+    # Web UI (FastAPI + HTMX + Tailwind)
+    "fastapi[standard]>=0.111",
+    "uvicorn[standard]>=0.30",
+    "python-multipart>=0.0.9",
 ]
 
 [project.optional-dependencies]
@@ -29,6 +33,7 @@ dev = [
 
 [project.scripts]
 zcyber = "zcyber_xhs.cli:cli"
+zcyber-web = "zcyber_xhs.web:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/zcyber_xhs"]
@@ -39,6 +44,11 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+# web.py embeds HTML fragments as Python strings; Tailwind class lists
+# cannot be meaningfully split across lines without breaking the HTML.
+"src/zcyber_xhs/web.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

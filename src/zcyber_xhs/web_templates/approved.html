@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Approved{% endblock %}
+{% block content %}
+
+<div class="space-y-6">
+  <div class="flex items-center justify-between flex-wrap gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-brand-text">Approved</h1>
+      <p class="text-sm text-brand-dim mt-1">{{ posts | length }} post{{ 's' if posts|length != 1 else '' }} ready to export</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select onchange="window.location='/approved?archetype='+this.value"
+              class="px-3 py-2 bg-brand-surface border border-brand-border rounded-lg text-sm text-brand-text focus:outline-none focus:border-brand-cyan/50">
+        <option value="" {% if not selected_archetype %}selected{% endif %}>All archetypes</option>
+        {% for arch in all_archetypes %}
+        <option value="{{ arch }}" {% if arch == selected_archetype %}selected{% endif %}>{{ archetype_zh.get(arch, arch) }}</option>
+        {% endfor %}
+      </select>
+      <a href="/export" class="px-4 py-2 bg-brand-green/10 text-brand-green border border-brand-green/20 text-sm font-semibold rounded-lg hover:bg-brand-green/20 transition-colors">
+        📤 Export
+      </a>
+    </div>
+  </div>
+
+  {% if posts %}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for post in posts %}
+    <div class="bg-brand-surface border border-brand-border rounded-xl overflow-hidden" id="approved-card-{{ post.id }}">
+      <div class="flex gap-0">
+        <div class="w-24 flex-shrink-0 bg-brand-bg">
+          {% set img = resolve_image(post.image_path) %}
+          {% if img %}
+          <img src="{{ img }}" class="w-24 h-32 object-cover" loading="lazy">
+          {% else %}
+          <div class="w-24 h-32 flex items-center justify-center bg-brand-bg">
+            <span class="text-2xl opacity-20">🖼</span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="flex-1 p-4 min-w-0 space-y-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs px-2 py-0.5 rounded bg-brand-indigo/15 text-brand-indigo border border-brand-indigo/20 font-mono">
+              {{ archetype_zh.get(post.archetype, post.archetype) }}
+            </span>
+            <span id="status-pill-{{ post.id }}" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border {{ status_color(post.status.value) }}">
+              {{ post.status.value }}
+            </span>
+          </div>
+          <p class="text-sm font-semibold text-brand-text line-clamp-2 leading-snug">{{ post.title or '(no title)' }}</p>
+          <p class="text-xs text-brand-dim line-clamp-2">{{ post.body[:120] if post.body else '' }}…</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 px-4 py-3 border-t border-brand-border bg-brand-bg/30">
+        <button hx-post="/api/posts/{{ post.id }}/to-draft"
+                hx-target="#status-pill-{{ post.id }}"
+                hx-swap="outerHTML"
+                class="flex-1 py-1.5 text-xs font-semibold bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 rounded-lg hover:bg-yellow-500/20 transition-colors">
+          ↩ To Draft
+        </button>
+        <button hx-post="/api/posts/{{ post.id }}/render?force=true"
+                hx-target="#rerender-slot-{{ post.id }}"
+                hx-swap="innerHTML"
+                class="py-1.5 px-3 text-xs font-semibold bg-brand-indigo/10 border border-brand-indigo/20 text-brand-indigo rounded-lg hover:bg-brand-indigo/20 transition-colors">
+          🔄 Re-render
+        </button>
+        <button hx-delete="/api/posts/{{ post.id }}"
+                hx-target="#approved-card-{{ post.id }}"
+                hx-swap="outerHTML"
+                hx-confirm="Delete post #{{ post.id }}?"
+                class="py-1.5 px-3 text-xs text-red-400/60 border border-red-400/15 rounded-lg hover:text-red-400 hover:border-red-400/30 transition-colors">
+          🗑
+        </button>
+      </div>
+      <div id="rerender-slot-{{ post.id }}"></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="py-24 text-center border border-dashed border-brand-border rounded-xl">
+    <div class="text-4xl mb-4">✅</div>
+    <p class="text-brand-dim">No approved posts yet.</p>
+    <a href="/review" class="mt-4 inline-block text-brand-cyan text-sm hover:underline">Go to Review →</a>
+  </div>
+  {% endif %}
+
+{% endblock %}

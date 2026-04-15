@@ -1,0 +1,78 @@
+# rank_war topic bank — controversial opinion polls for Thursday posts
+# Fields: slug, problem, scenario, solution, tool, command
+# problem = the debate question
+# scenario = side A position
+# solution = side B position
+# tool = relevant background/data
+# command = what to judge by
+
+topics:
+  - slug: password-manager-vs-memory
+    problem: 密码管理器到底安不安全？你会用吗
+    scenario: A方：用密码管理器，把所有鸡蛋放一个篮子，一旦被黑全完了
+    solution: B方：密码管理器是目前最安全的方案，比你"记忆宫殿"强100倍
+    tool: LastPass 2022年被黑，但加密库依然安全；大多数人实际上重复使用弱密码
+    command: 按照真实安全风险和可操作性来判断
+
+  - slug: vpn-worth-it
+    problem: VPN真的有用吗？还是在花冤枉钱
+    scenario: A方：VPN只是安慰剂，大多数威胁不来自网络层，还会降速
+    solution: B方：VPN在公共WiFi和翻墙场景下是必需品，值得
+    tool: NordVPN等服务曾被攻击；但公共WiFi中间人攻击真实存在
+    command: 按照实际使用场景和ROI来判断
+
+  - slug: ios-vs-android-security
+    problem: iOS比Android更安全？这个问题有标准答案吗
+    scenario: A方：iOS封闭生态安全性更好，苹果补丁更快，隐私保护更强
+    solution: B方：Android开放透明，谷歌安全团队实力强，碎片化是个历史问题
+    tool: 两个系统每年发现的CVE数量相近；用户行为才是最大变量
+    command: 按照实际漏洞利用数据和用户安全行为来判断
+
+  - slug: antivirus-still-needed
+    problem: 2024年还需要装杀毒软件吗
+    scenario: A方：Windows Defender已经够用，第三方杀毒软件是商业骗局
+    solution: B方：企业级端点保护仍然必要，普通用户也需要额外一层防护
+    tool: AV-TEST数据显示Defender检测率90%+；但企业EDR市场仍在高速增长
+    command: 按照对普通用户和企业用户分别判断
+
+  - slug: security-vs-convenience
+    problem: 安全和便利，你愿意牺牲哪个
+    scenario: A方：安全不能妥协，不方便就不方便，出了事更麻烦
+    solution: B方：太麻烦了没人会用，安全措施要考虑用户体验，否则形同虚设
+    tool: 研究显示MFA可以阻止99%的账号攻击，但企业用户绕过率高达70%
+    command: 按照实际安全结果（不是理论）来判断
+
+  - slug: public-wifi-ok-or-not
+    problem: 咖啡厅WiFi到底能不能用
+    scenario: A方：HTTPS已经够了，2024年用公共WiFi问题不大，别太紧张
+    solution: B方：只要不是你控制的网络就不安全，不值得冒险
+    tool: HTTPS覆盖率已达95%+；但DNS劫持、Evil Twin攻击依然真实存在
+    command: 按照现实威胁程度和加密覆盖率来判断
+
+  - slug: two-factor-sms-vs-app
+    problem: 短信验证码和Authenticator App，哪个更安全
+    scenario: A方：短信验证码够用了，Authenticator App太麻烦，大多数人用不来
+    solution: B方：SIM卡劫持证明短信2FA已不可信，Authenticator是最低门槛的安全方案
+    tool: SIM Swap攻击2023年上升400%；但短信2FA仍比没有2FA强99%
+    command: 按照实际攻击向量和可用性来判断
+
+  - slug: open-source-vs-closed-security
+    problem: 开源软件比闭源更安全？
+    scenario: A方：开源代码人人可见，漏洞更快被发现，更透明更安全
+    solution: B方：开源也意味着攻击者能看到所有代码，而且维护力量参差不齐
+    tool: Log4Shell、XZ Utils后门等都来自开源；但OpenSSL类项目也受益于全球审计
+    command: 按照漏洞发现速度和供应链攻击风险来综合判断
+
+  - slug: cloud-vs-local-data
+    problem: 数据放云端还是本地更安全
+    scenario: A方：云服务有专业安全团队，比你自己管服务器安全100倍
+    solution: B方：数据不在自己手里就是不安全，云服务随时可以被黑/审查/跑路
+    tool: 大部分云数据泄露来自配置错误；但家用NAS也频繁出现远程漏洞
+    command: 按照威胁模型（是担心黑客还是平台风险）来分情况讨论
+
+  - slug: bug-bounty-ethics
+    problem: 发现漏洞应该直接曝光还是等厂商修复
+    scenario: A方：给厂商90天修复期（负责任披露）是行业标准，保护用户利益
+    solution: B方：厂商经常拖着不修，直接曝光才能逼他们动起来
+    tool: Google Project Zero 90天政策引发多次争议；但部分厂商确实拖了数年
+    command: 按照用户安全和厂商责任之间的平衡来判断

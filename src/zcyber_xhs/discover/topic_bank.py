@@ -24,20 +24,34 @@ class TopicBank:
 
         Returns None if all topics have been used.
         """
+        results = self.pick_n_topics(archetype, 1)
+        return results[0] if results else None
+
+    def pick_n_topics(self, archetype: str, n: int) -> list[TopicEntry]:
+        """Pick up to N distinct unused topics and mark them all used atomically.
+
+        Calling this once from the main thread before spawning parallel workers
+        avoids the race condition where two threads both read the same "unused"
+        topic and mark it used independently.
+
+        Returns a list of up to min(n, available) topics.
+        """
         topics = self._load_bank(archetype)
         if not topics:
-            return None
+            return []
 
-        # Filter out already-used topics
         unused = [t for t in topics if not self.db.is_topic_used(archetype, t.slug)]
-
         if not unused:
-            # All used — could reset or return None
-            return None
+            return []
 
-        topic = random.choice(unused)
-        self.db.mark_topic_used(archetype, topic.slug)
-        return topic
+        # Pick min(n, available) unique topics without replacement
+        chosen = random.sample(unused, min(n, len(unused)))
+
+        # Mark all chosen topics used before any thread starts generating
+        for t in chosen:
+            self.db.mark_topic_used(archetype, t.slug)
+
+        return chosen
 
     def list_topics(self, archetype: str) -> list[TopicEntry]:
         """List all topics for an archetype."""

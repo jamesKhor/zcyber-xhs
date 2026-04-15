@@ -1,0 +1,16 @@
+# Cybersecurity profile — the default zcybernews content pipeline
+name: "Cybersecurity"
+slug: "cybersec"
+icon: "🔐"
+description: "Daily cybersecurity awareness content for XHS and Instagram"
+brand: "ZCYBERNEWS"
+default_language: zh
+archetypes:
+  - problem_command
+  - real_story
+  - everyday_panic
+  - rank_war
+  - mythbust
+  - news_hook
+  - ctf
+color: "#00B8FF"

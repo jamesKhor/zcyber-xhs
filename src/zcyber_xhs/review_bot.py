@@ -102,8 +102,8 @@ def _truncate(text: str, max_len: int) -> str:
     return text[:max_len] + "..."
 
 
-async def run_bot(config: Config, db: Database) -> None:
-    """Run the Telegram bot with callback query handlers."""
+def run_bot_sync(config: Config, db: Database) -> None:
+    """Run the Telegram bot (blocking, sync entry point)."""
     from telegram import Update
     from telegram.ext import (
         ApplicationBuilder,
@@ -181,7 +181,7 @@ async def run_bot(config: Config, db: Database) -> None:
                     f"Post #{post_id} could not be rejected."
                 )
 
-        elif data.startswith("reject_") or data.startswith("regen_"):
+        elif data.startswith("regen_"):
             post_id = int(data.split("_")[1])
             post = db.get_post(post_id)
             if not post:
@@ -189,31 +189,36 @@ async def run_bot(config: Config, db: Database) -> None:
                 return
 
             queue.reject(post_id)
-            is_regen = data.startswith("regen_")
+            await query.edit_message_text(
+                f"Post #{post_id} rejected. Regenerating..."
+            )
+            try:
+                import concurrent.futures
 
-            if is_regen:
-                await query.edit_message_text(
-                    f"Post #{post_id} rejected. Regenerating..."
-                )
-                # Auto-regenerate same archetype
-                try:
-                    from .orchestrator import Orchestrator
+                from .orchestrator import Orchestrator
 
-                    orchestrator = Orchestrator(config, db)
-                    new_id = orchestrator.run(post.archetype)
-                    if new_id:
-                        new_post = db.get_post(new_id)
-                        if new_post:
-                            chat_id = str(query.message.chat_id)
-                            await _send_preview_async(token, chat_id, new_post)
-                    else:
-                        await query.message.reply_text(
-                            f"No topics left for {post.archetype}."
-                        )
-                except Exception as e:
-                    await query.message.reply_text(f"Regen failed: {e}")
-            else:
-                await query.edit_message_text(f"Post #{post_id} REJECTED.")
+                def _regen_in_thread(arch: str) -> int | None:
+                    """Run orchestrator in a thread (Playwright needs its own)."""
+                    orch = Orchestrator(config, db)
+                    return orch.run(arch)
+
+                loop = asyncio.get_event_loop()
+                with concurrent.futures.ThreadPoolExecutor() as pool:
+                    new_id = await loop.run_in_executor(
+                        pool, _regen_in_thread, post.archetype
+                    )
+
+                if new_id:
+                    new_post = db.get_post(new_id)
+                    if new_post:
+                        chat_id = str(query.message.chat_id)
+                        await _send_preview_async(token, chat_id, new_post)
+                else:
+                    await query.message.reply_text(
+                        f"No topics left for {post.archetype}."
+                    )
+            except Exception as e:
+                await query.message.reply_text(f"Regen failed: {e}")
 
     app = ApplicationBuilder().token(token).build()
     app.add_handler(CommandHandler("start", start_handler))
@@ -221,5 +226,5 @@ async def run_bot(config: Config, db: Database) -> None:
     app.add_handler(CommandHandler("status", status_handler))
     app.add_handler(CallbackQueryHandler(callback_handler))
 
-    logger.info("Telegram bot started")
-    await app.run_polling()
+    logger.info("Telegram bot started — polling for updates")
+    app.run_polling()
