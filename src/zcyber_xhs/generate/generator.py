@@ -20,7 +20,9 @@ class ContentGenerator:
         self.llm = llm or LLMClient.from_config(config.llm)
         self._prompts_dir = config.base_dir / "config" / "prompts"
 
-    def generate(self, archetype: str, topic: TopicEntry, language: str = "zh") -> tuple[PostDraft, str]:
+    def generate(
+        self, archetype: str, topic: TopicEntry, language: str = "zh"
+    ) -> tuple[PostDraft, str]:
         """Generate a post draft for the given archetype and topic.
 
         Returns (PostDraft, payload_json).
@@ -36,7 +38,9 @@ class ContentGenerator:
 
         # Post-process: ensure default tags
         if language == "en":
-            default_tags = self.config.content.get("en_default_tags", self.config.content.get("default_tags", []))
+            default_tags = self.config.content.get(
+                "en_default_tags", self.config.content.get("default_tags", [])
+            )
         else:
             default_tags = self.config.content.get("default_tags", [])
         existing_tags = raw.get("tags", [])

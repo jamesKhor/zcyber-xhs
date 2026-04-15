@@ -3,17 +3,16 @@
 from __future__ import annotations
 
 import concurrent.futures
+import io
 import json
 import threading
 import uuid
-import yaml
 import zipfile
-import io
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
-from fastapi import FastAPI, Request, Form, BackgroundTasks
+import yaml
+from fastapi import BackgroundTasks, FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -210,7 +209,7 @@ async def dashboard(request: Request):
             recent_posts = db.list_posts(limit=15)
         finally:
             db.close()
-    except Exception as e:
+    except Exception:
         topics_remaining = 0
         recent_posts = []
     ctx.update({
@@ -254,7 +253,7 @@ async def review_page(request: Request, archetype: str = ""):
         posts = []
     if archetype:
         posts = [p for p in posts if p.archetype == archetype]
-    all_archetypes = sorted({p.archetype for p in db.list_posts(status=PostStatus.DRAFT, limit=200)} if False else {p.archetype for p in posts})
+    all_archetypes = sorted({p.archetype for p in posts})
     ctx.update({
         "posts": posts,
         "selected_archetype": archetype,
@@ -335,8 +334,8 @@ async def api_generate(
 
     def _run():
         try:
-            from zcyber_xhs.orchestrator import Orchestrator
             from zcyber_xhs.discover.topic_bank import TopicBank
+            from zcyber_xhs.orchestrator import Orchestrator
 
             config = get_config()
             override = topic_override.strip() or None
@@ -362,7 +361,9 @@ async def api_generate(
             def _worker(topic):
                 db = get_db()
                 try:
-                    return Orchestrator(config, db).run(archetype, topic, text_only, language=language)
+                    return Orchestrator(config, db).run(
+                        archetype, topic, text_only, language=language
+                    )
                 finally:
                     db.close()
 
@@ -518,7 +519,12 @@ async def api_render(background_tasks: BackgroundTasks, post_id: int, force: boo
             finally:
                 db.close()
             if path:
-                _update_job(job_id, status="done", image_url=f"/static/images/{Path(path).name}", post_id=post_id)
+                _update_job(
+                    job_id,
+                    status="done",
+                    image_url=f"/static/images/{Path(path).name}",
+                    post_id=post_id,
+                )
             else:
                 _update_job(job_id, status="error", error="No image produced")
         except Exception as e:
@@ -559,7 +565,10 @@ async def api_render_status(job_id: str, post_id: int):
           <img src="{img_url}" class="w-full rounded-lg border border-brand-border" loading="lazy">
           <p class="text-xs text-green-400">✓ Image ready</p>
         </div>""")
-    return HTMLResponse(f'<div id="render-{post_id}" class="text-xs text-red-400">✗ {job.get("error","Render failed")}</div>')
+    err = job.get("error", "Render failed")
+    return HTMLResponse(
+        f'<div id="render-{post_id}" class="text-xs text-red-400">✗ {err}</div>'
+    )
 
 
 @app.get("/api/posts/{post_id}/modal", response_class=HTMLResponse)
@@ -643,7 +652,11 @@ def _status_pill(status: str) -> str:
     colors = _status_color(status)
     labels = {"draft": "Draft", "approved": "Approved", "rejected": "Rejected",
               "published": "Published", "failed": "Failed"}
-    return f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border {colors}">{labels.get(status, status)}</span>'
+    label = labels.get(status, status)
+    return (
+        f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full'
+        f' text-xs font-medium border {colors}">{label}</span>'
+    )
 
 
 # ---------------------------------------------------------------------------

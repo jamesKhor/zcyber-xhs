@@ -123,8 +123,8 @@ def page_dashboard():
         st.rerun()
 
     try:
-        from zcyber_xhs.models import PostStatus  # noqa: PLC0415
         from zcyber_xhs.discover.topic_bank import TopicBank  # noqa: PLC0415
+        from zcyber_xhs.models import PostStatus  # noqa: PLC0415
 
         db = _get_db()
         config = _cached_config()
@@ -192,20 +192,40 @@ def page_generate():
     with col_arch:
         # Engagement guide — helps pick the right archetype
         ENGAGEMENT = {
-            "everyday_panic":  ("🔥🔥🔥", "🔥🔥🔥", "Relatable fear → '这不就是我！' + tag 朋友 instinct"),
-            "mythbust":        ("🔥🔥🔥", "🔥🔥🔥", "'Wait really?!' + people tag others to win arguments"),
-            "before_after":    ("🔥🔥",   "🔥🔥",   "'Which one are you?' → self-identify, tag the person doing it wrong"),
-            "ctf":             ("🔥🔥🔥", "🔥",     "People post their answer and race to be first"),
-            "problem_command": ("🔥",     "🔥",     "Technical — add 'want part 2?' or self-check prompt"),
-            "tool_spotlight":  ("🔥",     "🔥",     "Moderate — 'have you used this?' works"),
-            "news_hook":       ("🔥🔥",   "🔥",     "Opinion bait — '你怎么看这件事？'"),
+            "everyday_panic": (
+                "🔥🔥🔥", "🔥🔥🔥", "Relatable fear → '这不就是我！' + tag 朋友",
+            ),
+            "mythbust": (
+                "🔥🔥🔥", "🔥🔥🔥", "'Wait really?!' + tag others to win arguments",
+            ),
+            "before_after": (
+                "🔥🔥", "🔥🔥", "'Which one are you?' → self-identify",
+            ),
+            "ctf": (
+                "🔥🔥🔥", "🔥", "People post their answer and race to be first",
+            ),
+            "problem_command": (
+                "🔥", "🔥", "Technical — add 'want part 2?' or self-check prompt",
+            ),
+            "tool_spotlight": (
+                "🔥", "🔥", "Moderate — 'have you used this?' works",
+            ),
+            "news_hook": (
+                "🔥🔥", "🔥", "Opinion bait — '你怎么看这件事？'",
+            ),
         }
 
-        with st.expander("💡 Engagement guide — which archetype gets most comments & tags?", expanded=False):
+        expander_label = "💡 Engagement guide — which archetype gets most comments & tags?"
+        with st.expander(expander_label, expanded=False):
             rows = []
             for arch, label in ARCHETYPES:
                 cmts, tags, why = ENGAGEMENT.get(arch, ("", "", ""))
-                rows.append({"Archetype": f"{arch}", "Comments": cmts, "Tags": tags, "Why it works": why})
+                rows.append({
+                    "Archetype": arch,
+                    "Comments": cmts,
+                    "Tags": tags,
+                    "Why it works": why,
+                })
             st.dataframe(rows, width="stretch", hide_index=True)
 
         archetype_labels = [
@@ -277,8 +297,8 @@ def _run_batch_generation(
     so we just pass None and let N threads run simultaneously.
     """
     try:
-        from zcyber_xhs.orchestrator import Orchestrator  # noqa: PLC0415
         from zcyber_xhs.discover.topic_bank import TopicBank  # noqa: PLC0415
+        from zcyber_xhs.orchestrator import Orchestrator  # noqa: PLC0415
 
         config = _cached_config()
 
@@ -295,12 +315,18 @@ def _run_batch_generation(
                 db.close()
 
             if not picked:
-                st.error(f"No unused topics left for **{archetype}**. Add more topics to the YAML bank.")
+                st.error(
+                    f"No unused topics left for **{archetype}**. "
+                    "Add more topics to the YAML bank."
+                )
                 return
 
             actual = len(picked)
             if actual < count:
-                st.warning(f"Only {actual} unused topics available — generating {actual} article(s).")
+                st.warning(
+                    f"Only {actual} unused topics available — "
+                    f"generating {actual} article(s)."
+                )
                 count = actual
 
             # Pass slug as override so orchestrator skips its own pick_topic()
@@ -360,7 +386,10 @@ def _run_batch_generation(
             st.error("All generations failed — check the terminal for details.")
 
     except concurrent.futures.TimeoutError:
-        st.error("⏱️ Generation timed out (>3 min) — DeepSeek may be overloaded. Try again or reduce count.")
+        st.error(
+            "⏱️ Generation timed out (>3 min) — DeepSeek may be overloaded. "
+            "Try again or reduce count."
+        )
     except Exception as e:
         msg = str(e) or type(e).__name__
         st.error(f"Generation error: {msg}")
@@ -385,7 +414,12 @@ def _display_batch_results():
         return
 
     st.divider()
-    st.subheader(f"{'Generated Post' if len(posts) == 1 else f'{len(posts)} Generated Posts — pick the ones you like'}")
+    _heading = (
+        "Generated Post"
+        if len(posts) == 1
+        else f"{len(posts)} Generated Posts — pick the ones you like"
+    )
+    st.subheader(_heading)
 
     # Show deferred render result message if any
     render_msg = st.session_state.pop("batch_render_msg", None)
@@ -426,7 +460,7 @@ def _display_batch_results():
             if action_taken == "approved":
                 st.success(f"✅ Approved — post #{post.id} is in the export queue.")
             elif action_taken == "rejected":
-                st.warning(f"❌ Rejected.")
+                st.warning("❌ Rejected.")
             elif action_taken == "rendered":
                 st.success(f"🖼️ Image rendered for post #{post.id}. Refresh to preview.")
             elif action_taken == "render_failed":
@@ -494,7 +528,11 @@ def _render_image(post_id: int, force: bool = False) -> bool:
             finally:
                 db.close()
 
-        label = f"Re-rendering image for post #{post_id}..." if force else f"Rendering image for post #{post_id}..."
+        label = (
+            f"Re-rendering image for post #{post_id}..."
+            if force
+            else f"Rendering image for post #{post_id}..."
+        )
         with st.spinner(label):
             with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
                 result = pool.submit(_render_in_thread, post_id, force).result(timeout=120)
@@ -678,7 +716,11 @@ def page_review():
         st.caption(f"{len(selected_ids)} selected")
         ba1, ba2, ba3 = st.columns([1, 1, 4])
         with ba1:
-            if st.button(f"✅ Approve {len(selected_ids)}", type="primary", use_container_width=True):
+            if st.button(
+                f"✅ Approve {len(selected_ids)}",
+                type="primary",
+                use_container_width=True,
+            ):
                 for pid in selected_ids:
                     _queue_approve_silent(pid)
                     st.session_state.pop(f"rq_cb_{pid}", None)
@@ -720,7 +762,7 @@ def page_review():
                 with st.container(border=True):
                     # Select checkbox in top-right
                     cb_val = st.session_state.get(f"rq_cb_{post.id}", False)
-                    checked = st.checkbox(
+                    st.checkbox(
                         "Select", value=cb_val,
                         key=f"rq_cb_{post.id}",
                         label_visibility="collapsed",
@@ -1290,7 +1332,11 @@ def _run_export(post_ids: list[int], delete_after: bool = False):
                     src_path = Path(src)
                     if not src_path.exists():
                         continue
-                    new_name = f"image_{idx:02d}{src_path.suffix}" if len(paths) > 1 else f"image{src_path.suffix}"
+                    new_name = (
+                        f"image_{idx:02d}{src_path.suffix}"
+                        if len(paths) > 1
+                        else f"image{src_path.suffix}"
+                    )
                     shutil.copy2(src_path, dest / new_name)
                     image_count += 1
 
