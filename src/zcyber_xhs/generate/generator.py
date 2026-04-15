@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 
 from ..config import Config
 from ..models import PostDraft, TopicEntry
@@ -20,12 +20,12 @@ class ContentGenerator:
         self.llm = llm or LLMClient.from_config(config.llm)
         self._prompts_dir = config.base_dir / "config" / "prompts"
 
-    def generate(self, archetype: str, topic: TopicEntry) -> tuple[PostDraft, str]:
+    def generate(self, archetype: str, topic: TopicEntry, language: str = "zh") -> tuple[PostDraft, str]:
         """Generate a post draft for the given archetype and topic.
 
         Returns (PostDraft, payload_json).
         """
-        prompt = self._render_prompt(archetype, topic)
+        prompt = self._render_prompt(archetype, topic, language=language)
         raw = self.llm.generate_json(prompt)
 
         # Post-process: safety disclaimer
@@ -35,7 +35,10 @@ class ContentGenerator:
                 raw["body"] = raw["body"].rstrip() + f"\n\n⚠️ {disclaimer}"
 
         # Post-process: ensure default tags
-        default_tags = self.config.content.get("default_tags", [])
+        if language == "en":
+            default_tags = self.config.content.get("en_default_tags", self.config.content.get("default_tags", []))
+        else:
+            default_tags = self.config.content.get("default_tags", [])
         existing_tags = raw.get("tags", [])
         for tag in default_tags:
             if tag not in existing_tags:
@@ -77,37 +80,52 @@ class ContentGenerator:
                 logger.warning(f"Safety warning: {warning}")
 
         draft = PostDraft(**raw)
+        draft.language = language
         payload = json.dumps(raw, ensure_ascii=False, indent=2)
         return draft, payload
 
-
-class ContentBlockedError(Exception):
-    """Raised when generated content fails safety checks."""
-
-    def _render_prompt(self, archetype: str, topic: TopicEntry) -> str:
+    def _render_prompt(self, archetype: str, topic: TopicEntry, language: str = "zh") -> str:
         """Load and render the Jinja2 prompt template for the archetype."""
-        template_path = self._prompts_dir / f"{archetype}.j2"
-        if not template_path.exists():
-            raise FileNotFoundError(f"Prompt template not found: {template_path}")
+        # English: look in prompts/en/{archetype}_en.j2, fall back to zh if not found
+        if language == "en":
+            en_path = self._prompts_dir / "en" / f"{archetype}_en.j2"
+            template_name = f"en/{archetype}_en.j2" if en_path.exists() else f"{archetype}.j2"
+        else:
+            template_name = f"{archetype}.j2"
 
-        template_text = template_path.read_text(encoding="utf-8")
-        template = Template(template_text)
+        full_path = self._prompts_dir / template_name
+        if not full_path.exists():
+            raise FileNotFoundError(f"Prompt template not found: {full_path}")
 
-        # Build template variables from topic — pass all fields
-        variables = self._build_template_vars(topic)
+        env = Environment(
+            loader=FileSystemLoader(str(self._prompts_dir), encoding="utf-8")
+        )
+        template = env.get_template(template_name)
+        variables = self._build_template_vars(topic, language=language)
         return template.render(**variables)
 
-    def _build_template_vars(self, topic: TopicEntry) -> dict[str, Any]:
+    def _build_template_vars(self, topic: TopicEntry, language: str = "zh") -> dict[str, Any]:
         """Build the full set of Jinja2 template variables from a topic."""
-        # Start with all TopicEntry fields
         variables = topic.model_dump()
 
-        # Add config-level content settings
-        variables["cta"] = self.config.content.get("cta", "")
-        variables["safety_disclaimer"] = self.config.content.get("safety_disclaimer", "")
-        variables["default_tags"] = self.config.content.get("default_tags", [])
+        if language == "en":
+            variables["cta"] = self.config.content.get("en_cta", self.config.content.get("cta", ""))
+            variables["safety_disclaimer"] = self.config.content.get(
+                "en_safety_disclaimer", self.config.content.get("safety_disclaimer", "")
+            )
+            variables["default_tags"] = self.config.content.get(
+                "en_default_tags", self.config.content.get("default_tags", [])
+            )
+        else:
+            variables["cta"] = self.config.content.get("cta", "")
+            variables["safety_disclaimer"] = self.config.content.get("safety_disclaimer", "")
+            variables["default_tags"] = self.config.content.get("default_tags", [])
 
         # news_hook specific aliases
         variables["news_source"] = topic.news_url.split("/")[2] if topic.news_url else ""
 
         return variables
+
+
+class ContentBlockedError(Exception):
+    """Raised when generated content fails safety checks."""

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root {
+    --bg:     #080c14;
+    --panel:  #0f1520;
+    --border: #1e2a3a;
+    --text:   #f0f4f8;
+    --dim:    #7a8ea0;
+    --red:    #FF5252;
+    --orange: #FF8A50;
+    --cyan:   #00C8FF;
+    --yellow: #FFD54F;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1440px;
+    background: var(--bg);
+    background-image: radial-gradient(circle, rgba(255,82,82,0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+    {% if background_image %}
+    background-image: url('{{ background_image }}');
+    background-size: cover;
+    background-position: center;
+    {% endif %}
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8,12,20,0.85) 0%, rgba(8,12,20,0.97) 100%);
+    pointer-events: none;
+  }
+
+  .top-bar {
+    height: 32px;
+    background: linear-gradient(90deg, var(--red), var(--orange));
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Incident type label */
+  .incident-label {
+    padding: 36px 72px 24px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .label-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 82, 82, 0.12);
+    border: 1.5px solid rgba(255, 82, 82, 0.4);
+    border-radius: 40px;
+    padding: 10px 24px;
+  }
+  .label-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: none;
+  }
+  .label-text {
+    font-size: 26px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  {% if severity %}
+  .severity-chip {
+    font-size: 24px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .sev-critical { background: rgba(255,82,82,0.15); color: var(--red); border: 1.5px solid rgba(255,82,82,0.4); }
+  .sev-high { background: rgba(255,138,80,0.15); color: var(--orange); border: 1.5px solid rgba(255,138,80,0.4); }
+  .sev-medium { background: rgba(255,213,79,0.12); color: var(--yellow); border: 1.5px solid rgba(255,213,79,0.4); }
+  {% endif %}
+
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 72px;
+    gap: 52px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Main headline */
+  .headline {
+    font-size: 120px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.05;
+    word-break: break-word;
+    text-shadow: 0 0 60px rgba(255, 82, 82, 0.2);
+  }
+
+  /* Divider with icon */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--red), transparent);
+    opacity: 0.4;
+  }
+  .divider-icon {
+    font-size: 36px;
+    color: var(--red);
+    opacity: 0.7;
+  }
+
+  /* Caption / lesson */
+  .caption-block {
+    background: rgba(255, 82, 82, 0.06);
+    border-left: 6px solid var(--red);
+    border-radius: 0 16px 16px 0;
+    padding: 32px 36px;
+  }
+  .caption-label {
+    font-size: 22px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .caption-text {
+    font-size: 52px;
+    color: var(--dim);
+    line-height: 1.4;
+  }
+
+  /* Source meta */
+  .source-meta {
+    font-size: 28px;
+    color: var(--dim);
+    opacity: 0.7;
+  }
+
+  .footer {
+    padding: 30px 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid var(--border);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .brand {
+    font-size: 38px;
+    color: var(--cyan);
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+  }
+  .cta {
+    font-size: 30px;
+    color: var(--cyan);
+    background: rgba(0, 200, 255, 0.08);
+    border: 1.5px solid rgba(0, 200, 255, 0.25);
+    border-radius: 40px;
+    padding: 10px 28px;
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  }
+</style>
+</head>
+<body>
+  {% if background_image %}<div class="overlay"></div>{% endif %}
+
+  <div class="top-bar"></div>
+
+  <div class="incident-label">
+    <div class="label-chip">
+      <div class="label-dot"></div>
+      <span class="label-text">REAL INCIDENT</span>
+    </div>
+    {% if severity %}
+    <span class="severity-chip sev-{{ severity | lower }}">{{ severity | upper }}</span>
+    {% endif %}
+  </div>
+
+  <div class="main">
+    <div class="headline">{{ headline }}</div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">⚠</span>
+    </div>
+
+    {% if caption %}
+    <div class="caption-block">
+      <div class="caption-label">KEY LESSON</div>
+      <div class="caption-text">{{ caption }}</div>
+    </div>
+    {% endif %}
+
+    {% if source %}
+    <div class="source-meta">📌 {{ source }}</div>
+    {% endif %}
+  </div>
+
+  <div class="footer">
+    <span class="brand">ZCYBERNEWS</span>
+    <span class="cta">{{ cta }}</span>
+  </div>
+</body>
+</html>

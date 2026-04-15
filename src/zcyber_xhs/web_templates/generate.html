@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Generate{% endblock %}
+{% block content %}
+
+<div class="space-y-8" x-data="{ textOnly: false, count: 1, lang: 'zh' }">
+
+  <div>
+    <h1 class="text-2xl font-bold text-brand-text">Generate</h1>
+    <p class="text-sm text-brand-dim mt-1">Create new posts via LLM</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Archetype picker -->
+    <div class="lg:col-span-2 bg-brand-surface border border-brand-border rounded-xl p-6 space-y-4">
+      <h2 class="text-sm font-semibold text-brand-dim uppercase tracking-wider">Select Archetype</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="archetype-grid">
+        {% for slug, zh, en in archetypes %}
+        {% set rem = remaining.get(slug, 0) %}
+        <label class="relative flex items-start gap-3 p-4 bg-brand-bg border border-brand-border rounded-xl cursor-pointer
+                       hover:border-brand-cyan/40 transition-all has-[:checked]:border-brand-cyan has-[:checked]:bg-brand-cyan/5">
+          <input type="radio" name="archetype" value="{{ slug }}" class="mt-0.5 accent-cyan-400"
+                 {% if loop.first %}checked{% endif %}>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-semibold text-brand-text">{{ zh }}</div>
+            <div class="text-xs text-brand-dim mt-0.5">{{ en }}</div>
+            {% if rem > 0 %}
+            <div class="text-xs text-brand-indigo mt-1 font-mono">{{ rem }} topics left</div>
+            {% elif rem == 0 %}
+            <div class="text-xs text-brand-red mt-1">No topics left</div>
+            {% endif %}
+          </div>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Options panel -->
+    <div class="space-y-4">
+      <div class="bg-brand-surface border border-brand-border rounded-xl p-6 space-y-5">
+        <h2 class="text-sm font-semibold text-brand-dim uppercase tracking-wider">Options</h2>
+
+        <div>
+          <label class="text-xs text-brand-dim block mb-2">Language / 语言</label>
+          <div class="flex rounded-lg border border-brand-border overflow-hidden">
+            <button type="button"
+                    @click="lang = 'zh'"
+                    :class="lang === 'zh' ? 'bg-brand-cyan/10 text-brand-cyan border-brand-cyan/30' : 'text-brand-dim hover:text-brand-text'"
+                    class="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium transition-all border-r border-brand-border">
+              🇨🇳 ZH
+            </button>
+            <button type="button"
+                    @click="lang = 'en'"
+                    :class="lang === 'en' ? 'bg-brand-cyan/10 text-brand-cyan' : 'text-brand-dim hover:text-brand-text'"
+                    class="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium transition-all">
+              🇬🇧 EN
+            </button>
+          </div>
+          <input type="hidden" name="language" :value="lang">
+          <p class="text-xs text-brand-dim mt-1" x-text="lang === 'zh' ? 'Chinese · XHS' : 'English · Instagram-ready'"></p>
+        </div>
+
+        <div>
+          <label class="text-xs text-brand-dim block mb-2">How many posts?</label>
+          <div class="flex items-center gap-3">
+            <button type="button" @click="count = Math.max(1, count-1)"
+                    class="w-8 h-8 rounded-lg border border-brand-border text-brand-dim hover:text-brand-text hover:border-brand-cyan/40 transition-colors flex items-center justify-center">−</button>
+            <span class="text-xl font-bold text-brand-cyan w-6 text-center" x-text="count"></span>
+            <button type="button" @click="count = Math.min(5, count+1)"
+                    class="w-8 h-8 rounded-lg border border-brand-border text-brand-dim hover:text-brand-text hover:border-brand-cyan/40 transition-colors flex items-center justify-center">+</button>
+          </div>
+          <p class="text-xs text-brand-dim mt-1">Max 5 in parallel</p>
+        </div>
+
+        <div>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <div class="relative">
+              <input type="checkbox" x-model="textOnly" class="sr-only">
+              <div class="w-10 h-5 bg-brand-border rounded-full transition-colors" :class="textOnly ? 'bg-brand-cyan/30' : ''"></div>
+              <div class="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-brand-dim transition-transform" :class="textOnly ? 'translate-x-5 bg-brand-cyan' : ''"></div>
+            </div>
+            <div>
+              <div class="text-sm text-brand-text">Text only (fast)</div>
+              <div class="text-xs text-brand-dim">Skip image render now</div>
+            </div>
+          </label>
+        </div>
+
+        <div>
+          <label class="text-xs text-brand-dim block mb-2">Topic override <span class="text-brand-indigo">(optional)</span></label>
+          <input type="text" id="topic-override" placeholder="Leave blank to auto-pick"
+                 class="w-full px-3 py-2 bg-brand-bg border border-brand-border rounded-lg text-sm text-brand-text placeholder-brand-dim focus:outline-none focus:border-brand-cyan/50 transition-colors">
+        </div>
+
+      </div>
+
+      <!-- Generate button -->
+      <button
+        hx-post="/api/generate"
+        hx-include="#archetype-grid input:checked, #topic-override"
+        hx-vals='js:{count: document.querySelector("[x-data]").__x.$data.count, text_only: document.querySelector("[x-data]").__x.$data.textOnly}'
+        hx-target="#gen-output"
+        hx-swap="innerHTML"
+        class="w-full py-3 px-6 bg-brand-cyan text-brand-bg font-bold text-sm rounded-xl hover:bg-brand-cyan/90 transition-colors flex items-center justify-center gap-2">
+        <span>⚡</span> Generate
+      </button>
+    </div>
+  </div>
+
+  <!-- Generation output area -->
+  <div id="gen-output"></div>
+
+</div>
+
+<script>
+// Simpler form submission that Alpine.js doesn't complicate
+document.querySelector('button[hx-post]').addEventListener('htmx:configRequest', function(e) {
+  const alpineData = Alpine.$data(document.querySelector('[x-data]'));
+  e.detail.parameters['count'] = alpineData.count;
+  e.detail.parameters['text_only'] = alpineData.textOnly;
+  e.detail.parameters['language'] = alpineData.lang;
+  const topicEl = document.getElementById('topic-override');
+  if (topicEl) e.detail.parameters['topic_override'] = topicEl.value;
+  // get checked archetype
+  const checked = document.querySelector('input[name="archetype"]:checked');
+  if (checked) e.detail.parameters['archetype'] = checked.value;
+});
+</script>
+
+{% endblock %}

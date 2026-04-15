@@ -14,6 +14,7 @@ if sys.platform == "win32":
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import click
+from pathlib import Path
 
 from .config import Config
 from .db import Database
@@ -62,6 +63,139 @@ def generate(archetype: str, topic: str | None):
         click.echo(f"\nDone! Post #{post_id} is in draft queue.")
     else:
         click.echo("\nFailed to generate post.")
+
+    db.close()
+
+
+# ── Export (manual publishing helper) ─────────────────────
+
+
+@cli.command()
+@click.argument("post_id", type=int, required=False)
+@click.option(
+    "--all-approved",
+    is_flag=True,
+    help="Export ALL approved posts instead of a single one.",
+)
+def export(post_id: int | None, all_approved: bool):
+    """Export post(s) to a folder ready for manual publishing to XHS.
+
+    Creates output/manual_publish/<timestamp>_<id>/ containing:
+      - The image(s)
+      - post.txt with title, body, and tags ready to copy-paste
+
+    Examples:
+      zcyber export 19              # export one post
+      zcyber export --all-approved  # export every approved post
+    """
+    import json
+    import shutil
+    from datetime import datetime
+    from pathlib import Path
+
+    config = _get_config()
+    db = _get_db(config)
+
+    # Resolve which posts to export
+    if all_approved:
+        posts = db.list_posts(status=PostStatus.APPROVED)
+        if not posts:
+            click.echo("No approved posts to export.")
+            db.close()
+            return
+    elif post_id:
+        single = db.get_post(post_id)
+        if not single:
+            click.echo(f"Post #{post_id} not found.")
+            db.close()
+            return
+        posts = [single]
+    else:
+        # No args — show pending drafts and approved to help the user pick
+        click.echo("Usage: zcyber export <post_id>  OR  zcyber export --all-approved\n")
+        drafts = db.list_posts(status=PostStatus.DRAFT, limit=10)
+        approved = db.list_posts(status=PostStatus.APPROVED, limit=10)
+        if drafts:
+            click.echo("Pending drafts:")
+            for p in drafts:
+                click.echo(f"  #{p.id} [{p.archetype}] {p.title[:50]}")
+        if approved:
+            click.echo("Approved (ready to publish):")
+            for p in approved:
+                click.echo(f"  #{p.id} [{p.archetype}] {p.title[:50]}")
+        if not drafts and not approved:
+            click.echo("No posts in queue. Run `zcyber generate` first.")
+        db.close()
+        return
+
+    # Create export root
+    export_root = config.base_dir / "output" / "manual_publish"
+    export_root.mkdir(parents=True, exist_ok=True)
+
+    for post in posts:
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        folder_name = f"{ts}_post{post.id}_{post.archetype}"
+        dest = export_root / folder_name
+        dest.mkdir(exist_ok=True)
+
+        # Copy image(s)
+        image_count = 0
+        if post.image_path:
+            paths = [post.image_path]
+            if post.image_path.startswith("["):
+                try:
+                    paths = json.loads(post.image_path)
+                except json.JSONDecodeError:
+                    pass
+
+            for idx, src in enumerate(paths, start=1):
+                src_path = Path(src)
+                if not src_path.exists():
+                    continue
+                if len(paths) > 1:
+                    new_name = f"image_{idx:02d}{src_path.suffix}"
+                else:
+                    new_name = f"image{src_path.suffix}"
+                shutil.copy2(src_path, dest / new_name)
+                image_count += 1
+
+        # Write copy-paste friendly text file
+        tags = post.tags or []
+        tags_formatted = " ".join(
+            t if t.startswith("#") else f"#{t}" for t in tags
+        )
+
+        text_lines = [
+            "=" * 60,
+            f"POST #{post.id} — {post.archetype}",
+            "=" * 60,
+            "",
+            "TITLE (copy this into the XHS title field, max 20 chars):",
+            "-" * 60,
+            post.title or "",
+            "",
+            "BODY (copy this into the XHS content area):",
+            "-" * 60,
+            post.body or "",
+            "",
+            "TAGS (type these one by one in XHS):",
+            "-" * 60,
+            tags_formatted,
+            "",
+            "=" * 60,
+            f"IMAGES: {image_count} file(s) in this folder",
+            "=" * 60,
+        ]
+        (dest / "post.txt").write_text(
+            "\n".join(text_lines), encoding="utf-8"
+        )
+
+        click.echo(f"Exported #{post.id} → {dest}")
+
+    click.echo(f"\nDone. Open the folder(s) in File Explorer:")
+    click.echo(f"  {export_root}")
+    click.echo("\nSend the whole folder to your phone via WeChat "
+               "(文件传输助手) and publish manually in the XHS app.")
 
     db.close()
 
@@ -251,19 +385,18 @@ def schedule():
 @cli.command()
 def bot():
     """Start the Telegram review bot."""
-    import asyncio
-
     config = _get_config()
-    db = _get_db(config)
+    db = Database(config.base_dir / "zcyber_xhs.db", cross_thread=True)
+    db.init()
 
-    from .review_bot import run_bot
+    from .review_bot import run_bot_sync
 
     click.echo("Starting Telegram review bot...")
     click.echo("Commands: /start, /drafts, /status")
     click.echo("Press Ctrl+C to stop.\n")
 
     try:
-        asyncio.run(run_bot(config, db))
+        run_bot_sync(config, db)
     except (KeyboardInterrupt, SystemExit):
         click.echo("\nBot stopped.")
     finally:
@@ -298,8 +431,8 @@ def status():
 
     # Topic bank stats
     archetypes_with_banks = [
-        "problem_command", "tool_spotlight", "everyday_panic",
-        "before_after", "mythbust",
+        "problem_command", "everyday_panic", "mythbust",
+        "real_story", "rank_war", "hacker_pov",
     ]
     for archetype in archetypes_with_banks:
         remaining = bank.count_remaining(archetype)
@@ -380,6 +513,28 @@ def analytics_performance():
         )
 
     db.close()
+
+
+@cli.command()
+def gui():
+    """Launch the local web GUI (opens in browser at localhost:8501)."""
+    import subprocess
+    subprocess.run([sys.executable, "-m", "streamlit", "run",
+                   str(Path(__file__).parent / "gui.py"), "--server.headless", "true"])
+
+
+@cli.command()
+@click.option("--host", default="0.0.0.0", show_default=True)
+@click.option("--port", default=8080, show_default=True)
+@click.option("--reload", is_flag=True, default=False, help="Enable hot-reload (dev mode)")
+def web(host: str, port: int, reload: bool):
+    """Launch the FastAPI web UI (http://localhost:8080).
+
+    Replaces the old Streamlit GUI with a proper web application.
+    """
+    import uvicorn
+    click.echo(f"Starting ZCyber web UI at http://{host}:{port}")
+    uvicorn.run("zcyber_xhs.web:app", host=host, port=port, reload=reload)
 
 
 @analytics.command("health")

