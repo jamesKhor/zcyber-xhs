@@ -64,20 +64,21 @@ def _get_db():
 
 ARCHETYPES = [
     ("problem_command", "命令技巧"),
-    ("real_story",      "真实事件"),   # Tue — replaces tool_spotlight
+    ("real_story",      "真实事件"),   # Tue
     ("everyday_panic",  "日常惊魂"),
-    ("rank_war",        "观点对决"),   # Thu — replaces before_after
+    ("rank_war",        "观点对决"),   # Thu
     ("mythbust",        "辟谣"),
     ("news_hook",       "时事钩子"),
-    ("ctf",             "CTF挑战"),
+    ("hacker_pov",      "黑客视角"),   # Sun — replaces ctf
     # Legacy archetypes — kept for historical posts in DB
     ("tool_spotlight",  "工具推荐 (旧)"),
     ("before_after",    "前后对比 (旧)"),
+    ("ctf",             "CTF挑战 (旧)"),
 ]
 
 BANK_ARCHETYPES = [
     "problem_command", "real_story", "everyday_panic",
-    "rank_war", "mythbust",
+    "rank_war", "mythbust", "hacker_pov",
     # Legacy kept for reruns
     "tool_spotlight", "before_after",
 ]
@@ -192,26 +193,47 @@ def page_generate():
     with col_arch:
         # Engagement guide — helps pick the right archetype
         ENGAGEMENT = {
+            # ── Active archetypes (current weekly rotation) ──────────────
+            "problem_command": (
+                "🔥", "🔥",
+                "Technical — '想要下期？' or self-check prompt drives saves",
+            ),
+            "real_story": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "Personal breach story → '我朋友也遇到过!' + saves as warning",
+            ),
             "everyday_panic": (
-                "🔥🔥🔥", "🔥🔥🔥", "Relatable fear → '这不就是我！' + tag 朋友",
+                "🔥🔥🔥", "🔥🔥🔥",
+                "Relatable fear → '这不就是我！' + tag 朋友 instinct",
+            ),
+            "rank_war": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "VS debate → 'comment which side' drives heated discussion",
             ),
             "mythbust": (
-                "🔥🔥🔥", "🔥🔥🔥", "'Wait really?!' + tag others to win arguments",
-            ),
-            "before_after": (
-                "🔥🔥", "🔥🔥", "'Which one are you?' → self-identify",
-            ),
-            "ctf": (
-                "🔥🔥🔥", "🔥", "People post their answer and race to be first",
-            ),
-            "problem_command": (
-                "🔥", "🔥", "Technical — add 'want part 2?' or self-check prompt",
-            ),
-            "tool_spotlight": (
-                "🔥", "🔥", "Moderate — 'have you used this?' works",
+                "🔥🔥🔥", "🔥🔥🔥",
+                "'Wait really?!' + tag others to win arguments",
             ),
             "news_hook": (
-                "🔥🔥", "🔥", "Opinion bait — '你怎么看这件事？'",
+                "🔥🔥", "🔥",
+                "Opinion bait — '你怎么看这件事？' + funnel to zcybernews",
+            ),
+            "hacker_pov": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "POV immersion → '如果是我会怎么做' + saves for future reference",
+            ),
+            # ── Legacy archetypes (kept for historical posts) ─────────────
+            "tool_spotlight": (
+                "🔥", "🔥",
+                "(旧) Moderate — 'have you used this?' works",
+            ),
+            "before_after": (
+                "🔥🔥", "🔥🔥",
+                "(旧) 'Which one are you?' → self-identify",
+            ),
+            "ctf": (
+                "🔥🔥", "🔥",
+                "(旧) People post their answer — replaced by hacker_pov",
             ),
         }
 
