@@ -423,20 +423,37 @@ def _check_suspicious_domains(text: str, result: SafetyResult) -> None:
 
 
 def _check_platform_mentions(text: str, result: SafetyResult) -> None:
-    """XHS penalizes mentions of competitor platforms."""
+    """XHS penalizes cross-platform *promotion* (follow me on X, post on Y).
+
+    Simply naming 抖音/B站 as apps the audience uses (e.g. "抖音用户注意"
+    or "微信支付宝抖音都受影响") is fine — that's educational context.
+    We only flag when the text explicitly directs users to interact with a
+    competing platform (follow, subscribe, post, share there).
+    """
+    # Words that indicate cross-platform traffic diversion
+    _promo_context = (
+        r"(?:关注|订阅|粉丝|发布|上传|更新|主页|账号|博主|up主"
+        r"|follow|subscribe|channel|@\w)"
+    )
+
+    # Platforms that are direct content competitors to XHS
+    # (short video / social content platforms — NOT general apps like 微信)
     competitors = [
         (r"抖音", "Douyin/TikTok"),
         (r"快手", "Kuaishou"),
         (r"B站|bilibili|哔哩哔哩", "Bilibili"),
         (r"微博", "Weibo"),
-        (r"淘宝|天猫", "Taobao/Tmall"),
-        (r"拼多多", "Pinduoduo"),
-        (r"京东", "JD.com"),
     ]
     for pattern, name in competitors:
-        if re.search(pattern, text, re.IGNORECASE):
+        # Only flag if the platform name appears near promotion-context words
+        promo_pattern = (
+            rf"(?:{_promo_context}.{{0,15}}{pattern}"
+            rf"|{pattern}.{{0,15}}{_promo_context})"
+        )
+        if re.search(promo_pattern, text, re.IGNORECASE):
             result.add_warning(
-                f"Competitor platform '{name}' mentioned — may reduce XHS reach",
+                f"Cross-platform promotion to '{name}' detected — "
+                "direct users to XHS, not other platforms",
                 "XHS",
             )
 

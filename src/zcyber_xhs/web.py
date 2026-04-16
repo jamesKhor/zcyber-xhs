@@ -369,8 +369,10 @@ async def api_generate(
                     picked = bank.pick_n_topics(archetype, count)
                 finally:
                     db.close()
-                topics = [t.slug for t in picked]
-                _update_job(job_id, total=len(topics))
+                # Bank may be exhausted — fill remaining slots with None so
+                # orchestrator's DynamicTopicGenerator handles them
+                topics = [t.slug for t in picked] + [None] * (count - len(picked))
+                _update_job(job_id, total=count)
             else:
                 topics = [None] * count
 

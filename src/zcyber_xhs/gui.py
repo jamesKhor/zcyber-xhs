@@ -337,22 +337,21 @@ def _run_batch_generation(
                 db.close()
 
             if not picked:
-                st.error(
-                    f"No unused topics left for **{archetype}**. "
-                    "Add more topics to the YAML bank."
+                # Bank exhausted — let orchestrator use LLM dynamic generation
+                st.info(
+                    f"YAML bank for **{archetype}** is exhausted. "
+                    "Generating fresh topics via AI — this may take a moment."
                 )
-                return
-
-            actual = len(picked)
-            if actual < count:
-                st.warning(
-                    f"Only {actual} unused topics available — "
-                    f"generating {actual} article(s)."
-                )
-                count = actual
-
-            # Pass slug as override so orchestrator skips its own pick_topic()
-            topics_to_use = [t.slug for t in picked]
+                topics_to_use = [None] * count
+            else:
+                actual = len(picked)
+                if actual < count:
+                    st.warning(
+                        f"Only {actual} unused topics available in bank — "
+                        f"generating {actual} from bank + {count - actual} via AI."
+                    )
+                # Pass slug as override so orchestrator skips its own pick_topic()
+                topics_to_use = [t.slug for t in picked] + [None] * (count - actual)
         else:
             # news_hook / ctf — topics are self-managed inside orchestrator
             topics_to_use = [None] * count
