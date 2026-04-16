@@ -138,7 +138,7 @@ ARCHETYPE_ZH = {a: zh for a, zh, _ in ARCHETYPES}
 # ---------------------------------------------------------------------------
 
 def _resolve_image(image_path: str | None) -> str | None:
-    """Return URL path for serving image, or None."""
+    """Return URL path for the FIRST image, or None."""
     if not image_path:
         return None
     if image_path.startswith("["):
@@ -154,6 +154,25 @@ def _resolve_image(image_path: str | None) -> str | None:
     if p.exists():
         return f"/static/images/{p.name}"
     return None
+
+
+def _resolve_all_images(image_path: str | None) -> list[str]:
+    """Return URL paths for ALL images (carousel support)."""
+    if not image_path:
+        return []
+    if image_path.startswith("["):
+        try:
+            paths = json.loads(image_path)
+        except Exception:
+            paths = []
+    else:
+        paths = [image_path]
+    result = []
+    for p_str in paths:
+        p = Path(p_str)
+        if p.exists():
+            result.append(f"/static/images/{p.name}")
+    return result
 
 
 def _status_color(status: str) -> str:
@@ -581,9 +600,22 @@ async def api_post_modal(request: Request, post_id: int):
         db.close()
     if not post:
         return HTMLResponse("<p class='text-red-400'>Post not found</p>")
+
+    # Extract carousel_slides from stored payload for text preview
+    carousel_slides = []
+    if post.payload_json:
+        try:
+            payload = json.loads(post.payload_json)
+            carousel_slides = payload.get("carousel_slides", [])
+        except Exception:
+            carousel_slides = []
+
     ctx = {
         "request": request, "post": post,
-        "resolve_image": _resolve_image, "status_color": _status_color,
+        "resolve_image": _resolve_image,
+        "resolve_all_images": _resolve_all_images,
+        "carousel_slides": carousel_slides,
+        "status_color": _status_color,
         "archetype_zh": ARCHETYPE_ZH,
     }
     return templates.TemplateResponse(ctx["request"], "fragments/post_modal.html", ctx)

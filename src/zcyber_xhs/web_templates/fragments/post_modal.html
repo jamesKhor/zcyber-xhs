@@ -1,22 +1,107 @@
 <div class="p-6 space-y-5">
-  <div class="flex items-center gap-3">
+
+  <!-- Header row -->
+  <div class="flex items-center gap-3 flex-wrap">
     <span class="text-xs px-2 py-1 rounded bg-brand-indigo/15 text-brand-indigo border border-brand-indigo/20 font-mono">
       {{ archetype_zh.get(post.archetype, post.archetype) }} · #{{ post.id }}
     </span>
     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border {{ status_color(post.status.value) }}">
       {{ post.status.value }}
     </span>
+    {% set all_imgs = resolve_all_images(post.image_path) %}
+    {% if all_imgs | length > 1 %}
+    <span class="text-xs px-2 py-0.5 rounded bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan font-mono">
+      🖼 {{ all_imgs | length }} slides
+    </span>
+    {% endif %}
   </div>
 
   <h2 class="text-xl font-bold text-brand-text">{{ post.title or '(no title)' }}</h2>
 
-  {% set img = resolve_image(post.image_path) %}
-  {% if img %}
-  <img src="{{ img }}" class="w-full rounded-xl border border-brand-border max-h-64 object-cover" loading="lazy">
+  <!-- ── Image preview ───────────────────────────────────────────────── -->
+  {% if all_imgs | length > 1 %}
+  <!-- Carousel strip: horizontal scroll, each slide thumbnail -->
+  <div class="overflow-x-auto -mx-1 px-1 pb-1">
+    <div class="flex gap-3" style="width: max-content;">
+      {% for img_url in all_imgs %}
+      {% set slide = carousel_slides[loop.index0] if carousel_slides | length > loop.index0 else {} %}
+      <div class="flex-shrink-0 relative group" style="width: 160px;">
+        <img src="{{ img_url }}"
+             class="w-40 rounded-lg border border-brand-border object-cover cursor-pointer transition-all group-hover:border-brand-cyan/50"
+             style="height: 200px; object-fit: cover;"
+             loading="lazy"
+             onclick="this.classList.toggle('w-40'); this.classList.toggle('w-full');">
+        <!-- Slide type badge -->
+        {% set stype = slide.get('slide_type', '') %}
+        {% if stype %}
+        <span class="absolute top-2 left-2 text-xs px-1.5 py-0.5 rounded font-mono font-bold
+          {% if stype == 'hook' %}bg-red-500/80 text-white
+          {% elif stype == 'cta' %}bg-green-500/80 text-white
+          {% else %}bg-brand-cyan/80 text-brand-bg{% endif %}">
+          {% if stype == 'hook' %}HOOK
+          {% elif stype == 'cta' %}CTA
+          {% else %}{{ slide.get('point_number', loop.index) }}{% endif %}
+        </span>
+        {% endif %}
+        <!-- Slide headline on hover -->
+        {% if slide.get('headline') %}
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg px-2 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <p class="text-xs text-white line-clamp-2 leading-tight">{{ slide.get('headline', '') }}</p>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Slide text summary — accordion style -->
+  <div class="space-y-2">
+    {% for slide in carousel_slides %}
+    {% set stype = slide.get('slide_type', 'point') %}
+    <div class="rounded-lg border px-3 py-2
+      {% if stype == 'hook' %}border-red-500/25 bg-red-500/5
+      {% elif stype == 'cta' %}border-green-500/25 bg-green-500/5
+      {% else %}border-brand-border bg-brand-bg/40{% endif %}">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="text-xs font-mono font-bold
+          {% if stype == 'hook' %}text-red-400
+          {% elif stype == 'cta' %}text-green-400
+          {% else %}text-brand-cyan{% endif %}">
+          {% if stype == 'hook' %}🎣 HOOK
+          {% elif stype == 'cta' %}✅ CTA
+          {% else %}{{ slide.get('point_number', loop.index - 1) }}{% endif %}
+        </span>
+        {% if slide.get('chip_label') %}
+        <span class="text-xs text-brand-dim">· {{ slide.get('chip_label') }}</span>
+        {% endif %}
+      </div>
+      <p class="text-sm font-semibold text-brand-text">{{ slide.get('headline', '') }}</p>
+      {% if slide.get('body_text') %}
+      <p class="text-xs text-brand-dim mt-1 leading-relaxed">{{ slide.get('body_text', '') }}</p>
+      {% endif %}
+      {% if slide.get('command') %}
+      <code class="block mt-1 text-xs font-mono text-brand-cyan bg-brand-panel px-2 py-1 rounded">$ {{ slide.get('command') }}</code>
+      {% endif %}
+      {% if slide.get('steps') %}
+      <ul class="mt-1 space-y-0.5">
+        {% for step in slide.get('steps', []) %}
+        <li class="text-xs text-brand-dim">{{ loop.index }}. {{ step }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  {% elif all_imgs | length == 1 %}
+  <!-- Single image -->
+  <img src="{{ all_imgs[0] }}" class="w-full rounded-xl border border-brand-border max-h-80 object-cover" loading="lazy">
   {% endif %}
 
+  <!-- Caption / body -->
   <div class="text-sm text-brand-dim leading-relaxed whitespace-pre-wrap">{{ post.body or '' }}</div>
 
+  <!-- Tags -->
   {% if post.tags %}
   <div class="flex flex-wrap gap-1.5">
     {% for tag in post.tags %}

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root {
+    --bg:      #080c18;
+    --panel:   #0f1629;
+    --border:  #1e2d4a;
+    --text:    #f0f6ff;
+    --dim:     #6a7a9a;
+    --cyan:    #00C8FF;
+    --green:   #00E676;
+    --indigo:  #818CF8;
+    --purple:  #A78BFA;
+    --yellow:  #FFD54F;
+    --red:     #FF5252;
+    --orange:  #FF8C42;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    background: var(--bg);
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── Subtle dot-grid backdrop ── */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* ── Top accent bar — colour varies by slide type ── */
+  .top-bar {
+    height: 10px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .top-bar-hook    { background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow)); }
+  .top-bar-point   { background: linear-gradient(90deg, var(--cyan), var(--indigo)); }
+  .top-bar-cta     { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+
+  /* ── Slide counter pill (top-right) ── */
+  .slide-counter {
+    position: absolute;
+    top: 28px;
+    right: 44px;
+    font-size: 26px;
+    color: var(--dim);
+    font-family: "SF Mono", monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    z-index: 10;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 8px 20px;
+  }
+
+  /* ═══════════════════════════════════════
+     HOOK SLIDE  (slide 1 — scroll stopper)
+  ═══════════════════════════════════════ */
+  .hook-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 80px;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Category chip */
+  .hook-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 82, 82, 0.12);
+    border: 1.5px solid rgba(255, 82, 82, 0.4);
+    border-radius: 40px;
+    padding: 12px 30px;
+  }
+  .hook-chip-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+  .hook-chip-label {
+    font-size: 26px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Big emoji */
+  .hook-emoji {
+    font-size: 140px;
+    line-height: 1;
+  }
+
+  /* THE headline — this is the only thing that matters on the hook slide */
+  .hook-headline {
+    font-size: 108px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.08;
+    word-break: break-word;
+    text-shadow: 0 0 100px rgba(255, 82, 82, 0.2);
+  }
+
+  /* Teaser sub-line */
+  .hook-teaser {
+    font-size: 46px;
+    color: var(--dim);
+    line-height: 1.4;
+    border-left: 5px solid var(--red);
+    padding-left: 24px;
+    font-weight: 400;
+  }
+
+  /* Swipe hint */
+  .swipe-hint {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 32px;
+    color: var(--dim);
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .swipe-arrow {
+    font-size: 36px;
+    animation: swipe 1.5s ease-in-out infinite;
+  }
+  @keyframes swipe {
+    0%,100% { transform: translateX(0); }
+    50%      { transform: translateX(12px); }
+  }
+
+  /* ═══════════════════════════════════════
+     CONTENT / POINT SLIDE  (slides 2 – N-1)
+  ═══════════════════════════════════════ */
+  .point-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 80px 44px;
+    gap: 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .point-number-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .point-badge {
+    font-size: 26px;
+    font-weight: 900;
+    font-family: "SF Mono", monospace;
+    color: var(--bg);
+    background: var(--cyan);
+    border-radius: 12px;
+    padding: 10px 22px;
+    letter-spacing: 2px;
+    flex-shrink: 0;
+  }
+  .point-category {
+    font-size: 26px;
+    color: var(--dim);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .point-headline {
+    font-size: 90px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    word-break: break-word;
+  }
+
+  /* Divider */
+  .point-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan) 0%, transparent 80%);
+    flex-shrink: 0;
+  }
+
+  .point-body {
+    font-size: 50px;
+    color: rgba(240, 246, 255, 0.85);
+    line-height: 1.6;
+    font-weight: 400;
+    flex: 1;
+  }
+
+  /* Optional terminal-style code block inside a point slide */
+  .point-code {
+    background: var(--panel);
+    border: 1.5px solid var(--border);
+    border-left: 5px solid var(--cyan);
+    border-radius: 14px;
+    padding: 24px 32px;
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 40px;
+    color: var(--cyan);
+    line-height: 1.5;
+    word-break: break-all;
+    flex-shrink: 0;
+  }
+
+  /* ═══════════════════════════════════════
+     CTA / LAST SLIDE
+  ═══════════════════════════════════════ */
+  .cta-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    gap: 44px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 230, 118, 0.1);
+    border: 1.5px solid rgba(0, 230, 118, 0.35);
+    border-radius: 40px;
+    padding: 12px 30px;
+    width: fit-content;
+  }
+  .cta-chip-label {
+    font-size: 26px;
+    color: var(--green);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .cta-headline {
+    font-size: 100px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    word-break: break-word;
+    text-shadow: 0 0 80px rgba(0, 230, 118, 0.15);
+  }
+
+  .cta-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .cta-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    font-size: 48px;
+    color: rgba(240, 246, 255, 0.85);
+    line-height: 1.4;
+  }
+  .cta-step-num {
+    font-size: 28px;
+    font-weight: 900;
+    font-family: "SF Mono", monospace;
+    color: var(--green);
+    background: rgba(0, 230, 118, 0.12);
+    border: 1.5px solid rgba(0, 230, 118, 0.3);
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .cta-follow-block {
+    background: rgba(0, 200, 255, 0.06);
+    border: 1.5px solid rgba(0, 200, 255, 0.25);
+    border-radius: 16px;
+    padding: 28px 36px;
+    font-size: 44px;
+    color: var(--cyan);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* ═══════════════════════════════════════
+     SHARED FOOTER
+  ═══════════════════════════════════════ */
+  .footer {
+    padding: 22px 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid var(--border);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .brand {
+    font-size: 32px;
+    color: var(--cyan);
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-family: "SF Mono", monospace;
+  }
+  .footer-cta {
+    font-size: 26px;
+    color: var(--cyan);
+    background: rgba(0, 200, 255, 0.08);
+    border: 1.5px solid rgba(0, 200, 255, 0.25);
+    border-radius: 40px;
+    padding: 8px 24px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top accent bar — colour by slide type -->
+  {% if slide_type == "hook" %}
+  <div class="top-bar top-bar-hook"></div>
+  {% elif slide_type == "cta" %}
+  <div class="top-bar top-bar-cta"></div>
+  {% else %}
+  <div class="top-bar top-bar-point"></div>
+  {% endif %}
+
+  <!-- Slide counter (e.g. "2 / 5") — hidden on hook slide -->
+  {% if slide_number and total_slides and slide_type != "hook" %}
+  <div class="slide-counter">{{ slide_number }} / {{ total_slides }}</div>
+  {% endif %}
+
+
+  {# ══════════════════════════════════════════
+     HOOK SLIDE
+  ══════════════════════════════════════════ #}
+  {% if slide_type == "hook" %}
+  <div class="hook-wrapper">
+
+    <div class="hook-chip">
+      <div class="hook-chip-dot"></div>
+      <span class="hook-chip-label">{{ chip_label | default("网络安全") }}</span>
+    </div>
+
+    {% if emoji %}
+    <div class="hook-emoji">{{ emoji }}</div>
+    {% endif %}
+
+    <div class="hook-headline">{{ headline }}</div>
+
+    {% if caption %}
+    <div class="hook-teaser">{{ caption }}</div>
+    {% endif %}
+
+    <div class="swipe-hint">
+      <span>向左滑动查看详情</span>
+      <span class="swipe-arrow">→</span>
+    </div>
+
+  </div>
+
+  {# ══════════════════════════════════════════
+     CONTENT / POINT SLIDE
+  ══════════════════════════════════════════ #}
+  {% elif slide_type == "point" %}
+  <div class="point-wrapper">
+
+    <div class="point-number-row">
+      {% if point_number %}
+      <div class="point-badge">{{ point_number }}</div>
+      {% endif %}
+      {% if chip_label %}
+      <span class="point-category">{{ chip_label }}</span>
+      {% endif %}
+    </div>
+
+    <div class="point-headline">{{ headline }}</div>
+    <div class="point-divider"></div>
+
+    {% if command %}
+    <div class="point-code">$ {{ command }}</div>
+    {% endif %}
+
+    {% if body_text %}
+    <div class="point-body">{{ body_text }}</div>
+    {% endif %}
+
+  </div>
+
+  {# ══════════════════════════════════════════
+     CTA / LAST SLIDE
+  ══════════════════════════════════════════ #}
+  {% else %}
+  <div class="cta-wrapper">
+
+    <div class="cta-chip">
+      <span class="cta-chip-label">✓ 关键行动</span>
+    </div>
+
+    <div class="cta-headline">{{ headline }}</div>
+
+    {% if steps %}
+    <div class="cta-steps">
+      {% for step in steps %}
+      <div class="cta-step">
+        <div class="cta-step-num">{{ loop.index }}</div>
+        <span>{{ step }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% elif body_text %}
+    <div class="point-body">{{ body_text }}</div>
+    {% endif %}
+
+    {% if caption %}
+    <div class="cta-follow-block">{{ caption }}</div>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
+
+  <div class="footer">
+    <span class="brand">ZCYBERNEWS</span>
+    <span class="footer-cta">{{ cta }}</span>
+  </div>
+
+</body>
+</html>

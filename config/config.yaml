@@ -4,7 +4,7 @@ llm:
   provider: deepseek  # deepseek | kimi | anthropic
   model: deepseek-chat
   temperature: 0.8
-  max_tokens: 900   # shorter prompts (200-300字 body) fit in ~700-800 tokens; lower = faster response
+  max_tokens: 1800  # carousel JSON (5 slides + body + tags) needs ~1400-1600 tokens; 900 caused truncation
 
 schedule:
   # Day of week (0=Mon, 6=Sun) → archetype

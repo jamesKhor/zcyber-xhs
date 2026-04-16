@@ -75,18 +75,47 @@ class LLMClient:
         self,
         prompt: str,
         system: str = "",
+        retries: int = 2,
     ) -> dict[str, Any]:
-        """Generate and parse a JSON response from the LLM."""
-        raw = self.generate(prompt, system)
+        """Generate and parse a JSON response from the LLM.
 
-        # Strip markdown code fences if present
-        if raw.startswith("```"):
-            lines = raw.split("\n")
-            # Remove first and last lines (```json and ```)
-            lines = [line for line in lines if not line.strip().startswith("```")]
-            raw = "\n".join(lines)
+        Retries up to `retries` times on JSONDecodeError (handles transient
+        DeepSeek refusals or truncated responses).
+        """
+        import logging
+        logger = logging.getLogger("zcyber.llm")
 
-        return json.loads(raw)
+        last_err: Exception | None = None
+        for attempt in range(1, retries + 2):
+            raw = self.generate(prompt, system)
+
+            # Strip markdown code fences if present
+            if "```" in raw:
+                lines = raw.split("\n")
+                lines = [line for line in lines if not line.strip().startswith("```")]
+                raw = "\n".join(lines)
+
+            # Extract JSON object if LLM wrapped it in extra text
+            brace_start = raw.find("{")
+            brace_end = raw.rfind("}")
+            if brace_start != -1 and brace_end != -1 and brace_end > brace_start:
+                raw = raw[brace_start : brace_end + 1]
+
+            try:
+                return json.loads(raw)
+            except json.JSONDecodeError as exc:
+                last_err = exc
+                if attempt <= retries:
+                    logger.warning(
+                        f"JSONDecodeError on attempt {attempt}, retrying... "
+                        f"(snippet: {raw[:80]!r})"
+                    )
+
+        raise json.JSONDecodeError(
+            f"Failed to parse JSON after {retries + 1} attempts: {last_err}",
+            "",
+            0,
+        ) from last_err
 
     @classmethod
     def from_config(cls, config: dict) -> LLMClient:

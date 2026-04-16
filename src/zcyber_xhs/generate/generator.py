@@ -36,7 +36,7 @@ class ContentGenerator:
             if disclaimer and disclaimer not in raw.get("body", ""):
                 raw["body"] = raw["body"].rstrip() + f"\n\n⚠️ {disclaimer}"
 
-        # Post-process: ensure default tags
+        # Post-process: ensure default tags (cap total at 7 to avoid XHS shadowban)
         if language == "en":
             default_tags = self.config.content.get(
                 "en_default_tags", self.config.content.get("default_tags", [])
@@ -44,10 +44,12 @@ class ContentGenerator:
         else:
             default_tags = self.config.content.get("default_tags", [])
         existing_tags = raw.get("tags", [])
+        # Trim LLM tags to 4 max, then append defaults (keeps total ≤ 7)
+        trimmed_llm_tags = existing_tags[:4]
         for tag in default_tags:
-            if tag not in existing_tags:
-                existing_tags.append(tag)
-        raw["tags"] = existing_tags
+            if tag not in trimmed_llm_tags:
+                trimmed_llm_tags.append(tag)
+        raw["tags"] = trimmed_llm_tags[:7]  # hard cap at 7
 
         # Post-process: education disclaimer (always appended for cyber content)
         edu_disclaimer = self.config.content.get("education_disclaimer", "")

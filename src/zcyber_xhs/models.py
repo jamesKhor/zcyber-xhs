@@ -41,6 +41,20 @@ class ImageText(BaseModel):
     output_preview: str = ""
     caption: str = ""
 
+    # ── carousel_slide fields ──────────────────────────────────────────────
+    # slide_type: "hook" | "point" | "cta"
+    slide_type: str = "point"
+    # body_text: main paragraph text on point/cta slides
+    body_text: str = ""
+    # point_number: displayed badge e.g. "01", "02"
+    point_number: str = ""
+    # emoji: large emoji on the hook slide
+    emoji: str = ""
+    # chip_label: small category chip e.g. "钓鱼攻击", "密码安全"
+    chip_label: str = ""
+    # steps: list of action-item strings for the CTA slide
+    steps: list[str] = Field(default_factory=list)
+
     # tool_spotlight carousel
     tool_name: str = ""
     use_number: str = ""

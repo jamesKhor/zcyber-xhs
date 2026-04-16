@@ -1,31 +1,61 @@
-"""Topic discovery from YAML topic banks, with dedup against history."""
+"""Topic discovery from YAML topic banks, with dedup against history.
+
+When a bank is exhausted (all topics used), DynamicTopicGenerator is called
+to synthesise a fresh topic via LLM so generation never stalls.
+"""
 
 from __future__ import annotations
 
 import random
 from pathlib import Path
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 import yaml
 
 from ..db import Database
 from ..models import TopicEntry
 
+if TYPE_CHECKING:
+    from ..generate.llm import LLMClient
+
 
 class TopicBank:
-    """Load topics from YAML banks and pick unused ones."""
+    """Load topics from YAML banks and pick unused ones.
+
+    Pass an LLMClient to enable dynamic topic generation when the bank
+    is exhausted.  Without one the old behaviour (return None) is kept.
+    """
 
     def __init__(self, config_dir: Path, db: Database):
         self.banks_dir = config_dir / "topic_banks"
+        self.config_dir = config_dir
         self.db = db
 
-    def pick_topic(self, archetype: str) -> Optional[TopicEntry]:
+    def pick_topic(
+        self, archetype: str, llm: Optional["LLMClient"] = None
+    ) -> Optional[TopicEntry]:
         """Pick a random unused topic for the given archetype.
 
-        Returns None if all topics have been used.
+        1. Try the YAML bank first (curated quality, fast).
+        2. If the bank is exhausted and an LLM client is provided,
+           generate a fresh topic dynamically.
+        3. Returns None only if both sources fail.
         """
         results = self.pick_n_topics(archetype, 1)
-        return results[0] if results else None
+        if results:
+            return results[0]
+
+        # Bank exhausted — fall back to LLM dynamic generation
+        if llm is not None:
+            from .dynamic_topic import DynamicTopicGenerator
+            gen = DynamicTopicGenerator(llm, self.config_dir)
+            topic = gen.generate(archetype)
+            if topic:
+                # Mark the dynamic slug as used so it won't be re-used
+                self.db.mark_topic_used(archetype, topic.slug)
+                return topic
+
+        return None
 
     def pick_n_topics(self, archetype: str, n: int) -> list[TopicEntry]:
         """Pick up to N distinct unused topics and mark them all used atomically.

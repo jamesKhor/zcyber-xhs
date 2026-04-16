@@ -55,7 +55,11 @@ class Orchestrator:
         # 1. Discover topic
         topic = self._pick_topic(archetype, topic_override)
         if not topic:
-            click.echo(f"No unused topics for archetype '{archetype}'")
+            click.echo(
+                f"No topic available for archetype '{archetype}'. "
+                "YAML bank exhausted and LLM dynamic generation also failed. "
+                "Check your DEEPSEEK_API_KEY or add topics to the YAML bank."
+            )
             return None
 
         click.echo(f"Topic: {topic.slug} -- {topic.problem}")
@@ -95,7 +99,7 @@ class Orchestrator:
             force: If True, re-render even if an image already exists
                    (useful after template updates).
         """
-        from .models import PostDraft, Archetype  # local import avoids circularity
+        from .models import Archetype, PostDraft  # local import avoids circularity
 
         post = self.db.get_post(post_id)
         if not post:
@@ -174,7 +178,7 @@ class Orchestrator:
             return TopicEntry(slug="ctf-weekly", problem="weekly CTF challenge")
 
         if archetype in BANK_ARCHETYPES:
-            return self.topic_bank.pick_topic(archetype)
+            return self.topic_bank.pick_topic(archetype, llm=self.llm)
 
         return None
 
@@ -253,7 +257,7 @@ class Orchestrator:
         Text-card posts are batched into ONE browser session (fast).
         Carousel posts are rendered individually (each needs its own slide set).
         """
-        from .models import ImageText, Archetype  # local import
+        from .models import Archetype, ImageText  # local import
 
         def _build_draft(post, payload):
             raw_it = payload.get("image_text") or {}

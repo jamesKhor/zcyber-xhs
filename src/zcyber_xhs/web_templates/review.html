@@ -32,7 +32,7 @@
       <!-- Top: image + meta -->
       <div class="flex gap-0">
         <!-- Thumbnail -->
-        <div class="w-24 flex-shrink-0 bg-brand-bg">
+        <div class="w-24 flex-shrink-0 bg-brand-bg relative">
           {% set img = resolve_image(post.image_path) %}
           {% if img %}
           <img src="{{ img }}" class="w-24 h-32 object-cover" loading="lazy">
@@ -40,6 +40,13 @@
           <div class="w-24 h-32 flex items-center justify-center">
             <span class="text-2xl opacity-20">🖼</span>
           </div>
+          {% endif %}
+          <!-- Carousel slide count badge -->
+          {% if post.image_path and post.image_path.startswith('[') %}
+          {% set slide_count = post.image_path.count('png') + post.image_path.count('jpg') %}
+          <span class="absolute bottom-1 right-1 text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-black/70 text-brand-cyan border border-brand-cyan/30">
+            ×{{ slide_count }}
+          </span>
           {% endif %}
         </div>
         <!-- Content -->

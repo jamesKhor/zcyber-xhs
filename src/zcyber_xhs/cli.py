@@ -13,8 +13,9 @@ if sys.platform == "win32":
     if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-import click
 from pathlib import Path
+
+import click
 
 from .config import Config
 from .db import Database
@@ -49,7 +50,13 @@ def cli():
     help="Content archetype to generate.",
 )
 @click.option("--topic", "-t", default=None, help="Specific topic slug to use.")
-def generate(archetype: str, topic: str | None):
+@click.option(
+    "--text-only",
+    is_flag=True,
+    default=False,
+    help="Skip image rendering (fast mode). Use 'zcyber export' later to render.",
+)
+def generate(archetype: str, topic: str | None, text_only: bool):
     """Generate a post for the given archetype."""
     config = _get_config()
     db = _get_db(config)
@@ -57,7 +64,7 @@ def generate(archetype: str, topic: str | None):
     from .orchestrator import Orchestrator
 
     orchestrator = Orchestrator(config, db)
-    post_id = orchestrator.run(archetype, topic_override=topic)
+    post_id = orchestrator.run(archetype, topic_override=topic, text_only=text_only)
 
     if post_id:
         click.echo(f"\nDone! Post #{post_id} is in draft queue.")
@@ -192,7 +199,7 @@ def export(post_id: int | None, all_approved: bool):
 
         click.echo(f"Exported #{post.id} → {dest}")
 
-    click.echo(f"\nDone. Open the folder(s) in File Explorer:")
+    click.echo("\nDone. Open the folder(s) in File Explorer:")
     click.echo(f"  {export_root}")
     click.echo("\nSend the whole folder to your phone via WeChat "
                "(文件传输助手) and publish manually in the XHS app.")
