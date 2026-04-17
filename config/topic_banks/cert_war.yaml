@@ -8,10 +8,10 @@ topics:
     cert_b: CISM
     market: China
     angle: "管理层必备证书对决：哪个更容易晋升到CISO？"
-    cert_a_cost_usd: 699
-    cert_a_cost_local: "¥4999（培训+考试套餐）"
+    cert_a_cost_usd: 749
+    cert_a_cost_local: "¥5,400（考试费）；含培训约 ¥15,000–35,000"
     cert_b_cost_usd: 575
-    cert_b_cost_local: "¥4200（培训+考试套餐）"
+    cert_b_cost_local: "¥4,200（考试费，ISACA 会员价）"
     cert_a_salary_boost: "平均薪资涨幅 +22%"
     cert_b_salary_boost: "平均薪资涨幅 +18%"
     verdict: cissp_wins
@@ -23,10 +23,10 @@ topics:
     cert_b: CISM
     market: Singapore
     angle: "新加坡安全管理岗：CISSP 还是 CISM 更值得先考？"
-    cert_a_cost_usd: 699
-    cert_a_cost_local: "SGD 980（含考试费）"
+    cert_a_cost_usd: 749
+    cert_a_cost_local: "SGD 1,020（考试费）"
     cert_b_cost_usd: 575
-    cert_b_cost_local: "SGD 820（含考试费）"
+    cert_b_cost_local: "SGD 820（ISACA 会员考试费）"
     cert_a_salary_boost: "平均薪资涨幅 +24%"
     cert_b_salary_boost: "平均薪资涨幅 +16%"
     verdict: cissp_wins
@@ -37,15 +37,15 @@ topics:
     cert_a: CISP
     cert_b: CISSP
     market: China
-    angle: "国产 vs 国际：CISP 和 CISSP 到底选哪个？"
-    cert_a_cost_usd: 700
-    cert_a_cost_local: "¥5000（必须参加授权培训）"
-    cert_b_cost_usd: 699
-    cert_b_cost_local: "¥4999（培训+考试）"
-    cert_a_salary_boost: "平均薪资涨幅 +15%"
-    cert_b_salary_boost: "平均薪资涨幅 +22%"
+    angle: "国产 vs 国际：CISP 和 CISSP，薪资差距竟然接近 2 倍"
+    cert_a_cost_usd: 1750
+    cert_a_cost_local: "¥12,800（官方授权培训 ¥8,800 + 考试注册 ¥4,000；打折约 ¥9,600）"
+    cert_b_cost_usd: 749
+    cert_b_cost_local: "¥5,400（考试费；含培训约 ¥15,000-35,000）"
+    cert_a_salary_boost: "CISP 持有者平均年薪 ¥150k–¥200k（T1城市）"
+    cert_b_salary_boost: "CISSP 持有者平均年薪 ¥300k–¥500k（T1城市）——接近 CISP 的 2 倍"
     verdict: split
-    verdict_reason: "在国内甲方/政府做等保项目选 CISP；想去外企或出海选 CISSP；预算够的话两个都考"
+    verdict_reason: "在国内甲方/政府做等保项目必须有 CISP；想去外企、MNC 或谋求 CISO 职位必须有 CISSP。战略最优解：先考 CISP（12–18 个月），再攻 CISSP（薪资天花板直接翻倍）"
     category: china_vs_international
 
   - slug: oscp-vs-ceh-global
@@ -53,8 +53,8 @@ topics:
     cert_b: CEH
     market: Global
     angle: "渗透测试入行必考：OSCP 的实战派 vs CEH 的理论派"
-    cert_a_cost_usd: 1499
-    cert_a_cost_local: "约 ¥10800（90天实验室+考试）"
+    cert_a_cost_usd: 1649
+    cert_a_cost_local: "约 ¥11,900（90天实验室+考试；社区估计首次通过率仅15–20%）"
     cert_b_cost_usd: 950
     cert_b_cost_local: "约 ¥6800（含官方题库）"
     cert_a_salary_boost: "平均薪资涨幅 +30%"

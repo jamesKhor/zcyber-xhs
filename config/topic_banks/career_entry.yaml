@@ -209,18 +209,21 @@ topics:
   - slug: au-migration-cybersec-visa
     background: 想移民澳洲的网安从业者
     target_market: Australia
-    timeline_months: 18
-    entry_role: Security Analyst / Pentest（移民后）
-    first_cert: OSCP 或 Security+（加分）
-    cert_cost_local: "ACS技能评估：AUD 500 / OSCP：AUD 2250"
+    timeline_months: 24
+    entry_role: ICT Security Specialist (ANZSCO 262112)
+    first_cert: "ACS 技能评估（必须） + Security+ 或 OSCP 加分"
+    cert_cost_local: "ACS 评估：AUD 530–850 / 482签证申请费：AUD 3,115 / 186签证：AUD 4,765"
     learning_path:
-      - ACS (Australian Computer Society) 技能评估（网安类职位需要）
-      - OSCP 认证（加分项）
-      - EOI（Expression of Interest）189/190 签证申请
-      - 落地后投递 Seek.com.au 岗位
-    salary_at_entry: "AUD 75,000–100,000（落地后）"
-    top_tip: "信息安全分析师 (ANZSCO 262112) 在多个州是紧缺职业，直接加分；OSCP 在简历上能弥补无澳洲经验的劣势"
-    hook: "怎么用网安技能移民澳洲？签证路线+薪资真实情况"
+      - "ACS 技能评估（Australian Computer Society）— 8–12 周出结果"
+      - "路线 A（雇主担保）：482签证（2年）→ 186 ENS TRT 永居，雇主必须帮你担保"
+      - "路线 B（积分）：189 Skilled Independent 或 190 州担保——ANZSCO 262112 在 MLTSSL，全面积分签资格"
+      - "落地薪资：AUD 100k+ 起（远超 AUD 76,515 最低担保薪资门槛）"
+      - "Seek.com.au / LinkedIn AU — 悉尼/墨尔本岗位量排名全国前二"
+    salary_at_entry: "AUD 100,000–120,000（悉尼/墨尔本，含担保案例）"
+    top_tip: "ICT 安全专家（ANZSCO 262112）在 MLTSSL（中长期战略技能清单）——澳洲只有约200个职业有这个资格，意味着189/190/491所有积分签证路径全部开放。雇主在网安岗位的担保意愿远高于普通软件工程岗位，总移民成本（评估+签证+中介）约 AUD 11,000–17,000"
+    hook: "网安技能移民澳洲：482→永居路线图，比你想象的简单"
+    shocking_fact: "澳洲平均网安薪资 AUD 104,395（2025年Seek真实数据），悉尼高级岗可达 AUD 250,000；网安是澳洲雇主最愿意担保签证的IT方向之一"
+    source_url: "https://ausdirectmigration.com/how-to-migrate-to-australia-as-an-ict-security-specialist/"
     category: migration
 
   - slug: cn-dengji-baohu-entry-path

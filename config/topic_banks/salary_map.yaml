@@ -7,9 +7,12 @@ topics:
     role: SOC Analyst
     market: Singapore
     currency: SGD
-    entry_salary: "55,000–75,000"
-    mid_salary: "80,000–110,000"
-    senior_salary: "120,000–160,000"
+    entry_salary: "42,000–60,000"
+    mid_salary: "66,000–96,000"
+    senior_salary: "108,000–180,000"
+    monthly_entry: "S$3,500–S$5,000/mo"
+    monthly_mid: "S$5,500–S$8,000/mo"
+    monthly_senior: "S$9,000–S$15,000/mo"
     yoe_entry: "0-2"
     yoe_mid: "3-5"
     yoe_senior: "6+"
@@ -20,8 +23,28 @@ topics:
       - Crowdstrike
     required_certs: ["Security+", "CySA+"]
     hook: "新加坡SOC分析师第一年能拿多少？"
-    shocking_fact: "比同级软件工程师低约15%，但需求缺口大3倍，2025年招聘数量创新高"
-    source_url: "https://nodeflair.com/salaries"
+    shocking_fact: "入门比软件工程师低约10%，但第5年后网安专家往往薪资反超——因为岗位稀缺性持续拉升溢价；政府确认2025年新增3万个网安岗位"
+    source_url: "https://nodeflair.com/salaries/singapore-cybersecurity-operations-salary"
+    category: singapore_salaries
+
+  - slug: sg-vs-swe-salary-showdown
+    role: Cybersec vs Software Engineer (同级对比)
+    market: Singapore
+    currency: SGD
+    entry_salary: "网安：42,000–60,000 / SWE：48,000–72,000（FAANG：72,000–96,000+）"
+    mid_salary: "网安：66,000–96,000 / SWE：80,000–120,000"
+    senior_salary: "网安：108,000–180,000 / SWE：130,000–180,000（差距收窄）"
+    yoe_entry: "0-2"
+    yoe_mid: "3-5"
+    yoe_senior: "6+"
+    top_hiring:
+      - 政府机构 (DSTA/GovTech) — 明确偏好网安背景
+      - MAS 监管机构 — 网安合规需求持续增长
+      - 五大银行网安部门
+    required_certs: ["Security+", "OSCP for red team"]
+    hook: "新加坡网安 vs 软件工程师：入职第1年谁赚更多？第5年呢？"
+    shocking_fact: "入职第1年SWE赢（高出约15%），但第5年认证网安专家与同级SWE薪资持平甚至反超——SWE市场趋于饱和，网安缺口政府确认2025年额外创造3万个岗位"
+    source_url: "https://reeracoen.sg/en/articles/part-1-2025-fresh-graduate-salaries-in-singapore-key-trends-and-insights"
     category: singapore_salaries
 
   - slug: sg-pentest-salary-2025
@@ -124,8 +147,9 @@ topics:
       - Securemetric
     required_certs: ["Security+", "CISP optional"]
     hook: "马来西亚KL安全行业薪资：比你以为的高，比新加坡低多少？"
-    shocking_fact: "KL 初级 SOC 分析师 MYR 72k = SGD 21k，新加坡同岗位 SGD 75k，差距约 3.5 倍——但吉隆坡生活成本也低 60%"
-    source_url: "https://www.jobstreet.com.my"
+    shocking_fact: "马来西亚目前仅有16,765名网安从业者，但2025年底需要27,000人——缺口超1万人，市场17% CAGR增速是东南亚最快之一；CISSP/云安全认证者薪资溢价+25%"
+    source_url: "https://my.jobstreet.com/career-advice/role/cyber-security-analyst/salary"
+    shortage_data: "16,765 current workforce / 27,000 needed by end-2025 / ~10,000+ vacancy gap"
     category: malaysia_salaries
 
   - slug: my-pentest-salary
