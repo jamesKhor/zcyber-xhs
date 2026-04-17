@@ -1,0 +1,307 @@
+# Topic bank for career_entry archetype
+# Practical career roadmap for someone with zero background wanting to enter cybersec
+# Most searched content on XHS career channels — aspirational, not scary
+
+topics:
+  - slug: cs-grad-to-security-sg
+    background: CS学生/应届毕业生（有编程基础）
+    target_market: Singapore
+    timeline_months: 6
+    entry_role: Security Analyst / SOC L1
+    first_cert: CompTIA Security+
+    cert_cost_local: "SGD 550（考试费）"
+    learning_path:
+      - TryHackMe Pre-Security 路径（免费，30天）
+      - CompTIA Security+ 备考 8周（Darril Gibson 教材 + Prof. Messer 视频）
+      - HackTheBox Starting Point（免费机器）
+      - LinkedIn 优化 + 投递 DSTA/Ensign 实习
+    salary_at_entry: "SGD 55,000–65,000"
+    top_tip: "DSTA奖学金是新加坡CS应届生进安全行业的直通车；自学路线：6个月拿Security+再投普通职位"
+    hook: "CS毕业想转安全，新加坡怎么入行？6个月真的够吗"
+    category: fresh_grad
+
+  - slug: cs-grad-to-security-au
+    background: CS学生/应届毕业生（有编程基础）
+    target_market: Australia (Sydney/Melbourne)
+    timeline_months: 6
+    entry_role: Junior Security Analyst / SOC L1
+    first_cert: CompTIA Security+
+    cert_cost_local: "AUD 590（考试费）"
+    learning_path:
+      - TryHackMe SOC Level 1 路径（免费，45天）
+      - Security+ 备考 8周
+      - 申请 ASD Graduate Program（澳洲最佳安全毕业生项目）
+      - SEEK / LinkedIn 投递 CyberCX / Sekuro 初级岗
+    salary_at_entry: "AUD 75,000–90,000"
+    top_tip: "澳洲 ASD Graduate Program 是最权威的入门通道，截止日期每年3月；没选上再走自学+Security+路线"
+    hook: "想移民澳洲从事网安行业？应届生最快入行路线"
+    category: fresh_grad
+
+  - slug: non-tech-to-grc-china
+    background: 非技术背景（法律/审计/财务/管理类）
+    target_market: China
+    timeline_months: 9
+    entry_role: GRC分析师 / 合规专员 / 等保咨询
+    first_cert: CISP 或 ISO27001 主任审核员
+    cert_cost_local: "CISP：¥5000 / ISO27001 LA：¥6000"
+    learning_path:
+      - 学习等级保护2.0标准（免费文档+B站课程，2个月）
+      - ISO27001 主任审核员培训（5天，¥4000-6000）
+      - 考取 CISP（需授权培训，¥5000）
+      - 投递安全咨询公司（奇安信、绿盟等乙方 GRC 岗）
+    salary_at_entry: "¥100,000–150,000（一线城市乙方起步）"
+    top_tip: "法律/审计背景反而是竞争优势——很多GRC岗需要写合规报告，技术背景的人反而写不好；先投乙方积累项目经验"
+    hook: "法学/审计背景，完全不懂技术，能进网安行业吗？"
+    category: non_tech
+
+  - slug: non-tech-to-grc-sg
+    background: 非技术背景（法律/会计/管理）
+    target_market: Singapore
+    timeline_months: 9
+    entry_role: GRC Analyst / Compliance Analyst
+    first_cert: ISO27001 Lead Implementer / CISM（工作后考）
+    cert_cost_local: "ISO27001 LI：SGD 2800（培训+考试）"
+    learning_path:
+      - MAS TRM Guidelines 通读（免费，是SG金融安全法规基础）
+      - ISO27001 Lead Implementer 培训（5天，SGD 2800）
+      - ISACA Cybersecurity Fundamentals（在线，SGD 150）
+      - 投递银行/Big 4/GovTech 的 GRC/Risk 岗
+    salary_at_entry: "SGD 55,000–70,000"
+    top_tip: "新加坡金融行业 GRC 需求因 MAS TRM 新规激增；MAS TRM 熟悉度是面试最大加分项，一般 IT 背景的竞争者不了解"
+    hook: "新加坡GRC岗：不会写代码的人，安全行业还要你吗？"
+    category: non_tech
+
+  - slug: developer-to-appsec
+    background: 软件开发工程师（2年以上经验）
+    target_market: Global (SG/AU/CN)
+    timeline_months: 4
+    entry_role: Application Security Engineer / AppSec Analyst
+    first_cert: GWEB 或 eWPT（Web渗透测试）
+    cert_cost_local: "eWPT：约 USD 200 / GWEB：约 USD 979"
+    learning_path:
+      - PortSwigger Web Security Academy（完全免费，最好的AppSec入门）
+      - OWASP Top 10 实践（配合 DVWA 本地靶机）
+      - Bug Bounty 入门（HackerOne / Bugcrowd）
+      - 将 AppSec 审计技能加入 GitHub + 投递
+    salary_at_entry: "SG: SGD 80,000–100,000 / AU: AUD 100,000–120,000"
+    top_tip: "开发背景进 AppSec 是所有路线里最快的——你已经懂代码逻辑，只需学攻击视角；PortSwigger Academy 完全免费且业界认可"
+    hook: "程序员转安全工程师：4个月的路线图，不需要重新读学位"
+    category: career_pivot
+
+  - slug: it-ops-to-cloud-security
+    background: IT运维/系统管理员（有Linux/网络基础）
+    target_market: Singapore / Australia
+    timeline_months: 5
+    entry_role: Cloud Security Engineer / Security Operations
+    first_cert: AWS Security Specialty 或 CompTIA Security+
+    cert_cost_local: "AWS Security Specialty：SGD 420 / Security+：SGD 550"
+    learning_path:
+      - AWS Security Learning Path（AWS Skill Builder，部分免费）
+      - TryHackMe Cloud Security 路径（付费，SGD 14/月）
+      - 考取 AWS Security Specialty
+      - 结合原有运维经验投递云安全岗
+    salary_at_entry: "SG: SGD 75,000–95,000 / AU: AUD 90,000–115,000"
+    top_tip: "IT 运维背景最大优势是懂基础设施；云安全 = 云 + 安全，你已经有一半了；AWS Security Specialty 是最快能拿到的有含金量证书"
+    hook: "做了5年IT运维，如何平移到年薪更高的云安全岗？"
+    category: career_pivot
+
+  - slug: military-police-to-cybersec-sg
+    background: 军人/警察/政府安全部门（有纪律部队背景）
+    target_market: Singapore
+    timeline_months: 6
+    entry_role: SOC Analyst / Threat Intelligence / DSTA / CSA positions
+    first_cert: CompTIA Security+
+    cert_cost_local: "SGD 550（考试费）"
+    learning_path:
+      - Cybersecurity for Government Professionals（CSA/CSIS 提供培训）
+      - CompTIA Security+ 认证
+      - 申请 DSTA / Home Team Science and Technology Agency
+      - 利用 SC clearance 申请政府安全岗
+    salary_at_entry: "SGD 65,000–85,000（政府岗加 allowance）"
+    top_tip: "纪律部队背景在新加坡政府安全岗有隐性优势——保密资格审查更容易通过；DSTA 有专门面向 NS 人员的职位"
+    hook: "服役完想进网安行业？新加坡纪律部队背景的隐藏优势"
+    category: military_background
+
+  - slug: military-police-to-cybersec-au
+    background: 澳洲军队/警察/情报部门背景
+    target_market: Australia
+    timeline_months: 6
+    entry_role: Security Analyst (Government) / Threat Intelligence
+    first_cert: CompTIA Security+ / OSCP for technical roles
+    cert_cost_local: "Security+：AUD 590 / OSCP：AUD 2250"
+    learning_path:
+      - ASD Cyber Security Pathways（政府专项计划）
+      - Security+ 认证
+      - 申请 ASD / ACSC (Australian Cyber Security Centre)
+      - NV1 clearance 申请（军队背景审查更快）
+    salary_at_entry: "AUD 85,000–110,000（含 NV1 clearance premium）"
+    top_tip: "持有 NV1/NV2 许可的应聘者比普通候选人薪资高 AUD 20-40k；军队背景的清查通过率极高"
+    hook: "澳洲军人退役想进网安？NV1许可是你的隐藏加薪筹码"
+    category: military_background
+
+  - slug: mid-career-pivot-30-plus
+    background: 30岁以上非技术行业（金融/销售/HR等）转型
+    target_market: Singapore / Malaysia
+    timeline_months: 12
+    entry_role: GRC Analyst / Security Awareness / Vendor Risk
+    first_cert: CompTIA Security+ + ISO27001 Foundation
+    cert_cost_local: "Security+：SGD 550 / ISO27001 Foundation：SGD 800"
+    learning_path:
+      - Cybersecurity 基础自学（Coursera Google Certificate，SGD 50/月）
+      - CompTIA Security+ 备考（6周）
+      - 用原行业经验申请 GRC/Compliance 岗（金融背景最有优势）
+      - 考取 ISO27001 Lead Implementer（工作后）
+    salary_at_entry: "SG: SGD 55,000–70,000（GRC起步）"
+    top_tip: "30岁转型最大误区是想从技术岗切入——GRC/合规路线才是最快的；你的行业经验是竞争优势，不是包袱"
+    hook: "30岁转行进网安：从零开始，1年能做到吗？"
+    category: mid_career
+
+  - slug: fresh-grad-cn-jiafang-vs-yifang
+    background: 应届生（网络安全/计算机相关专业）
+    target_market: China
+    timeline_months: 3
+    entry_role: 安全运营/渗透测试/安全分析师
+    first_cert: CISP 或 CISP-PTE（视方向）
+    cert_cost_local: "CISP：¥5000 / CISP-PTE：¥8000"
+    learning_path:
+      - 校内 CTF 竞赛（最好的简历证明）
+      - 实习：乙方安全公司优先（比甲方学到更多技术）
+      - 考取 CISP（工作后，公司报销更常见）
+      - 1-2年乙方经验后再考虑跳甲方
+    salary_at_entry: "乙方：¥100k-140k / 甲方：¥120k-160k（一线城市）"
+    top_tip: "应届生选乙方成长更快，2-3年后跳甲方薪资涨幅比内部晋升快；大厂校招是另一条路但竞争激烈"
+    hook: "网安专业毕业生：第一份工作去甲方还是乙方？3年后差距有多大"
+    category: fresh_grad
+
+  - slug: bootcamp-vs-degree-vs-selfstudy
+    background: 考虑入行网安的各类背景人士
+    target_market: Global
+    timeline_months: 12
+    entry_role: Security Analyst / Junior Pentest
+    first_cert: Security+（自学路线）
+    cert_cost_local: "自学：USD 600 / 训练营：USD 8000-15000 / 学位：USD 30000+"
+    learning_path:
+      - 自学路线：TryHackMe + Security+ + HackTheBox（总费用 < USD 800）
+      - 训练营：SANS/TCM Security（高质量但贵）
+      - 学位：CS/CySec 本科（最全面但最慢最贵）
+    salary_at_entry: "无实质差异——雇主看证书和技能演示，不太看是否训练营"
+    top_tip: "自学+证书路线的 ROI 最高；训练营适合需要纪律约束的人；学位适合想要完整CS基础的人"
+    hook: "网安训练营花¥10万，还是自学花¥3000？真实ROI对比"
+    category: learning_path
+
+  - slug: free-learning-path-zero-budget
+    background: 零预算想学网安的人
+    target_market: Global
+    timeline_months: 6
+    entry_role: 技能建立阶段（工作后再考证）
+    first_cert: "暂无（先建立技能再说）"
+    cert_cost_local: "总费用：¥0（全免费路线）"
+    learning_path:
+      - TryHackMe 免费路径（Pre-Security + SOC Level 1）
+      - PortSwigger Web Security Academy（完全免费）
+      - HackTheBox 免费机器
+      - YouTube：John Hammond / NetworkChuck / TCM Security 频道
+    salary_at_entry: "先建技能，证书可后补"
+    top_tip: "完全零成本能学到 80% 的实操技能；证书是求职加速器，不是技能本身；先学技能，有工作后让公司报销证书费"
+    hook: "没有钱学网安？完全免费的6个月入门路线图"
+    category: learning_path
+
+  - slug: au-migration-cybersec-visa
+    background: 想移民澳洲的网安从业者
+    target_market: Australia
+    timeline_months: 18
+    entry_role: Security Analyst / Pentest（移民后）
+    first_cert: OSCP 或 Security+（加分）
+    cert_cost_local: "ACS技能评估：AUD 500 / OSCP：AUD 2250"
+    learning_path:
+      - ACS (Australian Computer Society) 技能评估（网安类职位需要）
+      - OSCP 认证（加分项）
+      - EOI（Expression of Interest）189/190 签证申请
+      - 落地后投递 Seek.com.au 岗位
+    salary_at_entry: "AUD 75,000–100,000（落地后）"
+    top_tip: "信息安全分析师 (ANZSCO 262112) 在多个州是紧缺职业，直接加分；OSCP 在简历上能弥补无澳洲经验的劣势"
+    hook: "怎么用网安技能移民澳洲？签证路线+薪资真实情况"
+    category: migration
+
+  - slug: cn-dengji-baohu-entry-path
+    background: 想找稳定安全工作的人（不喜欢高强度竞争）
+    target_market: China
+    timeline_months: 6
+    entry_role: 等级保护测评师 / 等保顾问
+    first_cert: 等级保护测评师（各省信息安全测评机构）
+    cert_cost_local: "¥3000-5000（省级差异大）"
+    learning_path:
+      - GB/T 22239-2019 等级保护基本要求（免费标准文件）
+      - 等保测评实操培训（省级测评机构）
+      - 考取等保测评师证
+      - 投递各省等保测评机构或乙方等保咨询岗
+    salary_at_entry: "¥100,000–150,000（乙方）/ ¥120,000–180,000（甲方/政府）"
+    top_tip: "等保测评是中国特有的安全合规需求，每年有大量政府/国企强制要求；竞争比大厂技术岗小很多，适合想要稳定的人"
+    hook: "等级保护测评师：被低估的稳定安全工作路线"
+    category: china_specific
+
+  - slug: pentest-first-bug-bounty-timeline
+    background: 想做渗透测试/漏洞挖掘的技术爱好者
+    target_market: Global
+    timeline_months: 12
+    entry_role: Bug Bounty Hunter / Junior Penetration Tester
+    first_cert: eJPT（入门）→ PNPT / OSCP
+    cert_cost_local: "eJPT：约 ¥1450 / PNPT：约 ¥2900 / OSCP：约 ¥10800"
+    learning_path:
+      - TryHackMe Jr Penetration Tester 路径（2个月）
+      - HackTheBox Starting Point（1个月）
+      - eJPT 认证考试（3个月后）
+      - HackerOne / Bugcrowd 新手项目（开始赚第一笔奖励）
+    salary_at_entry: "Bug Bounty 初期：USD 500-2000/月 / 渗透测试初级岗：SG SGD 70k+"
+    top_tip: "第一个 Bug Bounty 漏洞通常在 6-12 个月学习后才能找到；不要放弃，大多数成功的猎人在前 3 个月都没有收获"
+    hook: "从零到第一个 Bug Bounty：真实需要多长时间？"
+    category: pentest_path
+
+  - slug: blue-team-vs-red-team-entry
+    background: 刚开始考虑进入网安行业的新人
+    target_market: Global
+    timeline_months: 6
+    entry_role: "蓝队：SOC Analyst / 红队：Junior Pentester"
+    first_cert: "蓝队：Security+ + CySA+ / 红队：Security+ + eJPT"
+    cert_cost_local: "蓝队路线合计：约 ¥4600 / 红队路线合计：约 ¥3250"
+    learning_path:
+      - 蓝队：TryHackMe SOC L1 + Security+ + Splunk/SIEM 实操
+      - 红队：TryHackMe Jr Penetration Tester + eJPT
+    salary_at_entry: "蓝队初级（SG）：SGD 55-75k / 红队初级（SG）：SGD 70-90k"
+    top_tip: "蓝队岗位数量是红队的 3-5 倍，更容易拿第一份工作；红队薪资天花板更高；技术能力强且喜欢解谜选红队，稳定就业优先选蓝队"
+    hook: "红队 vs 蓝队：哪个方向更容易拿到第一份安全工作？"
+    category: learning_path
+
+  - slug: secops-soc-easiest-entry-china
+    background: 想进入网安行业的国内应届生/转行者
+    target_market: China
+    timeline_months: 4
+    entry_role: 安全运营 / SOC / 应急响应
+    first_cert: CISAW（入门）或 Security+
+    cert_cost_local: "CISAW：¥3000 / Security+：约 ¥2800"
+    learning_path:
+      - B站/YouTube 安全运营基础课（免费，1个月）
+      - CISAW 备考（2个月）
+      - SIEM 工具实操（Splunk 免费版/ElasticSearch SIEM）
+      - 投递乙方安全运营岗（比渗透测试竞争少）
+    salary_at_entry: "¥100,000–130,000（一线城市乙方）"
+    top_tip: "安全运营是中国安全行业岗位最多的方向，比渗透测试好入行；SOC 岗位在大量银行/运营商有大量招聘，CISAW 是敲门砖"
+    hook: "中国网安最容易入行的岗位：安全运营工程师实战路线"
+    category: china_specific
+
+  - slug: appsec-developer-background-timeline
+    background: 开发工程师（前端/后端/全栈）
+    target_market: Singapore / Australia / Global
+    timeline_months: 4
+    entry_role: Application Security Engineer / Product Security
+    first_cert: eWPT 或 GWEB
+    cert_cost_local: "eWPT：约 ¥1450 / GWEB：约 ¥7100"
+    learning_path:
+      - PortSwigger Web Security Academy（完全免费，OWASP实战）
+      - Burp Suite 实操练习（Community版免费）
+      - 参加公司内部安全审计项目
+      - 申请同公司或友商的 AppSec Engineer 内推
+    salary_at_entry: "SG：SGD 80,000–100,000 / AU：AUD 100,000–120,000"
+    top_tip: "开发转 AppSec 最快的路线是内部转岗——先把安全知识用在现有工作上，让 AppSec 团队认识你；外部申请也比 IT 运维背景容易得多"
+    hook: "后端开发转AppSec工程师：4个月做到，不需要重读学位"
+    category: career_pivot

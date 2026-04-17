@@ -161,3 +161,163 @@ topics:
     tool: account-recovery
     command: "改密码 → 退出所有设备 → 开启2FA → 检查绑定邮箱"
     category: incident
+
+  - slug: unexpected-2fa-code
+    problem: 收到了自己没有请求的2FA验证码
+    scenario: 突然收到六位数短信验证码，自己根本没在登录
+    solution: 有人已经知道你的密码——立刻改密码
+    tool: account-settings
+    command: "立即改密码 → 开启Authenticator APP → 检查是否有陌生登录设备"
+    category: account
+
+  - slug: login-alert-overseas
+    problem: 收到从北京/境外登录的告警通知
+    scenario: 明明在深圳，邮件提示账号从北京被登录
+    solution: 强制退出所有会话，立刻改密码
+    tool: account-security
+    command: "账号安全设置 → 查看登录设备列表 → 强制退出所有会话 → 改密码"
+    category: account
+
+  - slug: battery-draining-fast
+    problem: 手机电池突然一小时掉30%
+    scenario: 没刷视频没打游戏，手机电量飞速下降
+    solution: 查后台运行的可疑进程
+    tool: phone-settings
+    command: "设置 → 电池 → 电池用量 → 找出异常耗电的App → 卸载或限制后台"
+    category: malware
+
+  - slug: fake-apple-id-email
+    problem: 收到"你的Apple ID已停用"邮件，真的假的
+    scenario: 邮件要求点链接重新激活Apple ID
+    solution: 看发件人域名，真苹果只发 @apple.com
+    tool: email-check
+    command: "鼠标悬停查看实际发件邮箱 → 不点链接 → 直接去官网 apple.com 登录核实"
+    category: phishing
+
+  - slug: clicked-suspicious-link
+    problem: 手快点了可疑链接，接下来怎么办
+    scenario: 点开了朋友发的奇怪链接，页面一闪而过
+    solution: 接下来5分钟的紧急处置步骤
+    tool: browser
+    command: "断网 → 清除浏览器缓存和Cookie → 手机重启 → 改密码 → 检查App权限"
+    category: incident
+
+  - slug: apk-outside-appstore
+    problem: 在应用商店外下载了APK，有风险吗
+    scenario: 某App在官方商店被下架，从第三方网站下载了安装包
+    solution: 安装前先扫描，安装后检查权限
+    tool: virustotal
+    command: "上传APK到 virustotal.com → 安装后查权限 → 设置→应用→只允许必要权限"
+    category: malware
+
+  - slug: unknown-device-on-router
+    problem: 路由器管理页面发现陌生设备
+    scenario: 家里只有3台设备，路由器显示连了5台
+    solution: 踢掉陌生设备，换路由器Wi-Fi密码
+    tool: router-admin
+    command: "登录 192.168.1.1 → 已连接设备 → 封锁MAC地址 → 改Wi-Fi密码"
+    category: incident
+
+  - slug: google-activity-strange-location
+    problem: Google/苹果活动记录显示去过自己没去过的地方
+    scenario: 隐私报告里出现陌生城市的定位记录
+    solution: 检查账号登录设备，关闭可疑定位权限
+    tool: account-activity
+    command: "myaccount.google.com → 安全 → 查看登录设备 → 移除陌生设备"
+    category: account
+
+  - slug: new-admin-account-windows
+    problem: Windows电脑多了个自己没创建的管理员账号
+    scenario: 在用户管理里发现一个陌生的管理员帐户
+    solution: 立即断网，用防病毒工具全盘扫描
+    tool: windows-settings
+    command: "设置→账号→其他用户→删除陌生账号 → 杀毒全扫 → 检查计划任务"
+    category: malware
+
+  - slug: browser-homepage-hijacked
+    problem: 浏览器首页变成了没见过的搜索引擎
+    scenario: 打开Chrome发现默认主页被改掉了
+    solution: 删除可疑扩展，重置浏览器设置
+    tool: browser
+    command: "chrome://extensions → 删除可疑插件 → 设置→重置浏览器设置→恢复默认"
+    category: malware
+
+  - slug: fake-package-sms
+    problem: 收到"你有包裹等待领取"短信附带奇怪链接
+    scenario: 短信显示快递异常，点链接填信息就能解决
+    solution: 不点链接，直接去快递官网查单号
+    tool: sms-check
+    command: "不要点短信链接 → 手动打开顺丰/京东官网或官方APP查询快递状态"
+    category: phishing
+
+  - slug: app-new-permissions
+    problem: 一个用了很久的App突然要求新权限
+    scenario: 更新后App要求访问通讯录，以前从来不需要
+    solution: 拒绝授权，查查这个权限有什么用
+    tool: phone-settings
+    command: "设置→隐私→权限管理→找到该App→关闭可疑权限→如不影响使用就保持关闭"
+    category: privacy
+
+  - slug: outgoing-calls-not-mine
+    problem: 电话账单出现了自己没打过的电话
+    scenario: 月账单里有深夜打出去的陌生号码记录
+    solution: SIM卡或手机可能被入侵，立刻联系运营商
+    tool: carrier
+    command: "联系运营商挂失检查 → 改手机账户密码 → 检查手机是否被Root"
+    category: incident
+
+  - slug: opened-pdf-invoice-stranger
+    problem: 打开了陌生人发来的"PDF发票"
+    scenario: 收到一封自称是供应商的邮件，附了个PDF
+    solution: PDF可以执行宏和脚本，立刻检查系统
+    tool: antivirus
+    command: "断网 → 用Windows Defender全盘扫描 → 检查计划任务和启动项"
+    category: incident
+
+  - slug: email-sending-spam-itself
+    problem: 邮箱在自己发垃圾邮件给联系人
+    scenario: 朋友反映收到了我发的奇怪广告邮件
+    solution: 账号已被盗，立刻改密码并检查转发规则
+    tool: email-settings
+    command: "改邮箱密码 → 检查并删除可疑转发规则 → 开启2FA → 通知联系人别点链接"
+    category: account
+
+  - slug: unknown-device-router-hex
+    problem: 路由器显示一台叫"UNKNOWN"或随机字母的设备
+    scenario: 设备名称是一串十六进制数字，不知道是什么
+    solution: 可能是邻居蹭网或入侵设备
+    tool: router-admin
+    command: "记下MAC地址 → 封锁 → 换一个WPA3加密的强Wi-Fi密码 → 关闭WPS功能"
+    category: incident
+
+  - slug: computer-wakes-3am
+    problem: 电脑每天凌晨3点自动从睡眠唤醒
+    scenario: 早上发现电脑在运行但自己昨晚明明关了屏幕
+    solution: 检查计划任务和远程唤醒设置
+    tool: task-scheduler
+    command: "任务计划程序 → 查看所有计划任务 → 删除可疑条目 → 设备管理器→关闭网卡唤醒"
+    category: malware
+
+  - slug: cloud-storage-full-mysteriously
+    problem: 收到云存储已满告警，但我没上传任何东西
+    scenario: iCloud/百度网盘突然提示已用满，自己没上传过东西
+    solution: 可能有设备在同步数据，检查哪些设备连着账号
+    tool: cloud-settings
+    command: "账号→设备→查看所有已登录设备 → 移除陌生设备 → 改密码"
+    category: account
+
+  - slug: chrome-extension-unknown
+    problem: 发现一个自己不记得安装的Chrome扩展
+    scenario: 扩展栏出现一个图标，点开显示有读取所有网站数据的权限
+    solution: 立刻禁用并删除，检查近期浏览历史
+    tool: browser
+    command: "chrome://extensions → 找到可疑扩展 → 删除 → 改所有重要账号密码"
+    category: malware
+
+  - slug: password-manager-breach-alert
+    problem: Google密码管理器提示密码已出现在数据泄露中
+    scenario: 浏览器弹出警告某个网站的密码已被泄露
+    solution: 立刻为该网站改密码，并检查是否多个账号用同一密码
+    tool: password-manager
+    command: "点击警告 → 立刻改密码 → 检查是否有其他网站用了相同密码 → 逐一更改"
+    category: account

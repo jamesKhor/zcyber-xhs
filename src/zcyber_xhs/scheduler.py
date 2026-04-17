@@ -20,8 +20,24 @@ DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
 def _get_archetype_for_day(config: Config, day_of_week: int) -> str:
-    """Get the archetype assigned to a day of the week (0=Mon)."""
-    rotation = config.schedule.get("rotation", {})
+    """Get the archetype assigned to a day of the week (0=Mon).
+
+    Respects ``active_rotation``:
+    - ``"threat"``  → always use the original ``rotation`` block
+    - ``"career"``  → always use ``career_rotation``
+    - ``"mixed"``   → alternates weekly: even ISO week → threat, odd → career
+    """
+    active = config.schedule.get("active_rotation", "threat")
+
+    if active == "career":
+        rotation_key = "career_rotation"
+    elif active == "mixed":
+        iso_week = datetime.now().isocalendar()[1]
+        rotation_key = "career_rotation" if iso_week % 2 == 1 else "rotation"
+    else:
+        rotation_key = "rotation"
+
+    rotation = config.schedule.get(rotation_key, config.schedule.get("rotation", {}))
     return rotation.get(day_of_week, "problem_command")
 
 
@@ -196,15 +212,29 @@ def create_scheduler(config: Config) -> BlockingScheduler:
 
 def print_schedule(config: Config) -> None:
     """Print the weekly schedule to stdout."""
-    rotation = config.schedule.get("rotation", {})
     gen_hour = config.schedule.get("generate_hour", 8)
     pub_hour = config.schedule.get("publish_hour", 12)
+    active = config.schedule.get("active_rotation", "threat")
+    iso_week = datetime.now().isocalendar()[1]
 
-    click.echo("Weekly Schedule")
-    click.echo("-" * 45)
+    if active == "career":
+        rotation_key, label = "career_rotation", "career"
+    elif active == "mixed":
+        if iso_week % 2 == 1:
+            rotation_key, label = "career_rotation", f"career (ISO week {iso_week} — odd)"
+        else:
+            rotation_key, label = "rotation", f"threat (ISO week {iso_week} — even)"
+    else:
+        rotation_key, label = "rotation", "threat"
+
+    rotation = config.schedule.get(rotation_key, config.schedule.get("rotation", {}))
+
+    click.echo(f"Weekly Schedule  [{label}]")
+    click.echo("-" * 50)
     for day_num in range(7):
         archetype = rotation.get(day_num, "problem_command")
-        click.echo(f"  {DAY_NAMES[day_num]:<4}  {archetype}")
+        marker = " ← today" if day_num == datetime.now().weekday() else ""
+        click.echo(f"  {DAY_NAMES[day_num]:<4}  {archetype}{marker}")
     click.echo()
     click.echo(f"Generation: daily at {gen_hour:02d}:00")
     click.echo(f"Publish:    {pub_hour:02d}:00 and {min(pub_hour+6, 23):02d}:30")

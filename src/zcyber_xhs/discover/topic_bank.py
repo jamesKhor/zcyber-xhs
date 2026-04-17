@@ -48,8 +48,17 @@ class TopicBank:
         # Bank exhausted — fall back to LLM dynamic generation
         if llm is not None:
             from .dynamic_topic import DynamicTopicGenerator
+
+            # Collect recent topic slugs for this archetype to avoid repetition
+            recent_posts = self.db.list_posts(limit=8)
+            recent_slugs = [
+                p.topic_slug
+                for p in recent_posts
+                if p.archetype == archetype and p.topic_slug
+            ]
+
             gen = DynamicTopicGenerator(llm, self.config_dir)
-            topic = gen.generate(archetype)
+            topic = gen.generate(archetype, recent_titles=recent_slugs)
             if topic:
                 # Mark the dynamic slug as used so it won't be re-used
                 self.db.mark_topic_used(archetype, topic.slug)

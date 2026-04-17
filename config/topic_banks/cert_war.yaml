@@ -1,0 +1,304 @@
+# Topic bank for cert_war archetype
+# Head-to-head cert comparison + tier list — XHS users love ranking content
+# Tone: aspirational career advice, like a senior colleague talking to a junior
+
+topics:
+  - slug: cissp-vs-cism-china
+    cert_a: CISSP
+    cert_b: CISM
+    market: China
+    angle: "管理层必备证书对决：哪个更容易晋升到CISO？"
+    cert_a_cost_usd: 699
+    cert_a_cost_local: "¥4999（培训+考试套餐）"
+    cert_b_cost_usd: 575
+    cert_b_cost_local: "¥4200（培训+考试套餐）"
+    cert_a_salary_boost: "平均薪资涨幅 +22%"
+    cert_b_salary_boost: "平均薪资涨幅 +18%"
+    verdict: cissp_wins
+    verdict_reason: "国际认可度更高，甲方与外资公司硬性要求，跳槽谈薪筹码更足"
+    category: management_certs
+
+  - slug: cissp-vs-cism-sg
+    cert_a: CISSP
+    cert_b: CISM
+    market: Singapore
+    angle: "新加坡安全管理岗：CISSP 还是 CISM 更值得先考？"
+    cert_a_cost_usd: 699
+    cert_a_cost_local: "SGD 980（含考试费）"
+    cert_b_cost_usd: 575
+    cert_b_cost_local: "SGD 820（含考试费）"
+    cert_a_salary_boost: "平均薪资涨幅 +24%"
+    cert_b_salary_boost: "平均薪资涨幅 +16%"
+    verdict: cissp_wins
+    verdict_reason: "CISSP 在 MAS/GovTech 职位描述出现频率是 CISM 的 3 倍"
+    category: management_certs
+
+  - slug: cisp-vs-cissp-china
+    cert_a: CISP
+    cert_b: CISSP
+    market: China
+    angle: "国产 vs 国际：CISP 和 CISSP 到底选哪个？"
+    cert_a_cost_usd: 700
+    cert_a_cost_local: "¥5000（必须参加授权培训）"
+    cert_b_cost_usd: 699
+    cert_b_cost_local: "¥4999（培训+考试）"
+    cert_a_salary_boost: "平均薪资涨幅 +15%"
+    cert_b_salary_boost: "平均薪资涨幅 +22%"
+    verdict: split
+    verdict_reason: "在国内甲方/政府做等保项目选 CISP；想去外企或出海选 CISSP；预算够的话两个都考"
+    category: china_vs_international
+
+  - slug: oscp-vs-ceh-global
+    cert_a: OSCP
+    cert_b: CEH
+    market: Global
+    angle: "渗透测试入行必考：OSCP 的实战派 vs CEH 的理论派"
+    cert_a_cost_usd: 1499
+    cert_a_cost_local: "约 ¥10800（90天实验室+考试）"
+    cert_b_cost_usd: 950
+    cert_b_cost_local: "约 ¥6800（含官方题库）"
+    cert_a_salary_boost: "平均薪资涨幅 +30%"
+    cert_b_salary_boost: "平均薪资涨幅 +8%"
+    verdict: oscp_wins
+    verdict_reason: "OSCP 是实际打靶考试，HR 看到 OSCP 默认你能真的动手；CEH 被认为是背题考试，实际含金量存疑"
+    category: pentest_certs
+
+  - slug: security-plus-vs-ejpt-entry
+    cert_a: CompTIA Security+
+    cert_b: eJPT
+    market: Global
+    angle: "零基础第一本证书到底考哪个？"
+    cert_a_cost_usd: 392
+    cert_a_cost_local: "约 ¥2800（含考试费）"
+    cert_b_cost_usd: 200
+    cert_b_cost_local: "约 ¥1450（含实验室）"
+    cert_a_salary_boost: "HR 认知度高，简历过滤率 +40%"
+    cert_b_salary_boost: "技术认可度高，但 HR 认知度低"
+    verdict: security_plus_wins_for_jobs
+    verdict_reason: "Security+ 是很多公司 JD 的过滤词，能帮你过简历关；eJPT 技术含量更高但不够出名，适合纯技术路线"
+    category: entry_level_certs
+
+  - slug: pnpt-vs-oscp-pentest
+    cert_a: PNPT
+    cert_b: OSCP
+    market: Global
+    angle: "渗透测试新秀 PNPT 能打败 OSCP 吗？"
+    cert_a_cost_usd: 399
+    cert_a_cost_local: "约 ¥2900（含全套课程）"
+    cert_b_cost_usd: 1499
+    cert_b_cost_local: "约 ¥10800（90天实验室）"
+    cert_a_salary_boost: "技术口碑上升，2023-2025 年增长快"
+    cert_b_salary_boost: "业界黄金标准，平均薪资涨幅 +30%"
+    verdict: oscp_wins_brand_pnpt_wins_value
+    verdict_reason: "PNPT 性价比极高（TCM Security 出品，课程高质量），OSCP 品牌更响但贵 3.75 倍；预算有限先考 PNPT，再攒钱考 OSCP"
+    category: pentest_certs
+
+  - slug: cisp-vs-cisaw-china
+    cert_a: CISP
+    cert_b: CISAW
+    market: China
+    angle: "国内安全从业者必看：CISP 和 CISAW 到底差在哪？"
+    cert_a_cost_usd: 700
+    cert_a_cost_local: "¥5000（必须授权培训）"
+    cert_b_cost_usd: 430
+    cert_b_cost_local: "¥3000（考试费）"
+    cert_a_salary_boost: "平均薪资涨幅 +15%"
+    cert_b_salary_boost: "平均薪资涨幅 +8%"
+    verdict: cisp_wins
+    verdict_reason: "CISP 是中国信息安全行业从业资格最高认证，JD 要求频率远高于 CISAW；CISAW 适合预算不足的入门选手"
+    category: china_certs
+
+  - slug: cisp-pte-vs-oscp-china
+    cert_a: CISP-PTE
+    cert_b: OSCP
+    market: China
+    angle: "国内渗透测试证书 CISP-PTE vs 国际 OSCP：做甲方还是走技术？"
+    cert_a_cost_usd: 1150
+    cert_a_cost_local: "¥8000（必须强制培训+考试）"
+    cert_b_cost_usd: 1499
+    cert_b_cost_local: "约 ¥10800（90天实验室）"
+    cert_a_salary_boost: "政府/国企项目投标必备，涨幅视项目而定"
+    cert_b_salary_boost: "外企/安全公司平均薪资涨幅 +30%"
+    verdict: split_by_career_path
+    verdict_reason: "在国内做等保/合规/政府项目选 CISP-PTE；想去外企渗透岗或出海选 OSCP；两者技术含量都真实"
+    category: china_vs_international
+
+  - slug: cert-tier-list-sg-jobhunt
+    cert_a: "S/A/B/C 梯队（新加坡求职）"
+    cert_b: "实际 JD 出现频率"
+    market: Singapore
+    angle: "新加坡安全岗 JD 分析：哪些证书真的能帮你拿到面试？"
+    cert_a_cost_usd: 0
+    cert_a_cost_local: "梯队分析（非购买建议）"
+    cert_b_cost_usd: 0
+    cert_b_cost_local: "数据来源：NodeFlair + LinkedIn SG 职位分析"
+    cert_a_salary_boost: "S梯：CISSP/CISM/OSCP — 薪资谈判空间最大"
+    cert_b_salary_boost: "A梯：Security+/CySA+/CEH — 过简历筛选有效"
+    verdict: cissp_oscp_top_tier
+    verdict_reason: "S梯：CISSP（管理）/OSCP（技术）；A梯：Security+/CySA+；B梯：CEH/eLearnSecurity；C梯：供应商认证（AWS/Azure，纯安全岗价值有限）"
+    category: tier_list
+
+  - slug: cert-tier-list-china-jobhunt
+    cert_a: "S/A/B/C 梯队（中国求职）"
+    cert_b: "实际 JD 出现频率"
+    market: China
+    angle: "中国安全岗 JD 大数据：BOSS直聘最高频的证书是哪个？"
+    cert_a_cost_usd: 0
+    cert_a_cost_local: "梯队分析（非购买建议）"
+    cert_b_cost_usd: 0
+    cert_b_cost_local: "数据来源：BOSS直聘/猎聘安全岗 JD 分析"
+    cert_a_salary_boost: "S梯：CISP/CISSP — 中高级岗硬性要求"
+    cert_b_salary_boost: "A梯：CISP-PTE/等保测评师 — 乙方/项目岗必备"
+    verdict: cisp_top_china
+    verdict_reason: "S梯：CISP（通用）/CISSP（外企）；A梯：CISP-PTE/等保测评师；B梯：CISAW/Security+；C梯：未授权/过时认证"
+    category: tier_list
+
+  - slug: cert-roi-analysis
+    cert_a: OSCP
+    cert_b: CEH
+    market: Global
+    angle: "花同样的钱，哪个证书回本最快？用数字说话"
+    cert_a_cost_usd: 1499
+    cert_a_cost_local: "约 ¥10800（一次性）"
+    cert_b_cost_usd: 950
+    cert_b_cost_local: "约 ¥6800（EC-Council 官方）"
+    cert_a_salary_boost: "新加坡渗透测试初级起薪 SGD 70k；考后平均涨幅 +30%"
+    cert_b_salary_boost: "平均涨幅 +8%，ROI 明显低于 OSCP"
+    verdict: oscp_best_roi_for_pentest
+    verdict_reason: "OSCP 考过后新加坡渗透岗起薪 SGD 70k，14 个月收回成本；CEH 认可度下滑，ROI 不如 Security+（$392）"
+    category: roi_analysis
+
+  - slug: cissp-vs-cloud-security-certs
+    cert_a: CISSP
+    cert_b: AWS Security Specialty
+    market: Global
+    angle: "CISSP 还是 AWS Security：云时代哪个证书更值钱？"
+    cert_a_cost_usd: 699
+    cert_a_cost_local: "约 ¥4999（培训+考试）"
+    cert_b_cost_usd: 300
+    cert_b_cost_local: "约 ¥2200（考试费）"
+    cert_a_salary_boost: "平均薪资涨幅 +22%，适用范围更广"
+    cert_b_salary_boost: "云安全工程师岗平均薪资涨幅 +28%，但适用范围窄"
+    verdict: depends_on_role
+    verdict_reason: "做云安全工程师选 AWS Security Specialty（涨幅更大）；做安全架构师/CISO 路线选 CISSP；两者不互斥，高级岗经常要求全有"
+    category: management_certs
+
+  - slug: blue-team-gcih-vs-cysa-plus
+    cert_a: GCIH
+    cert_b: CySA+
+    market: Global
+    angle: "蓝队入行：GCIH 和 CySA+ 哪个更实用？"
+    cert_a_cost_usd: 979
+    cert_a_cost_local: "约 ¥7100（GIAC 考试费）"
+    cert_b_cost_usd: 392
+    cert_b_cost_local: "约 ¥2800（CompTIA 考试费）"
+    cert_a_salary_boost: "SANS 出品，技术口碑极佳，涨幅 +20%"
+    cert_b_salary_boost: "HR 认知度高，涨幅 +15%，性价比更好"
+    verdict: cysa_wins_for_entry
+    verdict_reason: "入门阶段 CySA+ 性价比更高（$392 vs $979）；有 3+ 年经验后 GCIH 含金量大幅提升；蓝队最优路线：Security+ → CySA+ → GCIH"
+    category: blue_team_certs
+
+  - slug: entry-path-secplus-to-cissp
+    cert_a: "路线A：Security+ → CySA+ → CISSP"
+    cert_b: "路线B：Security+ → eJPT → OSCP"
+    market: Global
+    angle: "安全入门两条路：蓝队管理路线 vs 红队技术路线，3年后薪资差多少？"
+    cert_a_cost_usd: 1483
+    cert_a_cost_local: "约 ¥10700（三证合计）"
+    cert_b_cost_usd: 2091
+    cert_b_cost_local: "约 ¥15100（三证合计）"
+    cert_a_salary_boost: "3年后：新加坡 SOC L2/安全分析师 SGD 80-110k"
+    cert_b_salary_boost: "3年后：新加坡渗透测试工程师 SGD 100-140k"
+    verdict: both_valid_different_ceiling
+    verdict_reason: "红队路线（Security+ → eJPT → OSCP）3年后薪资天花板更高，但学习难度大；蓝队路线就业机会多 3 倍；根据自己是否喜欢动手打靶来选"
+    category: career_path
+
+  - slug: dengji-baohu-assessor-reality
+    cert_a: 等级保护测评师
+    cert_b: CISP
+    market: China
+    angle: "等级保护测评师：小众但稳定，这个证值不值得考？"
+    cert_a_cost_usd: 430
+    cert_a_cost_local: "¥3000-5000（省级差异大）"
+    cert_b_cost_usd: 700
+    cert_b_cost_local: "¥5000（全国统一）"
+    cert_a_salary_boost: "政府/国央企测评岗：¥120-180k，需求稳定"
+    cert_b_salary_boost: "平均薪资涨幅 +15%，适用范围更广"
+    verdict: dengji_baohu_for_gov_path
+    verdict_reason: "等保测评师是政府/国央企信息安全项目的强制要求，需求量稳定但市场小；想进大厂或外企选 CISP；想进体制或央企考评测评师是捷径"
+    category: china_certs
+
+  - slug: cisp-pte-market-demand-2025
+    cert_a: CISP-PTE
+    cert_b: OSCP
+    market: China
+    angle: "2025年 CISP-PTE 含金量调查：真的值 ¥8000 吗？"
+    cert_a_cost_usd: 1150
+    cert_a_cost_local: "¥8000（强制培训+考试）"
+    cert_b_cost_usd: 1499
+    cert_b_cost_local: "约 ¥10800（90天实验室）"
+    cert_a_salary_boost: "国内乙方渗透岗招聘要求：约 35% JD 提及"
+    cert_b_salary_boost: "国内渗透岗招聘要求：约 18% JD 提及，但认可度更高"
+    verdict: cisp_pte_for_domestic_market
+    verdict_reason: "在国内安全公司/等保项目，CISP-PTE 是显性加分项；想去外企或 Bug Bounty 路线，OSCP 更被认可；2025 年 CISP-PTE 需求稳定但别期待大幅涨薪"
+    category: china_certs
+
+  - slug: security-plus-vs-ejpt-china
+    cert_a: CompTIA Security+
+    cert_b: eJPT
+    market: China
+    angle: "在中国找工作，Security+ 和 eJPT 有用吗？"
+    cert_a_cost_usd: 392
+    cert_a_cost_local: "约 ¥2800（考试费）"
+    cert_b_cost_usd: 200
+    cert_b_cost_local: "约 ¥1450（含实验室）"
+    cert_a_salary_boost: "国内 HR 认知度约 20%（外企更高）"
+    cert_b_salary_boost: "国内 HR 认知度约 10%，但技术社区认可"
+    verdict: limited_in_china_market
+    verdict_reason: "国内求职 Security+ 和 eJPT 认知度有限；外企/合资公司 Security+ 有用；纯技术路线 eJPT→OSCP 国际跳槽时价值更大；国内就业优先考 CISP/CISAW"
+    category: entry_level_certs
+
+  - slug: cert-path-sg-tier-list-detailed
+    cert_a: "S梯：CISSP + OSCP"
+    cert_b: "A梯：Security+ + CySA+"
+    market: Singapore
+    angle: "新加坡网安求职证书完整路线图（附费用+时间）"
+    cert_a_cost_usd: 2198
+    cert_a_cost_local: "SGD 3080（双证合计）"
+    cert_b_cost_usd: 784
+    cert_b_cost_local: "SGD 1100（双证合计）"
+    cert_a_salary_boost: "中级岗：SGD 100-140k，高级岗：SGD 160-200k"
+    cert_b_salary_boost: "初级岗：SGD 55-80k，是入场券"
+    verdict: start_with_a_tier
+    verdict_reason: "先用 A 梯（Security+ + CySA+）拿到第一份工作，再存钱升 S 梯；直接冲 S 梯风险高：CISSP 要求 5年工作经验，OSCP 需要扎实基础"
+    category: tier_list
+
+  - slug: oscp-vs-ceh-china-market
+    cert_a: OSCP
+    cert_b: CEH
+    market: China
+    angle: "在中国用 OSCP 还是 CEH 找渗透测试工作？"
+    cert_a_cost_usd: 1499
+    cert_a_cost_local: "约 ¥10800（90天实验室）"
+    cert_b_cost_usd: 950
+    cert_b_cost_local: "约 ¥6800"
+    cert_a_salary_boost: "国内技术社区/外企认可，渗透岗涨幅 +30%"
+    cert_b_salary_boost: "国内认可度高于国际均值，涨幅 +12%"
+    verdict: oscp_wins_technical_ceh_more_recognized
+    verdict_reason: "在中国 CEH 的 HR 认知度比 OSCP 高（更多国内机构办培训）；但技术面试官更看重 OSCP；大厂/安全公司 OSCP 含金量更高"
+    category: pentest_certs
+
+  - slug: pnpt-value-proposition
+    cert_a: PNPT
+    cert_b: CEH
+    market: Global
+    angle: "PNPT：最被低估的渗透测试证书，比 CEH 便宜一半还更硬核"
+    cert_a_cost_usd: 399
+    cert_a_cost_local: "约 ¥2900（含全套 TCM Security 课程）"
+    cert_b_cost_usd: 950
+    cert_b_cost_local: "约 ¥6800"
+    cert_a_salary_boost: "2023-2025 年认知度增长最快，实战口碑极佳"
+    cert_b_salary_boost: "HR 认知度高但技术含金量被业界质疑"
+    verdict: pnpt_wins_value
+    verdict_reason: "PNPT 是 5 天真实渗透测试报告考试，CEH 是选择题；$399 vs $950，PNPT 贵在哪里？贵在它真的教你打靶"
+    category: pentest_certs

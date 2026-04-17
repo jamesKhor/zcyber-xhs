@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 
 class Archetype(str, Enum):
+    # ── Threat / awareness rotation ──────────────────────────────────────
     PROBLEM_COMMAND = "problem_command"
     TOOL_SPOTLIGHT = "tool_spotlight"   # kept for DB backwards-compat
     EVERYDAY_PANIC = "everyday_panic"
@@ -17,9 +18,13 @@ class Archetype(str, Enum):
     NEWS_HOOK = "news_hook"
     MYTHBUST = "mythbust"
     CTF = "ctf"
-    REAL_STORY = "real_story"           # replaces tool_spotlight (Tue)
-    RANK_WAR = "rank_war"               # replaces before_after (Thu)
-    HACKER_POV = "hacker_pov"          # replaces ctf (Sun) — immersive 2nd-person scenario
+    REAL_STORY = "real_story"           # Tue: humanised breach narrative
+    RANK_WAR = "rank_war"               # Thu: opinion poll / debate
+    HACKER_POV = "hacker_pov"          # Sun: immersive 2nd-person scenario
+    # ── Career / education rotation (XHS pivot) ──────────────────────────
+    CERT_WAR = "cert_war"               # Mon: head-to-head cert comparison
+    SALARY_MAP = "salary_map"           # Tue: real salary bands by market/role
+    CAREER_ENTRY = "career_entry"       # Wed: break-in roadmap for non-security people
 
 
 class PostStatus(str, Enum):

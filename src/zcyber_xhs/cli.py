@@ -438,8 +438,11 @@ def status():
 
     # Topic bank stats
     archetypes_with_banks = [
+        # Threat rotation
         "problem_command", "everyday_panic", "mythbust",
         "real_story", "rank_war", "hacker_pov",
+        # Career rotation
+        "cert_war", "salary_map", "career_entry",
     ]
     for archetype in archetypes_with_banks:
         remaining = bank.count_remaining(archetype)

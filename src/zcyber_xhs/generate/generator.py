@@ -107,10 +107,14 @@ class ContentGenerator:
             loader=FileSystemLoader(str(self._prompts_dir), encoding="utf-8")
         )
         template = env.get_template(template_name)
-        variables = self._build_template_vars(topic, language=language)
+        variables = self._build_template_vars(topic, archetype=archetype, language=language)
         return template.render(**variables)
 
-    def _build_template_vars(self, topic: TopicEntry, language: str = "zh") -> dict[str, Any]:
+    _CAREER_ARCHETYPES = frozenset({"cert_war", "salary_map", "career_entry"})
+
+    def _build_template_vars(
+        self, topic: TopicEntry, archetype: str = "", language: str = "zh"
+    ) -> dict[str, Any]:
         """Build the full set of Jinja2 template variables from a topic."""
         variables = topic.model_dump()
 
@@ -123,7 +127,13 @@ class ContentGenerator:
                 "en_default_tags", self.config.content.get("default_tags", [])
             )
         else:
-            variables["cta"] = self.config.content.get("cta", "")
+            # Career archetypes use a different CTA tone (aspirational vs threat intel)
+            if archetype in self._CAREER_ARCHETYPES:
+                variables["cta"] = self.config.content.get(
+                    "career_cta", self.config.content.get("cta", "")
+                )
+            else:
+                variables["cta"] = self.config.content.get("cta", "")
             variables["safety_disclaimer"] = self.config.content.get("safety_disclaimer", "")
             variables["default_tags"] = self.config.content.get("default_tags", [])
 

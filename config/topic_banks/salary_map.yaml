@@ -1,0 +1,387 @@
+# Topic bank for salary_map archetype
+# Salary reveal carousel — real numbers by market, role, experience level
+# Shock value from real data. Aspirational, not scary.
+
+topics:
+  - slug: sg-soc-analyst-salary-2025
+    role: SOC Analyst
+    market: Singapore
+    currency: SGD
+    entry_salary: "55,000–75,000"
+    mid_salary: "80,000–110,000"
+    senior_salary: "120,000–160,000"
+    yoe_entry: "0-2"
+    yoe_mid: "3-5"
+    yoe_senior: "6+"
+    top_hiring:
+      - DSTA
+      - ST Engineering
+      - Ensign InfoSecurity
+      - Crowdstrike
+    required_certs: ["Security+", "CySA+"]
+    hook: "新加坡SOC分析师第一年能拿多少？"
+    shocking_fact: "比同级软件工程师低约15%，但需求缺口大3倍，2025年招聘数量创新高"
+    source_url: "https://nodeflair.com/salaries"
+    category: singapore_salaries
+
+  - slug: sg-pentest-salary-2025
+    role: Penetration Tester
+    market: Singapore
+    currency: SGD
+    entry_salary: "70,000–90,000"
+    mid_salary: "100,000–140,000"
+    senior_salary: "160,000–200,000"
+    yoe_entry: "0-2"
+    yoe_mid: "3-6"
+    yoe_senior: "7+"
+    top_hiring:
+      - Ensign InfoSecurity
+      - NCS Group
+      - HackerOne Bug Bounty
+      - Consultancies (PwC/KPMG Cyber)
+    required_certs: ["OSCP", "PNPT"]
+    hook: "新加坡渗透测试工程师：第一年薪资比你想象的高"
+    shocking_fact: "OSCP 持有者平均起薪比没证的同级别高出 SGD 12,000，差距在资历浅时最明显"
+    source_url: "https://nodeflair.com/salaries"
+    category: singapore_salaries
+
+  - slug: sg-cloud-security-engineer-salary
+    role: Cloud Security Engineer
+    market: Singapore
+    currency: SGD
+    entry_salary: "75,000–95,000"
+    mid_salary: "110,000–145,000"
+    senior_salary: "160,000–210,000"
+    yoe_entry: "1-3"
+    yoe_mid: "4-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - AWS Singapore
+      - Google Cloud APAC
+      - GovTech Singapore
+      - DBS / UOB (BFSI)
+    required_certs: ["AWS Security Specialty", "CISSP"]
+    hook: "云安全工程师是新加坡薪资增长最快的安全岗位"
+    shocking_fact: "2022-2025年涨薪幅度超过传统渗透测试岗，主因是云迁移需求爆炸式增长"
+    source_url: "https://nodeflair.com/salaries"
+    category: singapore_salaries
+
+  - slug: sg-security-architect-salary
+    role: Security Architect
+    market: Singapore
+    currency: SGD
+    entry_salary: "110,000–130,000"
+    mid_salary: "140,000–180,000"
+    senior_salary: "190,000–250,000"
+    yoe_entry: "5-8"
+    yoe_mid: "9-12"
+    yoe_senior: "13+"
+    top_hiring:
+      - MAS-regulated banks
+      - Temasek portfolio companies
+      - Big 4 Cyber practices
+      - Government agencies
+    required_certs: ["CISSP", "CISM"]
+    hook: "新加坡安全架构师：可能是安全圈最佳薪资上限的岗位"
+    shocking_fact: "Security Architect SGD 250k 的 TC 已接近新加坡软件架构师水平，但市场供给更少"
+    source_url: "https://nodeflair.com/salaries"
+    category: singapore_salaries
+
+  - slug: sg-ciso-salary
+    role: CISO
+    market: Singapore
+    currency: SGD
+    entry_salary: "200,000–280,000"
+    mid_salary: "280,000–400,000"
+    senior_salary: "400,000–600,000+"
+    yoe_entry: "12-15"
+    yoe_mid: "15-20"
+    yoe_senior: "20+"
+    top_hiring:
+      - Banks (MAS regulated)
+      - Government statutory boards
+      - Regional MNCs
+    required_certs: ["CISSP", "CISM", "MBA optional"]
+    hook: "新加坡CISO年薪：第一次看到这个数字会不会后悔没早点进安全行业"
+    shocking_fact: "新加坡金融机构 CISO 底薪已接近 VP Engineering，加上 bonus 总包可达 SGD 600k+"
+    source_url: "https://nodeflair.com/salaries"
+    category: singapore_salaries
+
+  - slug: my-kl-soc-analyst-salary
+    role: SOC Analyst
+    market: Malaysia (Kuala Lumpur)
+    currency: MYR
+    entry_salary: "48,000–72,000"
+    mid_salary: "84,000–120,000"
+    senior_salary: "132,000–180,000"
+    yoe_entry: "0-2"
+    yoe_mid: "3-5"
+    yoe_senior: "6+"
+    top_hiring:
+      - CyberSecurity Malaysia (CSM)
+      - Telekom Malaysia (TM)
+      - CIMB / Maybank (BFSI)
+      - Securemetric
+    required_certs: ["Security+", "CISP optional"]
+    hook: "马来西亚KL安全行业薪资：比你以为的高，比新加坡低多少？"
+    shocking_fact: "KL 初级 SOC 分析师 MYR 72k = SGD 21k，新加坡同岗位 SGD 75k，差距约 3.5 倍——但吉隆坡生活成本也低 60%"
+    source_url: "https://www.jobstreet.com.my"
+    category: malaysia_salaries
+
+  - slug: my-pentest-salary
+    role: Penetration Tester
+    market: Malaysia (Kuala Lumpur)
+    currency: MYR
+    entry_salary: "60,000–84,000"
+    mid_salary: "96,000–132,000"
+    senior_salary: "144,000–192,000"
+    yoe_entry: "0-3"
+    yoe_mid: "3-6"
+    yoe_senior: "7+"
+    top_hiring:
+      - LGMS Berhad
+      - Strateq
+      - Dimeng Consulting
+      - Multinational consulting firms
+    required_certs: ["OSCP", "CEH"]
+    hook: "马来西亚渗透测试工程师：本地就业 vs 远程给新加坡公司打工，哪个更划算？"
+    shocking_fact: "部分 KL 渗透测试工程师已拿到新加坡远程岗，本地生活成本+新加坡薪资，综合性价比超过新加坡本地就业"
+    source_url: "https://www.jobstreet.com.my"
+    category: malaysia_salaries
+
+  - slug: cn-t1-security-engineer-salary
+    role: 安全工程师（甲方大厂）
+    market: China T1 (北京/上海/深圳)
+    currency: CNY
+    entry_salary: "200,000–280,000"
+    mid_salary: "300,000–450,000"
+    senior_salary: "500,000–800,000"
+    yoe_entry: "0-3"
+    yoe_mid: "4-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - 腾讯安全
+      - 阿里安全
+      - 字节跳动安全
+      - 华为网络安全
+    required_certs: ["CISP preferred", "CISSP for senior"]
+    hook: "大厂安全工程师薪资：年包50万是普遍还是特例？"
+    shocking_fact: "腾讯/阿里安全高级工程师 P7+ 年总包可达 ¥800k，但需要 8 年以上经验+顶会论文，竞争极激烈"
+    source_url: "https://www.maimai.cn"
+    category: china_salaries
+
+  - slug: cn-t1-jiafang-vs-yifang
+    role: "甲方 vs 乙方 vs 大厂安全工程师"
+    market: China T1 (北京/上海/深圳)
+    currency: CNY
+    entry_salary: "甲方：150k / 乙方：120k / 大厂：200k"
+    mid_salary: "甲方：250k / 乙方：180k / 大厂：350k"
+    senior_salary: "甲方：400k / 乙方：280k / 大厂：600k+"
+    yoe_entry: "0-3"
+    yoe_mid: "4-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - 甲方代表：银行/运营商/国企信息安全部
+      - 乙方代表：奇安信、深信服、绿盟科技
+      - 大厂代表：BAT、字节、华为
+    required_certs: ["CISP", "CISSP", "CISP-PTE for red team"]
+    hook: "中国安全行业三条路：甲方/乙方/大厂，3年后薪资差多少？"
+    shocking_fact: "大厂薪资是乙方的 1.5-2 倍，但大厂内卷严重；乙方经验更广、跳槽机会多；甲方稳定但天花板低"
+    source_url: "https://www.maimai.cn"
+    category: china_salaries
+
+  - slug: cn-t2-city-salary-discount
+    role: 安全工程师（二线城市）
+    market: China T2 (成都/杭州/武汉)
+    currency: CNY
+    entry_salary: "120,000–180,000"
+    mid_salary: "200,000–300,000"
+    senior_salary: "320,000–500,000"
+    yoe_entry: "0-3"
+    yoe_mid: "4-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - 成都：腾讯成都分部、华为成都研究所
+      - 杭州：阿里云安全、网易安全
+      - 武汉：烽火通信安全部
+    required_certs: ["CISP", "CISAW entry"]
+    hook: "成都/杭州安全工作：比北京低多少薪资，生活质量高多少？"
+    shocking_fact: "T2城市安全薪资约为 T1 的 70%，但房价/生活成本约为 T1 的 45-55%，实际购买力更高"
+    source_url: "https://www.maimai.cn"
+    category: china_salaries
+
+  - slug: au-sydney-security-analyst-salary
+    role: Security Analyst
+    market: Australia (Sydney)
+    currency: AUD
+    entry_salary: "75,000–100,000"
+    mid_salary: "110,000–145,000"
+    senior_salary: "160,000–200,000"
+    yoe_entry: "0-2"
+    yoe_mid: "3-6"
+    yoe_senior: "7+"
+    top_hiring:
+      - ASD (Australian Signals Directorate)
+      - CBA / ANZ (BFSI)
+      - Palo Alto Networks Australia
+      - Telstra Security
+    required_certs: ["Security+", "CISSP for senior", "NV1 clearance valuable"]
+    hook: "澳大利亚安全分析师薪资：比新加坡高？移民路线真实成本"
+    shocking_fact: "AUD 100k 看起来比 SGD 75k 高，但澳洲税率（32.5%）vs 新加坡（7%）意味着税后实际差不多"
+    source_url: "https://www.seek.com.au"
+    category: australia_salaries
+
+  - slug: au-pentest-salary
+    role: Penetration Tester
+    market: Australia (Sydney/Melbourne)
+    currency: AUD
+    entry_salary: "85,000–110,000"
+    mid_salary: "120,000–160,000"
+    senior_salary: "170,000–220,000"
+    yoe_entry: "0-3"
+    yoe_mid: "3-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - CyberCX
+      - Sekuro
+      - BAE Systems Applied Intelligence
+      - PwC / Deloitte Cyber AU
+    required_certs: ["OSCP", "PNPT", "NV1 clearance for gov"]
+    hook: "澳洲渗透测试工程师：政府clearance加多少薪资？"
+    shocking_fact: "持有 NV1/NV2 安全许可的渗透测试工程师比无许可的薪资高 AUD 20-40k，政府项目专属通道"
+    source_url: "https://www.seek.com.au"
+    category: australia_salaries
+
+  - slug: hk-security-salary
+    role: Security Analyst / Pentest
+    market: Hong Kong
+    currency: HKD
+    entry_salary: "400,000–600,000"
+    mid_salary: "700,000–900,000"
+    senior_salary: "1,000,000–1,400,000"
+    yoe_entry: "0-3"
+    yoe_mid: "3-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - HSBC / Standard Chartered
+      - HKMA-related institutions
+      - PwC / KPMG HK Cyber
+    required_certs: ["CISSP", "CISM", "Security+"]
+    hook: "香港安全行业薪资：年薪百万是什么水平？"
+    shocking_fact: "HKD 1M 年薪 ≈ SGD 172k ≈ AUD 199k，香港金融安全岗高薪但生活成本极高，实际购买力与新加坡相近"
+    source_url: "https://www.jobsdb.com/hk"
+    category: hongkong_salaries
+
+  - slug: senior-sg-vs-au-vs-hk-comparison
+    role: Senior Security Engineer (6+ yoe)
+    market: Cross-market (SG vs AU vs HK)
+    currency: USD
+    entry_salary: "换算后 USD 等值对比"
+    mid_salary: "税前 vs 税后真实差距"
+    senior_salary: "SG: USD 120k / AU: USD 130k / HK: USD 128k（均为税前）"
+    yoe_entry: "不适用"
+    yoe_mid: "不适用"
+    yoe_senior: "6+"
+    top_hiring:
+      - 数据来源：Glassdoor + NodeFlair + SEEK
+    required_certs: ["CISSP", "OSCP"]
+    hook: "新加坡 vs 澳洲 vs 香港：高级安全工程师去哪个市场税后拿得最多？"
+    shocking_fact: "税前澳洲最高，税后新加坡最高（个税 7% vs 澳洲 32.5% vs 香港 15%）；如果考虑 CPF + 住房补贴，新加坡综合福利包最优"
+    source_url: "https://nodeflair.com/salaries"
+    category: cross_market
+
+  - slug: entry-level-global-comparison
+    role: Entry Level Security Analyst (0-2 yoe)
+    market: Global comparison
+    currency: USD
+    entry_salary: "SG: USD 40k / MY: USD 11k / CN T1: USD 28k / AU: USD 55k / HK: USD 51k"
+    mid_salary: "不适用（此为入门对比）"
+    senior_salary: "不适用"
+    yoe_entry: "0-2"
+    yoe_mid: "不适用"
+    yoe_senior: "不适用"
+    top_hiring:
+      - 各市场代表性公司见各市场词条
+    required_certs: ["Security+", "eJPT"]
+    hook: "刚毕业想进安全行业，去哪个市场起点最高？"
+    shocking_fact: "澳洲税前最高但税后优势缩小；新加坡税后+无强制储蓄拿到手最多；中国T1城市绝对金额低但购买力不差"
+    source_url: "各市场求职平台综合"
+    category: cross_market
+
+  - slug: remote-work-sg-salary-kl-cost
+    role: Remote Security Engineer (Singapore employer)
+    market: Remote (KL cost base, SG salary)
+    currency: SGD
+    entry_salary: "55,000–75,000（新加坡薪资标准）"
+    mid_salary: "80,000–110,000（新加坡薪资标准）"
+    senior_salary: "120,000–160,000（新加坡薪资标准）"
+    yoe_entry: "2+"
+    yoe_mid: "4+"
+    yoe_senior: "7+"
+    top_hiring:
+      - 新加坡注册公司远程雇佣
+      - MNC 区域安全团队
+    required_certs: ["Security+", "OSCP", "CISSP"]
+    hook: "新加坡薪资+KL生活成本：安全行业最香的远程工作组合"
+    shocking_fact: "SGD 80k/年 在吉隆坡的购买力相当于在新加坡 SGD 140k，而且不用缴新加坡 CPF（雇主不强制）"
+    source_url: "个人经验 + LinkedIn 职位分析"
+    category: remote_work
+
+  - slug: cn-jiafang-vs-yifang-career-advice
+    role: "甲方 vs 乙方 第一份工作选哪个"
+    market: China
+    currency: CNY
+    entry_salary: "乙方：¥100k-140k（一线城市） / 甲方：¥120k-160k（较稳定）"
+    mid_salary: "乙方：¥180k-250k / 甲方：¥200k-300k"
+    senior_salary: "乙方：¥280k-400k（跳槽天花板明显） / 甲方：¥350k-500k（含股权）"
+    yoe_entry: "0-3"
+    yoe_mid: "4-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - 乙方：奇安信、深信服、绿盟、启明星辰
+      - 甲方：头部银行/运营商/国企信息安全部
+    required_certs: ["CISP", "CISAW entry"]
+    hook: "中国安全毕业生第一份工作：甲方稳还是乙方学得多？"
+    shocking_fact: "乙方项目经验多、技能成长快，但 5 年后跳槽到甲方薪资涨幅比从乙方内部晋升高出 40-60%"
+    source_url: "https://www.maimai.cn"
+    category: china_salaries
+
+  - slug: my-grc-analyst-salary
+    role: GRC Analyst
+    market: Malaysia (Kuala Lumpur)
+    currency: MYR
+    entry_salary: "42,000–60,000"
+    mid_salary: "72,000–96,000"
+    senior_salary: "108,000–144,000"
+    yoe_entry: "0-2"
+    yoe_mid: "3-5"
+    yoe_senior: "6+"
+    top_hiring:
+      - CyberSecurity Malaysia
+      - Big 4 (PwC/Deloitte KL)
+      - 本地银行合规部门
+    required_certs: ["ISO27001 LA", "CISM", "CISP optional"]
+    hook: "马来西亚GRC分析师：非技术背景进安全行业最快的路"
+    shocking_fact: "GRC 分析师不需要会写代码，法律/审计背景直接可转型，是马来西亚非技术背景进安全行业最热门路线"
+    source_url: "https://www.jobstreet.com.my"
+    category: malaysia_salaries
+
+  - slug: sg-grc-analyst-salary
+    role: GRC Analyst
+    market: Singapore
+    currency: SGD
+    entry_salary: "55,000–70,000"
+    mid_salary: "75,000–100,000"
+    senior_salary: "110,000–145,000"
+    yoe_entry: "0-2"
+    yoe_mid: "3-5"
+    yoe_senior: "6+"
+    top_hiring:
+      - MAS-regulated banks
+      - Big 4 Cyber (risk/compliance arm)
+      - GovTech Singapore
+    required_certs: ["CISM", "ISO27001 LA", "CISSP for senior"]
+    hook: "新加坡GRC分析师：法律/审计背景的人如何在安全行业拿到SGD 100k+"
+    shocking_fact: "GRC 在 MAS TRM 新规下需求激增，2024-2025 年新加坡金融机构 GRC 岗位招聘量同比增长 35%"
+    source_url: "https://nodeflair.com/salaries"
+    category: singapore_salaries

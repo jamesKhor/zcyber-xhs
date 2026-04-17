@@ -17,13 +17,19 @@ from .images.renderer import ImageRenderer
 from .models import PostDraft, TopicEntry
 from .queue import DraftQueue
 
-# Archetypes that use YAML topic banks
-BANK_ARCHETYPES = {
+# Archetypes that use YAML topic banks (threat rotation)
+_THREAT_ARCHETYPES = {
     "problem_command", "tool_spotlight", "everyday_panic",
     "before_after", "mythbust",
-    "real_story", "rank_war",     # new archetypes (Tue + Thu)
-    "hacker_pov",                 # replaces ctf (Sun) — immersive scenario
+    "real_story", "rank_war", "hacker_pov",
 }
+
+# Career/education archetypes (XHS pivot — aspirational, not scary)
+_CAREER_ARCHETYPES = {
+    "cert_war", "salary_map", "career_entry",
+}
+
+BANK_ARCHETYPES = _THREAT_ARCHETYPES | _CAREER_ARCHETYPES
 
 
 class Orchestrator:

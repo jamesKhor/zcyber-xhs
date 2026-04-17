@@ -430,10 +430,14 @@ def _check_platform_mentions(text: str, result: SafetyResult) -> None:
     We only flag when the text explicitly directs users to interact with a
     competing platform (follow, subscribe, post, share there).
     """
-    # Words that indicate cross-platform traffic diversion
+    # Words that indicate cross-platform traffic diversion.
+    # Two categories:
+    #   a) Account/channel words — following someone on a rival platform
+    #   b) Content-origin words — content is trending/originated on a rival platform
     _promo_context = (
         r"(?:关注|订阅|粉丝|发布|上传|更新|主页|账号|博主|up主"
-        r"|follow|subscribe|channel|@\w)"
+        r"|follow|subscribe|channel|@\w"
+        r"|很火|爆火|热门|流行|风靡|火了|分享|转载|搬运)"
     )
 
     # Platforms that are direct content competitors to XHS
@@ -445,10 +449,11 @@ def _check_platform_mentions(text: str, result: SafetyResult) -> None:
         (r"微博", "Weibo"),
     ]
     for pattern, name in competitors:
-        # Only flag if the platform name appears near promotion-context words
+        # Flag when the platform name appears near promotion-context words.
+        # Window of 20 chars catches "在抖音上很火" (11 chars) and similar.
         promo_pattern = (
-            rf"(?:{_promo_context}.{{0,15}}{pattern}"
-            rf"|{pattern}.{{0,15}}{_promo_context})"
+            rf"(?:{_promo_context}.{{0,20}}{pattern}"
+            rf"|{pattern}.{{0,20}}{_promo_context})"
         )
         if re.search(promo_pattern, text, re.IGNORECASE):
             result.add_warning(
