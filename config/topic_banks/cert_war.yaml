@@ -302,3 +302,235 @@ topics:
     verdict: pnpt_wins_value
     verdict_reason: "PNPT 是 5 天真实渗透测试报告考试，CEH 是选择题；$399 vs $950，PNPT 贵在哪里？贵在它真的教你打靶"
     category: pentest_certs
+
+  # --- Advanced Technical Track (SG/AU/UK only — NOT China market) ---
+
+  - slug: crto-vs-osep-redteam-sg-au
+    cert_a: CRTO (Red Team Operator by Zero-Point Security)
+    cert_b: OSEP (OffSec Experienced Pentester / PEN-300)
+    market: Singapore / Australia
+    angle: "渗透测试进阶：CRTO便宜3倍，OSEP更有名，新加坡红队岗认哪个？"
+    cert_a_cost_usd: 520
+    cert_a_cost_local: "£399（~SGD 670 / ~AUD 760）；含48h实战靶场，6/8 flags模式"
+    cert_b_cost_usd: 1749
+    cert_b_cost_local: "约 SGD 2,350–3,700（Learn One订阅$1,749–$2,749）；含90天实验室+报告考核"
+    cert_a_salary_boost: "红队岗技术认可度高；Cobalt Strike + AD攻击链实战，OPSEC-aware tradecraft"
+    cert_b_salary_boost: "新加坡红队高级岗 SGD 108k–180k/yr；企业JD出现频率高于CRTO"
+    verdict: split
+    verdict_reason: "CRTO 性价比领先（便宜约3倍），Cobalt Strike操作更current；OSEP 品牌更响，企业JD更常见，且是OSCE3路线的必考之一。预算有限先考CRTO；追求完整OffSec认证体系考OSEP"
+    category: advanced_technical
+
+  - slug: osep-vs-osed-osce3-path
+    cert_a: OSEP (PEN-300 / Experienced Pentester)
+    cert_b: OSED (EXP-301 / Exploit Developer)
+    market: Singapore / Australia
+    angle: "OffSec最难三连：OSEP+OSED+OSWE组合拳，拿OSCE3是什么level？"
+    cert_a_cost_usd: 1749
+    cert_a_cost_local: "约 SGD 2,350（Learn One 90天订阅）；覆盖EDR规避、自定义C2、进程注入、AMSI绕过"
+    cert_b_cost_usd: 1749
+    cert_b_cost_local: "约 SGD 2,350（Learn One 90天订阅）；覆盖shellcode编写、ROP链、DEP/ASLR绕过、Windows漏洞利用开发"
+    cert_a_salary_boost: "红队操作员核心技能；覆盖现代CrowdStrike/SentinelOne对抗场景"
+    cert_b_salary_boost: "漏洞研究/exploit开发核心技能；与OSEP+OSWE合成OSCE3三连认证"
+    verdict: depends_on_goal
+    verdict_reason: "OSEP适合红队操作员路线（EDR规避、C2开发）；OSED适合漏洞研究/exploit开发路线；两者+OSWE = OSCE3，是OffSec最高荣誉认证，全球持有者极少。选哪个取决于你要做红队还是漏洞研究"
+    category: advanced_technical
+
+  - slug: crto2-edr-bypass-specialist
+    cert_a: CRTO2 (Red Team Ops II — Red Team Lead)
+    cert_b: OSEP (PEN-300)
+    market: Singapore / Australia / UK & Europe
+    angle: "绕过EDR才是硬核：CRTO2 vs OSEP，哪个让你真正对抗CrowdStrike？"
+    cert_a_cost_usd: 555
+    cert_a_cost_local: "£425（~SGD 715 / ~AUD 815）；含：EDR-aware执行、C++/C#自定义工具、PPID欺骗、ETW绕过、内存混淆、ASR绕过、WDAC利用"
+    cert_b_cost_usd: 1749
+    cert_b_cost_local: "约 SGD 2,350（Learn One 90天）；部分EDR规避内容为2020年代水平，对抗现代CrowdStrike/SentinelOne有局限"
+    cert_a_salary_boost: "针对现代EDR（CrowdStrike/SentinelOne/Defender）的最新对抗技术；CRTO2内容更新更频繁"
+    cert_b_salary_boost: "企业JD品牌认知度更高；OSCE3路线必考；红队高级岗常见要求"
+    verdict: split
+    verdict_reason: "CRTO2 EDR绕过内容更current，实际对抗CrowdStrike/SentinelOne更实用；OSEP品牌认知度更高，企业JD出现更频繁。想要最新EDR对抗技术选CRTO2，想要JD加分和OSCE3路线选OSEP"
+    category: advanced_technical
+
+  - slug: gxpn-vs-oscp-exploit-dev
+    cert_a: GXPN (GIAC Exploit Researcher and Advanced Penetration Tester)
+    cert_b: OSCP
+    market: Singapore / Australia
+    angle: "GXPN花$9000值不值？对比OSCP，新加坡雇主真的认吗？"
+    cert_a_cost_usd: 9779
+    cert_a_cost_local: "约 SGD 13,200（SEC660课程+考试合计）；全球持证者约2,600人；覆盖高级漏洞利用、ASLR/DEP/ROP绕过、自定义fuzzing"
+    cert_b_cost_usd: 1649
+    cert_b_cost_local: "约 SGD 2,230（含90天实验室）；全球持证者100,000+"
+    cert_a_salary_boost: "美国 exploit研究岗均薪 $119,895–$158,000；通常由雇主赞助；专家级漏洞研究角色"
+    cert_b_salary_boost: "新加坡渗透岗 JD 中最常见认证；平均薪资涨幅 +30%"
+    verdict: oscp_wins_for_jobs
+    verdict_reason: "OSCP出现在远多于GXPN的JD中；GXPN适合专职漏洞研究员，通常由雇主付费送培训。自费考证优先OSCP（$1,649 vs $9,779）；已在漏洞研究岗且公司愿意报销再考GXPN"
+    category: advanced_technical
+
+  - slug: grem-malware-analyst
+    cert_a: GREM (GIAC Reverse Engineering Malware)
+    cert_b: OSCP
+    market: Singapore / Australia
+    angle: "逆向恶意软件 vs 渗透测试：GREM和OSCP服务完全不同的职业路线"
+    cert_a_cost_usd: 8750
+    cert_a_cost_local: "约 SGD 11,800（FOR610课程$8,000–$9,500+考试）；覆盖IDA Pro/Ghidra、静态+动态恶意软件分析、脱壳、内存取证"
+    cert_b_cost_usd: 1649
+    cert_b_cost_local: "约 SGD 2,230（含90天实验室）；攻击性渗透测试"
+    cert_a_salary_boost: "恶意软件分析师/威胁情报/蓝队；美国均薪 $117,000；通常雇主赞助"
+    cert_b_salary_boost: "渗透测试/红队；平均薪资涨幅 +30%"
+    verdict: depends_on_goal
+    verdict_reason: "完全不同的职业路线：GREM面向恶意软件分析师、威胁情报、蓝队；OSCP面向渗透测试、红队。先想清楚你要做攻击还是防守——选错了方向白花钱"
+    category: advanced_technical
+
+  - slug: crest-cct-uk-gov-requirement
+    cert_a: CREST CCT (Certified Tester)
+    cert_b: OSCP
+    market: UK & Europe
+    market_note: "UK/Europe specific — not relevant for SG/AU/CN markets"
+    angle: "英国政府渗透测试必持证：CREST CCT vs OSCP，在英国工作哪个更重要？"
+    cert_a_cost_usd: 4000
+    cert_a_cost_local: "约 £3,200（两个考试组件各£1,600）；需要约10,000小时经验（5年）；6小时现场实践+笔试"
+    cert_b_cost_usd: 1649
+    cert_b_cost_local: "约 £1,300（含90天实验室）；无工作经验门槛"
+    cert_a_salary_boost: "英国政府渗透测试 PPN 014（2025）强制要求；CBEST（英格兰银行金融行业测试）强制资质；无此证书无法拿英国政府/CBEST合同"
+    cert_b_salary_boost: "技术能力证明，全球认可；在英国个人技术JD常见要求"
+    verdict: split
+    verdict_reason: "CREST CCT是英国受监管市场的营业执照——没有它就无法赢得UK政府/CBEST合同；OSCP证明个人技术能力。在英国做渗透测试两者都需要：先考OSCP打基础，有5年经验后考CREST CCT解锁政府合同"
+    category: advanced_technical
+
+  # --- Governance / Management Track (all markets including China) ---
+
+  - slug: cisa-vs-cism-audit-vs-management
+    cert_a: CISA (Certified Information Systems Auditor by ISACA)
+    cert_b: CISM (Certified Information Security Manager by ISACA)
+    market: Global
+    angle: "审计师 vs 管理者：CISA和CISM，非技术背景进网安哪个更快？"
+    cert_a_cost_usd: 760
+    cert_a_cost_local: "$760（非会员）/ $575（ISACA会员）；四大审计、监管机构、银行合规岗首选；无技术前提，审计/财务背景最适合"
+    cert_b_cost_usd: 760
+    cert_b_cost_local: "$760（非会员）/ $575（ISACA会员）；安全管理、治理、风险路线；美国均薪 $140,000–$165,000"
+    cert_a_salary_boost: "美国均薪 $132,000；四大咨询（PwC/德勤/KPMG/EY）IT审计岗明确要求；银行/监管机构合规岗高频认证"
+    cert_b_salary_boost: "美国均薪 $140,000–$165,000；CISO晋升路线最常见管理认证；企业内部安全管理层要求"
+    verdict: depends_on_goal
+    verdict_reason: "CISA走审计/合规职业路线，四大和监管机构强需求，法律/财务背景转型最快；CISM走管理/领导力路线，适合有一定经验想晋升管理层的人。两者考试费用相同，选哪个取决于你想去四大还是想做CISO"
+    category: governance_certs
+
+  - slug: crisc-risk-specialist
+    cert_a: CRISC (Certified in Risk and Information Systems Control by ISACA)
+    cert_b: CISM (Certified Information Security Manager by ISACA)
+    market: Global
+    angle: "IT风险管理专家：CRISC年薪¥200k+，哪类背景最适合考？"
+    cert_a_cost_usd: 760
+    cert_a_cost_local: "$760（非会员）；覆盖IT风险识别、评估、应对；银行/保险/监管机构高度重视；金融/风险背景加分"
+    cert_b_cost_usd: 760
+    cert_b_cost_local: "$575（ISACA会员）；安全管理通用路线；适用行业更广"
+    cert_a_salary_boost: "美国均薪 $151,000；ISACA认证中薪资最高之一；银行/保险/监管机构IT风险岗的首选认证"
+    cert_b_salary_boost: "美国均薪 $140,000–$165,000；适用范围更广但风险管理细分不如CRISC精准"
+    verdict: crisc_wins_for_risk_roles
+    verdict_reason: "CRISC是IT风险管理最精准的认证，银行/保险公司招风险专员时明确偏好CRISC；美国均薪$151,000超过CISM。有金融/风险/内审背景的人考CRISC是最快进网安高薪岗的路线"
+    category: governance_certs
+
+  - slug: gcti-threat-intel-analyst
+    cert_a: GCTI (GIAC Cyber Threat Intelligence)
+    cert_b: CompTIA Security+
+    market: Singapore / Australia / China
+    angle: "不用写代码的网安高薪岗：威胁情报分析师，GCTI怎么考？"
+    cert_a_cost_usd: 999
+    cert_a_cost_local: "$999（单独考试）/ 含FOR578课程约$7,000+（通常雇主赞助）；覆盖威胁行为者画像、MITRE ATT&CK应用、情报分析、暗网监控、结构化分析技术；无命令行要求"
+    cert_b_cost_usd: 392
+    cert_b_cost_local: "约 SGD 550（SG）/ AUD 590（AU）；通用安全基础认证"
+    cert_a_salary_boost: "威胁情报分析师岗位；SG政府机构（CSA/MAS）/银行情报团队；不需要写任何利用代码"
+    cert_b_salary_boost: "HR过滤认证，入门基础，不区分专业方向"
+    verdict: gcti_wins_for_cti_career
+    verdict_reason: "完全不同的层次——GCTI是威胁情报分析师的专业认证，Security+是通用入门证书。有地缘政治分析/研究/情报背景的人考GCTI直接切入高薪专业岗位，不需要学编程"
+    category: threat_intel
+
+  - slug: cissp-cism-china-management-path
+    cert_a: CISSP
+    cert_b: CISM
+    market: China
+    angle: "中国企业安全管理层：CISSP年薪翻倍 vs CISM更快拿到，怎么选？"
+    cert_a_cost_usd: 749
+    cert_a_cost_local: "¥5,400（考试费）；含培训约¥15,000–35,000；T1城市均薪¥300k–500k"
+    cert_b_cost_usd: 575
+    cert_b_cost_local: "¥4,200（ISACA会员考试费）；管理路线更聚焦；T1城市均薪¥220k–350k（管理岗）"
+    cert_a_salary_boost: "T1城市CISSP持证者均薪¥300k–500k；外资公司/大型互联网公司CISO岗硬性要求"
+    cert_b_salary_boost: "T1城市CISM管理岗¥220k–350k；纯管理路线更快考过；国内大型国企/金融机构管理层常见"
+    verdict: cissp_wins_for_salary
+    verdict_reason: "CISSP薪资天花板明显更高（T1均薪差约¥100k–150k）；但CISM考试难度更低，对纯管理路线更聚焦。想要最高薪资上限选CISSP；想快速拿证走纯管理路线选CISM；最优策略：先考CISM，再攻CISSP"
+    category: management_certs
+
+  - slug: cisa-big4-audit-path
+    cert_a: CISA
+    cert_b: CISSP
+    market: Singapore / China
+    angle: "四大咨询 vs 企业内部：CISA进四大，CISSP做CISO，到底选哪条路？"
+    cert_a_cost_usd: 575
+    cert_a_cost_local: "$575（ISACA会员）；四大（PwC/德勤/毕马威/安永）网安咨询/IT审计岗明确偏好；SG持证者薪资SGD 70–110k"
+    cert_b_cost_usd: 749
+    cert_b_cost_local: "$749；SG持证者薪资SGD 120–200k（高级岗）；需5年工作经验"
+    cert_a_salary_boost: "四大IT审计/网安咨询岗首选认证；进入四大后晋升路径清晰；无工作经验门槛（相对友好）"
+    cert_b_salary_boost: "企业内部CISO/安全总监路线；SG薪资天花板更高；但需要5年工作经验+技术背景"
+    verdict: split
+    verdict_reason: "职业路径完全不同——CISA进四大咨询，做IT审计/合规顾问，服务多家客户；CISSP做企业内部CISO，深耕一个组织。四大工作经验积累快但压力大；内部CISO稳定但晋升慢。先明确自己想要咨询生涯还是企业生涯"
+    category: governance_certs
+
+  # --- Non-Technical Entry Certs ---
+
+  - slug: non-tech-cert-tierlist-sg
+    cert_a: CISA (审计路线——无需编程)
+    cert_b: GCTI (威胁情报路线——无需编程)
+    market: Singapore
+    angle: "完全不会编程也能拿高薪！新加坡网安非技术路线证书排行"
+    cert_a_cost_usd: 575
+    cert_a_cost_local: "$575（ISACA会员）；无编程要求；审计/财务背景最适合；SG四大IT审计/网安咨询岗首选"
+    cert_b_cost_usd: 999
+    cert_b_cost_local: "$999（单独考试）；无命令行要求；分析/研究背景最适合；新加坡CSA/MAS/银行威胁情报团队"
+    cert_a_salary_boost: "SG持证者薪资SGD 65–100k；四大咨询需求持续旺盛"
+    cert_b_salary_boost: "SG威胁情报分析师SGD 75–110k；政府机构/银行情报团队有需求"
+    verdict: split
+    verdict_reason: "两张证书都不需要写代码。审计/财务背景走CISA进四大；研究分析背景走GCTI进政府情报机构或银行威胁情报团队。判断依据：你是喜欢写合规报告还是喜欢研究黑客组织？"
+    category: non_technical_entry
+
+  - slug: non-tech-cert-tierlist-china
+    cert_a: CISP (管理方向)
+    cert_b: CISA
+    market: China
+    angle: "不会命令行的人怎么进网安？CISP管理方向 vs CISA审计方向"
+    cert_a_cost_usd: 1750
+    cert_a_cost_local: "¥12,800（含授权培训+考试）；管理方向无需深度技术背景；国内政府/央国企管理岗主要认证"
+    cert_b_cost_usd: 575
+    cert_b_cost_local: "$575（ISACA会员，约¥4,200）；纯审计/合规路线；四大中国区+外资企业认可"
+    cert_a_salary_boost: "国内政府/国企安全管理岗的主要敲门砖；管理路线薪资¥150k–250k（T1）"
+    cert_b_salary_boost: "四大中国区IT审计岗首选；外资企业合规岗认可度高；T1城市薪资¥150k–220k"
+    verdict: depends_on_goal
+    verdict_reason: "CISP走国内政府/央国企安全管理路线，国内认可度更高；CISA走四大/外资企业审计路线，国际认可度更高。目标是留在国内体制内选CISP；目标是进四大或外资公司选CISA"
+    category: non_technical_entry
+
+  - slug: sans-giac-bundle-worth-it
+    cert_a: GIAC (单独考试，如GPEN $999)
+    cert_b: OSCP
+    market: Singapore / Australia
+    angle: "自费vs公费：GIAC花$9000值不值？vs OSCP，新加坡打工人怎么选？"
+    cert_a_cost_usd: 999
+    cert_a_cost_local: "$999（单独考试，无SANS课程自学）/ 含SANS课程约$8,500–$9,779（通常雇主赞助）"
+    cert_b_cost_usd: 1649
+    cert_b_cost_local: "约 SGD 2,230（含90天实验室）；自费友好，无需配套课程"
+    cert_a_salary_boost: "GIAC认证技术质量极高；但SANS课程设计为雇主送培训，自费ROI较低"
+    cert_b_salary_boost: "SG/AU招聘JD最常见技术认证；自费1,649刀，JD出现频率最高"
+    verdict: oscp_wins_for_self_funders
+    verdict_reason: "GIAC认证本身质量很高，但套餐设计针对雇主送培——自费$8,500+考GPEN，不如$1,649考OSCP。如果公司愿意报销，考GIAC没问题；如果自费，OSCP每花一块钱的JD曝光度高出5倍以上"
+    category: advanced_technical
+
+  - slug: gcti-vs-osint-cti-career
+    cert_a: GCTI (GIAC Cyber Threat Intelligence)
+    cert_b: OSINT自学路线（无认证）
+    market: Global
+    angle: "威胁情报分析师：花$999考GCTI，还是自学OSINT免费入行？"
+    cert_a_cost_usd: 999
+    cert_a_cost_local: "$999（单独考试）/ 含FOR578课程$7,000+（雇主赞助）；覆盖情报生命周期、威胁行为者画像、MITRE ATT&CK、暗网监控、结构化分析技术；无命令行要求"
+    cert_b_cost_usd: 0
+    cert_b_cost_local: "¥0（MITRE ATT&CK官网、OpenCTI、MISP、Maltego免费版）；无认证，靠portfolio和项目经验"
+    cert_a_salary_boost: "GCTI持证者年薪比未认证CTI分析师高$15,000–$25,000（企业买家认可结构化分析方法论）"
+    cert_b_salary_boost: "自学路线进入门槛低，但谈薪资时无标准化证明材料；企业HR无法快速评估能力"
+    verdict: gcti_wins_for_salary
+    verdict_reason: "GCTI持证者薪资溢价$15,000–$25,000/yr，1年内回本。自学OSINT能入行但谈薪时处于弱势。对有分析背景（情报/政治/研究）的人：$999考试单独备考（SANS INDEX方法）是最高ROI的入行投资"
+    category: threat_intel

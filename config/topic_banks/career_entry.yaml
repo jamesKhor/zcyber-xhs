@@ -308,3 +308,223 @@ topics:
     top_tip: "开发转 AppSec 最快的路线是内部转岗——先把安全知识用在现有工作上，让 AppSec 团队认识你；外部申请也比 IT 运维背景容易得多"
     hook: "后端开发转AppSec工程师：4个月做到，不需要重读学位"
     category: career_pivot
+
+  # --- Non-Technical Career Paths ---
+
+  - slug: cant-code-grc-analyst-sg
+    background: "完全没有技术背景（法律/审计/金融/HR）"
+    target_market: Singapore
+    timeline_months: 6
+    entry_role: GRC Analyst (Governance, Risk, Compliance)
+    first_cert: ISO 27001 Lead Implementer + CISA (exam)
+    cert_cost_local: "ISO 27001 Lead Implementer：SGD 2,000（5天课程）；CISA考试：$575（ISACA会员）"
+    learning_path:
+      - ISO 27001 Lead Implementer培训（5天，SGD 2,000）——打合规框架基础
+      - ISACA官方教材自学CISA（3个月）
+      - 研究MAS TRM Guidelines和新加坡PDPA（免费，金融GRC面试必考）
+      - 投递四大咨询（PwC/德勤/KPMG/EY）IT审计部门或MAS监管金融机构GRC团队
+    salary_at_entry: "SGD 60,000–80,000"
+    top_tip: "GRC分析师工作内容是写风险评估报告、做合规审查、和业务部门开会——法律/审计背景比技术背景更受欢迎。面试时强调你的合规/报告写作经验，不要道歉说自己不会编程"
+    hook: "不会代码进网安：新加坡GRC分析师6个月转行路线图"
+    shocking_fact: "GRC分析师不需要写任何代码——工作内容是写风险评估报告、做合规审查、和业务部门开会。法律/审计背景比技术背景更受欢迎"
+    category: non_technical_entry
+
+  - slug: cant-code-cti-analyst-sg
+    background: "有分析能力、喜欢研究（政治/国际关系/新闻/金融背景）"
+    target_market: Singapore
+    timeline_months: 8
+    entry_role: Cyber Threat Intelligence (CTI) Analyst
+    first_cert: GCTI (GIAC Cyber Threat Intelligence)
+    cert_cost_local: "$999（单独考试，用SANS INDEX方法备考）"
+    learning_path:
+      - MITRE ATT&CK官网免费框架自学（2个月）——不需要命令行
+      - OpenCTI / MISP免费平台实操练习（了解情报工作流）
+      - GCTI备考（SANS INDEX方法，收集笔记索引本考开卷）
+      - 投递新加坡CSA/MAS/DBS/OCBC/星展银行威胁情报团队
+    salary_at_entry: "SGD 70,000–95,000"
+    top_tip: "中英双语是威胁情报分析师的稀缺优势——追踪中文黑客论坛/APT组织的分析师在新加坡市场严重不足。面试时展示你分析中文地下论坛的能力，溢价立竿见影"
+    hook: "国际关系/新闻背景怎么进网安？威胁情报分析师不需要命令行"
+    shocking_fact: "威胁情报分析师的工作是追踪黑客组织——需要的是地缘政治分析能力、语言能力（中英双语溢价）和报告写作，不是写代码"
+    category: non_technical_entry
+
+  - slug: law-to-data-privacy-officer
+    background: "法律/合规背景"
+    target_market: Singapore / China
+    timeline_months: 4
+    entry_role: Data Protection Officer (DPO) / Privacy Counsel
+    first_cert: CIPM (Certified Information Privacy Manager by IAPP)
+    cert_cost_local: "CIPM考试：$550（USD）；IAPP会员：$500/yr（备考建议加入）"
+    learning_path:
+      - IAPP Foundation of Privacy + Technology在线课程（IAPP官网）
+      - CIPM备考（重点：隐私计划管理、隐私设计原则）
+      - 新加坡PDPA专项学习 + 中国PIPL和数据安全法模块
+      - 向PDPC（新加坡个人数据保护委员会）注册为企业DPO
+    salary_at_entry: "SGD 80,000–120,000（新加坡）；¥200,000–350,000（中国外资企业）"
+    top_tip: "新加坡PDPA规定特定企业必须指定DPO，但市面上持证DPO严重不足——这是法律背景人士进入网安行业最快且最有竞争力的切口"
+    hook: "律师/法务怎么转型数据安全？DPO：被动等人来找还是主动布局"
+    shocking_fact: "新加坡PDPA要求每家公司必须有DPO，但市面上持证DPO严重不足；中国PIPL和数据安全法催生了大量合规岗位，法律背景直接加分"
+    category: non_technical_entry
+
+  - slug: finance-to-grc-china
+    background: "金融/审计/财会背景（CPA、ACCA、内审）"
+    target_market: China
+    timeline_months: 6
+    entry_role: 信息安全合规专员 / GRC分析师
+    first_cert: CISA ($575 ISACA会员) 或 CISP管理方向
+    cert_cost_local: "CISA：¥4,200（ISACA会员）；CISP管理方向：¥12,800（含授权培训）"
+    learning_path:
+      - ISACA官方教材自学CISA（3个月，重点：IT审计、内控、风险评估）
+      - 了解等级保护2.0合规框架（免费标准文件，快速入门）
+      - 结合CPA/ACCA审计知识准备面试案例
+      - 目标：四大咨询中国区信息安全部门，或甲方金融机构合规部
+    salary_at_entry: "¥150,000–220,000（T1城市四大咨询）"
+    top_tip: "四大中国区信息安全咨询抢的就是这种复合背景——懂金融审计逻辑+愿意学网安合规，比纯技术背景更适合和客户沟通。简历上突出金融审计项目经验，CISA是加分项而非硬门槛"
+    hook: "CPA/ACCA转网安：四大咨询信息安全部门，年薪15万起"
+    shocking_fact: "四大中国区信息安全咨询部门抢的就是你这种背景——懂金融审计逻辑+愿意学网安合规，比纯技术背景的人更适合和客户沟通"
+    category: non_technical_entry
+
+  - slug: hr-to-security-awareness
+    background: "HR/培训/教育背景"
+    target_market: Singapore / China
+    timeline_months: 5
+    entry_role: Security Awareness & Training Manager
+    first_cert: CompTIA Security+ (基础技术扫盲)
+    cert_cost_local: "Security+：SGD 550（SG）/ ¥2,800（CN）；KnowBe4 Security Awareness Specialist Program：免费"
+    learning_path:
+      - CompTIA Security+（技术扫盲，2个月）——建立安全语言基础
+      - KnowBe4 Security Awareness Specialist Program（免费在线认证）
+      - 研究网络钓鱼模拟工具（GoPhish免费版实操）
+      - 构建内部培训campaign portfolio（案例：如何把100人公司钓鱼点击率从60%降到5%）
+      - 目标：100人以上企业安全意识/培训经理岗
+    salary_at_entry: "SGD 65,000–90,000（新加坡）；¥150,000–200,000（中国企业）"
+    top_tip: "安全意识培训岗最看重的能力是讲故事和改变行为——HR背景的人天然有优势。面试时带一个你设计过的培训项目案例，比技术证书更有说服力"
+    hook: "HR背景进网安：安全意识培训经理，专门对付'点了钓鱼邮件的同事'"
+    shocking_fact: "人为因素是82%数据泄露的根因（Verizon DBIR 2024）——公司越来越需要能讲故事、做培训的人，不是只会修防火墙的人"
+    category: non_technical_entry
+
+  - slug: non-tech-blue-team-soc-tier1
+    background: "IT支持/服务台/网络运维（轻技术背景）"
+    target_market: Singapore / Malaysia / China
+    timeline_months: 4
+    entry_role: SOC Analyst Tier 1 (Security Operations Center)
+    first_cert: CompTIA Security+ + BTL1 (Blue Team Labs Level 1)
+    cert_cost_local: "Security+：SGD 550（SG）/ MYR 1,300（MY）/ ¥2,800（CN）；BTL1：$299（USD）"
+    learning_path:
+      - TryHackMe SOC Level 1路径（免费，覆盖SIEM、日志分析、钓鱼分析）
+      - CompTIA Security+备考（6周）
+      - BTL1认证（完全初学者友好，不需要漏洞利用知识）
+      - 投递MSSP（Managed Security Service Provider）初级SOC岗
+    salary_at_entry: "SGD 42,000–60,000（新加坡）；MYR 42,000–66,000（马来西亚）；¥96,000–144,000（中国T1）"
+    top_tip: "SOC Tier 1面试核心是展示你能看懂告警、会写工单、知道什么时候升级上报——不是黑进系统的能力。IT支持经验里的incident ticket经验直接迁移"
+    hook: "IT支持/运维怎么升级到安全运营？4个月SOC Tier 1上岸路线"
+    shocking_fact: "SOC Tier 1是网安门槛最低、需求量最大的职位——本质上是看告警、写工单、上报事件。IT支持背景6个月就能转"
+    category: non_technical_entry
+
+  - slug: non-tech-project-manager-to-security
+    background: "项目经理/产品经理背景"
+    target_market: Singapore / China
+    timeline_months: 9
+    entry_role: Security Program Manager / vCISO Assistant
+    first_cert: CISM (Certified Information Security Manager)
+    cert_cost_local: "Security+：SGD 550（先扫盲）；CISM考试：$575（ISACA会员）"
+    learning_path:
+      - CompTIA Security+（技术扫盲，2个月）——建立安全项目语言基础
+      - CISM备考（3个月，重点：安全治理、风险管理、项目管理与安全的交叉）
+      - 在现有项目中主动承接安全相关工作（引入安全审计、SDLC安全流程）
+      - 目标：有成长安全项目的科技公司、或咨询公司安全项目经理岗
+    salary_at_entry: "SGD 90,000–130,000（新加坡）；¥200,000–300,000（中国大厂）"
+    top_tip: "安全项目经理是最难招的岗位之一——已有PMP或项目管理经验的人只需补安全知识，而不是从零开始。CISM考试内容70%是管理/流程，和PMP逻辑高度重合"
+    hook: "PM/产品经理进网安：安全项目经理，大厂年薪20万+"
+    shocking_fact: "安全项目经理是最难招的岗位之一——既需要懂安全术语，又要会跟业务部门讲故事，PMP+CISM是硬核组合"
+    category: non_technical_entry
+
+  - slug: non-tech-analyst-threat-intel-china
+    background: "情报/翻译/研究/政治分析背景（国内）"
+    target_market: China
+    timeline_months: 8
+    entry_role: 威胁情报分析师 (CTI Analyst)
+    first_cert: CISP + MITRE ATT&CK自学（无官方认证门槛要求）
+    cert_cost_local: "CISP：¥12,800（含授权培训）；MITRE ATT&CK学习：免费"
+    learning_path:
+      - MITRE ATT&CK For Enterprise免费框架学习（2个月）
+      - 奇安信/安恒威胁情报平台试用版实操（了解实际工作流）
+      - CISP合规基础（帮助进入甲方合规岗的敲门砖）
+      - 目标：奇安信、360、深信服威胁情报团队，或金融机构SOC的威胁情报岗
+    salary_at_entry: "¥120,000–200,000（T1城市）"
+    top_tip: "国内威胁情报分析师严重缺口——有地缘政治分析能力+中英双语的人最稀缺。面试时带一份你对某APT组织或黑产团伙的分析报告，哪怕是自学写的，效果超过任何证书"
+    hook: "学国际关系/情报的人怎么进甲方安全部门？威胁情报分析师不写代码"
+    shocking_fact: "国内威胁情报分析师严重缺口——有地缘政治分析能力+中英双语的人更稀缺；APT组织追踪、黑产情报分析都不需要写漏洞利用代码"
+    category: non_technical_entry
+
+  - slug: entry-level-grc-australia
+    background: "任何非技术背景（商科/法律/会计）"
+    target_market: Australia
+    timeline_months: 6
+    entry_role: GRC Analyst / Information Security Analyst
+    first_cert: ISO 27001 Lead Implementer + CISA (exam)
+    cert_cost_local: "ISO 27001 Lead Implementer：约AUD 2,500（5天课程）；CISA考试：$575（USD，ISACA会员）"
+    learning_path:
+      - ISO 27001 Lead Implementer培训（5天，悉尼/墨尔本均有课程）
+      - CISA自学备考（3个月，ISACA官方教材）
+      - 了解APRA CPG 234（澳洲审慎监管局网安指南）和ASD Essential Eight框架
+      - 投递四大悉尼/墨尔本分部、ASX上市公司GRC团队、金融服务机构
+    salary_at_entry: "AUD 75,000–95,000"
+    top_tip: "APRA CPG 234监管推动澳洲金融机构持续招聘GRC人才；了解澳洲本地监管框架（APRA/ASD）是面试时的差异化优势，大多数来自其他国家的应聘者不熟悉"
+    hook: "澳洲商科/法律毕业生转网安：GRC分析师6个月路线，年薪AUD 75k起"
+    shocking_fact: "澳洲APRA CPG 234监管要求推动金融机构大量招聘GRC人才；ASD Essential Eight合规也产生了持续需求——不需要会写代码"
+    category: non_technical_entry
+
+  - slug: non-tech-sales-to-security-sales
+    background: "销售/BD/客户成功背景"
+    target_market: Singapore / Australia
+    timeline_months: 6
+    entry_role: Security Sales Engineer (Presales) / Cybersecurity Account Manager
+    first_cert: CompTIA Security+ + Palo Alto PCNSA 或 CrowdStrike CCFA
+    cert_cost_local: "Security+：SGD 550；PCNSA：$155（Palo Alto官方）；CCFA：免费（CrowdStrike大学）"
+    learning_path:
+      - CompTIA Security+（技术扫盲，2个月）——理解网安产品的技术语言
+      - Palo Alto Networks PCNSA或CrowdStrike CCFA（免费或低价vendor认证）
+      - 研究1-2个主要网安厂商的产品（Palo Alto / CrowdStrike / Trend Micro APAC产品线）
+      - 利用现有销售经验+技术证书申请网安vendor presales岗
+    salary_at_entry: "SGD 80,000–120,000（基本薪）+ 佣金；OTE SGD 150,000–200,000（新加坡顶级网安vendor）"
+    top_tip: "网安销售工程师的核心能力是把技术翻译成业务语言——销售背景+Security+的组合比纯技术背景更适合presales。CrowdStrike/Palo Alto APAC团队明确寻找有销售经验的人"
+    hook: "销售背景进网安：网安销售工程师，OTE新加坡15万+是真的"
+    shocking_fact: "网安销售是整个行业里最难找人的岗位——需要懂技术又能跟C-suite讲故事；有销售经验+Security+就能进CrowdStrike/Palo Alto做客户成功，OTE年薪15万SGD+"
+    category: non_technical_entry
+
+  - slug: non-tech-writer-to-security-content
+    background: "写作/内容/媒体/市场营销背景"
+    target_market: Singapore / China / Remote
+    timeline_months: 3
+    entry_role: Security Content Writer / Security Awareness Consultant
+    first_cert: CompTIA Security+ (可选，增加可信度)
+    cert_cost_local: "Security+：SGD 550（可选）；主要投入：建立写作portfolio（¥0）"
+    learning_path:
+      - CompTIA Security+扫盲（可选，2个月——建立基础技术词汇）
+      - 研究3-5个主要威胁类型（勒索软件、网络钓鱼、供应链攻击）和对应事件案例
+      - 翻译/改写2-3份真实安全威胁报告（Mandiant/CrowdStrike年度报告）为中文科普文章
+      - 建立写作portfolio → 投递网安厂商市场部、安全咨询公司内容岗、媒体/博客
+    salary_at_entry: "SGD 50,000–75,000（新加坡）；¥100,000–180,000（中国）；Remote岗位USD 40,000–65,000"
+    top_tip: "网安内容岗招聘难度超过技术岗——因为懂安全又会写故事的人极少。3个月建立portfolio比任何证书都有说服力：拿一份Mandiant威胁报告，翻译成普通人能看懂的中文文章，这就是你的入场券"
+    hook: "写作背景最快进网安：3个月，不用会代码"
+    shocking_fact: "网安公司市场/内容岗位招聘难度超过技术岗——因为懂安全又会写故事的人极少；这是非技术背景进入行业最快的路"
+    category: non_technical_entry
+
+  - slug: mid-career-non-tech-cissp-path
+    background: "有5年以上其他行业工作经验（含IT相关背景）"
+    target_market: Global
+    timeline_months: 12
+    entry_role: 信息安全经理 / Security Manager
+    first_cert: CISSP ($749 exam)
+    cert_cost_local: "CISSP考试：$749（USD）；备考资料：Prabh Nair视频（YouTube免费）+ Boson模拟题（$99）"
+    learning_path:
+      - Prabh Nair CISSP MindMaps视频（YouTube，完全免费，最佳备考资源之一）
+      - Boson模拟题刷题（$99，业界公认最接近真实考题）
+      - CISSP官方学习指南（可选）
+      - 找一位CISSP mentor完成endorsement（CISSP要求背书流程，非技术）
+      - 目标：中大型企业安全管理岗、CISO助理、安全项目经理
+    salary_at_entry: "SGD 100,000–140,000（新加坡）；¥200,000–400,000（中国T1）；AUD 120,000–160,000（澳洲）"
+    top_tip: "CISSP要求5年工作经验，但不必全部来自网安——IT项目管理、审计、合规都算数。30岁+跨行转型网安管理层，CISSP是最直接的路径，因为它的考试内容本身就是管理视角而非纯技术"
+    hook: "30岁+有工作经验转网安管理层：CISSP是你的直通车"
+    shocking_fact: "CISSP有5年工作经验门槛——但这5年不必全是网安岗；IT项目管理、审计、合规都算数；30岁+转型网安管理层的最优路线"
+    category: governance
