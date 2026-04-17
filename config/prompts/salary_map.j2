@@ -7,6 +7,8 @@
 - 入门薪资（{{ yoe_entry }} 年经验）：{{ entry_salary }}
 - 中级薪资（{{ yoe_mid }} 年经验）：{{ mid_salary }}
 - 高级薪资（{{ yoe_senior }} 年经验）：{{ senior_salary }}
+{% if leadership_salary is defined and leadership_salary %}- 领导层/总监薪资（{{ yoe_leadership | default('10-15') }} 年经验）：{{ leadership_salary }}{% endif %}
+{% if ciso_salary is defined and ciso_salary %}- CISO/首席信息安全官年薪（{{ yoe_ciso | default('15+') }} 年经验）：{{ ciso_salary }}{% endif %}
 - 主要招聘方：{{ top_hiring }}
 - 推荐证书：{{ required_certs }}
 - 内容钩子：{{ hook }}
@@ -21,10 +23,11 @@
 
 **2. 震撼点必须出现在 hook 幻灯片**
 {{ shocking_fact }} 必须以数据形式出现在第一张幻灯片，制造"我没想到是这个数字"的效果。
+{% if ciso_salary is defined and ciso_salary %}如果有 ciso_salary 数据，hook 幻灯片必须用 CISO 年薪数字作为最震撼的开场。{% endif %}
 
 **3. 具体性强制要求**
 每张幻灯片至少提到：
-- 真实经验年限（{{ yoe_entry }}、{{ yoe_mid }}、{{ yoe_senior }}）
+- 真实经验年限（{{ yoe_entry }}、{{ yoe_mid }}、{{ yoe_senior }}{% if leadership_salary is defined and leadership_salary %}、{{ yoe_leadership | default('10-15') }}{% endif %}{% if ciso_salary is defined and ciso_salary %}、{{ yoe_ciso | default('15+') }}{% endif %}）
 - 真实的薪资影响因素（证书/地点/行业方向）
 - 至少一家真实雇主类型（从 {{ top_hiring }} 取）
 
@@ -45,11 +48,28 @@
 
 ## 五张轮播图结构
 
+{% if ciso_salary is defined and ciso_salary %}
+【有CISO数据时 — 展示完整职业天花板梯子】
+- 幻灯片 01 (hook)：用 CISO 年薪 {{ ciso_salary }} 作为震撼开场，"做到顶，能拿多少？"
+- 幻灯片 02 (point 01)：起点——入门薪资（{{ yoe_entry }} 年：{{ entry_salary }} {{ currency }}）
+- 幻灯片 03 (point 02)：爬坡——中高级薪资（{{ yoe_mid }} 年：{{ mid_salary }}  →  {{ yoe_senior }} 年：{{ senior_salary }}）
+- 幻灯片 04 (point 03)：天花板——领导层/CISO（{{ yoe_leadership | default('10-15') }} 年：{{ leadership_salary }}  →  {{ yoe_ciso | default('15+') }} 年：{{ ciso_salary }} {{ currency }}/年）+ 达到这一层需要什么
+- 幻灯片 05 (cta)：你现在哪一层，目标是哪一层
+{% elif leadership_salary is defined and leadership_salary %}
+【有领导层数据但无CISO数据 — 展示3-tier梯子+领导层天花板】
+- 幻灯片 01 (hook)：用领导层薪资 {{ leadership_salary }} 制造震撼感
+- 幻灯片 02 (point 01)：入门级（{{ yoe_entry }} 年：{{ entry_salary }} {{ currency }}）
+- 幻灯片 03 (point 02)：中高级（{{ yoe_mid }} 年：{{ mid_salary }}  →  {{ yoe_senior }} 年：{{ senior_salary }}）
+- 幻灯片 04 (point 03)：领导层天花板（{{ yoe_leadership }} 年：{{ leadership_salary }} {{ currency }}）+ 如何突破
+- 幻灯片 05 (cta)：你现在哪一层
+{% else %}
+【标准3-tier结构】
 - 幻灯片 01 (hook)：用 {{ shocking_fact }} 制造开场震撼感
 - 幻灯片 02 (point 01)：入门级薪资拆解（{{ yoe_entry }} 年，{{ entry_salary }} {{ currency }}，如何到达这个水平）
 - 幻灯片 03 (point 02)：中高级薪资 + 从入门升到中级的关键动作（{{ mid_salary }} / {{ senior_salary }}）
 - 幻灯片 04 (point 03)：市场对比或意外发现（用 {{ shocking_fact }} 的背景数据讲深一层）
 - 幻灯片 05 (cta)：你现在在哪里，你想去哪里
+{% endif %}
 
 ## 输出格式
 请严格输出以下 JSON，不要输出任何 JSON 之外的文字，不要加代码块标记：
