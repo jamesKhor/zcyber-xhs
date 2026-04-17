@@ -8,31 +8,16 @@ llm:
 
 schedule:
   # Day of week (0=Mon, 6=Sun) → archetype
-  # Threat/fear rotation (weeks 1-2): original 7-archetype loop
+  # Career/education rotation — aspirational, not scary
+  # Audience: 18-35 Chinese speakers not in / entering / early in cybersec career
   rotation:
-    0: problem_command
-    1: real_story      # Tue: humanized breach narrative (replaces tool_spotlight)
-    2: everyday_panic
-    3: rank_war        # Thu: opinion poll / debate (replaces before_after)
-    4: news_hook
-    5: mythbust
-    6: hacker_pov
-
-  # Career/education rotation (weeks 3-4): platform pivot — aspirational, not scary
-  # High XHS engagement from 18-35 audience entering or exploring cybersec careers
-  career_rotation:
     0: cert_war        # Mon: head-to-head cert comparison + tier list
     1: salary_map      # Tue: salary reveal by market, role, yoe
-    2: career_entry    # Wed: practical roadmap for zero-background entrants
-    3: cert_war        # Thu: second cert matchup of the week
-    4: news_hook       # Fri: keep news_hook for zcybernews cross-funnel traffic
-    5: salary_map      # Sat: second salary market reveal
-    6: career_entry    # Sun: second entry roadmap topic
-
-  # active_rotation controls which rotation the scheduler reads
-  # values: "threat" | "career" | "mixed"
-  # "mixed" alternates weekly: odd ISO weeks use threat, even ISO weeks use career
-  active_rotation: mixed
+    2: career_entry    # Wed: break-in roadmap for non-security people
+    3: cert_war        # Thu: second cert matchup (different market/angle)
+    4: career_entry    # Fri: second entry roadmap (different background)
+    5: salary_map      # Sat: second market salary reveal
+    6: cert_war        # Sun: cert tier list / ROI analysis
 
   # Generation runs at this hour (24h)
   generate_hour: 8
@@ -48,9 +33,8 @@ publishing:
 
 content:
   # Chinese content (XHS / 小红书)
-  # Career archetypes use career_cta; threat archetypes use cta
-  cta: "更多威胁情报 → 主页 zcybernews"
-  career_cta: "更多网安职业干货 → 关注 zcybernews"
+  cta: "更多网安职业干货 → zcybernews.com/salary"
+  career_cta: "更多网安职业干货 → zcybernews.com/salary"
   safety_disclaimer: "仅限自己设备/授权测试"
   education_disclaimer: "本内容仅供网络安全学习和研究用途"
   ai_label: ""

@@ -17,19 +17,16 @@ from .images.renderer import ImageRenderer
 from .models import PostDraft, TopicEntry
 from .queue import DraftQueue
 
-# Archetypes that use YAML topic banks (threat rotation)
+# Career/education archetypes — the only active rotation
+_CAREER_ARCHETYPES = {"cert_war", "salary_map", "career_entry"}
+
+# Threat archetypes kept for DB backwards-compat (old posts still reference them)
 _THREAT_ARCHETYPES = {
     "problem_command", "tool_spotlight", "everyday_panic",
-    "before_after", "mythbust",
-    "real_story", "rank_war", "hacker_pov",
+    "before_after", "mythbust", "real_story", "rank_war", "hacker_pov",
 }
 
-# Career/education archetypes (XHS pivot — aspirational, not scary)
-_CAREER_ARCHETYPES = {
-    "cert_war", "salary_map", "career_entry",
-}
-
-BANK_ARCHETYPES = _THREAT_ARCHETYPES | _CAREER_ARCHETYPES
+BANK_ARCHETYPES = _CAREER_ARCHETYPES | _THREAT_ARCHETYPES
 
 
 class Orchestrator:

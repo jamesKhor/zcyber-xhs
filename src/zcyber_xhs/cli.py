@@ -436,14 +436,8 @@ def status():
     click.echo(f"Published today:  {published_today}")
     click.echo()
 
-    # Topic bank stats
-    archetypes_with_banks = [
-        # Threat rotation
-        "problem_command", "everyday_panic", "mythbust",
-        "real_story", "rank_war", "hacker_pov",
-        # Career rotation
-        "cert_war", "salary_map", "career_entry",
-    ]
+    # Topic bank stats — career archetypes only
+    archetypes_with_banks = ["cert_war", "salary_map", "career_entry"]
     for archetype in archetypes_with_banks:
         remaining = bank.count_remaining(archetype)
         total = len(bank.list_topics(archetype))
