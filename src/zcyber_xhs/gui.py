@@ -782,9 +782,11 @@ def page_review():
 
                 with st.container(border=True):
                     # Select checkbox in top-right
-                    cb_val = st.session_state.get(f"rq_cb_{post.id}", False)
+                    # Initialize state before rendering — never pass value= alongside key=
+                    if f"rq_cb_{post.id}" not in st.session_state:
+                        st.session_state[f"rq_cb_{post.id}"] = False
                     st.checkbox(
-                        "Select", value=cb_val,
+                        "Select",
                         key=f"rq_cb_{post.id}",
                         label_visibility="collapsed",
                     )
@@ -1244,8 +1246,9 @@ def page_export():
     for post in filtered:
         img_tag = " 🖼️" if post.image_path else " ⚠️ no image"
         label = f"#{post.id} · **{post.archetype}** · {post.title or '(no title)'}{img_tag}"
-        default_val = st.session_state.get(f"export_cb_{post.id}", True)
-        if st.checkbox(label, value=default_val, key=f"export_cb_{post.id}"):
+        if f"export_cb_{post.id}" not in st.session_state:
+            st.session_state[f"export_cb_{post.id}"] = True
+        if st.checkbox(label, key=f"export_cb_{post.id}"):
             selected_ids.append(post.id)
 
     st.divider()

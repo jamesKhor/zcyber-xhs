@@ -409,3 +409,116 @@ topics:
     shocking_fact: "GRC 在 MAS TRM 新规下需求激增，2024-2025 年新加坡金融机构 GRC 岗位招聘量同比增长 35%"
     source_url: "https://nodeflair.com/salaries"
     category: singapore_salaries
+
+  # ── Hong Kong market entries ──────────────────────────────────────────────
+
+  - slug: hk-soc-analyst-salary-2025
+    role: SOC Analyst / Security Operations
+    market: Hong Kong
+    currency: HKD
+    entry_salary: "330,000–420,000"
+    mid_salary: "480,000–660,000"
+    senior_salary: "720,000–1,080,000"
+    monthly_entry: "HKD 27,500–35,000/mo"
+    monthly_mid: "HKD 40,000–55,000/mo"
+    monthly_senior: "HKD 60,000–90,000/mo"
+    yoe_entry: "0-2"
+    yoe_mid: "3-5"
+    yoe_senior: "6+"
+    top_hiring:
+      - HSBC Cybersecurity Operations
+      - Standard Chartered (HK)
+      - Hang Seng Bank
+      - PwC HK Cyber
+      - HKMA(香港金管局)外包商
+    required_certs: ["Security+", "CySA+", "CISM for mid+"]
+    hook: "香港SOC分析师薪资揭秘：金融中心的网安岗，比你想的更好拿"
+    shocking_fact: "香港个人薪俸税最高税率仅15%（标准税率），远低于澳洲32.5%和英国40%；加上港币挂钩美元，购买力换算后薪资比大陆T1城市高出2-3倍"
+    source_url: "https://www.jobsdb.com/hk/en/JobSearch/SearchJobs/information-technology"
+    category: hongkong_salaries
+
+  - slug: cn-to-hk-cyber-migration-salary
+    role: Security Engineer (Mainland China → Hong Kong transition)
+    market: China → Hong Kong
+    currency: HKD
+    entry_salary: "中国T1 ¥200k/年 → 香港 HKD 480k/年（税后差距约50%）"
+    mid_salary: "中国T1 ¥300k/年 → 香港 HKD 720k/年"
+    senior_salary: "中国T1 ¥400k/年 → 香港 HKD 900k-1.2M/年"
+    yoe_entry: "0-3"
+    yoe_mid: "4-7"
+    yoe_senior: "8+"
+    top_hiring:
+      - HSBC / Citi / JPMorgan HK cyber团队
+      - Big 4 HK（PwC/Deloitte/EY/KPMG）
+      - Huawei HK（双语优势明显）
+      - 香港政府资讯科技总监办公室（OGCIO）
+    required_certs: ["CISSP", "CISA", "HKMA认可资质"]
+    hook: "大陆网安工程师跳槽香港：薪资涨多少？签证怎么搞？"
+    shocking_fact: "持CISSP + 3年T1城市经验的大陆工程师，通过香港优才计划（QMAS）成功率极高；入职香港后薪资税后净得通常比大陆高 40-60%，且持香港永久居民身份后可再跳澳洲/英国"
+    source_url: "https://www.immd.gov.hk/eng/services/visas/quality_migrant_admission_scheme.html"
+    category: hongkong_salaries
+
+  - slug: sg-vs-hk-senior-engineer-showdown
+    role: Senior Security Engineer (5+ yoe) — SG vs HK comparison
+    market: Singapore vs Hong Kong
+    currency: USD
+    entry_salary: "不适用（此为高级岗对比）"
+    mid_salary: "SG: USD 80k–110k / HK: USD 75k–105k"
+    senior_salary: "SG: USD 108k–150k / HK: USD 95k–140k（税前）"
+    yoe_entry: "不适用"
+    yoe_mid: "3-5"
+    yoe_senior: "5+"
+    top_hiring:
+      - SG: GovTech / Grab / Sea Group / DBS
+      - HK: HSBC / Standard Chartered / Hang Seng / HKEX
+    required_certs: ["CISSP", "OSCP for technical roles"]
+    hook: "新加坡 vs 香港：高级安全工程师去哪里钱更多？"
+    shocking_fact: "税前新加坡略高；但税后两者接近——新加坡个税最高22%+CPF 20%，香港薪俸税最高15%；香港最大优势是无强制储蓄扣除，拿到手现金更多；新加坡优势是政府补贴+社会福利更完善"
+    source_url: "https://nodeflair.com/salaries / https://www.glassdoor.com/Salaries/hong-kong"
+    category: cross_market
+
+  - slug: my-to-hk-cyber-career-jump
+    role: Security Analyst (Malaysia → Hong Kong)
+    market: Malaysia → Hong Kong
+    currency: HKD
+    entry_salary: "MY MYR 60k/年 → HK HKD 360k–420k/年（税后净得涨约4-5倍）"
+    mid_salary: "MY MYR 90k/年 → HK HKD 540k–660k/年"
+    senior_salary: "MY MYR 120k/年 → HK HKD 720k–960k/年"
+    yoe_entry: "2+"
+    yoe_mid: "4+"
+    yoe_senior: "7+"
+    top_hiring:
+      - Deloitte HK（马来西亚背景普通话+英语双语极受欢迎）
+      - KPMG HK
+      - Standard Chartered（大中华区业务需要华人背景）
+      - 香港金融机构合规部门
+    required_certs: ["CISM", "ISO27001 LA", "CISSP加分项"]
+    hook: "马来西亚安全分析师跳槽香港：年薪直接翻4倍？"
+    shocking_fact: "马来西亚华人背景在香港金融机构竞争力极强——普通话+粤语+英语三语优势，加上熟悉中国大陆市场，HSBC等大行跨境合规团队抢着要"
+    source_url: "https://www.jobsdb.com/hk"
+    category: hongkong_salaries
+
+  - slug: hk-hkma-fintech-security-specialist
+    role: HKMA / FinTech Cybersecurity Specialist
+    market: Hong Kong (Financial sector)
+    currency: HKD
+    entry_salary: "420,000–540,000"
+    mid_salary: "600,000–840,000"
+    senior_salary: "960,000–1,440,000"
+    monthly_entry: "HKD 35,000–45,000/mo"
+    monthly_mid: "HKD 50,000–70,000/mo"
+    monthly_senior: "HKD 80,000–120,000/mo"
+    yoe_entry: "2+"
+    yoe_mid: "5+"
+    yoe_senior: "8+"
+    top_hiring:
+      - HKMA（香港金融管理局）
+      - HKEX（香港交易所）
+      - 汇丰银行网安部门
+      - 渣打银行亚太区安全
+      - 香港虚拟银行（ZA Bank / Mox / Livi）
+    required_certs: ["CISM", "CISSP", "CISA", "ISO27001 LA"]
+    hook: "香港金融网安专家：HKMA监管要求催生的百万年薪岗位"
+    shocking_fact: "HKMA 2023年发布《监管科技白皮书》后，香港虚拟银行和传统银行网安合规岗位需求暴增；持CISM+CISA双证的候选人，香港金融机构开价比新加坡同岗高出10-20%"
+    source_url: "https://www.hkma.gov.hk/eng/key-functions/banking-stability/cybersecurity/"
+    category: hongkong_salaries

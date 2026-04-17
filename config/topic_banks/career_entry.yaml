@@ -528,3 +528,80 @@ topics:
     hook: "30岁+有工作经验转网安管理层：CISSP是你的直通车"
     shocking_fact: "CISSP有5年工作经验门槛——但这5年不必全是网安岗；IT项目管理、审计、合规都算数；30岁+转型网安管理层的最优路线"
     category: governance
+
+  # ── Hong Kong career entry paths ─────────────────────────────────────────
+
+  - slug: cn-mainland-to-hk-cyber-qmas
+    background: "中国大陆网安工程师，3年以上经验，目标通过优才计划移居香港"
+    target_market: Hong Kong
+    timeline_months: 12
+    entry_role: Security Engineer / SOC Analyst (HK)
+    first_cert: CISSP ($749) + HKMA相关知识自学
+    cert_cost_local: "CISSP：$749（USD）；CISA：$575（USD）；两证合计约¥10,000"
+    learning_path:
+      - 备考CISSP（3-6个月）——香港金融机构JD高频要求
+      - 学习香港《个人资料（私隐）条例》（PDPO）和HKMA《科技风险管理指引》（免费下载）
+      - 用香港优才计划综合积分制自测工具评估积分（QMAS官网免费）
+      - 在LinkedIn切换至Hong Kong，开始networking大行HK cyber团队
+      - CISSP取证后直接申请QMAS，附上英文履历和薪资证明
+    salary_at_entry: "HKD 480,000–600,000/年（约¥440,000–550,000，税后净得通常比大陆高50-70%）"
+    top_tip: "QMAS优才计划没有工作offer就能申请——先拿到身份，再在港找工作。CISSP是香港金融机构认可度最高的证书，面试时直接免掉技术笔试环节"
+    hook: "大陆网安工程师移居香港：优才计划+CISSP，12个月上岸路线图"
+    shocking_fact: "香港优才计划成功率：CISSP持证+T1城市3年经验的候选人综合评分通常超过510分（及格线80分），成功率接近90%；很多人不知道可以无需工作邀请直接申请居港权"
+    category: hongkong_entry
+
+  - slug: sg-professional-to-hk-financial-cyber
+    background: "新加坡网安专业人士，有意探索香港金融行业机会"
+    target_market: Hong Kong (Financial sector)
+    timeline_months: 6
+    entry_role: Cybersecurity Consultant / HKMA Compliance Specialist
+    first_cert: CISA ($575) 或 CISM ($415 会员价)
+    cert_cost_local: "CISA：$575（USD）；CISM：$415（USD）"
+    learning_path:
+      - 研究HKMA《科技风险管理指引》vs MAS TRM差异点（HKMA更强调实时监控）
+      - 获取CISA认证（如尚未持有）——香港Big4审计和银行合规团队入门标配
+      - 在LinkedIn直接联系HSBC / Standard Chartered HK cyber hiring manager
+      - 申请Employment Visa（香港工作签注）——有工作offer后约4-6周获批，无需移民局排队
+    salary_at_entry: "HKD 600,000–840,000/年（比新加坡同岗略低5-10%，但税后差距缩小至2-5%）"
+    top_tip: "SG→HK最大优势是英语+普通话双语——香港本地人通常粤语为主，能用普通话对接大陆客户的候选人在外资行极有竞争力；另外香港工作签证处理速度比新加坡Employment Pass快很多"
+    hook: "新加坡网安工程师跳槽香港：6个月入职HSBC/渣打，薪资怎么变？"
+    shocking_fact: "香港薪俸税最高税率仅15%（标准税率），且无强制CPF扣除；新加坡税前比香港高约8-12%，但税后实际到手差距不足5%——很多人算错了"
+    category: hongkong_entry
+
+  - slug: my-chinese-background-to-hk-cyber
+    background: "马来西亚华人网安从业者，普通话+英语+粤语潜力，寻求跨境跳槽"
+    target_market: Hong Kong
+    timeline_months: 8
+    entry_role: Security Analyst / GRC Consultant (HK)
+    first_cert: CISM ($415 会员价) 或 ISO27001 LA
+    cert_cost_local: "CISM：$415（USD会员）；ISO27001 LA培训：MYR 3,000–4,500（马来西亚本地班）"
+    learning_path:
+      - 报考CISM（可在KL考试中心参加）——香港金融机构GRC岗必看证书
+      - 自学粤语基础（Cantonese 101）——不需要流利，但几句粤语暖场在面试中印象极佳
+      - 更新LinkedIn至Hong Kong，主动contact大行HK compliance/cyber猎头
+      - 投递Big 4 HK（PwC/Deloitte）——马来西亚Big4经验直接可转，团队文化相近
+      - 获offer后申请香港工作签证（Employment Visa，4-6周）
+    salary_at_entry: "HKD 360,000–480,000/年（比马来西亚现薪高3-4倍，税率仅15%）"
+    top_tip: "马来西亚华人在香港有天然优势：普通话对接大陆业务 + 英语处理国际监管要求 + 大马人普遍英文书写能力强于本地港人。Big4 HK跨境项目团队特别偏好这种背景"
+    hook: "马来西亚华人网安工程师去香港：薪资涨3倍+税率15%，怎么做到的？"
+    shocking_fact: "香港Big4咨询公司在招聘香港本地毕业生的同时，每年都有专门针对马来西亚/新加坡华人背景的离岸招聘配额——因为三语能力+跨境市场理解在香港稀缺"
+    category: hongkong_entry
+
+  - slug: hk-fresh-grad-cyber-entry
+    background: "香港本地应届毕业生或刚来港工作签证持有人"
+    target_market: Hong Kong
+    timeline_months: 6
+    entry_role: Junior Security Analyst / IT Audit Associate
+    first_cert: CompTIA Security+ (约HKD 3,200) 或 eJPT (USD 200)
+    cert_cost_local: "Security+：约HKD 3,200；eJPT：USD 200（约HKD 1,560）"
+    learning_path:
+      - CompTIA Security+（3个月自学，YouTube免费资源丰富）
+      - 阅读HKMA《科技风险管理指引》2.0版（官网免费，面试必考）
+      - 在JobsDB / LinkedIn HK投递IT审计助理和Junior SOC Analyst岗
+      - 目标公司：四大会计师事务所IT审计部、HSBC/渣打/汇丰的Graduate Programme
+      - 加入香港信息安全专业人员协会（ISPA）——本地networking最佳平台，会员费HKD 500/年
+    salary_at_entry: "HKD 264,000–360,000/年（HKD 22,000–30,000/月），较新加坡入门低约20%，但生活成本和税率相应更低"
+    top_tip: "香港大行Graduate Programme（汇丰、渣打等）每年招收应届毕业生进入网安团队，申请不需要工作经验，但HKMA监管知识是面试加分项——很多人不知道这个门路"
+    hook: "香港应届生进网安：大行Graduate Programme是隐藏快车道"
+    shocking_fact: "汇丰、渣打等大行香港Graduate Programme每年有专属网安方向名额，起薪HKD 22,000–28,000/月，一年内参与真实红队/蓝队项目——比外面培训班有价值100倍"
+    category: hongkong_entry
