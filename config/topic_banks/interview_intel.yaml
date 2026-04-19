@@ -1,0 +1,456 @@
+# Topic bank for interview_intel archetype
+# Insider interview intelligence — real questions, what interviewers want, what kills your chances
+# Tone: like a friend who just came out of the interview telling you everything
+# Highest save rate of any career content format — readers screenshot and keep forever
+
+topics:
+
+  # ── SINGAPORE (7 entries) ──────────────────────────────────────────────────
+
+  - slug: dbs-sg-security-engineer-interview
+    company: DBS Bank
+    role: Security Engineer
+    market: Singapore
+    rounds: 3
+    real_questions:
+      - "我们的网银系统最近出现了一个 OAuth token 没有正确失效的 bug，你会怎么排查和修复？"
+      - "描述一次你发现安全漏洞并向非技术团队解释严重性的经历"
+      - "如果你在代码审查中发现一个 SQL 注入风险，但修复成本高且上线时间紧，你会怎么做？"
+      - "DBS 在新加坡和印度都有大型工程团队，跨时区的安全事件响应你怎么协调？"
+      - "MAS TRM 2021 对金融机构有哪些关键网络安全要求？"
+    what_they_want: "银行安全工程师不是纯技术岗——面试官在看你能不能在业务压力下做风险判断。他们要看你懂 MAS 监管框架、能和开发团队沟通风险、又不会每个 bug 都喊「必须立刻停止发布」。"
+    bad_answer_example: "说「我会直接拒绝发布，安全不能妥协」——听起来原则性强，但暴露了你不懂风险量化和业务优先级权衡，银行安全工程师必须能谈补偿控制和缓解措施。"
+    good_answer_angle: "展示你会用 CVSS 评分量化风险，提出短期缓解方案（如 WAF 规则），争取时间做彻底修复，并记录决策过程——这才是银行想要的安全思维。"
+    salary_range: "SGD 90,000–120,000/年；高级工程师可达 SGD 140k+；含奖金和 RSU"
+    required_certs: ["CISSP", "CEH", "AWS Security Specialty"]
+    hook: "星展银行面试真题曝光"
+    shocking_fact: "DBS 安全工程师面试第二轮会模拟真实事件响应场景，给你一份「脱敏的」安全事件日志，要求你现场分析并写 RCA——没见过这种格式的候选人往往当场卡住。"
+    category: singapore_interview
+
+  - slug: govtech-sg-soc-analyst-interview
+    company: GovTech Singapore
+    role: SOC Analyst
+    market: Singapore
+    rounds: 2
+    real_questions:
+      - "你收到一条 SIEM 告警：某个内部 IP 在非工作时间向外部 IP 大量发送 DNS 请求，你的调查步骤是什么？"
+      - "区分误报和真实威胁，你的判断逻辑是什么？给一个具体例子。"
+      - "你熟悉 MITRE ATT&CK 框架吗？举一个你用它映射告警的实际例子。"
+      - "新加坡政府系统和私营企业系统的安全架构有哪些关键差异？"
+      - "如果你发现一个同事的账号在异常时间登录了敏感系统，你会怎么处理？"
+    what_they_want: "GovTech 的 SOC 面试官在测试你处理「灰色警报」的判断力——不是找一个只会升级所有告警的人，而是能区分噪声和真实威胁、有系统性调查思路的分析师。政府背景还需要你理解数据分类和正式上报流程。"
+    bad_answer_example: "回答「我会立刻封锁那个 IP」——在政府环境中，任何行动都需要先调查、取证、走审批流程，单方面封锁可能中断关键政府服务，这个答案暴露了你缺乏政府环境操作经验。"
+    good_answer_angle: "描述你的调查顺序：被动观察 → 数据收集 → 威胁情报比对 → 形成假设 → 上报给主管决策。强调「不做未经授权的行动」在政府环境中比速度更重要。"
+    salary_range: "SGD 65,000–85,000/年；含政府福利（医疗、年金）；总补偿比市场略低但工作稳定"
+    required_certs: ["CompTIA Security+", "CySA+", "GCIA"]
+    hook: "新加坡政府SOC面试内幕"
+    shocking_fact: "GovTech 的面试只有 2 轮，但第一轮是技术笔试，包含真实告警日志分析题——很多人以为政府机构面试「稳」，结果在笔试就被淘汰了。"
+    category: singapore_interview
+
+  - slug: grab-sg-appsec-interview
+    company: Grab
+    role: Application Security Engineer
+    market: Singapore
+    rounds: 4
+    real_questions:
+      - "Review 这段 Go 代码（给你看一段 Grab 风格的微服务代码），找出所有安全问题并按严重程度排序。"
+      - "Grab 的骑手端 app 和用户端 app 共享一个 API gateway，你如何设计权限模型防止越权访问？"
+      - "描述一次你在 CI/CD 流水线中集成安全扫描工具的经历，遇到了什么阻力？"
+      - "我们正在引入新的第三方 SDK，你的供应链安全审查流程是什么？"
+      - "解释 SSRF 的原理，以及在 Grab 这样有大量内部微服务的环境中为什么特别危险。"
+    what_they_want: "Grab 要找的不是「安全警察」，而是能嵌入开发团队工作流的安全工程师。他们在评估你能不能用开发者语言沟通风险、能不能设计开发者愿意用的安全工具、而不是只会说「这个不安全，不能上」。"
+    bad_answer_example: "在代码审查题中只找到一个 SQL 注入然后停下来——Grab 面试官期望你在 10 分钟内找出 5-8 个问题，包括逻辑漏洞、权限设计问题和信息泄露。只找显而易见的漏洞说明你的 AppSec 深度不够。"
+    good_answer_angle: "展示系统性的代码审查清单思维：输入验证 → 认证授权 → 加密传输 → 日志敏感信息 → 依赖安全 → 业务逻辑。把发现整理成报告格式而不是口头描述。"
+    salary_range: "SGD 100,000–130,000/年；含股票（ESOP）；总补偿可达 SGD 160k+"
+    required_certs: ["OSCP", "BSCP (Burp Suite Certified Practitioner)", "GWEB"]
+    hook: "Grab应聘安全工程师被问啥"
+    shocking_fact: "Grab 的第 4 轮面试是文化和价值观面试，但面试官会问你「描述一次你和工程师发生分歧并最终妥协的经历」——很多安全工程师在这里失分，因为他们的答案是「我坚持了安全标准，对方最后接受了」，Grab 想看的是真正的协作，不是谁赢了。"
+    category: singapore_interview
+
+  - slug: ensign-sg-pentest-interview
+    company: Ensign InfoSecurity
+    role: Penetration Tester
+    market: Singapore
+    rounds: 3
+    real_questions:
+      - "给你一个目标域名，描述你的外部侦察（OSINT）流程，你会用哪些工具和数据源？"
+      - "你在渗透测试中发现了一个严重漏洞，但客户的修复时间窗口只有 3 小时，你会怎么写报告？"
+      - "解释 Kerberoasting 攻击原理，以及在实际 AD 环境中如何检测和缓解。"
+      - "你做过哪些不依赖自动化工具的手动渗透测试？给一个例子。"
+      - "客户说「上次测试公司给我们的报告什么问题都没找到」，你怎么回应？"
+    what_they_want: "Ensign 是新加坡本地最大的网安公司之一，服务大量政府和关键基础设施客户。他们要的不是只会跑 Metasploit 的工具人，而是能写高质量报告、能向高管解释风险、又具备真实手动测试能力的综合型渗透测试员。"
+    bad_answer_example: "描述你的渗透测试流程时只提自动化工具（Nmap、Nessus、Burp Suite 自动扫描）——Ensign 面试官会直接追问「如果这些工具全部被防火墙拦截，你怎么办？」没有手动技巧的候选人在这里会完全卡住。"
+    good_answer_angle: "强调方法论而不是工具：侦察 → 漏洞识别 → 漏洞利用 → 后渗透 → 报告，每个阶段都说出 2-3 个不依赖工具的手动技术。提到你如何让报告让 CTO 和 CISO 都能读懂。"
+    salary_range: "SGD 75,000–100,000/年；高级渗透测试员可达 SGD 120k；含项目奖金"
+    required_certs: ["OSCP", "PNPT", "CRTO"]
+    hook: "新加坡最大安全公司面试关卡"
+    shocking_fact: "Ensign 面试第二轮是实战靶场测试，给你一个内网环境，2 小时内必须拿到 Domain Admin——没做过 HackTheBox Pro Labs 或 TryHackMe 企业靶场的候选人直接在这轮出局。"
+    category: singapore_interview
+
+  - slug: big4-sg-grc-consultant-interview
+    company: "Big 4 (PwC / Deloitte)"
+    role: GRC Consultant
+    market: Singapore
+    rounds: 3
+    real_questions:
+      - "一家金融机构的 ISO 27001 审计中，你发现他们的 BCP 文件已经 3 年没更新，你如何评定这个发现的风险等级并建议行动？"
+      - "MAS TRM 和 MAS CSF 有什么区别？什么类型的机构需要遵守哪个？"
+      - "你如何向一个完全不懂技术的 CFO 解释为什么他们需要为安全意识培训投入预算？"
+      - "如果客户的高管对你的审计发现提出异议，你怎么处理？"
+      - "描述一次你在短时间内交付一份高质量合规报告的经历。"
+    what_they_want: "四大 GRC 咨询岗考的是「顾问思维」：能不能把技术风险翻译成业务语言、能不能在模糊情况下快速做判断、能不能管理客户关系压力。技术知识是基线，但沟通和结构化思维才是差异点。"
+    bad_answer_example: "用「我们会修复所有漏洞」这类答案回答风险评定问题——四大面试官想看你用 likelihood × impact 矩阵量化风险，给出具体的风险等级（高/中/低）和缓解建议，而不是含糊的承诺。"
+    good_answer_angle: "用麦肯锡式结构（问题 → 影响 → 建议 → 实施路径）回答所有案例题。展示你能把 MAS 法规要求映射到具体控制措施，并用商业语言表达。"
+    salary_range: "SGD 65,000–90,000/年（初级顾问）；高级经理可达 SGD 130k+；含绩效奖金"
+    required_certs: ["CISA", "CISSP", "ISO 27001 Lead Auditor"]
+    hook: "四大GRC顾问面试怎么过"
+    shocking_fact: "PwC 新加坡的 GRC 岗有约 40% 的候选人在 HR 电话筛选就被淘汰——原因不是技术不够，而是没研究过 MAS TRM 2021，电话里回答不出「MAS 对金融机构的网络安全要求有哪三个关键领域」这种基础题。"
+    category: singapore_interview
+
+  - slug: sea-group-sg-security-interview
+    company: "Sea Group (Shopee / Garena)"
+    role: Security Engineer
+    market: Singapore
+    rounds: 4
+    real_questions:
+      - "Shopee 在东南亚多个国家运营，如何设计一个跨区域的统一身份认证系统，同时符合各国数据本地化法规？"
+      - "我们的游戏平台（Garena）发现有人用 BOT 刷游戏内货币，从安全工程师角度你会设计什么反制方案？"
+      - "描述你设计或审查过的最复杂的授权模型，你遇到了什么边界案例？"
+      - "在高速增长的产品团队中，你如何确保安全不成为发布瓶颈？"
+      - "解释 JWT 的常见安全配置错误，以及如何在 code review 中发现这些问题。"
+    what_they_want: "Sea Group 的安全团队规模大但人均产出要求极高——他们要的安全工程师能在超高速产品迭代环境中，同时处理 Web、Mobile 和游戏三个不同安全问题域。他们特别看重你能不能设计可扩展的安全方案，而不是逐个处理漏洞。"
+    bad_answer_example: "在 BOT 反制题中只回答「加 CAPTCHA 和限流」——Sea 面试官想看系统性思维：行为分析、设备指纹、账户风控、实时异常检测、对抗对手的升级策略。只说基础防御方案说明你没见过工业级对抗场景。"
+    good_answer_angle: "展示你能从攻击者视角设计防御：「如果我是攻击者，我会绕过 X，所以我在设计 Y 的时候同时加了 Z」。这种思维模式在 Sea 的面试中得分很高。"
+    salary_range: "SGD 100,000–140,000/年；含 RSU（限制性股票单位）；总补偿 Top 10% 可超 SGD 200k"
+    required_certs: ["OSCP", "AWS Security Specialty", "BSCP"]
+    hook: "Shopee母公司安全岗到底考什么"
+    shocking_fact: "Sea Group 的 4 轮面试中第 3 轮是系统设计——但不是普通的系统设计，是「安全系统设计」，你需要在白板上画出一个完整的安全架构，包括威胁建模、控制措施和监控方案。很多纯技术背景的候选人从来没做过这种「大图」思维练习。"
+    category: singapore_interview
+
+  - slug: mas-sg-technology-risk-interview
+    company: "MAS (Monetary Authority of Singapore)"
+    role: Technology Risk Examiner
+    market: Singapore
+    rounds: 3
+    real_questions:
+      - "一家持牌支付机构声称他们的渗透测试已「通过」，但测试是他们自己的内部团队做的，你如何评价这个声明的可信度？"
+      - "MAS 科技风险管理框架（TRM）2021 版对云外包有哪些具体要求？"
+      - "你被分配审查一家小型数字银行的网络安全状况，你的审查计划如何制定？从哪里开始？"
+      - "如果你在审查中发现一个严重的控制缺陷，但机构 CEO 威胁要投诉你，你怎么处理？"
+      - "解释「物质外包」的概念及其在 MAS 框架下的申报要求。"
+    what_they_want: "MAS 招的不是技术大牛，是能代表监管机构行使权力的「审查员」。他们要看你有没有监管心态：独立、客观、不被机构影响、能坚持立场。技术知识是必要条件，但专业判断和职业操守才是差异点。"
+    bad_answer_example: "对「被 CEO 威胁投诉」的情景题说「我会再考虑一下，可能我的判断有问题」——这个答案对监管机构来说是灾难性的。MAS 审查员必须能够独立行使判断，不受被审查机构的压力影响。"
+    good_answer_angle: "展示你理解监管权威的来源和正当程序：记录所有发现 → 按正式流程上报 → 给机构正式回应机会 → 不因外部压力改变审查结论。强调程序正义比快速和谐更重要。"
+    salary_range: "SGD 80,000–110,000/年；含政府公积金、医疗、稳定晋升路径；工作稳定性远高于私营企业"
+    required_certs: ["CISA", "CISSP", "ISO 27001 Lead Auditor"]
+    hook: "进新加坡金管局需要过什么关"
+    shocking_fact: "MAS 面试会要求你签署保密协议才能参加第二轮——因为第二轮的案例研究用的是真实（脱敏）监管案例。很多应聘者以为政府机构面试「死板好过」，结果发现 MAS 的技术深度丝毫不亚于私营银行。"
+    category: singapore_interview
+
+  # ── HONG KONG (5 entries) ─────────────────────────────────────────────────
+
+  - slug: hsbc-hk-cyber-interview
+    company: HSBC HK
+    role: Cybersecurity Analyst
+    market: Hong Kong
+    rounds: 3
+    real_questions:
+      - "HSBC 在香港使用混合云架构，如果 AWS 上的工作负载被攻击者横向移动到本地数据中心，你的检测和响应方案是什么？"
+      - "香港金融机构受到 HKMA 的网络安全评估框架（C-RAF）约束，你对这个框架的主要要求有什么了解？"
+      - "描述一次你处理数据泄露事件的经历，你是如何决定是否需要上报监管机构的？"
+      - "你如何评估一个钓鱼邮件告警的真实风险？从告警到关闭你的完整流程是什么？"
+      - "HSBC 的香港团队需要和伦敦总部密切协作，你如何在时区差异中确保安全事件的高效响应？"
+    what_they_want: "HSBC 香港的安全团队规模庞大，他们在找能独立工作又能跨团队协作的分析师。面试官评估的核心是你的「决策框架」——面对模糊信息时你如何做出有依据的判断，而不是找一个只会按手册操作的执行者。"
+    bad_answer_example: "对数据泄露上报题说「我会立刻上报 HKMA」——这说明你不了解香港的监管上报门槛（需要评估事件严重性、影响范围，符合条件才触发上报义务）。草率上报会浪费监管资源，损害公司声誉。"
+    good_answer_angle: "展示你的上报决策框架：影响评估（受影响客户数量/数据类型）→ 法律义务审查（个人资料条例 PDPO / HKMA 通报要求）→ 内部上报（CISO → 法律团队 → 合规团队）→ 形成上报建议。过程比答案更重要。"
+    salary_range: "HKD 420,000–540,000/年（约 SGD 72k–93k）；含年终奖；总补偿视绩效可高 30%"
+    required_certs: ["CISSP", "CISM", "CySA+"]
+    hook: "汇丰香港网安面试全流程"
+    shocking_fact: "HSBC 香港的第一轮面试是由 HR 主导的英语和普通话双语面试——面试官会突然切换语言测试你的反应，因为这个岗位需要同时服务香港本地团队和大陆监管机构。"
+    category: hongkong_interview
+
+  - slug: standard-chartered-hk-interview
+    company: Standard Chartered HK
+    role: Security Engineer
+    market: Hong Kong
+    rounds: 3
+    real_questions:
+      - "渣打在香港使用了多个 SIEM 平台，你如何设计一个跨平台的告警关联规则来检测 APT 组织的横向移动？"
+      - "解释零信任架构的核心原则，以及在大型遗留银行系统中实施零信任的最大挑战是什么？"
+      - "香港的《网络安全法》（2025）对金融机构有什么影响？你认为关键基础设施运营商最需要关注哪些条款？"
+      - "你如何说服一个「我们从来没被攻击过，所以不需要额外安全投入」的 CIO？"
+      - "描述你设置过的最有效的安全监控规则，它发现了什么真实威胁？"
+    what_they_want: "渣打香港的面试官在测试你的「安全工程师成熟度」——能不能把技术方案和业务价值连接起来，能不能在遗留系统约束下提出实用方案，而不是总说「重构整个系统」。"
+    bad_answer_example: "对零信任实施题说「首先需要替换所有遗留系统」——这个答案暴露了你没有在真实企业环境工作过的经验。渣打这类百年老行有大量无法替换的核心系统，「先替换遗留系统」在这里不可行，面试官想听的是渐进式零信任落地路径。"
+    good_answer_angle: "展示渐进式实施思维：先识别高价值资产 → 在这些资产周围建立微隔离 → 引入身份验证强化（MFA/PAM）→ 逐步扩展到更多系统。强调不需要「一次性完成」零信任。"
+    salary_range: "HKD 480,000–660,000/年（约 SGD 83k–114k）；含年终奖和福利"
+    required_certs: ["CISSP", "OSCP", "AWS/Azure Security"]
+    hook: "渣打香港安全工程师薪资揭秘"
+    shocking_fact: "渣打香港的第二轮技术面试要求你现场解读一段真实（脱敏）的 Splunk 查询输出，然后解释这个告警代表什么威胁。从来没用过 SIEM 工具的候选人在这里会彻底暴露——光靠理论知识完全不够。"
+    category: hongkong_interview
+
+  - slug: big4-hk-cyber-consultant-interview
+    company: "Big 4 HK (PwC / KPMG)"
+    role: Cyber Consultant
+    market: Hong Kong
+    rounds: 3
+    real_questions:
+      - "一家在香港上市的集团公司发现他们的 ERP 系统存在未授权访问记录，你作为外部顾问的初步评估流程是什么？"
+      - "解释 HKMA C-RAF 三个级别（基础、中级、高级）的差异，什么类型的机构适用哪个级别？"
+      - "你如何在 4 周内完成一个合规差距分析，同时管理多个利益相关者的期望？"
+      - "客户要求你把审计发现「软化」，说「这会影响他们的监管评级」，你怎么处理？"
+      - "你做过最复杂的威胁建模工作是什么？用什么方法论？"
+    what_they_want: "四大香港的网安顾问岗比新加坡更注重本地监管知识（HKMA / SFC / PDPO）和中文沟通能力。面试官在评估你能不能独立运作一个客户项目，从提案到交付报告全程不需要高级顾问手把手带。"
+    bad_answer_example: "对「软化发现」的情景题说「我会和客户讨论，看看他们的担心是否有道理」——四大的职业操守要求非常明确：发现的事实不能因为客户压力而更改，可以调整表述方式，但不能改变事实性结论。含糊的答案会让面试官觉得你缺乏职业骨气。"
+    good_answer_angle: "明确表示事实不会因客户压力改变，但可以帮助客户理解「如何展示已有的补偿控制措施」以及「改进计划」——这样既坚持了专业立场，又给了客户建设性帮助。"
+    salary_range: "HKD 480,000–600,000/年（约 SGD 83k–104k）；高级经理 HKD 900k+；含绩效奖金"
+    required_certs: ["CISA", "CISSP", "ISO 27001 Lead Auditor"]
+    hook: "四大香港网安顾问面试暗坑"
+    shocking_fact: "KPMG 香港的网安顾问面试全程用英文进行，但面试结束后会要求你用普通话（或粤语）重新总结你的答案——这是在测试你的双语专业表达能力，因为很多大陆客户的高管只接受中文汇报。"
+    category: hongkong_interview
+
+  - slug: hkex-security-engineer-interview
+    company: HKEX (Hong Kong Exchanges and Clearing)
+    role: Security Engineer
+    market: Hong Kong
+    rounds: 4
+    real_questions:
+      - "交易所系统对延迟极其敏感，你如何设计安全监控方案，确保安全检查不会影响交易系统的低延迟要求？"
+      - "描述一个针对金融交易所的 APT 攻击的典型攻击链，以及每个阶段你会如何检测？"
+      - "HKEX 连接香港、上海、深圳三个交易所（沪深港通），你如何管理跨境数据传输的安全合规风险？"
+      - "如果你发现一个可能影响交易系统的零日漏洞，在没有补丁的情况下你会采取什么补偿控制措施？"
+      - "解释 SWIFT 客户安全计划（CSP）的核心要求，以及如何审计合规性。"
+    what_they_want: "HKEX 的安全工程师需要理解「金融交易系统的特殊性」——任何安全措施引入的延迟都可能影响市场公平性，任何误报都可能中断交易。面试官在寻找能在「不能影响业务」的强约束下设计有效安全方案的工程师。"
+    bad_answer_example: "对零日漏洞题说「先关闭受影响的服务直到补丁发布」——在交易所环境，关闭服务等于关闭市场，这会引发监管调查和市场恐慌。这个答案暴露了你没有考虑过关键基础设施的业务连续性约束。"
+    good_answer_angle: "展示你的补偿控制思维：网络隔离 + 增强监控 + 访问限制 + 紧急响应预案 + 通知监管机构（提前报告，不等事故发生）——在「不能关服务」的约束下最大化安全保障。"
+    salary_range: "HKD 600,000–840,000/年（约 SGD 104k–145k）；含年终奖和股权；香港金融行业顶级薪酬之一"
+    required_certs: ["CISSP", "CISM", "GCIA"]
+    hook: "港交所安全工程师年薪百万港币"
+    shocking_fact: "HKEX 的第 4 轮面试是由首席信息安全官（CISO）亲自主持的，面试内容没有固定题目——CISO 会根据你前三轮的回答即兴提问，测试你在压力下的反应速度和思维深度。只有约 15% 的候选人能走到第 4 轮。"
+    category: hongkong_interview
+
+  - slug: hkma-tech-risk-interview
+    company: "HKMA (Hong Kong Monetary Authority)"
+    role: "IT Examiner / Technology Risk"
+    market: Hong Kong
+    rounds: 3
+    real_questions:
+      - "香港金融机构在采用公有云时，根据 HKMA 的指引，需要在风险评估中涵盖哪些关键领域？"
+      - "你如何评估一家银行的网络安全成熟度？给出你的评估框架和关键指标。"
+      - "描述一次你发现机构「合规但不安全」的情况——他们满足了所有合规要求，但安全风险依然很高，你如何处理？"
+      - "HKMA 的网络弹性框架（CRF）和传统合规审查有什么本质区别？"
+      - "如果被审查机构的 CEO 告诉你「我们已经请了 Big 4 做审计，不需要你再来」，你怎么回应？"
+    what_they_want: "HKMA 和 MAS 类似，寻找具备监管视角的「独立判断者」。但香港市场更复杂——需要理解本地（HKMA/SFC）和大陆监管（人民银行相关规定）的双轨体系。他们要的人能在政治敏感环境中坚持专业判断。"
+    bad_answer_example: "对「合规但不安全」题说「只要满足 HKMA 要求就算合格」——这正是 HKMA 审查员最不想听的答案。监管框架是最低标准，不是安全保障。说这种话说明你把合规和安全混为一谈。"
+    good_answer_angle: "展示你能区分「形式合规」和「实质安全」：合规框架是地板不是天花板。举例说明如何用对话和技术证据（渗透测试结果、安全指标数据）推动机构超越最低合规要求。"
+    salary_range: "HKD 480,000–660,000/年（约 SGD 83k–114k）；含政府福利；稳定晋升通道；比私营银行工作压力更低"
+    required_certs: ["CISA", "CISSP", "CISM"]
+    hook: "香港金管局IT审查员面试解密"
+    shocking_fact: "HKMA 的面试全程用英文，但第三轮的案例研究会涉及大陆金融机构在港经营的合规场景——要求你能同时理解香港和内地监管框架的差异，这是很多本地候选人的知识盲区。"
+    category: hongkong_interview
+
+  # ── AUSTRALIA (4 entries) ─────────────────────────────────────────────────
+
+  - slug: cba-au-security-analyst-interview
+    company: Commonwealth Bank of Australia
+    role: Security Analyst
+    market: Australia
+    rounds: 4
+    real_questions:
+      - "CBA 的客户端 app 每天处理数百万笔交易，你如何设计异常交易检测的安全监控规则，同时控制误报率？"
+      - "描述你使用 MITRE ATT&CK 框架改进检测覆盖率的实际经历。"
+      - "澳大利亚的 SOCI 法案（关键基础设施安全法）对金融机构有哪些新增义务？"
+      - "你在 SOC 值班时收到一个高优先级告警，但你 90% 确信这是误报——你会怎么处理？"
+      - "描述你设计过的最有效的威胁狩猎（Threat Hunting）方案，你在找什么？"
+    what_they_want: "CBA 的安全团队规模是澳大利亚银行业最大的之一，他们不需要全才，他们要的是能在高压环境中独立处理具体技术问题的专才。面试官在评估你的「情境判断力」——面对不完整信息时你如何快速做出有依据的决定。"
+    bad_answer_example: "对 90% 确信是误报的告警说「我会按流程升级给高级分析师」——CBA 的 SOC 告警量非常大，事事升级会让高级分析师窒息。面试官想看的是你有没有能力独立判断、记录理由、关闭误报，并知道什么情况下才真的需要升级。"
+    good_answer_angle: "展示你的误报判断流程：查告警历史（这个规则历史误报率多少）→ 交叉验证（查 EDR / 网络日志 / 用户行为）→ 评估背景（工作时间？正常业务操作？）→ 做出有文档记录的决定。强调文档记录的重要性。"
+    salary_range: "AUD 95,000–125,000/年；含超级年金（Super）11%；总补偿比市场基准高约 10-15%"
+    required_certs: ["CySA+", "GCIA", "Security+"]
+    hook: "澳洲四大银行安全分析师怎么进"
+    shocking_fact: "CBA 的第 3 轮面试是「情景模拟」——面试官扮演一个「焦虑的」业务线经理，向你施压要求立刻解除对某个系统的安全限制，测试你在业务压力下能不能坚持安全立场同时保持专业态度。很多候选人不是输在技术，而是输在处理这种人际冲突。"
+    category: australia_interview
+
+  - slug: asd-au-security-interview
+    company: "ASD (Australian Signals Directorate)"
+    role: Security Analyst
+    market: Australia
+    rounds: 5
+    real_questions:
+      - "解释澳大利亚 Essential Eight 框架中「应用程序白名单」的实施挑战，以及如何在大型企业环境中落地？"
+      - "你如何分析一个怀疑是 APT 组织使用的自定义恶意软件样本？给出你的静态和动态分析流程。"
+      - "描述一次你发现的、需要向组织高层上报的重大安全事件，你如何准备和传达这个消息？"
+      - "在不影响正在进行的取证调查的情况下，你如何隔离一个被感染的系统？"
+      - "澳大利亚面临来自哪些威胁行为者的主要网络威胁？他们的战术、技术和程序（TTP）有什么特征？"
+    what_they_want: "ASD 是澳大利亚的信号情报和网络防御机构，他们要的不是普通企业安全分析师，而是能处理国家级威胁情报的「分析员」。他们特别关注你的逻辑推理能力、分析严谨性、以及在信息不完整时做出有依据判断的能力。"
+    bad_answer_example: "对威胁行为者题给出一个背诵感强的「教科书答案」（如：「中国、俄罗斯、朝鲜、伊朗」）而没有展示对澳大利亚具体威胁环境的理解——ASD 面试官想看你对 APT 组织 TTP 的深度分析，以及这些 TTP 与澳大利亚关键基础设施的交叉点。"
+    good_answer_angle: "展示你能把威胁情报和具体影响连接起来：引用 ASD 公开发布的《澳大利亚网络威胁报告》中的数据，讨论 APT40 等组织针对澳大利亚关键基础设施的具体手法（鱼叉式钓鱼、供应链攻击）。"
+    salary_range: "AUD 110,000–150,000/年；含澳大利亚公务员福利；需 NV1 或 NV2 安全许可（政府资助申请）"
+    required_certs: ["GCIA", "GCIH", "OSCP", "CISSP（高级岗）"]
+    hook: "澳大利亚最顶级情报机构怎么进"
+    shocking_fact: "ASD 的面试流程长达 3-6 个月——第 5 轮之后还有安全背景调查，调查范围包括你过去 10 年的海外旅行记录、所有外国关系、和财务状况。有过在某些国家工作或居住经历的候选人可能在背调阶段被终止，和你的技术能力完全无关。"
+    category: australia_interview
+
+  - slug: cyberx-au-pentest-interview
+    company: CyberCX
+    role: Penetration Tester
+    market: Australia
+    rounds: 3
+    real_questions:
+      - "我们给你一个 IP 段，你怎么做初步侦察确定攻击面，而不会触发防火墙告警？"
+      - "描述一次你在客户网络中发现比预期严重得多的漏洞，你是如何决定是否继续利用还是立刻暂停告知客户的？"
+      - "CyberCX 的很多客户在澳大利亚政府和关键基础设施领域，有什么特别的测试限制你需要注意？"
+      - "如果你的渗透测试工具被客户的 EDR 检测并阻止了，你的下一步是什么？"
+      - "如何写一份让非技术的 CFO 能读懂，但技术团队又觉得有足够深度的渗透测试报告？"
+    what_they_want: "CyberCX 是澳大利亚最大的本地网安公司，他们的客户很多是政府机构，因此格外重视「测试边界意识」——你必须证明你知道什么时候该停下来，不会因为追求「更好的发现」而超出授权范围，给公司带来法律风险。"
+    bad_answer_example: "对「工具被 EDR 检测到」的题目说「我会切换到另一个工具继续」——这暴露了你的红队思维，但 CyberCX 作为服务提供商更关心：是否需要通知客户 SOC（避免误伤他们的事件响应流程）？是否需要暂停测试等待技术确认？先问授权，再谈技术。"
+    good_answer_angle: "展示「授权意识优先」：首先确认这次测试是否是灰盒（客户 SOC 知情）还是黑盒（完全模拟攻击者）→ 根据授权范围决定是否继续 → 记录所有操作的时间戳（法律保护）→ 评估是否需要切换技术。"
+    salary_range: "AUD 90,000–120,000/年；高级渗透测试员 AUD 140k+；含差旅补贴（很多项目需要到客户现场）"
+    required_certs: ["OSCP", "PNPT", "CRTO"]
+    hook: "澳大利亚渗透测试公司真实面试题"
+    shocking_fact: "CyberCX 的面试第二轮会要求你现场展示你的个人工具箱——不是问你用什么工具，而是让你打开你自己的 Kali 或 Parrot 系统，展示你定制化的脚本和工作流。没有个人定制工具集的候选人（只靠默认工具）在这里会显得经验不足。"
+    category: australia_interview
+
+  - slug: big4-au-cyber-grc-interview
+    company: "Big 4 AU (Deloitte / EY)"
+    role: Cyber GRC Consultant
+    market: Australia
+    rounds: 3
+    real_questions:
+      - "澳大利亚 SOCI 法案 2018（2022 年修订）对关键基础设施所有者的主要义务是什么？"
+      - "一家澳大利亚能源公司要求你评估他们的 OT（操作技术）安全成熟度，你的评估框架是什么？"
+      - "描述你如何向一个怀疑网络安全投资价值的董事会展示 ROI（安全投资回报率）？"
+      - "ISM（澳大利亚信息安全手册）和 Essential Eight 的关系是什么？政府机构应该遵循哪个？"
+      - "你在 6 周内需要交付一个完整的 ISO 27001 差距分析，团队只有你和一个初级顾问，如何规划？"
+    what_they_want: "澳大利亚四大网安 GRC 岗比其他地区更注重本地监管知识（SOCI、ISM、Essential Eight、Privacy Act）和 OT 安全意识，因为很多大客户是能源、矿业和关键基础设施。面试官要的是能快速上手独立交付项目的「自驱型顾问」。"
+    bad_answer_example: "对 OT 安全评估题直接套用 ISO 27001 框架——这说明你不了解 OT 环境的特殊性（Purdue 模型、ICS/SCADA 系统、实时性要求）。在澳大利亚 Big 4，OT 安全是增长最快的业务条线，候选人对 IEC 62443 完全不了解是扣分项。"
+    good_answer_angle: "展示你知道 OT 和 IT 的本质差异：实时性 > 机密性（OT 安全第一目标是可用性）、Purdue 参考模型、OT 专用框架（IEC 62443 / NIST CSF for ICS）。能提到这些，已经超越 80% 的候选人。"
+    salary_range: "AUD 85,000–115,000/年；高级顾问 AUD 130k+；Manager 级别 AUD 160k+；含绩效奖金"
+    required_certs: ["CISA", "CISSP", "ISO 27001 Lead Auditor"]
+    hook: "澳洲四大网安GRC顾问年薪揭秘"
+    shocking_fact: "Deloitte 澳大利亚的 GRC 岗面试第二轮是一个 90 分钟的 Case Study——他们会给你一份 30 页的「虚构」关键基础设施公司审计报告，要求你在 30 分钟内准备并向「客户高管」（面试官）汇报 3 个最重要发现。时间压力是刻意设计的，考的是你在压力下的优先级判断。"
+    category: australia_interview
+
+  # ── CHINA (4 entries) ─────────────────────────────────────────────────────
+
+  - slug: alibaba-cn-security-interview
+    company: "阿里巴巴 (Alibaba)"
+    role: Security Engineer P6
+    market: China
+    rounds: 5
+    real_questions:
+      - "阿里云平台每天处理千亿级请求，你如何设计一个低延迟、高准确率的 Web 应用防火墙规则引擎？"
+      - "描述你设计过的最复杂的安全架构，你做了哪些权衡取舍？"
+      - "阿里巴巴的微服务架构有数千个服务间调用，你如何实现服务间的零信任认证？"
+      - "如果你是攻击者，你会从哪里入手攻击阿里云的控制台？（要求真实思考，不要给「正确答案」）"
+      - "你如何评估一个新的安全工具是否值得引入到大规模分布式系统中？"
+    what_they_want: "阿里的 P6 面试（约 5-8 年经验级别）考的是系统性思维和工程深度——不是「你会用什么工具」，而是「你能不能设计可以支撑数亿用户的安全系统」。面试官是同级别的技术大牛，他们在评估你的技术视野够不够宽，同时足够深。"
+    bad_answer_example: "对大规模 WAF 设计题给出一个「用 ModSecurity + 自定义规则」的回答——这是 SMB 级别的方案，暴露了你没有大规模系统设计经验。阿里面试官期望你讨论规则引擎的分布式架构、规则更新的热加载机制、误报率控制、性能压测方法。"
+    good_answer_angle: "展示规模化思维：先问「当前系统 QPS 是多少、P99 延迟要求是什么」→ 再设计分层防护（边缘 + 业务层）→ 讨论规则引擎的决策树优化 → 提出 A/B 测试新规则的灰度方案。越能量化越好。"
+    salary_range: "¥350,000–500,000/年（P6 级别）；含 15-100% 年终奖（视年份和业绩）；RSU（限制性股票）"
+    required_certs: ["CISSP（加分项）", "云安全认证（阿里云/AWS）"]
+    hook: "阿里P6安全工程师5轮面试真题"
+    shocking_fact: "阿里安全工程师面试的第 4 轮是「逆向面试」——面试官会问你「你对我们的安全架构有什么问题要问？」，这轮实际上在测试你的学习欲望和技术敏感度。什么问题都没有的候选人基本确定失败，因为阿里认为好奇心是顶级工程师的核心特质。"
+    category: china_interview
+
+  - slug: tencent-cn-security-interview
+    company: "腾讯 (Tencent)"
+    role: Security Engineer
+    market: China
+    rounds: 5
+    real_questions:
+      - "微信每天有数十亿条消息传输，你如何在端到端加密和内容合规检测之间做技术设计的平衡？"
+      - "腾讯游戏（王者荣耀/英雄联盟）面临大规模外挂攻击，描述你的反外挂技术方案。"
+      - "你在 SDL（安全开发生命周期）实施中遇到的最大阻力是什么？你怎么克服的？"
+      - "解释 Android 系统的 TrustZone 机制，以及攻击者如何可能绕过它。"
+      - "你如何快速评估一个你从未见过的 APK 是否含有恶意代码？"
+    what_they_want: "腾讯的安全面试比阿里更注重产品安全（Product Security）视角——因为腾讯的核心资产是数十亿用户的社交数据和游戏账号。面试官在评估你能不能理解腾讯业务的特殊安全挑战（社交数据隐私、游戏反作弊、移动端安全），而不是套用通用安全框架。"
+    bad_answer_example: "对微信加密和合规的题目说「这是一个不可能同时解决的矛盾，只能牺牲其中一个」——腾讯面试官想看的是工程师的创造性解决方案（如服务端 NLP 检测 + 本地加密 + 合规报告机制的分层设计），给不出方案说明你的工程思维不足。"
+    good_answer_angle: "展示你理解这道题背后的技术和监管双重约束，然后提出一个分层方案。承认存在真实矛盾，但展示如何用技术手段最大化两个目标——这种思维在腾讯这样的公司才能被认可。"
+    salary_range: "¥300,000–450,000/年；含年终奖（通常 2-4 个月工资）；RSU 4 年归属"
+    required_certs: ["CISSP（高级岗加分）", "移动安全相关认证"]
+    hook: "腾讯安全工程师面试题全曝光"
+    shocking_fact: "腾讯的第 5 轮面试（终面）是由安全团队负责人（T4 级别）亲自主持，持续约 2 小时——前 1 小时是技术深挖，后 1 小时是「你为什么选择腾讯而不是阿里或字节？」腾讯特别在意候选人是否真的理解腾讯的产品价值观，给不出差异化答案的候选人常在这里翻车。"
+    category: china_interview
+
+  - slug: cn-state-bank-security-interview
+    company: "国有大行（四大行 / 国开行）"
+    role: Information Security Officer
+    market: China
+    rounds: 3
+    real_questions:
+      - "根据人民银行发布的《金融行业网络安全等级保护实施指引》，三级系统的基本要求有哪些关键控制点？"
+      - "国有银行的信息系统上线前需要通过等级保护测评，你作为信息安全负责人如何准备这个测评？"
+      - "描述你参与过的最大规模的安全演练（如护网行动），你的角色和贡献是什么？"
+      - "银行内部发现员工违规使用个人设备处理敏感客户数据，你的处置流程是什么？"
+      - "人民银行《网络安全法》和银保监会的安全要求有什么关系？"
+    what_they_want: "国有银行的信息安全岗不是纯技术岗——他们在招「懂合规、能管人、会写报告」的「安全管理者」。面试官更在意你的体制内工作经历、对监管框架的熟悉度、以及你能不能用官方语言写材料（等保报告、整改报告、应急预案）。"
+    bad_answer_example: "大量讨论技术手段（防火墙配置、漏洞扫描工具）而忽略合规程序——国有银行的安全工作 60% 是合规文件和流程管理，40% 才是技术。面试官会觉得你「技术思维太重，不适合我们的工作模式」。"
+    good_answer_angle: "展示你熟悉等级保护 2.0 框架、人民银行和银保监会的关键监管要求，能把技术控制措施映射到具体法规条款。强调你有参与或主导合规测评的实际经历。"
+    salary_range: "¥150,000–250,000/年；含五险一金（高比例）；工作稳定；总补偿比互联网低但风险极小"
+    required_certs: ["CISP（强制性加分）", "等级保护测评师", "CISSP（加分）"]
+    hook: "四大国有银行信息安全岗怎么进"
+    shocking_fact: "国有银行的信息安全岗面试通常有一道「政治题」：询问你对网络安全国家战略的理解，或者要求你解释《数据安全法》的核心原则——没有准备这类题目的候选人（特别是海归和民企背景的人）在这里会显得格格不入。"
+    category: china_interview
+
+  - slug: huawei-security-interview
+    company: "华为 (Huawei)"
+    role: Security Engineer
+    market: China
+    rounds: 4
+    real_questions:
+      - "华为的 5G 设备销往全球，你如何在产品设计阶段嵌入安全（Security by Design）而不影响上市时间？"
+      - "你如何对一个嵌入式系统（如路由器固件）做安全审计？给出完整的工具和方法论。"
+      - "华为面临来自多个国家的安全审查，你如何设计一个透明、可验证的安全保证机制？"
+      - "描述一次你发现供应链安全风险并处理的经历。"
+      - "解释 TPM（可信平台模块）在设备安全中的作用，以及攻击者可能如何绕过它。"
+    what_they_want: "华为的安全工程师需要同时理解产品硬件、固件和软件安全——这和纯软件公司完全不同。面试官特别看重你对嵌入式系统安全和供应链安全的理解，以及你能不能在「全球监管审查」的背景下设计安全方案。"
+    bad_answer_example: "对固件安全审计题只说「用 Binwalk 提取固件然后扫描已知漏洞」——这是入门级回答。华为面试官期望你讨论二进制逆向分析（Ghidra/IDA Pro）、自定义协议分析、硬件调试接口（JTAG/UART）以及如何绕过固件保护机制。"
+    good_answer_angle: "展示嵌入式安全的层次：固件提取（Binwalk + 硬件接口）→ 文件系统分析 → 二进制逆向 → 动态分析（QEMU 模拟）→ 协议分析 → 报告。能讨论针对特定处理器架构（ARM/MIPS）的分析差异更好。"
+    salary_range: "¥280,000–400,000/年；含年终奖（视部门和绩效差异很大）；华为独特的 TUP（虚拟股票分红）制度"
+    required_certs: ["CISSP（加分）", "华为认证（HCIA/HCIP Security）"]
+    hook: "华为安全工程师TUP股票分红真相"
+    shocking_fact: "华为的安全工程师面试第 3 轮是英文技术面试——即使你的工作语言是中文，华为会要求你用英文描述一个复杂的安全架构，因为很多项目涉及国际客户和监管机构对接。英文技术表达能力差的候选人在这里频繁翻车。"
+    category: china_interview
+
+  # ── MALAYSIA (2 entries) ──────────────────────────────────────────────────
+
+  - slug: maybank-my-security-interview
+    company: Maybank
+    role: Security Analyst
+    market: Malaysia
+    rounds: 3
+    real_questions:
+      - "马来西亚 Bank Negara Malaysia (BNM) 的《网络风险管理框架》对金融机构的事件上报要求是什么？"
+      - "Maybank 同时在马来西亚、新加坡、印度尼西亚运营，如何统一管理跨境数据访问的安全策略？"
+      - "你如何评估一个针对网银系统的钓鱼攻击活动的影响范围？给出你的调查步骤。"
+      - "描述你用 SIEM 发现了一个真实安全事件的经历，你的分析过程是什么？"
+      - "Maybank 在推进数字化转型，你如何确保新上线的 API 服务的安全性？"
+    what_they_want: "Maybank 作为东南亚最大的银行之一，面试官在找能够在「监管合规」和「技术落地」之间架桥的分析师。他们特别看重你对 BNM 监管框架的理解，以及你有没有在马来西亚金融行业的实际工作经验。"
+    bad_answer_example: "对跨境数据访问题直接说「统一使用一套策略就行」——马来西亚、新加坡、印度尼西亚有完全不同的数据本地化法规（个人数据保护法 PDPA / 印尼 GR 71号法规），「一套策略」说明你没做过跨境合规工作。"
+    good_answer_angle: "展示你理解数据分类（哪些是每个国家要求本地存储的）→ 访问控制按国家数据主权设计 → 审计日志满足各国监管要求。说明你知道多个司法管辖区的数据合规不是技术问题而是法律映射问题。"
+    salary_range: "MYR 60,000–90,000/年；含 EPF（公积金）、SOCSO；银行行业薪资稳定但涨薪幅度有限"
+    required_certs: ["CompTIA Security+", "CySA+", "CISM（高级岗）"]
+    hook: "马来西亚最大银行安全岗薪资真相"
+    shocking_fact: "Maybank 的面试会问你对马来西亚《2023 年数字服务法》（新闻管理相关）的看法——不是考法律知识，而是在测试你能不能在敏感政策话题上保持专业中立态度，因为银行安全官员需要与政府监管机构打交道。"
+    category: malaysia_interview
+
+  - slug: big4-my-cyber-interview
+    company: "Big 4 KL (KPMG / EY Malaysia)"
+    role: Cyber Consultant
+    market: Malaysia
+    rounds: 3
+    real_questions:
+      - "马来西亚《个人资料保护法》（PDPA 2010）的「7 原则」是什么？哪个原则在审计中最常被违反？"
+      - "你如何向一个从没做过网络安全审计的中小企业老板解释为什么他们需要进行渗透测试？"
+      - "描述一次你在客户现场发现的最意外的安全漏洞，当时你如何处理？"
+      - "马来西亚和新加坡的网络安全监管环境有什么主要差异？对跨境运营的公司有什么影响？"
+      - "你如何在 3 个月内建立一个客户公司的基础安全运营能力（SOC 从零到有）？"
+    what_they_want: "马来西亚四大网安顾问岗的独特之处是——客户规模差异极大，从 Petronas 这样的巨型国企到家族企业，都是客户。面试官在评估你能不能根据不同规模和成熟度的客户，灵活调整你的方案深度和沟通风格。"
+    bad_answer_example: "对「向 SME 老板解释渗透测试」题用行话回答（「我会解释 CVE、攻击面、漏洞利用链」）——马来西亚很多中小企业主没有技术背景，用行话解释安全是顾问最常见的失误。面试官想看的是你能不能用「如果你的保险柜没有锁，小偷根本不需要暴力破解」这类比喻沟通。"
+    good_answer_angle: "展示你的「客户等级意识」：先评估客户的技术成熟度 → 选择对应的沟通框架 → 用商业风险语言（「如果发生数据泄露，马来西亚 PDPA 罚款上限是 RM 500k，加上声誉损失」）替代技术语言。"
+    salary_range: "MYR 65,000–96,000/年；Senior Consultant MYR 110k+；Manager MYR 140k+；含绩效奖金"
+    required_certs: ["CISA", "CISSP", "ISO 27001 Lead Auditor"]
+    hook: "吉隆坡四大网安顾问薪资全揭露"
+    shocking_fact: "KPMG 马来西亚网安顾问面试有一轮是完全用马来文（Bahasa Malaysia）进行的——因为很多政府客户的官方沟通需要用马来文，不能流利使用马来文的候选人（包括本地华人）在这轮会遇到明显障碍。"
+    category: malaysia_interview

@@ -14,10 +14,10 @@ schedule:
     0: cert_war        # Mon: head-to-head cert comparison + tier list
     1: salary_map      # Tue: salary reveal by market, role, yoe
     2: career_entry    # Wed: break-in roadmap for non-security people
-    3: cert_war        # Thu: second cert matchup (different market/angle)
-    4: career_entry    # Fri: second entry roadmap (different background)
+    3: interview_intel # Thu: real interview questions + insider intel
+    4: day_in_life     # Fri: hour-by-hour POV of a real cyber role
     5: salary_map      # Sat: second market salary reveal
-    6: cert_war        # Sun: cert tier list / ROI analysis
+    6: exam_reality    # Sun: raw cert exam experience (pass/fail story)
 
   # Generation runs at this hour (24h)
   generate_hour: 8

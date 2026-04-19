@@ -1,0 +1,659 @@
+# Topic bank for day_in_life archetype
+# POV immersion format: realistic hour-by-hour account of a real cybersecurity role
+# Unglamorous moments included for credibility — drives saves and comments on XHS
+# Markets: Singapore, Hong Kong, Australia, China, Malaysia, Remote
+
+topics:
+  # ── Singapore (6 entries) ────────────────────────────────────────────────────
+
+  - slug: sg-govtech-security-engineer-day
+    role: Security Engineer
+    market: Singapore (GovTech)
+    company_type: Government technology agency
+    yoe: 3
+    salary_context: SGD 85,000/year (SGD 7,083/month gross)
+    schedule:
+      - time: "08:15"
+        event: "到办公室，打开 Slack 看一夜的安全告警邮件。3 条是误报，1 条需要跟进——云存储桶配置变更触发了扫描规则。"
+      - time: "09:00"
+        event: "每日 standup 15 分钟。汇报昨天渗透测试结果的修复进度。有一个 finding 卡在变更审批流程里，已经等了 9 天。"
+      - time: "09:30"
+        event: "写漏洞修复跟进邮件，抄送三个部门主管。政府系统变更需要 CAB（变更顾问委员会）批准，不能直接 push fix。"
+      - time: "11:00"
+        event: "检查政府云平台（GCC）的安全合规仪表盘。有 2 个非合规配置，需要写不符合原因说明（POA&M），填表格。"
+      - time: "14:00"
+        event: "午饭后开 GovTech 内部培训——新加坡政府 IM8 策略更新说明会。1.5 小时，大部分内容已经知道，但必须参加并签到。"
+      - time: "15:30"
+        event: "终于有时间做真正的技术活：审查新应用系统的威胁建模文档（STRIDE 方法），给开发团队提安全设计意见。"
+      - time: "17:00"
+        event: "CAB 批准邮件来了——但要求 Friday 在非高峰时段做变更，下班前要准备好 rollback 计划文档。"
+      - time: "17:45"
+        event: "更新 JIRA 工单状态，提交今天的工时记录。下班。"
+    best_part: "做真实的威胁建模和安全设计，影响服务几十万新加坡市民的政府系统——这个意义感很真实。"
+    worst_part: "变更审批流程拖死人。一个明显的配置修复因为跨部门审批要等 2 周，期间系统一直带着已知漏洞运行。"
+    hook: "新加坡政府网安工程师的一天"
+    shocking_fact: "GovTech 安全工程师平均每周要写 3-5 份合规文档——技术时间不到工作时长的 40%。很多人误以为政府岗位技术性强，实际上是文档驱动的。"
+    category: singapore_day
+
+  - slug: sg-dbs-cloud-security-day
+    role: Cloud Security Engineer
+    market: Singapore (DBS Bank)
+    company_type: Major retail bank (Southeast Asia's largest)
+    yoe: 5
+    salary_context: SGD 120,000/year (SGD 10,000/month gross)
+    schedule:
+      - time: "08:30"
+        event: "远程登录，打开 AWS Security Hub 和 Prisma Cloud 仪表盘。昨晚自动扫描产生了 47 条新发现，先按严重级别分类。"
+      - time: "09:15"
+        event: "与开发团队对齐：有 3 个微服务昨天部署了新版本，需要确认它们通过了 SAST 和容器镜像扫描。有 1 个镜像有已知 CVE，发消息要求修复。"
+      - time: "10:30"
+        event: "MAS TRM 合规审查会议——季度检查。要汇报云安全态势评分，准备了 20 页 PPT，会议开了 90 分钟，最后决定下周再开一次。"
+      - time: "12:30"
+        event: "午饭，跟 SecOps 团队聊天。他们正在排查一个 IAM 角色权限过宽的问题，已经告警 3 天了。"
+      - time: "13:30"
+        event: "写 Cloud Security Baseline 文档更新——新增 Kubernetes 网络策略章节。这是给内部开发团队用的，写完要经过 3 轮内部评审。"
+      - time: "15:00"
+        event: "参与 DevSecOps 流水线改进讨论。推动在 CI/CD 中加入 IaC 安全扫描（Checkov），但有团队说会增加 build 时间，博弈中。"
+      - time: "16:30"
+        event: "处理昨晚那个容器漏洞的修复确认，开发团队推了新镜像，验证通过，关闭工单。"
+      - time: "17:30"
+        event: "更新 Confluence，下班。今天没有告警升级，算是好日子。"
+    best_part: "DBS 的 DevSecOps 成熟度在亚洲银行里数一数二，能接触到真实的大规模云安全挑战，技术成长很快。"
+    worst_part: "每个 MAS 合规动作都需要大量文档，有时候感觉 30% 时间在写不会有人看的 PPT。"
+    hook: "DBS银行云安全工程师：年薪12万新币的一天"
+    shocking_fact: "DBS 每天在 AWS 上运行超过 1000 个微服务。云安全工程师处理的告警中，约 60% 是误报——筛选噪音本身就是一门技术。"
+    category: singapore_day
+
+  - slug: sg-big4-pentest-consultant-day
+    role: Penetration Testing Consultant
+    market: Singapore (PwC / Deloitte)
+    company_type: Big 4 consulting firm
+    yoe: 2
+    salary_context: SGD 72,000/year (SGD 6,000/month gross); overtime not uncommon
+    schedule:
+      - time: "08:00"
+        event: "在客户办公室报到——今天是一家本地银行的 web 应用渗透测试项目第 3 天。领了临时访客证，被带到一间隔离的测试室。"
+      - time: "08:30"
+        event: "架设测试环境，确认 VPN 隧道和授权 IP 白名单正确。上午 9 点开始 testing window，规则是只能在营业时间内测试。"
+      - time: "09:00"
+        event: "开始 web 应用扫描。Burp Suite 跑主动扫描，同时手动检查认证逻辑。发现一个 IDOR 漏洞——用户 A 能访问用户 B 的账单记录。"
+      - time: "10:30"
+        event: "记录 IDOR 发现，截图取证，写 PoC 步骤。整理漏洞描述——要用客户能看懂的语言，不能只写技术细节。"
+      - time: "12:00"
+        event: "午饭，在客户食堂吃。不能离开太远，下午 1 点要继续测试窗口。"
+      - time: "13:00"
+        event: "继续测试 API 端点。找到 3 个参数泄露问题，但严重性评级要拿回去跟 senior 讨论后才能确定。"
+      - time: "15:30"
+        event: "测试窗口结束。回公司整理今天的发现，开始起草报告初稿。报告模板很复杂，每个 finding 要写 5 个字段。"
+      - time: "18:30"
+        event: "继续写报告，目标是明天出初稿。Big 4 的报告要求质量很高，一份报告通常要改 3-5 遍。加班到 7 点才回家。"
+    best_part: "每个项目都是不同行业、不同系统——2 年经验已经渗透过银行、医院、政府系统、电商平台，视野开阔得很快。"
+    worst_part: "报告写作占用的时间比测试本身还多。入行前以为每天都在攻击系统，实际上有 40% 时间在写 Word 文档。"
+    hook: "四大网安顾问的一天：不只是'黑'系统"
+    shocking_fact: "Big 4 渗透测试顾问的 testing window 通常只有营业时间（09:00-17:00），周末不能测试。真正的手动测试时间可能只有每天 5-6 小时，其余时间是报告和会议。"
+    category: singapore_day
+
+  - slug: sg-grab-appsec-engineer-day
+    role: Application Security Engineer
+    market: Singapore (Grab)
+    company_type: Southeast Asia super-app (unicorn tech company)
+    yoe: 4
+    salary_context: SGD 108,000/year (SGD 9,000/month gross) + RSU
+    schedule:
+      - time: "09:30"
+        event: "Grab 弹性工时，9:30 开始。打开 GitHub 看昨晚工程师合并的 PR，用自动化工具扫描有没有引入新的安全问题。"
+      - time: "10:00"
+        event: "安全代码审查：一个支付相关 PR。发现硬编码的 API secret 字符串——开发工程师不知道这是问题，友善地评论说明并关联 KB 文章。"
+      - time: "11:00"
+        event: "AppSec 周会，7 人团队对齐本周 bug bounty 新报告。HackerOne 平台上来了 5 个新提交，分配给团队成员确认和复现。"
+      - time: "12:00"
+        event: "处理一个 bug bounty 报告——研究员说找到了 SSRF，但 PoC 不完整。花 45 分钟尝试复现，最终判断是 low 级别误报，写回复邮件给研究员。"
+      - time: "13:30"
+        event: "午饭，在公司食堂吃。Grab 总部在 one-north，食堂选择多。"
+      - time: "14:30"
+        event: "参与新功能安全设计评审——Grab 要推出一个新的外卖骑手评分系统。和产品经理、后端工程师讨论数据隐私设计，防止用户匿名评论被反追踪。"
+      - time: "16:00"
+        event: "更新 AppSec 安全标准文档——把这周发现的 hardcoded secret 问题，加进开发者安全指南，和推送通知一起发给全工程团队。"
+      - time: "17:30"
+        event: "回复 2 个内部 Slack 问题（工程师问安全 API 怎么用）、更新工单状态，下班。"
+    best_part: "在 Grab 做 AppSec 能接触到真实高流量系统——每天有数百万笔支付交易通过你审查过的代码。这个规模感在小公司是不可能有的。"
+    worst_part: "Bug bounty 误报率高，很多研究员提交的报告质量参差不齐，复现、判断、礼貌回复占用了大量时间却产出为零。"
+    hook: "Grab应用安全工程师的一天：守护东南亚支付安全"
+    shocking_fact: "Grab 的 bug bounty 计划每月收到数百份报告，其中约 70% 是无效提交或已知问题。AppSec 工程师花在过滤噪音上的时间，比修真正漏洞的时间多。"
+    category: singapore_day
+
+  - slug: sg-csa-policy-analyst-day
+    role: Cybersecurity Policy Analyst (Governance)
+    market: Singapore (CSA — Cyber Security Agency of Singapore)
+    company_type: Government regulatory agency
+    yoe: 6
+    salary_context: SGD 110,000/year (SGD 9,167/month gross) + civil service benefits
+    schedule:
+      - time: "08:30"
+        event: "到 Maxwell Chambers 附近的 CSA 办公室，早会之前先看昨天在公众咨询期收到的行业反馈——《网络安全（修订）法案》草案。"
+      - time: "09:00"
+        event: "部门晨会，讨论本周优先事项：ASEAN 网络安全工作组会议的材料准备，下周提交，还差两个章节。"
+      - time: "10:00"
+        event: "起草《关键信息基础设施（CII）网络安全要求》更新意见书。把技术标准翻译成政策语言，需要能让非技术的立法者读懂。"
+      - time: "12:00"
+        event: "和能源行业 CII 运营商的线上会议——他们在问合规时间表的问题，花了 1 小时解释政策条文的适用范围。"
+      - time: "13:30"
+        event: "午饭，附近的麦士威熟食中心。"
+      - time: "14:30"
+        event: "审阅一份由外部咨询公司提交的网络安全态势调研报告草稿，提供政策视角意见。报告写法太学术，要求修改为政策简报格式。"
+      - time: "16:00"
+        event: "参加 CSA 与 MAS、IMDA 的跨部门协调会——讨论金融科技公司应当归属哪个监管框架。这类问题没有标准答案，开了 90 分钟。"
+      - time: "17:30"
+        event: "整理今天的会议纪要，更新 ASEAN 文件进度，发给团队同事确认。下班。"
+    best_part: "你写的政策条文会真实影响整个行业的安全标准——看到自己参与起草的法规正式颁布的那一刻，成就感很强。"
+    worst_part: "跨部门协调极其耗时。一个政策问题往往要开十几次会才能达成共识，技术上的正确答案在政治协调中会被稀释。"
+    hook: "新加坡CSA政策分析师：写法规的网安人，一天什么样？"
+    shocking_fact: "CSA 的政策分析师几乎不碰技术工具——工作内容是写文件、开会、和行业谈判。但他们的决策影响着新加坡所有 CII 运营商（电力、水务、金融、医疗、电信）必须遵守的安全标准。"
+    category: singapore_day
+
+  - slug: sg-ciso-bank-day
+    role: Chief Information Security Officer (CISO)
+    market: Singapore (local Singapore bank)
+    company_type: Local Singapore retail bank
+    yoe: 18
+    salary_context: SGD 380,000/year base (total comp with bonus ~SGD 500k+)
+    schedule:
+      - time: "07:30"
+        event: "在家处理邮件，浏览当天安全新闻。一个东南亚银行昨晚被勒索软件攻击的消息——转发给 SecOps 主管，要求评估同类风险暴露面。"
+      - time: "09:00"
+        event: "Board Risk Committee 月度汇报准备——今天下午要向董事会汇报 Q1 网络安全态势。PPT 已经准备好，但 CFO 昨晚要求调整资源投入部分的表达方式。"
+      - time: "10:00"
+        event: "和 CTO 双边会议，讨论即将上线的新核心银行系统的安全架构评审结果。有 2 个高风险发现，CTO 希望推迟修复时间线——需要协商。"
+      - time: "11:30"
+        event: "MAS 监察员来访的准备会——下个月 MAS 技术风险检查（TRM Examination），需要确认所有证据文档就绪。"
+      - time: "14:00"
+        event: "Board Risk Committee 汇报，1.5 小时。董事会里有人对云安全投资回报提问，当场解释 ROI 框架。顺利通过，获批年度安全预算增加 15%。"
+      - time: "15:30"
+        event: "签署 3 份安全相关的供应商合同，每份都要看采购条款里的安全附件是否达标。"
+      - time: "16:30"
+        event: "和 CISO 同行（另一家银行）私下通话，分享行业威胁情报——这种同行网络在新加坡金融圈很重要。"
+      - time: "18:00"
+        event: "回复 SecOps 主管邮件：勒索软件风险评估结论是低暴露面，已有控制措施覆盖。发内部简报给管理层，结束今天工作。"
+    best_part: "能在战略层面决定银行的安全投入方向，推动真正改变机构安全态势的决策。直接向 CEO 汇报，影响力是职业生涯里最大的阶段。"
+    worst_part: "几乎没有时间做技术活——95% 是会议、邮件、文档、政治。18 年积累的技术直觉在这个岗位上反而变成了背景噪音。"
+    hook: "新加坡银行CISO的一天：年薪38万新币买什么？"
+    shocking_fact: "新加坡 CISO 平均每天参加 6-8 个会议，直接用于技术研究的时间不足 30 分钟。很多 CISO 说他们的工作本质上是 PR + 政治 + 预算管理，不是网络安全。"
+    category: singapore_day
+
+  # ── Hong Kong (5 entries) ────────────────────────────────────────────────────
+
+  - slug: hk-hsbc-soc-analyst-day
+    role: SOC Analyst (Security Operations Center)
+    market: Hong Kong (HSBC)
+    company_type: Global investment and retail bank
+    yoe: 2
+    salary_context: HKD 380,000/year (HKD 31,667/month gross)
+    schedule:
+      - time: "08:45"
+        event: "早班交接，接收夜班同事的告警摘要。昨晚有 12 条告警，9 条已关闭，3 条待跟进——其中 1 条是可疑的大陆 IP 登录尝试。"
+      - time: "09:00"
+        event: "打开 Splunk 仪表盘，审查待处理告警。可疑登录尝试：查 IP 信誉、看日志上下文，判断是员工出差还是真实入侵。结果：员工上海出差，关闭。"
+      - time: "10:30"
+        event: "UEBA 工具（用户行为分析）产生了一个异常——一个内部账户在非常规时间大量访问客户数据库。上报给 Tier 2，写 incident ticket。"
+      - time: "12:00"
+        event: "午饭，在 Canary Wharf 区的公司食堂（HSBC 香港总部附近）。"
+      - time: "13:00"
+        event: "分析钓鱼邮件报告——员工举报了一封假冒 IT 部门的邮件。提取 IOC（indicator of compromise），在防火墙上加黑名单，写报告。"
+      - time: "14:30"
+        event: "参加 SOC 月度 KPI 回顾：平均告警响应时间、误报率、已关闭 incident 数量。数据都已经准备好，但 Manager 要求下个月把 MTTR 从 45 分钟降到 30 分钟。"
+      - time: "16:00"
+        event: "更新 runbook 文档——把今天处理钓鱼邮件的流程改进点记录下来，供团队参考。"
+      - time: "17:30"
+        event: "交班给下午班同事，口头交接 3 条待跟进事项，下班。"
+    best_part: "HSBC 的 SOC 工具链是香港最先进的之一，能接触到 UEBA、SOAR 自动化、真实的大型金融机构威胁场景。"
+    worst_part: "12 小时轮班制（有些 SOC 岗）、重复性高，大量告警是误报。前 6 个月的工作感觉是在做机械化分类，容易产生告警疲劳。"
+    hook: "汇丰SOC分析师的一天：香港顶级银行网安岗，真实什么样？"
+    shocking_fact: "HSBC 香港 SOC 每天处理数万条安全告警，但真实 incident 不到 0.1%。分析师 80% 的工作是在告警海洋里找那 0.1%——这就是 SOC 工作的本质。"
+    category: hongkong_day
+
+  - slug: hk-big4-cyber-consultant-day
+    role: Cybersecurity Consultant
+    market: Hong Kong (Big 4 — Deloitte / PwC / KPMG / EY)
+    company_type: Big 4 professional services firm
+    yoe: 3
+    salary_context: HKD 540,000/year (HKD 45,000/month gross)
+    schedule:
+      - time: "08:30"
+        event: "在客户办公室（香港某大型保险公司）开项目启动会——今天是 ISO 27001 差距分析项目第 1 天，向客户团队介绍工作方法论。"
+      - time: "10:00"
+        event: "和客户 IT 经理进行访谈，了解现有安全控制措施。问访谈问题、记录回答、追问细节。客户有些问题答不上来，需要现场帮他们解读 ISO 条款含义。"
+      - time: "12:00"
+        event: "午饭，客户安排的便当，边吃边整理上午的访谈记录。"
+      - time: "13:00"
+        event: "审查客户的安全策略文档——发现版本是 2019 年的，很多条款已过时。在差距分析工作表里标注，估算整改工作量。"
+      - time: "15:00"
+        event: "电话汇报给 Engagement Manager——今天的访谈进度，以及发现客户文档严重缺失的情况。EM 要求在明天的汇报里加一页执行摘要说明风险。"
+      - time: "16:30"
+        event: "回公司（或 WFH），整理访谈笔记、更新差距分析工作表，向团队分享今天收获。"
+      - time: "19:00"
+        event: "还在修改 PowerPoint——明天要向客户 CISO 汇报第一周发现。Big 4 的 PPT 质量要求极高，改了 4 稿。加班。"
+    best_part: "每个项目都接触不同行业（保险、零售、航空、政府），3 年下来积累了非常广的行业经验，这在专职甲方是不可能有的。"
+    worst_part: "Project pressure 很大，加班是常态。香港 Big 4 咨询的 work-life balance 比新加坡差，深夜改 PPT 是真实的生活。"
+    hook: "香港四大网安顾问的一天：加班是常态吗？真实回答"
+    shocking_fact: "香港 Big 4 网安咨询顾问平均每年参与 6-8 个不同项目，每个项目 4-12 周。这种高速度意味着 3 年顾问经验等于甲方 8-10 年的行业曝光量——但代价是没有深度。"
+    category: hongkong_day
+
+  - slug: hk-ti-consultant-investbank-day
+    role: Threat Intelligence Consultant
+    market: Hong Kong (Major Investment Bank)
+    company_type: Investment bank (bulge bracket or regional)
+    yoe: 8
+    salary_context: HKD 1,020,000/year (HKD 85,000/month gross; verified market rate for senior TI at HK investment banks)
+    schedule:
+      - time: "08:00"
+        event: "扫描夜间威胁情报订阅 feed：Recorded Future、Flashpoint、行业 ISAC 报告。标记 2 条与金融行业相关的 APT 活动更新。"
+      - time: "09:00"
+        event: "撰写每日威胁简报（1-2 页）——给 CISO、风险委员会、交易大厅安全团队。要求：用高管能看懂的语言，今天重点写 APT41 针对亚洲金融机构的新 TTP。"
+      - time: "10:30"
+        event: "内部威胁猎人（Threat Hunting）合作：与 SOC 团队分享新发现的 IOC，推动在 SIEM 里建新检测规则。讨论规则误报风险。"
+      - time: "12:00"
+        event: "参加 FS-ISAC（金融服务信息共享与分析中心）亚太区电话会议——分享本月的威胁情报，同时接收其他成员机构的情报分享。"
+      - time: "13:30"
+        event: "午饭后处理一个紧急请求：交易部门收到一封可疑邮件，疑似 spear phishing，要求立即分析附件和发件人。"
+      - time: "14:30"
+        event: "沙盒分析可疑附件：结果是低威胁的销售推广邮件，但发件域名有异常。写短报告给交易部门，建议加强员工认知培训。"
+      - time: "16:00"
+        event: "准备下周董事会威胁景观汇报材料——整理本季度的重要威胁事件、行业攻击趋势，翻译成业务影响语言。"
+      - time: "17:30"
+        event: "回复 2 个外部研究员的情报共享邮件，更新内部情报知识库，结束工作。"
+    best_part: "站在信息的前沿——你在威胁真正成为攻击之前就看到了它。接触到行业顶级情报平台和同行网络，视野在香港金融圈里属于最宽的。"
+    worst_part: "每天阅读大量负面信息（黑客活动、地缘政治冲突对金融系统的威胁），长期下来有一定心理负担。很多情报是模糊的，决策常常要在不确定性里做。"
+    hook: "香港投行威胁情报顾问：月薪8.5万港币，做什么的？"
+    shocking_fact: "香港投行威胁情报职位是整个亚太金融圈薪资最高的安全专业方向之一——年薪 HKD 85k/月（HKD 102 万/年）已是市场验证的中高级水平，远超 SOC 分析师（HKD 30-40k/月）同等年资薪资的 2 倍以上。"
+    category: hongkong_day
+
+  - slug: hk-hkex-security-engineer-day
+    role: Security Engineer
+    market: Hong Kong (HKEX — Hong Kong Exchanges and Clearing)
+    company_type: Stock exchange and financial market infrastructure operator
+    yoe: 5
+    salary_context: HKD 720,000/year (HKD 60,000/month gross)
+    schedule:
+      - time: "08:30"
+        event: "HKEX 市场开盘前检查——扫描交易系统相关安全监控，确认昨晚维护窗口后系统正常。任何安全告警在 09:30 开盘前必须处理。"
+      - time: "09:00"
+        event: "处理一个防火墙规则变更请求：交易部门申请开放一个新的 API 端口。审查请求合理性、评估安全影响、批准或拒绝——今天这个直接批准，条件是加日志记录。"
+      - time: "10:30"
+        event: "漏洞管理周例会：审查本月扫描结果，给各系统的漏洞打优先级。HKEX 的核心系统变更极其谨慎，一个已知漏洞可能要等季度维护窗口才能修复。"
+      - time: "12:00"
+        event: "午饭，HKEX 内部食堂。"
+      - time: "13:00"
+        event: "参与网络分段设计讨论——HKEX 正在扩展数据中心，需要规划新的 DMZ 区域。花 2 小时讨论防火墙策略，很多细节要对齐。"
+      - time: "15:00"
+        event: "处理 SFC（证券及期货事务监察委员会）合规检查的证据收集——监管机构要求提交过去 6 个月的防火墙日志和访问记录。"
+      - time: "16:30"
+        event: "安全意识培训内容更新——下月面向 HKEX 全员的网络钓鱼培训材料审查，确认内容准确性。"
+      - time: "17:30"
+        event: "确认明天的变更发布窗口（周五晚市场收盘后），准备 rollback 计划，下班。"
+    best_part: "HKEX 是香港最关键的金融基础设施之一，系统停机会影响整个香港市场。这种关键性带来的使命感，在一般公司是没有的。"
+    worst_part: "因为系统关键性极高，变更审批极其严格和缓慢。一个紧急安全补丁可能因为变更窗口限制，要等 2-3 周才能上线。"
+    hook: "香港交易所安全工程师的一天：守护港股系统"
+    shocking_fact: "HKEX 交易系统每天处理超过 1,000 亿港元的交易量。安全工程师推送的每一个变更，都需要在 09:30-16:00 市场交易时段之外执行——这意味着所有维护工作在深夜或周末进行。"
+    category: hongkong_day
+
+  - slug: hk-ciso-financial-institution-day
+    role: Chief Information Security Officer (CISO)
+    market: Hong Kong (major financial institution)
+    company_type: Financial institution (bank or insurance group)
+    yoe: 20
+    salary_context: HKD 2,000,000/year base (verified senior CISO level at major HK financial institution; total comp with bonus higher)
+    schedule:
+      - time: "07:00"
+        event: "在家查看隔夜威胁情报摘要，有一个针对亚洲金融机构的新型钓鱼活动——发消息给 Threat Intelligence 团队要求评估。"
+      - time: "09:00"
+        event: "和 HKMA（香港金融管理局）检查员的预备会议——月底监管检查，今天确认文件清单和受访人员安排。"
+      - time: "10:30"
+        event: "Board IT Risk Committee 季度会议（今天是准备，明天是正式汇报）。审阅材料，与公司秘书确认议程，和 CFO 对齐安全投资预算表述。"
+      - time: "12:00"
+        event: "与顾问公司合伙人午餐——讨论下半年的红队演练计划。对方提出的报价比预期高 30%，需要回去跟采购谈。"
+      - time: "14:00"
+        event: "处理一个人事问题：SOC 主管提出辞职，需要在 1 个月内完成知识传接和招聘。这类管理事件占 CISO 时间的比例远超预期。"
+      - time: "15:30"
+        event: "审签 3 份供应商安全评估报告，批准其中 2 家，要求第 3 家补充数据加密说明后再提交。"
+      - time: "16:30"
+        event: "和 CEO、CFO 进行非正式沟通——勒索软件保险续约谈判，CISO 需要提供技术意见。"
+      - time: "18:00"
+        event: "最后处理邮件，发给 HKMA 一份例行月度安全态势报告，结束工作。"
+    best_part: "HKD 200 万的年薪是市场对你 20 年积累的认可。但更重要的是，你在定义整个机构如何看待和管理网络风险——这是真正的影响力。"
+    worst_part: "永远在救火，永远有政治。技术问题只占你挑战的 20%，其余是人、预算、监管、董事会期望。20 年后你会发现最难的不是黑客，是内部流程。"
+    hook: "香港CISO年薪200万港币：买的是什么？"
+    shocking_fact: "香港顶级金融机构 CISO 年薪 HKD 200 万基本薪（加奖金可达 HKD 300 万），是 SOC 初级分析师（HKD 38 万）的 5 倍以上。但调查显示，80% 的 CISO 表示最大压力来源不是技术——而是董事会的期望管理。"
+    category: hongkong_day
+
+  # ── Australia (3 entries) ────────────────────────────────────────────────────
+
+  - slug: au-cba-incident-responder-day
+    role: Incident Responder
+    market: Sydney, Australia (Commonwealth Bank of Australia)
+    company_type: Major Australian retail bank (Big 4 AU bank)
+    yoe: 4
+    salary_context: AUD 120,000/year (AUD 10,000/month gross)
+    schedule:
+      - time: "08:00"
+        event: "交班会——AEST 早班开始。夜班团队汇报：有一个端点被标记可疑进程（PowerShell encoded command），已隔离，等早班深入分析。"
+      - time: "08:30"
+        event: "取得被隔离端点的内存 dump 和日志，开始 triage。CrowdStrike 已抓到 malware 样本，上传 VirusTotal，结合行为分析判断威胁级别。"
+      - time: "10:00"
+        event: "确认是 Cobalt Strike beacon——有人在内网建立了 C2 通道，但还没有横移迹象。立即上报给 Incident Manager，触发 P1 incident 流程。"
+      - time: "10:30"
+        event: "P1 incident 桥接电话——CISO、CTO、SecOps 主管全部在线。汇报初步分析，讨论隔离范围，协调通知澳洲 ACSC（澳洲网络安全中心）的时机。"
+      - time: "12:30"
+        event: "边吃午饭边继续分析——P1 incident 期间基本没有正常午休时间。"
+      - time: "13:00"
+        event: "横向排查：检查同一子网其他端点，发现感染来源是一封员工点击的钓鱼邮件附件。确认感染范围只有 1 台机器，开始清除和取证工作。"
+      - time: "15:30"
+        event: "系统恢复，写 incident timeline 文档。CBA 要求所有 P1 incident 在 72 小时内提交初步报告给 APRA。"
+      - time: "17:30"
+        event: "完成初步报告草稿，提交给 Incident Manager 审阅。今天是高压的一天，明天还要继续写完整的事后分析报告。"
+    best_part: "P1 incident 的那种高度专注感——所有人都在看你，你的分析决定着机构下一步怎么走。那种 in-the-zone 的状态是很多工作给不了的。"
+    worst_part: "P1 incident 没有固定下班时间，午饭经常省了。平静期间又可能几周都只是处理低级别告警，两种状态差异极大，心理调节需要时间。"
+    hook: "澳洲联邦银行应急响应工程师的一天：P1事件爆发时"
+    shocking_fact: "CBA 需要根据 APRA CPS 234 在 72 小时内向澳洲审慎监管局报告重大安全事件——这意味着应急响应团队不只是在处理技术问题，还在同步处理监管合规时钟的压力。"
+    category: australia_day
+
+  - slug: au-asd-security-analyst-day
+    role: Security Analyst (Intelligence & Signals)
+    market: Canberra, Australia (ASD — Australian Signals Directorate)
+    company_type: Australian government intelligence agency
+    yoe: 5
+    salary_context: AUD 140,000/year + NV1 security clearance allowance (effective total ~AUD 155,000)
+    schedule:
+      - time: "08:00"
+        event: "ASD 堪培拉总部，通过安全门禁进入 SCIF（Sensitive Compartmented Information Facility）。设备必须留在门外，使用专用安全终端。"
+      - time: "08:30"
+        event: "浏览分类威胁情报简报——来自盟国情报共享网络的最新威胁指标（Five Eyes 框架）。某些内容无法带出工作区域，需要在这里完成阅读和分析。"
+      - time: "10:00"
+        event: "分析一批从 ASD 传感器网络收集的网络流量数据——寻找 APT 活动指标。大部分是噪音，但今天在某个政府机构流量里发现一个可疑的 DNS beaconing 模式。"
+      - time: "12:00"
+        event: "午饭在安全食堂，不能带手机进来。和同事聊最近在 HackTheBox 上的练习（业余时间——工作内容不能讨论）。"
+      - time: "13:00"
+        event: "将 DNS beaconing 发现写成内部 intelligence report，按 ASD 标准格式。需要引用具体 TTP，映射到 MITRE ATT&CK，评估置信度。"
+      - time: "14:30"
+        event: "参加跨团队技术评审，讨论一个新型 malware 家族的检测规则调整。会议记录不能带出，只能在安全系统里更新。"
+      - time: "16:30"
+        event: "更新内部案例数据库，完成今天的工作日志（这也是安全要求的一部分）。"
+      - time: "17:00"
+        event: "清桌，通过安全门禁离开，拿回手机。今天工作内容除了同组同事，不能和任何人讨论。"
+    best_part: "你接触的威胁情报和分析工具，是澳洲平民部门永远看不到的。知道自己在保护国家关键基础设施，使命感不一样。"
+    worst_part: "保密要求让你几乎无法在职业社交媒体（LinkedIn）展示工作成就。很多有趣的工作永远不能写进简历，转行时会面临无法证明经验的困境。"
+    hook: "澳洲情报机构ASD安全分析师的一天：他们每天在做什么？"
+    shocking_fact: "ASD 安全分析师持有 NV1（Negative Vetting Level 1）安全许可，这为他们带来约 AUD 15,000 年薪溢价。但获得 NV1 审查平均需要 3-6 个月，且每 5 年必须重新审查——职业流动性因此受到限制。"
+    category: australia_day
+
+  - slug: au-cyberx-pentest-consultant-day
+    role: Penetration Testing Consultant
+    market: Melbourne / Sydney, Australia (CyberCX)
+    company_type: Australia's largest independent cybersecurity firm
+    yoe: 3
+    salary_context: AUD 105,000/year (AUD 8,750/month gross)
+    schedule:
+      - time: "08:30"
+        event: "WFH 开始（CyberCX 允许混合办公）。今天是一个 ASX 上市零售公司的外部网络渗透测试第 2 天，目标是外网 IP 范围和 web 应用。"
+      - time: "09:00"
+        event: "继续昨天的侦察工作：Shodan 扫描、子域名枚举、检查 Certificate Transparency logs。发现一个测试环境 subdomain 没有 WAF 保护。"
+      - time: "10:00"
+        event: "测试 dev 子域——发现一个暴露的 .git 文件夹，成功 dump 部分源码。在源码里发现了硬编码的 AWS access key（测试环境的）。"
+      - time: "11:30"
+        event: "验证 AWS key 是否还有效，权限范围是什么。结论：Key 还有效，有 S3 读权限。立即通知客户联系人——这是需要即时披露的高危发现。"
+      - time: "12:30"
+        event: "午饭，在家随便吃。"
+      - time: "13:00"
+        event: "继续测试主应用——OWASP Top 10 系统性测试。发现 2 个 Reflected XSS，1 个 broken access control。记录，截图，写 PoC。"
+      - time: "15:30"
+        event: "开始写今天的发现记录——这会成为最终报告的基础。每个 finding 要写：描述、影响、重现步骤、修复建议。"
+      - time: "17:30"
+        event: "今天测试窗口结束，整理发现清单发给 Senior Consultant 确认，明天开始写完整报告。"
+    best_part: "找到一个真实的高危漏洞（比如今天的 AWS key 暴露）并帮客户在攻击者之前修复它，这种成就感是这份工作最真实的价值。"
+    worst_part: "客户质量参差不齐。有些客户购买渗透测试只是为了合规打勾，找到真实漏洞反而不高兴，这很消耗积极性。"
+    hook: "澳洲最大网安公司渗透测试顾问的一天"
+    shocking_fact: "CyberCX 的渗透测试顾问平均每年参与 20-30 个不同客户项目。找到的最有价值漏洞通常不是复杂的 0-day，而是最基础的配置错误——比如今天找到的 git 文件夹暴露和硬编码 API key，这类问题在 ASX 上市公司里依然普遍存在。"
+    category: australia_day
+
+  # ── China (4 entries) ─────────────────────────────────────────────────────────
+
+  - slug: cn-alibaba-security-engineer-day
+    role: Security Engineer (P6)
+    market: Hangzhou / Beijing, China (Alibaba Group)
+    company_type: Major internet technology company (tier-1 big tech)
+    yoe: 5
+    salary_context: "¥450,000/year (base + bonus; P6 级别在杭州/北京的市场参考水平)"
+    schedule:
+      - time: "10:00"
+        event: "阿里弹性工时，10 点上线。打开钉钉，看昨晚安全监控产生的告警摘要，确认自动响应规则有没有误触发。"
+      - time: "10:30"
+        event: "处理一个内部安全平台 Bug——业务团队反馈某个 API 扫描策略覆盖不到新上线的微服务。排查配置，修复，验证，更新文档。"
+      - time: "12:00"
+        event: "午饭，园区食堂（阿里西溪园区选择非常多）。"
+      - time: "13:30"
+        event: "代码安全审计：审查电商业务团队一个支付逻辑的 PR，发现条件竞争（race condition）漏洞。写详细评审意见，附上修复建议代码。"
+      - time: "15:00"
+        event: "参加安全能力建设分享会——组内同事分享最新攻击手法研究，45 分钟，质量很高，阿里内部技术分享文化比较好。"
+      - time: "16:00"
+        event: "下一个版本安全需求评审：新功能的数据分类分级方案，根据《数据安全法》和《个人信息保护法》要求提意见。"
+      - time: "18:00"
+        event: "更新内部安全 wiki，回复 2 个来自业务团队的安全咨询 Lark 消息。"
+      - time: "20:00"
+        event: "在家继续处理一个安全自动化工具的代码改进，大厂氛围，晚上还在工作。提交 PR 后下线。"
+    best_part: "阿里的安全技术栈和数据规模是世界级的——你接触的系统每天处理亿级交易，解决的安全问题在业界也是领先的。"
+    worst_part: "大厂节奏快、要求高，但也有不少时间花在内部政治和流程上。P6 已经是中级，但内卷氛围下晋升 P7 竞争异常激烈。"
+    hook: "阿里P6安全工程师的一天：年薪45万怎么过的？"
+    shocking_fact: "阿里 P6 安全工程师年薪 ¥45 万（base + bonus），但阿里园区内部绩效考核（KPI）淘汰率约 10%——意味着每年有 10% 的人因绩效不达标离职。高薪背后是高压力的持续交付要求。"
+    category: china_day
+
+  - slug: cn-bank-grc-manager-day
+    role: GRC Manager (Governance, Risk & Compliance)
+    market: Beijing / Shanghai, China (State-owned bank)
+    company_type: State-owned commercial bank (国有商业银行)
+    yoe: 8
+    salary_context: "¥280,000/year (国有银行 GRC 经理级，北京/上海；含绩效奖金，稳定但上限明确)"
+    schedule:
+      - time: "08:30"
+        event: "到行，打开 OA 系统看审批待办——今天有 4 个系统上线申请需要安全合规审批，每个要审查等保材料、渗透测试报告、风险评估表。"
+      - time: "09:30"
+        event: "信息安全委员会月度例会准备——整理本月风险事件台账、合规整改进度表，打印 20 份给各分行代表。"
+      - time: "10:30"
+        event: "例会开始，1 小时。汇报等保 2.0 整改进度：3 个系统已通过测评，2 个还在整改。分行代表提问题，大部分是理解政策的问题，逐一解释。"
+      - time: "12:00"
+        event: "食堂午饭，国有银行的食堂补贴很好，基本免费。"
+      - time: "13:30"
+        event: "人民银行（央行）发布了新的金融数据安全监管通知，花 1.5 小时研读，标记需要行动的条款，计划下周内部培训。"
+      - time: "15:00"
+        event: "和 IT 部门对接：一个核心系统的等保整改，IT 说资源不够，无法在期限内完成。需要写风险接受申请，请分管副行长签字。"
+      - time: "16:30"
+        event: "更新年度信息安全风险评估报告——这是监管必交文件，每年一次，今年目标下月提交银保监会。"
+      - time: "17:30"
+        event: "下班（国有银行基本准点下班，这是与互联网公司的最大区别）。"
+    best_part: "国有银行稳定——不裁员、不内卷、有假期、食堂补贴好。8 年资历在这里意味着尊重和相对充裕的资源。"
+    worst_part: "晋升极慢，薪资上限明显。¥28 万在北京已经不低，但 5 年后也可能只有 ¥35 万——相比互联网的成长空间差距悬殊。做真正有挑战性技术活的机会很少。"
+    hook: "国有银行信息安全经理的一天：稳定的代价是什么？"
+    shocking_fact: "国有银行 GRC 经理年薪约 ¥28 万，但国有银行员工享有的隐性福利（住房公积金比例高达 12%+12%、补充医疗、食堂补贴、带薪假期）折算下来，实际总薪酬包比账面数字高 20-30%。"
+    category: china_day
+
+  - slug: cn-qianxin-pentest-day
+    role: Red Team Engineer (渗透测试/红队工程师)
+    market: Beijing, China (奇安信 Qi An Xin)
+    company_type: Major domestic cybersecurity vendor (乙方)
+    yoe: 4
+    salary_context: "¥200,000/year (奇安信红队工程师 4 年经验市场水平；项目奖金另计)"
+    schedule:
+      - time: "09:30"
+        event: "到公司（奇安信北京总部），今天是一个央企客户的攻防演练项目第 2 周。打开 VPN 进入隔离测试网络。"
+      - time: "10:00"
+        event: "继续昨天的内网横移——已控 1 台 Web 服务器，今天目标是扩大权限，尝试达到域控。运行 BloodHound 分析 AD 路径。"
+      - time: "11:30"
+        event: "发现一条通过 Kerberoasting 可攻击的服务账户路径。尝试，成功拿到 hash，线下爆破中。等结果期间继续其他侦察。"
+      - time: "12:30"
+        event: "食堂午饭，边吃边看 hash 爆破进度——还没出来，继续跑。"
+      - time: "13:30"
+        event: "Hash 爆破成功，获得一个高权限账户。按测试授权书，到此为止，不实际获取域控权限，记录 attack path 截图。"
+      - time: "14:30"
+        event: "开始整理攻击路径文档——attack chain 图、每步的截图、时间戳、使用的工具。报告格式很重要，客户需要看懂你是怎么进来的。"
+      - time: "16:00"
+        event: "内部技术分享：组里一个同事分享最新 APT 技术研究，1 小时，质量很高。奇安信内部技术氛围比较浓。"
+      - time: "18:00"
+        event: "继续整理报告，今天写完攻击路径章节。¥20 万的岗位在奇安信属于中级，写报告是日常工作的重要组成部分，不只是打靶。"
+    best_part: "奇安信的客户覆盖面极广——从央企到政府到金融，每个项目都不一样。4 年下来技术广度很难在甲方积累。"
+    worst_part: "项目多的时候出差频繁，有时候一个月只在北京待一周。赶报告和赶项目期限是常态，生活节奏不稳定。"
+    hook: "奇安信红队工程师的一天：真正的'合法黑客'生活"
+    shocking_fact: "奇安信每年参与国家级攻防演练（护网行动/HW 行动），其红队工程师在演练期间 24 小时轮班——不是 9-6，是真正的全天候作战。护网季节每月加班超过 100 小时并不罕见。"
+    category: china_day
+
+  - slug: cn-startup-solo-security-day
+    role: Solo Security Engineer (唯一安全工程师)
+    market: Shanghai, China (Series B startup)
+    company_type: 互联网创业公司 (Series B, ~200人)
+    yoe: 3
+    salary_context: "¥180,000/year (上海 Series B 创业公司独立安全岗市场水平)"
+    schedule:
+      - time: "10:00"
+        event: "远程开工（公司弹性工时）。查看昨晚 WAF 告警——有 3 条 SQL 注入尝试，来自同一 IP，已被自动封锁，确认后关闭。"
+      - time: "10:30"
+        event: "今天有个新功能上线——用户头像上传功能。产品没有提前通知安全，临时要求你做上线前的快速安全审查。15 分钟快速看代码，发现没有文件类型白名单验证，要求修复后才能上线。"
+      - time: "11:30"
+        event: "公司这个月要做 SOC 2 Type I 审计（客户要求）——你是唯一懂安全的人，所以你同时是 SOC 2 项目的负责人。今天开始准备证据清单，有 50+ 控制点要核对。"
+      - time: "13:00"
+        event: "工位旁边随便吃，或者点外卖。一个人的安全团队没有 '午饭讨论技术' 的对象。"
+      - time: "14:00"
+        event: "HR 发来邮件：新员工背景调查供应商的合同要你审安全条款。你还要兼职审采购合同的安全部分。"
+      - time: "15:00"
+        event: "回复 CTO 关于云成本优化方案的问题——他想关掉一个 WAF 策略来减少延迟，你要解释为什么不能关，然后提出折中方案。"
+      - time: "16:30"
+        event: "更新安全策略文档（应 SOC 2 审计要求），写《访问控制策略》V1.0——公司之前没有这个文件。"
+      - time: "19:00"
+        event: "SOC 2 文档还没写完，加班。一个人扛所有事，没有人可以分担，这就是 solo security 的现实。"
+    best_part: "你在这家公司是从零到一的安全体系建设者。3 年后这段经历会在简历上非常亮眼——很多大厂 AppSec 岗位喜欢这种'从无到有'的经历。"
+    worst_part: "一个人的安全团队意味着没有人帮你 review 决策、没有 mentor、出了问题是你一个人背锅。孤独感和责任感同时压着你。"
+    hook: "创业公司唯一安全工程师：一个人顶一个团队是什么感觉？"
+    shocking_fact: "中国超过 60% 的 Series B 以下创业公司没有专职安全人员。当一家公司终于招了第一个安全工程师，这个人通常要同时承担：漏洞扫描、合规审计、代码审查、员工培训、采购合同审查——相当于 3-4 个大厂角色的工作量，拿的是 1 个人的薪资。"
+    category: china_day
+
+  # ── Malaysia (2 entries) ─────────────────────────────────────────────────────
+
+  - slug: my-maybank-security-analyst-day
+    role: Security Analyst
+    market: Kuala Lumpur, Malaysia (Maybank)
+    company_type: Malaysia's largest bank and Southeast Asia regional bank
+    yoe: 3
+    salary_context: MYR 72,000/year (MYR 6,000/month gross; Malaysia's competitive bank rate for mid-level security)
+    schedule:
+      - time: "08:30"
+        event: "到 Menara Maybank，刷卡进入办公室。打开 SIEM 仪表盘查看昨晚的告警——有 2 条需要跟进，其他已经自动关闭。"
+      - time: "09:00"
+        event: "早会：团队 8 人对齐今日事项。本周有 BNM（马来西亚国家银行）RMIT 合规审查准备工作，优先级最高。"
+      - time: "09:30"
+        event: "跟进一个可疑账户访问告警——一个内部账户在非常规时间登录了核心系统。联系 IT，确认是维护工程师非常规作业，不是入侵，关闭工单。"
+      - time: "10:30"
+        event: "BNM RMIT 合规准备：整理过去 3 个月的安全事件台账，格式化成监管要求的报告模板。这是纯文档工作，枯燥但重要。"
+      - time: "12:30"
+        event: "午饭，附近的 berjaya times square foodcourt，花费约 MYR 15-20。同事大部分在附近吃马来餐或中餐。"
+      - time: "13:30"
+        event: "参与漏洞管理月度审查——IT 团队汇报本月补丁应用进度，安全团队跟进高危漏洞的修复状态。有 3 个漏洞超期未修复，需要风险接受签字。"
+      - time: "15:00"
+        event: "更新员工安全意识培训内容——下月全行员工培训，更新最新的钓鱼邮件案例和操作指引。"
+      - time: "17:00"
+        event: "准时下班，Maybank 文化相对正常，不鼓励长期加班。"
+    best_part: "Maybank 的东南亚网络意味着有机会接触跨国项目（新加坡、印尼、菲律宾等分行），本地银行但视野不局限于马来西亚。"
+    worst_part: "MYR 6,000 在 KL 税后实到约 MYR 5,400。和新加坡同等职位（SGD 6,000+）相比薪资差距明显，加上林吉特汇率，落差感是真实存在的。"
+    hook: "马来亚银行安全分析师的一天：KL网安从业者真实生活"
+    shocking_fact: "Maybank 安全分析师月薪 MYR 6,000，税后约 MYR 5,400（约 SGD 1,620）。相比之下，同等职位在新加坡月薪 SGD 5,500-7,000（约 MYR 18,000-23,000）——同样的工作，薪资差距超过 3 倍。这是马来西亚网安人才流失新加坡的主要原因。"
+    category: malaysia_day
+
+  - slug: my-kl-remote-sg-employer-day
+    role: Remote Security Engineer (KL-based, Singapore employer)
+    market: Kuala Lumpur, Malaysia (Remote for Singapore company)
+    company_type: Singapore fintech or tech company (remote-first team)
+    yoe: 4
+    salary_context: SGD 75,000/year paid in SGD (约 MYR 250,000/year at ~1:3.3 exchange rate; 马来西亚个人所得税税率约 24%)
+    schedule:
+      - time: "09:00"
+        event: "家里开工（Bangsar 或 Mont Kiara 一带的公寓）。新加坡上班时间是 9-6，KL 同步。打开 Slack 确认新加坡同事的更新，查看昨晚部署的安全告警。"
+      - time: "09:30"
+        event: "Daily standup（视频会议）——新加坡时间 9:30，马来西亚也是 9:30（同时区）。汇报昨天完成的 IAM 审查，今天计划做云安全配置检查。"
+      - time: "10:00"
+        event: "AWS Security Hub 配置合规检查：扫描结果显示有 12 个非合规配置，按严重性排序，和开发团队分工处理。"
+      - time: "12:00"
+        event: "午饭——在家自己煮或者下楼去附近 hawker center，MYR 10-15 解决。这是远程工作最实在的福利之一。"
+      - time: "13:00"
+        event: "参与新功能安全设计评审（视频）。新加坡 PM 介绍需求，你提安全要求——数据加密、API 认证方式、日志记录规范。"
+      - time: "14:30"
+        event: "写本季度的安全态势报告初稿——远程岗位需要更强的文档能力，因为沟通全部异步。"
+      - time: "16:30"
+        event: "处理 2 个内部员工的安全问题咨询（Slack 消息），回复 vendor 关于安全评估问卷的邮件。"
+      - time: "18:00"
+        event: "新加坡下班时间到，你也下班。关掉工作电脑，KL 生活成本低，省下来的钱可以提前退休或多储蓄。"
+    best_part: "新加坡薪资水平（SGD 75k = 约 MYR 250k），在 KL 生活。KL 生活成本是新加坡的 40-50%，同样的钱在 KL 过得好很多——住更大的房子，外食更便宜，不用 CPF 强制储蓄。"
+    worst_part: "职业发展可见度低——远程工作容易被忽视，晋升机会少于 in-office 同事。工作和生活的边界模糊，在家工作有时候感觉永远开着工作状态。"
+    hook: "KL远程为新加坡公司打工：月薪折算2万令吉，值得吗？"
+    shocking_fact: "马来西亚远程工作者为新加坡雇主工作，需要在马来西亚申报并缴纳个人所得税（税率最高 24%）——但无需缴纳新加坡 CPF。税后实到约 MYR 190,000/年，相当于 KL 本地高级经理薪资水平，但工作量是新加坡全薪级别。很多人不知道税务申报的要求。"
+    category: malaysia_day
+
+  # ── Remote / Cross-border (2 entries) ───────────────────────────────────────
+
+  - slug: remote-bug-bounty-hunter-day
+    role: Full-time Bug Bounty Hunter
+    market: Remote / Global (primarily HackerOne and Bugcrowd platforms)
+    company_type: Self-employed / independent researcher
+    yoe: 0  # years of formal employment — bug bounty experience started from self-study
+    salary_context: "~USD 80,000/year average (highly variable; median full-time hunter ~USD 50k-80k; top 1% exceed USD 500k)"
+    schedule:
+      - time: "09:00"
+        event: "浏览 HackerOne 和 Bugcrowd 平台更新：有没有新开放的私有项目邀请？今天有 1 个新邀请——某金融科技公司的 Web 应用。"
+      - time: "09:30"
+        event: "开始侦察新项目：子域名枚举、技术栈识别、浏览 JS 文件找隐藏端点。这个阶段是最耗时的，但也是找到别人忽视漏洞的关键。"
+      - time: "11:00"
+        event: "在一个旧版 API 端点发现了不正确的对象级权限控制（BOLA/IDOR）——用户 A 可以通过修改 ID 读取用户 B 的订单。"
+      - time: "11:30"
+        event: "详细测试 BOLA 影响范围，写 PoC，截图。准备 HackerOne report——格式很重要，写得越清楚，triager 越快响应，奖励出得越快。"
+      - time: "12:30"
+        event: "提交 report。奖励金额未知，可能 USD 150，也可能 USD 5,000——取决于公司评级和漏洞影响。等待期间继续测试其他功能。"
+      - time: "13:00"
+        event: "午饭，在家随便解决。Bug bounty 没有午休概念，你自己定节奏。"
+      - time: "14:00"
+        event: "检查上周提交的 2 份报告状态：1 份已 triaged，等待奖励；1 份被标记为 Informative（不予奖励）——这是常态，要接受。"
+      - time: "15:00"
+        event: "研究最新发布的安全博客和 writeups——其他研究员分享的技术让你了解最新攻击手法，持续学习是 bug bounty 的核心。"
+      - time: "17:00"
+        event: "今天没有新的重大发现，但侦察工作打好了基础。Bug bounty 的节奏是这样的：大多数天没有收获，偶尔一个 critical 报告能带来几千美元。"
+      - time: "19:00"
+        event: "关掉电脑，结束工作——或者继续，没有人管你。自由和自律同时要求你。"
+    best_part: "完全自主——你决定工作什么、什么时候工作、在哪里工作。找到高价值漏洞后的收入在几个小时内到账，成就感极其直接。"
+    worst_part: "收入极度不稳定。好月可能 USD 20,000，坏月可能 USD 0。精神上的压力：你不知道这个月能不能找到漏洞，也不知道找到的漏洞会不会被判为 Informative（白做）。"
+    hook: "全职漏洞赏金猎人的一天：年入百万是真的吗？"
+    shocking_fact: "HackerOne 平台数据显示，95% 的注册研究员从未获得超过 USD 1,000 的奖励。真正靠 bug bounty 全职生活的人不到 500 人（全球）——但这 500 人里，顶级研究员年收入超过 USD 1,000,000。这个行业的收入分布极度不平均。"
+    category: remote_day
+
+  - slug: sg-contractor-day
+    role: Independent Security Consultant / Contractor
+    market: Singapore (self-employed, contract engagements)
+    company_type: Self-employed / independent consultancy
+    yoe: 10
+    salary_context: "SGD 180,000/year (实际合同金额更高，约 SGD 220k-250k，扣除 CPF、保险、行政成本后净收入约 SGD 180k)"
+    schedule:
+      - time: "08:00"
+        event: "在家看邮件——2 封来自不同客户的询价：一个银行要做云安全评估（2 周项目），一个初创公司想要虚拟 CISO 服务（每月 2 天）。"
+      - time: "09:00"
+        event: "当前项目：一家跨国制造商的 OT（操作技术）安全评估第 3 天。远程接入客户 jump server，审查工业控制系统的网络分段设计。"
+      - time: "11:00"
+        event: "发现 PLC（可编程逻辑控制器）管理网络和企业办公网络之间没有充分隔离——这是 OT 安全里的高危配置。详细记录，截图。"
+      - time: "12:00"
+        event: "午饭，在家自己煮或者附近 hawker center，SGD 5-8 解决。独立顾问的一个福利：灵活的午饭时间。"
+      - time: "13:00"
+        event: "写评估报告的执行摘要章节——这是最难写的部分，要让非技术的 CFO 和 CEO 读懂网络分段问题的业务影响。"
+      - time: "14:30"
+        event: "回复询价邮件：云安全评估报价 SGD 12,000（2 周，包含渗透测试和报告），虚拟 CISO 服务报价 SGD 3,500/月（每月 2 天）。发出后等候。"
+      - time: "15:30"
+        event: "行政工作：更新 Xero 会计账目，发上月的两张客户发票（一个已超 30 天还未收款），处理企业所得税预缴。"
+      - time: "17:00"
+        event: "LinkedIn 上有猎头来消息——问是否考虑全职 CISO 职位，package SGD 280k。回复说目前不考虑，维护关系。"
+      - time: "18:00"
+        event: "收到一个报价接受确认——银行客户接受了云安全评估，下周一开始。更新自己的项目日历，下班。"
+    best_part: "年收入比同等级全职员工高 40-60%，时间自主，能选择自己想做的项目类型。10 年经验转化成真正的定价权——每天的费率你自己定。"
+    worst_part: "行政负担是隐形的全职工作：开发票、追收款、报税、CPF 自缴、续保……这些全部是你一个人的事。另外，项目和项目之间的空窗期没有收入，需要保持足够的现金储备。"
+    hook: "新加坡独立安全顾问的一天：年入18万新币，自由的代价"
+    shocking_fact: "新加坡独立安全顾问的日费率（day rate）通常是 SGD 1,200-2,500/天，看专业领域和经验。但要达到稳定的 SGD 180k 年净收入，需要全年维持约 70-80% 的利用率（即平均每周 3.5-4 天有收费工作）——找项目和养客户关系本身就是一份工作。"
+    category: remote_day

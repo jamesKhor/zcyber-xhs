@@ -22,9 +22,13 @@ class Archetype(str, Enum):
     RANK_WAR = "rank_war"               # Thu: opinion poll / debate
     HACKER_POV = "hacker_pov"          # Sun: immersive 2nd-person scenario
     # ── Career / education rotation (XHS pivot) ──────────────────────────
-    CERT_WAR = "cert_war"               # Mon: head-to-head cert comparison
-    SALARY_MAP = "salary_map"           # Tue: real salary bands by market/role
-    CAREER_ENTRY = "career_entry"       # Wed: break-in roadmap for non-security people
+    CERT_WAR = "cert_war"               # Mon/Thu/Sun: head-to-head cert comparison
+    SALARY_MAP = "salary_map"           # Tue/Sat: real salary bands by market/role
+    CAREER_ENTRY = "career_entry"       # Wed/Fri: break-in roadmap for non-security people
+    DAY_IN_LIFE = "day_in_life"         # Fri: hour-by-hour real career day POV
+    INTERVIEW_INTEL = "interview_intel" # Thu: real interview questions + insider intel
+    EXAM_REALITY = "exam_reality"       # Sun: raw cert exam experience (pass/fail)
+    CAREER_MYTH = "career_myth"         # Monthly: debunking career myths with data
 
 
 class PostStatus(str, Enum):

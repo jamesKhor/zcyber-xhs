@@ -63,12 +63,16 @@ def _get_db():
 # ---------------------------------------------------------------------------
 
 # NOTE: Keep in sync with orchestrator.py _CAREER_ARCHETYPES + _THREAT_ARCHETYPES
-# Active career rotation (Mon cert_war / Tue salary_map / Wed career_entry / repeat)
+# Active career rotation — all 7 have YAML topic banks
 ARCHETYPES = [
     # ── Active career archetypes ─────────────────────────────────────────────
-    ("cert_war",     "证书对决"),    # Mon / Thu / Sun
-    ("salary_map",   "薪资揭秘"),   # Tue / Sat
-    ("career_entry", "入行路线"),   # Wed / Fri
+    ("cert_war",       "证书对决"),    # Mon
+    ("salary_map",     "薪资揭秘"),   # Tue / Sat
+    ("career_entry",   "入行路线"),   # Wed
+    ("interview_intel","面试情报"),   # Thu
+    ("day_in_life",    "职业日记"),   # Fri
+    ("exam_reality",   "备考实录"),   # Sun
+    ("career_myth",    "谣言破解"),   # Monthly special
     # ── Retired threat archetypes — kept so old DB posts can be re-run ──────
     ("problem_command", "命令技巧 (旧)"),
     ("real_story",      "真实事件 (旧)"),
@@ -83,8 +87,9 @@ ARCHETYPES = [
 ]
 
 BANK_ARCHETYPES = [
-    # Active career archetypes — have YAML topic banks
+    # Active career archetypes — all have YAML topic banks
     "cert_war", "salary_map", "career_entry",
+    "day_in_life", "interview_intel", "exam_reality", "career_myth",
 ]
 
 # ---------------------------------------------------------------------------
@@ -209,6 +214,22 @@ def page_generate():
             "career_entry": (
                 "🔥🔥🔥", "🔥🔥",
                 "Roadmap saves — '收藏了以后用' + comments from people sharing their background",
+            ),
+            "interview_intel": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "Top save rate — '截图备用' + study group shares; insider intel goes viral",
+            ),
+            "day_in_life": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "POV immersion — '这和我想的不一样！' + tag 朋友; saves as aspiration",
+            ),
+            "exam_reality": (
+                "🔥🔥🔥", "🔥🔥",
+                "Failure stories build trust — '我也是！' floods comments + saves for prep",
+            ),
+            "career_myth": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "Debunk drives comment wars — believers vs truth-knowers; high share rate",
             ),
             # ── Retired threat archetypes (旧) ────────────────────────────
             "problem_command": (
@@ -778,9 +799,13 @@ def page_review():
     # ── Two-column XHS-style grid ─────────────────────────────────────────
     arch_colors = {
         # Active career archetypes
-        "cert_war":     "#00B8FF",   # cyan — brand primary
-        "salary_map":   "#FFD54F",   # gold — money / aspiration
-        "career_entry": "#69FF47",   # green — growth / entry
+        "cert_war":       "#00B8FF",   # cyan — brand primary
+        "salary_map":     "#FFD54F",   # gold — money / aspiration
+        "career_entry":   "#69FF47",   # green — growth / entry
+        "interview_intel":"#FF6B9D",   # pink — insider / exclusive
+        "day_in_life":    "#A78BFA",   # purple — immersion / POV
+        "exam_reality":   "#FB923C",   # orange — intensity / honesty
+        "career_myth":    "#F43F5E",   # red — debunk / alert
         # Legacy threat archetypes (旧) — kept for old DB posts
         "problem_command": "#818CF8",
         "everyday_panic":  "#FF7043",

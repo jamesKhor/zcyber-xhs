@@ -17,8 +17,11 @@ from .images.renderer import ImageRenderer
 from .models import PostDraft, TopicEntry
 from .queue import DraftQueue
 
-# Career/education archetypes — the only active rotation
-_CAREER_ARCHETYPES = {"cert_war", "salary_map", "career_entry"}
+# Career/education archetypes — the active rotation (all have YAML topic banks)
+_CAREER_ARCHETYPES = {
+    "cert_war", "salary_map", "career_entry",
+    "day_in_life", "interview_intel", "exam_reality", "career_myth",
+}
 
 # Threat archetypes kept for DB backwards-compat (old posts still reference them)
 _THREAT_ARCHETYPES = {

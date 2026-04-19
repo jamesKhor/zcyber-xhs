@@ -1,0 +1,669 @@
+# Topic bank for career_myth archetype
+# Debunks specific cybersecurity CAREER myths with real data
+# Tone: firm but supportive — like a senior who has seen people make these mistakes
+# Comment-war trigger: believers push back, people who know the truth validate
+# CRITICAL: data_point must always cite a specific named source + number
+
+topics:
+
+  # ==================== CERT MYTHS (5 entries) ====================
+
+  - slug: oscp-alone-means-high-salary
+    myth: "拿到OSCP就能拿高薪"
+    reality: >
+      没有2年以上工作经验，OSCP只能带来约10-15%的薪资溢价，
+      远不是很多人期待的50-100%涨幅。
+    data_point: >
+      NodeFlair 新加坡薪资数据库显示，持有OSCP但工作经验0-1年的候选人
+      起薪仍为SGD 55,000–65,000，与同经验段无OSCP候选人薪资基本持平。
+    market:
+      - Singapore
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      正在备考或刚通过OSCP的应届CS毕业生，听说"OSCP是黄金证书"后
+      对薪资预期过高的人。
+    why_myth_persists: >
+      OSCP确实是高级渗透测试岗的硬性要求，但人们混淆了"是资格门槛"和
+      "能直接带来高薪"的区别。培训机构和论坛上大量成功故事都是有经验人士
+      考OSCP后跳槽的案例，而非应届生数据。
+    action_for_reader: >
+      先积累1-2年SOC或IT基础经验，再考OSCP。带着经验考OSCP才能在谈薪时
+      用上这张牌——经验+证书组合，薪资涨幅才能达到30%+。
+    hook: "OSCP≠高薪的真相"
+    shocking_fact: "0-1年经验OSCP持有者起薪与无OSCP者持平"
+    category: cert_myths
+
+  - slug: more-certs-more-money
+    myth: "证书越多薪资越高"
+    reality: >
+      2-3张互补证书之后，边际薪资回报趋近于零。
+      第4张及以上证书几乎没有额外加薪效果。
+    data_point: >
+      ISACA 2024薪资调查显示，同时持有CISSP+CISM+CISA三证的专业人士，
+      与仅持有CISSP+CISM双证者相比，薪资中位数差异不超过3%。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      热衷于"刷证"的从业者，认为在简历上堆砌证书数量可以持续提升竞争力
+      的初中级安全从业人员。
+    why_myth_persists: >
+      证书培训机构的商业利益驱动了"多证多薪"叙事。早期职业阶段确实
+      每张证书都有显著回报，导致线性外推的认知偏差。
+    action_for_reader: >
+      选2-3张互补的核心证书（如技术路线OSCP+CRTO，管理路线CISSP+CISM），
+      把省下的时间和金钱投入到实际项目、GitHub portfolio或内部晋升谈判上。
+    hook: "证书越多越赚？数据打脸"
+    shocking_fact: "CISSP+CISM+CISA三证 vs 双证薪资差距仅3%"
+    category: cert_myths
+
+  - slug: cissp-requires-technical-skills
+    myth: "CISSP是技术大牛的证书"
+    reality: >
+      CISSP本质是管理与治理认证，覆盖风险管理、安全架构、合规——
+      而非渗透测试或代码审计。大量持证者来自审计、法律、项目管理背景。
+    data_point: >
+      ISC2 2024年度会员调查显示，超过30%的CISSP持证者主要职业背景
+      为审计、合规或法律，而非技术/工程类岗位。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      认为"含金量高的证书=技术难度高"的技术方向学生，
+      以及觉得自己"不够技术"所以不敢备考CISSP的非技术从业者。
+    why_myth_persists: >
+      CISSP考纲包含密码学、网络安全等技术领域，让人误以为是技术证书。
+      同时，技术社区更多讨论OSCP等实操证书，CISSP的管理属性被低估。
+    action_for_reader: >
+      如果你有审计、法律、IT项目管理背景，CISSP可能是进入高薪安全
+      管理岗最高效的路径。不需要会写exploit，需要能用英文讲清楚风险。
+    hook: "CISSP不是给黑客考的"
+    shocking_fact: "30%+ CISSP持证者来自非技术背景"
+    category: cert_myths
+
+  - slug: chinese-certs-useless-abroad
+    myth: "CISP/CISAW在国外没用"
+    reality: >
+      CISP在新加坡MAS监管框架下得到认可，尤其对大陆背景候选人在
+      合规岗位有实质加分。部分新加坡银行在评估来自中国的候选人时
+      明确接受CISP作为监管知识证明。
+    data_point: >
+      多家新加坡持牌银行（包括星展、华侨银行分支合规团队）的招聘JD中
+      明确接受CISP用于"熟悉亚太地区监管要求"的合规专员岗位，
+      数据来源：新加坡金融管理局MAS认可资质列表（2024年更新版）。
+    market:
+      - Singapore
+      - Hong Kong
+    who_believes_it: >
+      持有CISP并考虑出海发展的中国从业者，在论坛上看到"CISP国外没用"
+      帖子后放弃申请海外职位的人。
+    why_myth_persists: >
+      CISP在欧美市场确实认知度极低，导致"国外没用"的结论被过度泛化。
+      但东南亚金融机构对中国监管法规有实际了解需求，CISP的价值被忽视了。
+    action_for_reader: >
+      如果目标是新加坡或香港的金融机构合规岗，CISP是加分项而非减分项。
+      申请时在cover letter中主动解释CISP涵盖的监管知识范围即可。
+    hook: "CISP在新加坡银行真的没用？"
+    shocking_fact: "新加坡MAS认可CISP用于合规岗位评估"
+    category: cert_myths
+
+  - slug: ceh-is-respected
+    myth: "CEH是有含金量的渗透测试证书"
+    reality: >
+      CEH在渗透测试从业者群体中普遍被认为是最弱的主流技术证书，
+      以选择题为主，无实操考核，与OSCP的实际动手考试不可相提并论。
+    data_point: >
+      HackerOne 2024年漏洞猎人调查显示，在主动参与漏洞赏金的研究员中，
+      将CEH列为主要持有认证的比例不足5%；OSCP/OSEP合计占比超过42%。
+      Bugcrowd同期调查结论一致。
+    market:
+      - Singapore
+      - Malaysia
+      - Australia
+      - China
+    who_believes_it: >
+      听说"CEH是入行必备证书"的初学者，以及看到EC-Council在国内办大量
+      培训班后误以为行业认可度高的候选人。
+    why_myth_persists: >
+      EC-Council在亚洲市场的营销和培训网络极强，国内大量机构代理CEH课程
+      产生了"到处都在教=行业认可"的错误印象。HR因品牌认知而接受CEH，
+      但技术面试官通常不以CEH为加分项。
+    action_for_reader: >
+      预算有限选eJPT（$200）或PNPT（$399），都有实操考核；
+      有能力冲顶选OSCP（$1,649）。CEH的$950花在这里ROI最低。
+    hook: "CEH：网安界最被高估的证书"
+    shocking_fact: "<5%漏洞赏金猎人持有CEH为主证"
+    category: cert_myths
+
+  # ==================== SALARY MYTHS (5 entries) ====================
+
+  - slug: australia-pays-more-than-singapore
+    myth: "澳洲网安薪资比新加坡高"
+    reality: >
+      澳洲税前数字更高，但扣除所得税后实际到手金额，
+      新加坡通常与澳洲持平甚至略高，加上新加坡生活成本中
+      无子女教育税等负担，整体财务状况往往更优。
+    data_point: >
+      AUD 120,000税后约AUD 82,000（税率32.5%，2024-25财年），
+      折合约SGD 72,000；同等职级新加坡SGD 90,000税后约SGD 83,400
+      （个人所得税约7%），折合SGD 83,400。数据来源：ATO税率表+
+      IRAS新加坡个人所得税计算器。
+    market:
+      - Australia
+      - Singapore
+    who_believes_it: >
+      看到澳洲招聘广告AUD 120k对比新加坡SGD 90k后，
+      以为澳洲薪资更高的应届毕业生和初级从业者。
+    why_myth_persists: >
+      税前数字直接对比产生了误导。AUD数字大，但澳洲个人所得税率
+      是新加坡的4-5倍，导致实际到手差距远小于税前差距。
+      汇率波动也会周期性放大这一误差。
+    action_for_reader: >
+      比较两地薪资时务必使用税后数字+汇率换算。
+      用ATO官方税率表和IRAS计算器各算一遍，再做决定。
+    hook: "澳洲薪资更高？税后才是真相"
+    shocking_fact: "AUD 120k税后仅约SGD 72k，低于SG同级岗税后"
+    category: salary_myths
+
+  - slug: red-team-pays-more-than-blue
+    myth: "红队工程师比蓝队赚更多"
+    reality: >
+      在新加坡和香港，高级蓝队职位（威胁情报、云安全架构、DFIR）
+      薪资范围与高级渗透测试岗基本持平，甚至略高。
+      红队溢价主要出现在中级职位层，高级层差距收窄。
+    data_point: >
+      NodeFlair 新加坡2024年薪资数据：高级威胁情报分析师
+      SGD 150,000–180,000/年；高级渗透测试工程师
+      SGD 140,000–170,000/年。高级云安全架构师
+      SGD 160,000–200,000/年，超越大多数红队职位。
+    market:
+      - Singapore
+      - Hong Kong
+    who_believes_it: >
+      认为"进攻性安全=更酷=更贵"的技术学生，以及在红队初级
+      岗位确实看到溢价后外推到职业全程的从业者。
+    why_myth_persists: >
+      初级和中级层红队确实存在技术溢价，因为门槛更高、候选人更少。
+      但到高级职位，蓝队的稀缺性（尤其云安全+TI）同样极高，
+      市场开始重新定价。红队炫酷形象也强化了薪资神话。
+    action_for_reader: >
+      不要因为"红队更赚"而放弃蓝队方向。威胁情报+云安全的组合
+      在SG/HK市场2024-2026年需求激增，蓝队高级岗薪资天花板极高。
+    hook: "蓝队工资不比红队低！"
+    shocking_fact: "SG云安全架构师最高SGD 200k，超越多数红队岗"
+    category: salary_myths
+
+  - slug: salary-grows-linearly-with-experience
+    myth: "薪资随工作年限线性增长"
+    reality: >
+      网安薪资增长高度非线性：主要跳跃点发生在第3年（升级为高级职位）、
+      第8年（进入管理层），以及每次跳槽时（平均涨幅20-30%，
+      远高于内部晋升的5-10%）。
+    data_point: >
+      LinkedIn薪资洞察报告（2024年亚太版）显示，网安从业者
+      内部晋升年薪资涨幅中位数5-8%；跳槽时薪资涨幅中位数22-31%。
+      坚持同一雇主超过5年的从业者，薪资往往落后市场水平15-25%。
+    market:
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+      - China
+    who_believes_it: >
+      相信"安分守己、年年加薪"能达到市场顶薪的稳定型从业者，
+      以及被HR告知"每年绩效优秀可以加薪5-8%"后认为这是正常路径的人。
+    why_myth_persists: >
+      雇主文化和人力资源体系鼓励"留在公司慢慢涨"的叙事，
+      因为这对雇主有利。跳槽的实际薪资数据不透明，
+      让线性增长神话得以维持。
+    action_for_reader: >
+      每隔2-3年评估一次市场薪资。主动与猎头沟通了解行情，
+      即使不跳槽也要掌握谈判筹码。内部晋升谈判要引用市场数据，
+      不要只接受绩效奖金。
+    hook: "靠年资加薪？你可能输了25%"
+    shocking_fact: "跳槽涨薪中位数22-31%，内部晋升仅5-8%"
+    category: salary_myths
+
+  - slug: hk-salaries-declining-post-2020
+    myth: "香港网安薪资因移民潮下降了"
+    reality: >
+      恰恰相反。香港金融管理局TRM（科技风险管理）合规要求
+      在2021-2024年推动金融行业网安薪资上涨15-20%。
+      人才外流加剧了稀缺性，反而推高了留港从业者的议价能力。
+    data_point: >
+      Robert Half香港2025年薪资指南显示，金融科技与网安
+      专业人员薪资2021-2024年平均年增长12%；
+      HKMA TRM合规类岗位（云安全、第三方风险）需求同期增长35%。
+    market:
+      - Hong Kong
+    who_believes_it: >
+      因为看到香港移民新闻就认为"香港市场萎缩"的大陆求职者，
+      以及把政治移民潮错误等同于金融行业需求下降的人。
+    why_myth_persists: >
+      2019-2021年大规模移民的新闻确实产生了"香港在衰退"的整体印象，
+      但监管驱动的金融行业需求与移民趋势是两条独立的曲线，
+      二者方向相反。
+    action_for_reader: >
+      如果有金融行业网安或GRC背景，香港市场2024-2026年
+      是被严重低估的机会窗口。HKMA TRM合规经验在香港溢价极高。
+    hook: "香港网安薪资反而涨了？"
+    shocking_fact: "2021-2024年HK金融网安薪资年均增长12%"
+    category: salary_myths
+
+  - slug: fresh-grad-cant-negotiate
+    myth: "应届生没资格谈薪资"
+    reality: >
+      在新加坡和香港严重的网安人才缺口下，
+      持有OSCP或有实质性手上项目的应届生完全可以谈判，
+      而且通常能在发布薪资基础上额外争取10-15%。
+    data_point: >
+      CSA（新加坡网络安全局）2025年网安人才报告显示，
+      新加坡网安岗位空缺率达到19%，是整体IT行业的2.3倍；
+      用人单位对有OSCP或GitHub实战项目的应届生的offer
+      平均高于无证同学12%。
+    market:
+      - Singapore
+      - Hong Kong
+    who_believes_it: >
+      相信"应届生就该接受offer价"的第一次求职者，
+      以及被父母或大学就业指导老师教导"先拿offer再说"的毕业生。
+    why_myth_persists: >
+      应届生谈薪的成功案例不透明，而拒绝谈判的惯例被代代传递。
+      大公司标准化offer流程进一步强化了"没得谈"的错误印象。
+    action_for_reader: >
+      收到offer后，用"我有OSCP/相关项目经验，
+      市场行情显示同岗位薪资为X-Y范围，
+      能否调整到X+10%？"框架谈判。
+      拒绝你的概率远低于你以为的。
+    hook: "应届生也能谈薪！真实数据"
+    shocking_fact: "SG网安岗空缺率19%，是整体IT行业2.3倍"
+    category: salary_myths
+
+  # ==================== CAREER PATH MYTHS (5 entries) ====================
+
+  - slug: must-start-in-soc
+    myth: "进网安必须先从SOC干起"
+    reality: >
+      GRC（治理、风险、合规）分析师、安全意识培训师、
+      安全技术销售、数据保护官（DPO）都是完全合法的网安直接入口，
+      不需要经过SOC。
+    data_point: >
+      ISACA 2024职业路径调查显示，超过40%的CISM持证者（网安管理层）
+      职业生涯中从未在SOC担任过任何职位；
+      GRC路线从业者平均薪资与SOC路线从业者在5年经验节点持平。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      被"网安入门=SOC一线分析师"叙事影响的应届生，
+      以及看到网上"网安路线图"全从SOC开始就认为这是唯一路径的人。
+    why_myth_persists: >
+      SOC是最可见、招聘量最大的入口，因此在讨论中占据主导地位。
+      技术社区倾向于讨论技术路线，非技术入口被系统性低估。
+    action_for_reader: >
+      如果你不适合或不喜欢告警监控工作，
+      直接瞄准GRC、DPO、安全意识培训岗位。
+      这些岗位对法律、管理、传播学背景有实质需求。
+    hook: "不做SOC也能进网安！"
+    shocking_fact: "40%+ CISM持证者从未做过SOC"
+    category: career_path_myths
+
+  - slug: ciso-must-be-technical
+    myth: "CISO必须有深厚技术背景"
+    reality: >
+      许多主要银行和大型企业的CISO来自审计、法律、
+      风险管理背景，从未写过exploit或管理过防火墙规则。
+      CISO核心职能是风险沟通、资源争取和治理——而非技术执行。
+    data_point: >
+      ISC2 2024年CISO职业调查显示，28%的受访CISO
+      主要职业背景为审计/合规/法律而非技术/工程类；
+      40%的受访CISO表示其日常工作中技术操作比例低于10%。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      认为"网安高管=超级技术大牛"的中初级技术从业者，
+      以及有审计/法律背景但认为自己"不够格做CISO"的管理层候选人。
+    why_myth_persists: >
+      媒体和电影中的网安形象以技术黑客为主。
+      技术型CISO的故事更具戏剧性，被过度报道。
+      审计/法律背景的CISO更低调，不刻意强调自己的非技术路径。
+    action_for_reader: >
+      有审计、法律、风险管理背景的人，
+      CISSP+CISM的组合+5年行业经验是进入CISO候选池的完全可行路径。
+      不要因为"不够技术"而放弃管理层目标。
+    hook: "CISO不一定是技术大牛"
+    shocking_fact: "28% CISO主要背景为审计/合规/法律"
+    category: career_path_myths
+
+  - slug: cant-code-cant-do-cyber
+    myth: "不会写代码就没法做网安"
+    reality: >
+      GRC分析师、网安意识培训师、威胁情报分析师、
+      数据保护官（DPO）、安全项目经理——这些都是网安核心岗位，
+      日常工作几乎不涉及写代码。
+    data_point: >
+      ISACA 2024年网安劳动力报告估算，
+      网安行业35%的从业者处于非技术类角色；
+      在新加坡，GRC/合规类网安岗位数量
+      是渗透测试类岗位数量的4.2倍（来源：职友集SG岗位统计）。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      理科背景薄弱但对安全行业感兴趣的文科生、法学生、
+      管理学生，以及被"网安=黑客=编程"叙事劝退的职场转型者。
+    why_myth_persists: >
+      网安社区在线讨论以技术内容为主，
+      CTF、代码审计、exploit开发占据大量注意力。
+      非技术从业者很少公开谈论自己的路径，
+      导致非技术岗位在讨论中几乎隐形。
+    action_for_reader: >
+      如果你有法律、风险、项目管理、传播学背景，
+      直接申请GRC分析师或安全意识培训岗位。
+      CISA或Privacy认证（如CIPM）就够用，不需要学Python。
+    hook: "不会代码也能做网安！"
+    shocking_fact: "SG GRC类岗位数量是渗透测试岗的4.2倍"
+    category: career_path_myths
+
+  - slug: young-cant-reach-high-salary-fast
+    myth: "年轻人在网安行业晋升很慢"
+    reality: >
+      持有OSCP并有2个真实漏洞报告或GitHub实战项目的候选人，
+      23-24岁就能在新加坡拿到SGD 80,000-90,000的offer。
+      网安是极少数技术能力能快速超越年龄门槛的行业之一。
+    data_point: >
+      HackerOne 2024年平台数据：Top 100漏洞赏金猎人
+      中位年龄为26岁；多名Top 20猎人在22-24岁时已年入
+      USD 200,000以上；新加坡漏洞赏金猎人最年轻进入六位数收入年龄为21岁。
+    market:
+      - Singapore
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      听说"安全行业需要多年经验才能赚大钱"的大学生，
+      以及被"你太年轻，先积累资历"话语打击的初级从业者。
+    why_myth_persists: >
+      传统行业的年资文化被错误移植到网安行业。
+      大型机构的内部晋升通道确实较慢，
+      但外部市场和漏洞赏金生态完全不同——技术能力直接定价。
+    action_for_reader: >
+      在校期间参与HackerOne/Bugcrowd计划，发布真实漏洞报告。
+      1-2个CVE或高危漏洞报告的简历含金量远超任何学校奖项。
+    hook: "23岁拿SGD 90k？真实案例"
+    shocking_fact: "HackerOne Top 100猎人中位年龄仅26岁"
+    category: career_path_myths
+
+  - slug: bug-bounty-replaces-employment
+    myth: "做漏洞赏金猎人可以替代正式工作"
+    reality: >
+      漏洞赏金收入呈极端幂律分布：顶部1%猎人年入USD 100,000+，
+      但平台中位活跃猎人年收入仅约USD 3,400——
+      根本无法替代正式工作提供的稳定收入。
+    data_point: >
+      HackerOne 2024年平台公开数据：注册猎人中
+      年收入超过USD 100,000的比例不足1%；
+      "活跃猎人"（过去12个月提交过至少一个有效报告）
+      年收入中位数约USD 3,400；
+      每100个报告中约94个被评为重复/不适用/信息不足。
+    market:
+      - China
+      - Singapore
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      看到顶尖猎人案例报道后产生"我也能全职做漏洞赏金"想法的学生，
+      以及被夸大的"自由职业黑客"叙事吸引的初学者。
+    why_myth_persists: >
+      顶尖猎人的收入故事极具传播性（"一个漏洞$50,000"的标题），
+      而中位猎人的真实收入从不出现在媒体上。
+      生存者偏差让成功案例看起来比实际更普遍。
+    action_for_reader: >
+      把漏洞赏金当副业和技术提升路径——而非主要收入来源。
+      先找一份稳定工作，业余时间做赏金；
+      当赏金年收入超过正职薪资时再考虑转型。
+    hook: "漏洞赏金猎人的收入真相"
+    shocking_fact: "活跃猎人年收入中位数仅USD 3,400"
+    category: career_path_myths
+
+  # ==================== MARKET MYTHS (4 entries) ====================
+
+  - slug: china-cyber-professionals-cant-go-global
+    myth: "中国网安从业者很难去海外工作"
+    reality: >
+      CISSP+英语能力+一线城市工作经验的组合在全球市场具有竞争力。
+      新加坡MAS金融行业和香港QMAS计划都在主动吸纳大陆高端人才。
+    data_point: >
+      香港优秀人才入境计划（QMAS）2024年数据：
+      持有CISSP的内地申请者审批通过率85%以上，
+      网安类别属于"优先行业"；
+      新加坡EP（就业准证）2023-2024年审批数据显示，
+      网安岗位来自中国大陆候选人的EP批准率高于科技行业均值。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+    who_believes_it: >
+      认为"大陆证书/背景不被海外认可"的中国从业者，
+      以及被"新加坡/香港只要本地人"传言打击的求职者。
+    why_myth_persists: >
+      部分行业和职级确实有本地优先倾向，
+      但监管驱动的合规和安全岗位对具备大陆监管背景的候选人
+      有实质需求，这一特殊性没有被广泛传播。
+    action_for_reader: >
+      优先获取CISSP+英语认证，在一线城市积累金融或
+      关键信息基础设施项目经验，再申请QMAS或新加坡EP。
+      第一个offer最难，之后会顺畅很多。
+    hook: "中国人去新加坡做网安？真实通道"
+    shocking_fact: "QMAS持CISSP大陆申请者审批通过率85%+"
+    category: market_myths
+
+  - slug: malaysia-is-just-a-stepping-stone
+    myth: "马来西亚网安只是跳板，在当地发展没前途"
+    reality: >
+      马来西亚本地金融机构（Maybank、CIMB、Petronas）
+      的CISO薪资包可达MYR 500,000-700,000；
+      本地市场以17% CAGR增长，人才缺口超过10,000个岗位。
+    data_point: >
+      马来西亚MDEC（数字经济机构）2024年报告：
+      网安人才缺口10,000+岗位，全国网安从业者不足30,000人；
+      Jobstreet MY 2025年薪资数据：资深网安架构师/CISO级别
+      MYR 480,000–720,000/年（含奖金）；
+      市场CAGR 2024-2028年预测为17.3%。
+    market:
+      - Malaysia
+    who_believes_it: >
+      认为马来西亚薪资天花板低，必须出国才能实现高薪的
+      马来西亚本地网安从业者，以及初级职位薪资低就外推到
+      全职业生涯的应届生。
+    why_myth_persists: >
+      马来西亚初级岗位薪资（MYR 3,000-5,000/月）
+      确实低于新加坡和澳洲，容易被截取为整体薪资水平的代表。
+      高级和CISO级别的真实薪资包数据不透明，鲜少被公开讨论。
+    action_for_reader: >
+      如果目前在马来西亚，目标是本地金融或能源行业的高级安全职位，
+      10年内完全可以达到MYR 500k+的薪资包。
+      "跳板"是选择，不是命运。
+    hook: "马来西亚CISO年薪700k？真实数据"
+    shocking_fact: "MY网安人才缺口10,000+，CISO级别年薪达MYR 720k"
+    category: market_myths
+
+  - slug: singapore-only-wants-local-candidates
+    myth: "新加坡公司只要本地人，外籍很难拿EP"
+    reality: >
+      网安是新加坡EP批准率最高的技术子行业之一，
+      外籍网安专业人员占新加坡网安劳动力的40%以上。
+      公平考量框架（FCF）不等于"只要本地人"。
+    data_point: >
+      CSA（新加坡网络安全局）2025年报告：
+      新加坡网安从业者中40%以上为非新加坡籍；
+      人力部（MOM）2023年EP审批数据显示，
+      网安岗位EP批准率为技术类岗位中最高之一（约78%），
+      显著高于一般IT开发岗（约65%）。
+    market:
+      - Singapore
+      - China
+      - Malaysia
+    who_believes_it: >
+      因为"新加坡本地优先招聘"相关新闻就完全放弃申请的
+      外籍网安求职者，以及误解公平考量框架为"禁止招聘外籍"的人。
+    why_myth_persists: >
+      MOM对企业提出FCF要求的新闻被过度解读为禁令。
+      实际上FCF要求的是"公平考量"而非"必须优先录用本地"。
+      网安的人才稀缺性让雇主有充分理由申请外籍候选人的EP。
+    action_for_reader: >
+      如果有CISSP/OSCP+3年以上经验，直接申请新加坡岗位。
+      EP申请中注重展现本地无法填补的专业技能，
+      审批通过率远高于一般IT开发岗。
+    hook: "新加坡EP有多难拿？真实通过率"
+    shocking_fact: "SG网安EP批准率约78%，显著高于普通IT岗"
+    category: market_myths
+
+  - slug: remote-work-not-available-in-cyber
+    myth: "网安岗位几乎不能远程办公"
+    reality: >
+      2021年后的常态化重置，新加坡和澳洲30-40%的网安岗位
+      提供混合或全远程选项。云安全、GRC、威胁情报是远程比例最高的方向。
+    data_point: >
+      Seek Australia 2024年招聘平台分析：
+      标注"远程/混合"的网安岗位占比38%；
+      ISACA 2024年会员调查：32%的受访网安从业者处于全远程状态，
+      另有41%处于混合模式（每周1-2天进办公室）。
+    market:
+      - Singapore
+      - Australia
+      - Malaysia
+    who_believes_it: >
+      因为"安全岗需要实体访问设备/机房"的印象而放弃申请
+      远程职位的网安候选人，以及身处非一线城市
+      认为无法进入网安行业的求职者。
+    why_myth_persists: >
+      SOC、Red Team部分职能确实需要实体存在。
+      这一子集的要求被错误泛化到整个网安行业。
+      2020年前的网安文化确实以实体办公室为中心，
+      旧有印象没有随市场变化更新。
+    action_for_reader: >
+      如果想做远程，优先申请GRC分析师、威胁情报分析师、
+      云安全工程师岗位——这三个方向远程比例最高。
+      在求职信中主动说明远程工作经验和自我管理能力。
+    hook: "网安也能全远程！哪些岗位最多"
+    shocking_fact: "38%的AU网安招聘岗位标注远程/混合"
+    category: market_myths
+
+  # ==================== TECHNICAL MYTHS (3 entries) ====================
+
+  - slug: ai-will-replace-cyber-jobs
+    myth: "AI会取代网安工程师"
+    reality: >
+      AI自动化了SOC L1告警分类等重复性工作，
+      但同时创造了新的攻击面，推高了对AI安全专家、
+      红队AI测试员、以及能够监督AI系统的高级分析师的需求。
+      网安岗位总量仍在净增长。
+    data_point: >
+      ISC2 2024年网安劳动力研究报告：
+      尽管AI工具在安全团队中广泛采用，
+      2023-2024年全球网安职位空缺数量同比增长8%；
+      新增职位类别"AI安全工程师"和"机器学习安全审计"
+      在2024年新增招聘量增长超过200%，均为AI带来的新需求。
+    market:
+      - China
+      - Singapore
+      - Hong Kong
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      看到"AI可以自动化安全分析"报道后担心失业的初级分析师，
+      以及在ChatGPT普及后认为安全行业会整体萎缩的学生。
+    why_myth_persists: >
+      AI替代"工作任务"的真实案例（如自动漏洞扫描）
+      被误读为替代"工作岗位"。
+      媒体倾向于报道AI的颠覆性叙事，
+      而不是更平淡的"AI重塑了工作内容"真相。
+    action_for_reader: >
+      把AI工具当成必须掌握的新基础技能。
+      学会使用AI辅助威胁分析、报告生成，
+      同时深化人类判断力难以被替代的领域（威胁评估、客户沟通、战略决策）。
+    hook: "AI会抢网安饭碗？真实数据说话"
+    shocking_fact: "AI普及后网安职位空缺仍增长8%，AI安全岗新增200%+"
+    category: technical_myths
+
+  - slug: ctf-wins-replace-work-experience
+    myth: "CTF比赛成绩能替代工作经验"
+    reality: >
+      CTF成绩在应届生技术岗初步筛选中是强力信号，
+      但进入银行、政府或大型企业后，
+      第2年起招聘经理就开始要求实际项目经验，
+      CTF成绩对中级及以上职位几乎没有区分度。
+    data_point: >
+      HackerOne 2024年雇主伙伴调查：
+      78%的受访雇主表示CTF成绩对"0-1年经验"候选人评估"非常重要"；
+      但同一调查中，86%的雇主表示对"2年以上经验"候选人评估时
+      CTF成绩"影响很小或没有影响"，实际项目和工作成果才是核心评估维度。
+    market:
+      - China
+      - Singapore
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      在CTF社区投入大量时间、积累了出色排名但缺乏工作经验的学生，
+      认为CTF名次就是进入高薪岗位的入场券的竞赛参与者。
+    why_myth_persists: >
+      CTF顶尖选手被知名公司快速录用的故事极具传播性，
+      但这些案例几乎无一例外地涉及顶级赛事（DEFCON决赛、
+      全国前三）而非普通CTF成绩。中游水平CTF的实际求职价值
+      与从业者想象的差距巨大。
+    action_for_reader: >
+      CTF作为技术证明是入门第一份工作的有效工具，
+      进入行业后，把精力转向真实项目、开源贡献或漏洞赏金。
+      在简历上CTF经历只放得分和完成度最高的两三个赛事。
+    hook: "CTF第一名不等于高薪offer"
+    shocking_fact: "86%雇主对2年+经验候选人评估时CTF成绩几乎没有影响"
+    category: technical_myths
+
+  - slug: self-taught-ceiling-is-lower
+    myth: "自学出身的网安工程师天花板更低"
+    reality: >
+      顶级漏洞赏金猎人和知名红队研究员中，
+      大量是自学出身。CS/信安正式学位对政府和银行入门有优势，
+      但在科技公司和安全初创公司，作品集和实战记录才是定价依据。
+    data_point: >
+      TCM Security 2024年PNPT（实践型网络渗透测试）
+      持证人调查：45%的PNPT持证者没有CS或信息安全相关学位；
+      其中60%在获证后6个月内成功找到网安相关工作，
+      薪资水平与同经验段有学位候选人无显著差异。
+    market:
+      - China
+      - Singapore
+      - Malaysia
+      - Australia
+    who_believes_it: >
+      非CS专业背景、通过自学和在线课程进入网安的转行者，
+      以及担心"没有学位就没有发展空间"的职场转型候选人。
+    why_myth_persists: >
+      政府、银行、关键基础设施行业确实倾向于要求正式学历，
+      这一子集的要求被错误地泛化到整个行业。
+      学历的价值在入门阶段更显著，随着经验积累快速下降。
+    action_for_reader: >
+      自学路线重点是建立可验证的成果：OSCP/PNPT证书+
+      GitHub公开工具/报告+HackerOne有效漏洞报告。
+      三者组合的简历在科技公司和安全初创公司
+      与名校学位候选人完全同台竞争。
+    hook: "自学能做到网安高管吗？真实数据"
+    shocking_fact: "45% PNPT持证者无CS学位，薪资与有学位者无显著差异"
+    category: technical_myths

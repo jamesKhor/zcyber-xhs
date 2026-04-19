@@ -110,7 +110,10 @@ class ContentGenerator:
         variables = self._build_template_vars(topic, archetype=archetype, language=language)
         return template.render(**variables)
 
-    _CAREER_ARCHETYPES = frozenset({"cert_war", "salary_map", "career_entry"})
+    _CAREER_ARCHETYPES = frozenset({
+        "cert_war", "salary_map", "career_entry",
+        "day_in_life", "interview_intel", "exam_reality", "career_myth",
+    })
 
     def _build_template_vars(
         self, topic: TopicEntry, archetype: str = "", language: str = "zh"
