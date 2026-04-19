@@ -62,25 +62,29 @@ def _get_db():
 # Archetype metadata
 # ---------------------------------------------------------------------------
 
+# NOTE: Keep in sync with orchestrator.py _CAREER_ARCHETYPES + _THREAT_ARCHETYPES
+# Active career rotation (Mon cert_war / Tue salary_map / Wed career_entry / repeat)
 ARCHETYPES = [
-    ("problem_command", "命令技巧"),
-    ("real_story",      "真实事件"),   # Tue
-    ("everyday_panic",  "日常惊魂"),
-    ("rank_war",        "观点对决"),   # Thu
-    ("mythbust",        "辟谣"),
-    ("news_hook",       "时事钩子"),
-    ("hacker_pov",      "黑客视角"),   # Sun — replaces ctf
-    # Legacy archetypes — kept for historical posts in DB
+    # ── Active career archetypes ─────────────────────────────────────────────
+    ("cert_war",     "证书对决"),    # Mon / Thu / Sun
+    ("salary_map",   "薪资揭秘"),   # Tue / Sat
+    ("career_entry", "入行路线"),   # Wed / Fri
+    # ── Retired threat archetypes — kept so old DB posts can be re-run ──────
+    ("problem_command", "命令技巧 (旧)"),
+    ("real_story",      "真实事件 (旧)"),
+    ("everyday_panic",  "日常惊魂 (旧)"),
+    ("rank_war",        "观点对决 (旧)"),
+    ("mythbust",        "辟谣 (旧)"),
+    ("news_hook",       "时事钩子 (旧)"),
+    ("hacker_pov",      "黑客视角 (旧)"),
     ("tool_spotlight",  "工具推荐 (旧)"),
     ("before_after",    "前后对比 (旧)"),
     ("ctf",             "CTF挑战 (旧)"),
 ]
 
 BANK_ARCHETYPES = [
-    "problem_command", "real_story", "everyday_panic",
-    "rank_war", "mythbust", "hacker_pov",
-    # Legacy kept for reruns
-    "tool_spotlight", "before_after",
+    # Active career archetypes — have YAML topic banks
+    "cert_war", "salary_map", "career_entry",
 ]
 
 # ---------------------------------------------------------------------------
@@ -193,47 +197,59 @@ def page_generate():
     with col_arch:
         # Engagement guide — helps pick the right archetype
         ENGAGEMENT = {
-            # ── Active archetypes (current weekly rotation) ──────────────
+            # ── Active career archetypes ──────────────────────────────────
+            "cert_war": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "VS debate — '你考哪个？' drives comment wars + saves as study ref",
+            ),
+            "salary_map": (
+                "🔥🔥🔥", "🔥🔥🔥",
+                "Shock numbers → '没想到这么多！' + tag 同学; CISO ceiling = screenshot bait",
+            ),
+            "career_entry": (
+                "🔥🔥🔥", "🔥🔥",
+                "Roadmap saves — '收藏了以后用' + comments from people sharing their background",
+            ),
+            # ── Retired threat archetypes (旧) ────────────────────────────
             "problem_command": (
                 "🔥", "🔥",
-                "Technical — '想要下期？' or self-check prompt drives saves",
+                "(旧) Technical — low engagement with career audience",
             ),
             "real_story": (
-                "🔥🔥🔥", "🔥🔥🔥",
-                "Personal breach story → '我朋友也遇到过!' + saves as warning",
+                "🔥🔥", "🔥🔥",
+                "(旧) Fear-based — retired, mismatched to career-seeker audience",
             ),
             "everyday_panic": (
-                "🔥🔥🔥", "🔥🔥🔥",
-                "Relatable fear → '这不就是我！' + tag 朋友 instinct",
+                "🔥🔥", "🔥🔥",
+                "(旧) Fear-based — 1/15 approval rate, retired",
             ),
             "rank_war": (
-                "🔥🔥🔥", "🔥🔥🔥",
-                "VS debate → 'comment which side' drives heated discussion",
+                "🔥🔥", "🔥🔥",
+                "(旧) Threat debate — retired",
             ),
             "mythbust": (
-                "🔥🔥🔥", "🔥🔥🔥",
-                "'Wait really?!' + tag others to win arguments",
+                "🔥🔥", "🔥🔥",
+                "(旧) Threat myth — retired",
             ),
             "news_hook": (
                 "🔥🔥", "🔥",
-                "Opinion bait — '你怎么看这件事？' + funnel to zcybernews",
+                "(旧) CVE hook — retired; use cert_war/salary_map instead",
             ),
             "hacker_pov": (
-                "🔥🔥🔥", "🔥🔥🔥",
-                "POV immersion → '如果是我会怎么做' + saves for future reference",
+                "🔥🔥", "🔥🔥",
+                "(旧) POV immersion — retired",
             ),
-            # ── Legacy archetypes (kept for historical posts) ─────────────
             "tool_spotlight": (
                 "🔥", "🔥",
-                "(旧) Moderate — 'have you used this?' works",
+                "(旧) Tool review — retired",
             ),
             "before_after": (
-                "🔥🔥", "🔥🔥",
-                "(旧) 'Which one are you?' → self-identify",
+                "🔥", "🔥",
+                "(旧) Before/after — retired",
             ),
             "ctf": (
-                "🔥🔥", "🔥",
-                "(旧) People post their answer — replaced by hacker_pov",
+                "🔥", "🔥",
+                "(旧) CTF challenge — retired",
             ),
         }
 
@@ -310,12 +326,12 @@ def _run_batch_generation(
 ):
     """Generate 1-N posts in parallel and store all IDs in session state.
 
-    For bank archetypes (problem_command, everyday_panic, etc.) we pre-pick
+    For bank archetypes (cert_war, salary_map, career_entry) we pre-pick
     all N topics atomically in the main thread before spinning up workers —
     this prevents two threads from racing on pick_topic() and picking the
     same unused topic twice.
 
-    For news_hook and ctf the orchestrator handles topic selection internally
+    For non-bank archetypes the orchestrator handles topic selection internally
     so we just pass None and let N threads run simultaneously.
     """
     try:
@@ -761,11 +777,16 @@ def page_review():
 
     # ── Two-column XHS-style grid ─────────────────────────────────────────
     arch_colors = {
-        "problem_command": "#00C8FF",
+        # Active career archetypes
+        "cert_war":     "#00B8FF",   # cyan — brand primary
+        "salary_map":   "#FFD54F",   # gold — money / aspiration
+        "career_entry": "#69FF47",   # green — growth / entry
+        # Legacy threat archetypes (旧) — kept for old DB posts
+        "problem_command": "#818CF8",
         "everyday_panic":  "#FF7043",
         "mythbust":        "#FF5252",
         "before_after":    "#00E676",
-        "tool_spotlight":  "#818CF8",
+        "tool_spotlight":  "#A0A0A0",
         "news_hook":       "#FFD54F",
         "ctf":             "#00E676",
     }
@@ -1084,11 +1105,16 @@ def page_approved():
     pairs = [filtered_posts[i:i+2] for i in range(0, len(filtered_posts), 2)]
 
     arch_colors = {
-        "problem_command": "#00C8FF",
+        # Active career archetypes
+        "cert_war":     "#00B8FF",
+        "salary_map":   "#FFD54F",
+        "career_entry": "#69FF47",
+        # Legacy threat archetypes (旧)
+        "problem_command": "#818CF8",
         "everyday_panic":  "#FF7043",
         "mythbust":        "#FF5252",
         "before_after":    "#00E676",
-        "tool_spotlight":  "#818CF8",
+        "tool_spotlight":  "#A0A0A0",
         "news_hook":       "#FFD54F",
         "ctf":             "#00E676",
     }
