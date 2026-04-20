@@ -40,13 +40,19 @@ class ContentGenerator:
             logger.warning(f"Title over limit ({len(title)} chars): {title!r}")
             # Smart truncation: prefer cutting at the last natural break ≤20 chars
             # so the title stays grammatically clean rather than mid-word.
-            _BREAK_CHARS = set("，。！？：；、…「」『』【】")
+            # Priority: Chinese punctuation > space (word boundary) > hard cut at 20.
+            _PUNCT_CHARS = set("，。！？：；、…「」『』【】")
             cut = 20
+            space_cut = None
             for i in range(19, 9, -1):   # scan back from pos 19 to pos 10
-                if title[i] in _BREAK_CHARS:
-                    # Cut before the punctuation so it doesn't dangle at the end
-                    cut = i
+                if title[i] in _PUNCT_CHARS:
+                    cut = i          # cut before the trailing punctuation
+                    space_cut = None  # punct wins, clear space fallback
                     break
+                if title[i] == " " and space_cut is None:
+                    space_cut = i    # remember last space as fallback
+            if cut == 20 and space_cut is not None:
+                cut = space_cut      # fall back to last word boundary
             raw["title"] = title[:cut]
             logger.warning(f"Title smart-truncated to {cut} chars: {raw['title']!r}")
 
