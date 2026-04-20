@@ -30,6 +30,26 @@ class ContentGenerator:
         prompt = self._render_prompt(archetype, topic, language=language)
         raw = self.llm.generate_json(prompt)
 
+        # Post-process: enforce XHS 20-char title limit
+        # XHS platform rejects titles > 20 chars (Chinese + English + digits each = 1 char).
+        # The prompt already instructs ≤20 chars; this is the safety net.
+        title = raw.get("title", "")
+        if len(title) > 20:
+            import logging
+            logger = logging.getLogger("zcyber.generator")
+            logger.warning(f"Title over limit ({len(title)} chars): {title!r}")
+            # Smart truncation: prefer cutting at the last natural break ≤20 chars
+            # so the title stays grammatically clean rather than mid-word.
+            _BREAK_CHARS = set("，。！？：；、…「」『』【】")
+            cut = 20
+            for i in range(19, 9, -1):   # scan back from pos 19 to pos 10
+                if title[i] in _BREAK_CHARS:
+                    # Cut before the punctuation so it doesn't dangle at the end
+                    cut = i
+                    break
+            raw["title"] = title[:cut]
+            logger.warning(f"Title smart-truncated to {cut} chars: {raw['title']!r}")
+
         # Post-process: safety disclaimer
         if raw.get("safety_disclaimer_needed"):
             disclaimer = self.config.content.get("safety_disclaimer", "")
