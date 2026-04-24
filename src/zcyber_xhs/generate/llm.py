@@ -46,7 +46,7 @@ class LLMClient:
         if not api_key:
             raise ValueError(f"Missing API key: set {env_var} in .env")
 
-        self.client = OpenAI(base_url=base_url, api_key=api_key, timeout=45.0)
+        self.client = OpenAI(base_url=base_url, api_key=api_key, timeout=90.0)
         self.model = model or default_model
         self.temperature = temperature
         self.max_tokens = max_tokens

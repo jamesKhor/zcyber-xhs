@@ -86,7 +86,7 @@ XHS 平台硬限制：标题最多 **20个字符**，超过会被平台截断或
   "carousel_slides": [
     {
       "slide_type": "hook",
-      "headline": "（≤15字；结果优先：先说转行结果，例：「{{ background }}背景→{{ entry_role }}，{{ timeline_months }}个月」；不要只问问题，要先给答案再引发好奇）",
+      "headline": "（≤15字；结果优先且必须包含薪资数字：例：「{{ background }}→{{ entry_role }}{{ timeline_months }}个月，入职{{ salary_at_entry }}」；薪资锚点必须在headline或caption其中一个，让读者0.5秒就明白「这个数字我想要」）",
       "emoji": "🎯",
       "caption": "（≤20字，亮出薪资结果：例「入职薪资{{ salary_at_entry }}，{{ timeline_months }}个月做到的」）",
       "chip_label": "转行实录"
@@ -119,11 +119,11 @@ XHS 平台硬限制：标题最多 **20个字符**，超过会被平台截断或
       "slide_type": "cta",
       "headline": "（≤12字，你现在在哪个阶段？）",
       "steps": [
+        "🗓️ 这周能做的第一步：（≤15字，写一个2小时内可完成的具体行动，例「打开TryHackMe注册免费账号」「查{{ first_cert }}官网报名条件」）",
         "你是什么背景？评论区说说 👇",
-        "你想进哪个市场？SG / AU / CN？",
-        "关注看更多细分背景入行路线图"
+        "入行第一天老板问你个CVE你会怎么答？→ 先收藏 zcybernews，35+信息源一站搞定，再也不用一个个翻"
       ],
-      "caption": "关注 zcybernews 获取更多威胁情报 →",
+      "caption": "入行必备情报站 → zcybernews.com",
       "chip_label": "说说你的情况"
     }
   ],

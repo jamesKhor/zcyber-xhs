@@ -33,8 +33,8 @@ publishing:
 
 content:
   # Chinese content (XHS / 小红书)
-  cta: "更多网安职业干货 → zcybernews.com/salary"
-  career_cta: "更多网安职业干货 → zcybernews.com/salary"
+  cta: "老板问CVE/最新漏洞/勒索事件 → 我打开 zcybernews。追踪35+网安信息源，一站搞定 → zcybernews.com"
+  career_cta: "老板问CVE/最新漏洞/勒索事件 → 我打开 zcybernews。追踪35+网安信息源，一站搞定 → zcybernews.com"
   safety_disclaimer: "仅限自己设备/授权测试"
   education_disclaimer: "本内容仅供网络安全学习和研究用途"
   ai_label: ""

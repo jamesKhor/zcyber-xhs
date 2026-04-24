@@ -77,6 +77,13 @@ class ContentGenerator:
                 trimmed_llm_tags.append(tag)
         raw["tags"] = trimmed_llm_tags[:7]  # hard cap at 7
 
+        # Post-process: append the configured CTA to body (career_cta for career archetypes).
+        # The LLM outputs a `cta` field in JSON but the body only gets the LLM's own
+        # engagement question — the config CTA would be silently lost without this step.
+        cta_text = raw.get("cta", "")
+        if cta_text and cta_text not in raw.get("body", ""):
+            raw["body"] = raw["body"].rstrip() + f"\n\n{cta_text}"
+
         # Post-process: education disclaimer (always appended for cyber content)
         edu_disclaimer = self.config.content.get("education_disclaimer", "")
         if edu_disclaimer and edu_disclaimer not in raw.get("body", ""):

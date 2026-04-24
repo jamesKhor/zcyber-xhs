@@ -63,7 +63,11 @@ EXPLOIT_PATTERNS = [
     (r"msfvenom\b", "Metasploit payload generator"),
     (r"msfconsole\b", "Metasploit console"),
     (r"meterpreter\b", "Meterpreter shell"),
-    (r"cobalt\s*strike\b", "Cobalt Strike C2"),
+    (
+        r"cobalt\s*strike.{0,40}"
+        r"(?:deploy|listener|stager|payload|generate|setup|install|beacon.*inject|c2.*server)",
+        "Cobalt Strike C2 setup",
+    ),
     (r"empire\b.*stager", "Empire C2 stager"),
     (r"reverse.{0,10}shell", "Reverse shell"),
     (r"bind.{0,10}shell", "Bind shell"),
