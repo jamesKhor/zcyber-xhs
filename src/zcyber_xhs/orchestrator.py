@@ -95,7 +95,7 @@ class Orchestrator:
             force: If True, re-render even if an image already exists
                    (useful after template updates).
         """
-        from .models import PostDraft, Archetype  # local import avoids circularity
+        from .models import Archetype, PostDraft  # local import avoids circularity
 
         post = self.db.get_post(post_id)
         if not post:
@@ -253,7 +253,7 @@ class Orchestrator:
         Text-card posts are batched into ONE browser session (fast).
         Carousel posts are rendered individually (each needs its own slide set).
         """
-        from .models import ImageText, Archetype  # local import
+        from .models import Archetype, ImageText  # local import
 
         def _build_draft(post, payload):
             raw_it = payload.get("image_text") or {}

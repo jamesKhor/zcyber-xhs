@@ -13,8 +13,9 @@ if sys.platform == "win32":
     if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-import click
 from pathlib import Path
+
+import click
 
 from .config import Config
 from .db import Database
@@ -192,7 +193,7 @@ def export(post_id: int | None, all_approved: bool):
 
         click.echo(f"Exported #{post.id} → {dest}")
 
-    click.echo(f"\nDone. Open the folder(s) in File Explorer:")
+    click.echo("\nDone. Open the folder(s) in File Explorer:")
     click.echo(f"  {export_root}")
     click.echo("\nSend the whole folder to your phone via WeChat "
                "(文件传输助手) and publish manually in the XHS app.")
